@@ -18,6 +18,7 @@ class Trip < ApplicationRecord
     class_name: :User
   
   validates :start_date, :end_date, :title, presence: true
+  validates :title, uniqueness: { scope: :creator }
 
   # TODO: add validation start_date <= end_date
 end
