@@ -5,7 +5,7 @@ class Api::SessionsController < ApplicationController
       login!(user)
       render json: user
     else
-      render json: "Failed to login", status: 400
+      render json: {errors: "Failed to login"}, status: 400
     end
   end
   

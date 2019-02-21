@@ -1,6 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import MyTripsContainer from './components/Trips/MyTripsContainer';
 
-document.addEventListener("DOMContentLoaded", () => {
-  ReactDOM.render(<h1>Do the things</h1>, document.getElementById("root"));
-});
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <MyTripsContainer />
+      </div>
+    );
+  };
+}
+
+export default App;
