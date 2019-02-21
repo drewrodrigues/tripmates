@@ -1,10 +1,11 @@
 class Api::TripsController < ApplicationController
-  before_action :set_trip, only: [:show, :destroy]
+  before_action :set_trip, only: [:show, :destroy, :update]
 
   def create
     @trip = Trip.new(trip_params)
+    @trip.creator_id = params[:user_id]
     if @trip.save
-      render @trip
+      render :show
     else
       render json: @trip.errors.full_messages, status: 422
     end
@@ -15,14 +16,23 @@ class Api::TripsController < ApplicationController
   end
 
   def update
+    if @trip.update(trip_params)
+      render :show
+    else
+      render json: @trip.errors.full_messages, status: 422
+    end
   end
 
   def index
-    @trips = Trip.find_by(creator_id: params[:user_id])
+    @trips = Trip.where(creator_id: params[:user_id])
   end
 
   def destroy
-    @trip.destroy
+    if @trip.destroy
+      render :show
+    else
+      render json: @trip.errors.full_messages, status: 422
+    end
   end
 
   private
