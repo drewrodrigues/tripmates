@@ -1,12 +1,8 @@
 import React from 'react';
-import axios from 'axios';
-
-// TODO: disable button until form is valid
 
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
 
     this.state = { email: "", password: "" };
 
@@ -21,17 +17,7 @@ class SignIn extends React.Component {
   submit(e) {
     e.preventDefault();
     const { email, password } = this.state;
-
-    axios.post('/api/session', { user: { email, password }}
-    ).then(res => {
-      // TODO: store into store
-      console.log(this.props.store);
-      console.log(res.data);
-      console.log(this.props);
-    }).catch(err => {
-      // TODO: show errors
-      console.log(err);
-    });
+    this.props.login({email, password});
   }
 
   render() {

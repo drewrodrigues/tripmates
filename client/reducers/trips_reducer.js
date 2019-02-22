@@ -5,7 +5,8 @@ const tripReducer = (state = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_TRIP:
-      return state; // FIXME: change this
+      let newState = Object.assign({}, state, action.trip);
+      return newState;
     case RECEIVE_TRIPS:
       return action.trips
     default:

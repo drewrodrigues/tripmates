@@ -14,6 +14,11 @@ export const receiveTrips = trips => ({
 });
 
 export const retrieveMyTrips = userId => dispatch => {
-  return APIUtil.fetchMyTrips(userId) // TODO: make it scope to current user
+  return APIUtil.fetchMyTrips(userId)
     .then(res => dispatch(receiveTrips(res)));
+};
+
+export const createTrip = (userId, trip) => dispatch => {
+  return APIUtil.createTrip(userId, trip)
+    .then(res => dispatch(receiveTrip(res)));
 };

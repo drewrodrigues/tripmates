@@ -1,12 +1,10 @@
 import React from 'react';
-import MyTripsContainer from './components/Trips/MyTripsContainer';
+import NavContainer from './components/Shared/NavContainer';
 
 class App extends React.Component {
   render() {
-    return (
-      <div>
-        <MyTripsContainer />
-      </div>
+    return(
+      <NavContainer />
     );
   };
 }

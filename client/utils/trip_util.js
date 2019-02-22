@@ -1,3 +1,12 @@
+export const createTrip = (userId, trip) => {
+  return $.ajax({
+    type: "POST",
+    url: `api/users/${userId}/trips`,
+    data: {trip: trip},
+    dataType: "JSON"
+  });
+};
+
 export const fetchMyTrips = userId => {
   return $.ajax({
     type: "GET",
@@ -12,7 +21,7 @@ export const fetchTrip = id => {
     url: `api/trips/${id}`,
     dataType: "JSON"
   });
-}
+};
 
 export const deleteTrip = trip => {
   return $.ajax({
