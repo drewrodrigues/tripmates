@@ -28,7 +28,7 @@ class App extends React.Component {
 
     if (user === null) {
       return(
-        <div>
+        <div class="container">
           <NavContainer />
 
           <Switch>
@@ -41,7 +41,7 @@ class App extends React.Component {
       );
     } else {
       return(
-        <div>
+        <div class="container">
           <NavContainer />
 
           <Switch>

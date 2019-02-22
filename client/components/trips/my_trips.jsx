@@ -17,8 +17,10 @@ class MyTrips extends React.Component {
     const { deleteTrip } = this;
 
     return(
-      <ul>
-        <h3>My Trips</h3>
+      <div>
+        <div class="jumbotron">
+          <h3>My Trips</h3>
+        </div>
         <TripForm currentUserID={this.props.currentUserID} createTrip={createTrip}/>
         {trips.map(trip => (
           <li key={trip.id}>
@@ -26,7 +28,7 @@ class MyTrips extends React.Component {
             <button onClick={() => deleteTrip(trip)}>X</button>
           </li>)
         )}
-      </ul>
+      </div>
     );
   }
 }

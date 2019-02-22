@@ -32,23 +32,36 @@ class TripForm extends React.Component {
         <form onSubmit={handleSubmit}>
           <input type="text" 
             placeholder="Title"
-            onChange={(e) => handleUpdate('title', e)}/>
+            onChange={(e) => handleUpdate('title', e)}
+            className="form-control"
+            />
 
           <input type="date" 
-            onChange={(e) => handleUpdate('start_date', e)}/>
+            onChange={(e) => handleUpdate('start_date', e)}
+            className="form-control"
+            />
 
           <input type="date" 
-            onChange={(e) => handleUpdate('end_date', e)}/>
+            onChange={(e) => handleUpdate('end_date', e)}
+            className="form-control"
+            />
 
           <input type="text"
             placeholder="Location"
-            onChange={(e) => handleUpdate('location', e)}/>
+            onChange={(e) => handleUpdate('location', e)}
+            className="form-control"
+            />
 
           <input type="text"
             placeholder="Image Url"
-            onChange={(e) => handleUpdate('image_url', e)}/>
+            onChange={(e) => handleUpdate('image_url', e)}
+            className="form-control"
+            />
 
-          <input type="submit" value="Create Trip"/>
+          <input type="submit" 
+            value="Create Trip"
+            className="btn btn-success btn-sm"
+          />
         </form>    
       </div>
     );
