@@ -3,11 +3,11 @@ import * as APIUtil from './../utils/session_util';
 export const RECEIVE_CURRENT_USER   = "RECEIVE_CURRENT_USER";
 export const LOGOUT                 = "LOGOUT";
 
-const receiveCurrentUser = user => {
+export const receiveCurrentUser = user => {
   return {type: RECEIVE_CURRENT_USER, user}
 };
 
-const receiveLogout = () => {
+export const receiveLogout = () => {
   return {type: LOGOUT}
 };
 
@@ -21,3 +21,7 @@ export const signIn = (user) => dispatch => {
     .then(res => dispatch(receiveCurrentUser(res)));
 };
 
+export const signUp = (user) => dispatch => {
+  return APIUtil.signup(user)
+    .then(res => dispatch(receiveCurrentUser(res)));
+};

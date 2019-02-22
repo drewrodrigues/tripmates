@@ -20,11 +20,11 @@ class SignUp extends React.Component {
   submit(e) {
     e.preventDefault();
     const { first_name, last_name, email, password } = this.state;
-
-    axios.post('/api/users', { user: { first_name, last_name, email, password }
-    }).then(res => {
-      store.dispatch({type: "LOGIN", user: res.data});
-    })
+    
+    const that = this;
+    this.props.signUp(this.state).then(() => {
+      that.props.history.push('/created_trips');
+    });
   }
 
   render() {

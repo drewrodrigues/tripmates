@@ -168,7 +168,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_pages_home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/pages/home */ "./client/components/pages/home.jsx");
 /* harmony import */ var _components_pages_about__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/pages/about */ "./client/components/pages/about.jsx");
 /* harmony import */ var _components_trips_my_trips_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/trips/my_trips_container */ "./client/components/trips/my_trips_container.jsx");
-/* harmony import */ var _components_users_sign_up__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/users/sign_up */ "./client/components/users/sign_up.jsx");
+/* harmony import */ var _components_users_sign_up_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/users/sign_up_container */ "./client/components/users/sign_up_container.jsx");
 /* harmony import */ var _components_sessions_sign_in_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/sessions/sign_in_container */ "./client/components/sessions/sign_in_container.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -211,32 +211,6 @@ function (_React$Component) {
   _createClass(App, [{
     key: "render",
     value: function render() {
-      var loggedInRoutes = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/home",
-        render: _components_pages_home__WEBPACK_IMPORTED_MODULE_3__["default"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/about",
-        render: _components_pages_about__WEBPACK_IMPORTED_MODULE_4__["default"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/created_trips",
-        component: _components_trips_my_trips_container__WEBPACK_IMPORTED_MODULE_5__["default"]
-      }));
-      var loggedOutRoutes = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        exact: true,
-        path: "/about",
-        render: _components_pages_about__WEBPACK_IMPORTED_MODULE_4__["default"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        exact: true,
-        path: "/login",
-        component: _components_sessions_sign_in_container__WEBPACK_IMPORTED_MODULE_7__["default"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        exact: true,
-        path: "/signup",
-        component: _components_users_sign_up__WEBPACK_IMPORTED_MODULE_6__["default"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/",
-        render: _components_pages_home__WEBPACK_IMPORTED_MODULE_3__["default"]
-      }));
       var user = store.getState().session.id; // TODO: why does this work?
       // TODO: once a link is clicked, is this whole thing re-rendered?
 
@@ -251,7 +225,7 @@ function (_React$Component) {
           component: _components_sessions_sign_in_container__WEBPACK_IMPORTED_MODULE_7__["default"]
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
           path: "/signup",
-          component: _components_users_sign_up__WEBPACK_IMPORTED_MODULE_6__["default"]
+          component: _components_users_sign_up_container__WEBPACK_IMPORTED_MODULE_6__["default"]
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
           path: "/",
           render: _components_pages_home__WEBPACK_IMPORTED_MODULE_3__["default"]
@@ -284,33 +258,33 @@ function (_React$Component) {
 /*!*******************************************!*\
   !*** ./client/actions/session_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_CURRENT_USER, LOGOUT, logout, signIn */
+/*! exports provided: RECEIVE_CURRENT_USER, LOGOUT, receiveCurrentUser, receiveLogout, logout, signIn, signUp */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CURRENT_USER", function() { return RECEIVE_CURRENT_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT", function() { return LOGOUT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveCurrentUser", function() { return receiveCurrentUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveLogout", function() { return receiveLogout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signIn", function() { return signIn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signUp", function() { return signUp; });
 /* harmony import */ var _utils_session_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../utils/session_util */ "./client/utils/session_util.js");
 
 var RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 var LOGOUT = "LOGOUT";
-
 var receiveCurrentUser = function receiveCurrentUser(user) {
   return {
     type: RECEIVE_CURRENT_USER,
     user: user
   };
 };
-
 var receiveLogout = function receiveLogout() {
   return {
     type: LOGOUT
   };
 };
-
 var logout = function logout() {
   return function (dispatch) {
     return _utils_session_util__WEBPACK_IMPORTED_MODULE_0__["logout"]().then(function (res) {
@@ -321,6 +295,13 @@ var logout = function logout() {
 var signIn = function signIn(user) {
   return function (dispatch) {
     return _utils_session_util__WEBPACK_IMPORTED_MODULE_0__["login"](user).then(function (res) {
+      return dispatch(receiveCurrentUser(res));
+    });
+  };
+};
+var signUp = function signUp(user) {
+  return function (dispatch) {
+    return _utils_session_util__WEBPACK_IMPORTED_MODULE_0__["signup"](user).then(function (res) {
       return dispatch(receiveCurrentUser(res));
     });
   };
@@ -387,6 +368,31 @@ var deleteTrip = function deleteTrip(trip) {
   return function (dispatch) {
     return _utils_trip_util__WEBPACK_IMPORTED_MODULE_0__["deleteTrip"](trip).then(function () {
       return dispatch(removeTrip(trip));
+    });
+  };
+};
+
+/***/ }),
+
+/***/ "./client/actions/user_actions.js":
+/*!****************************************!*\
+  !*** ./client/actions/user_actions.js ***!
+  \****************************************/
+/*! exports provided: signUp */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signUp", function() { return signUp; });
+/* harmony import */ var _utils_session_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/session_util */ "./client/utils/session_util.js");
+/* harmony import */ var _session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_actions */ "./client/actions/session_actions.js");
+ // TODO: pull into user util
+
+
+var signUp = function signUp(user) {
+  return function (dispatch) {
+    return _utils_session_util__WEBPACK_IMPORTED_MODULE_0__["signUp"](user).then(function (res) {
+      return dispatch(Object(_session_actions__WEBPACK_IMPORTED_MODULE_1__["receiveCurrentUser"])(res));
     });
   };
 };
@@ -676,7 +682,12 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
           className: "nav-link",
           to: "/login"
-        }, "Login")));
+        }, "Login")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          class: "nav-item"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+          className: "nav-link",
+          to: "/signup"
+        }, "Sign Up")));
       }
     }
   }]);
@@ -1046,18 +1057,9 @@ function (_React$Component) {
           last_name = _this$state.last_name,
           email = _this$state.email,
           password = _this$state.password;
-      axios.post('/api/users', {
-        user: {
-          first_name: first_name,
-          last_name: last_name,
-          email: email,
-          password: password
-        }
-      }).then(function (res) {
-        store.dispatch({
-          type: "LOGIN",
-          user: res.data
-        });
+      var that = this;
+      this.props.signUp(this.state).then(function () {
+        that.props.history.push('/created_trips');
       });
     }
   }, {
@@ -1106,6 +1108,40 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (SignUp);
+
+/***/ }),
+
+/***/ "./client/components/users/sign_up_container.jsx":
+/*!*******************************************************!*\
+  !*** ./client/components/users/sign_up_container.jsx ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _sign_up__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sign_up */ "./client/components/users/sign_up.jsx");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/user_actions */ "./client/actions/user_actions.js");
+
+
+
+
+var mapStateToProps = function mapStateToProps(store) {
+  return {
+    /*TODO: errors at some point*/
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    signUp: function signUp(user) {
+      return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_2__["signUp"])(user));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, mapDispatchToProps)(_sign_up__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -1339,15 +1375,15 @@ var tripReducer = function tripReducer() {
 /*!**************************************!*\
   !*** ./client/utils/session_util.js ***!
   \**************************************/
-/*! exports provided: signup, login, logout */
+/*! exports provided: signUp, login, logout */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signup", function() { return signup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signUp", function() { return signUp; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
-var signup = function signup(user) {
+var signUp = function signUp(user) {
   return $.ajax({
     type: "POST",
     url: "/api/users",
