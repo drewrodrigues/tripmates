@@ -1,7 +1,7 @@
 export const allTripsSelector = trips => {
   const result = [];
-  Object.keys(trips).forEach(key => {
-    result.push(trips[key]);
+  Object.values(trips).forEach(value => {
+    result.push(value);
   });
   return result;
 };
