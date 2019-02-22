@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 // TODO: disable button until form is valid
 
@@ -25,10 +24,7 @@ class SignUp extends React.Component {
     axios.post('/api/users', { user: { first_name, last_name, email, password }
     }).then(res => {
       store.dispatch({type: "LOGIN", user: res.data});
-    }).catch(err => {
-      // TODO: show errors
-      console.log(err.response.data.errors);
-    });
+    })
   }
 
   render() {

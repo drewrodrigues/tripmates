@@ -1,5 +1,5 @@
 import React from 'react';
-import TripForm from './TripForm';
+import TripForm from './trip_form';
 
 class MyTrips extends React.Component {
   componentDidMount() {

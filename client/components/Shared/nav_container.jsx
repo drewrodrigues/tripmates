@@ -1,16 +1,17 @@
 import { connect } from 'react-redux';
-import Nav from './Nav';
+import Nav from './nav';
 import { logout } from '../../actions/session_actions';
+import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = state => ({
-  session: state.session
+  currentUser: state.session.id
 });
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout())
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Nav);
+)(Nav));

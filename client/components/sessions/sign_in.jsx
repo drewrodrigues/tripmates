@@ -16,8 +16,12 @@ class SignIn extends React.Component {
 
   submit(e) {
     e.preventDefault();
+    const that = this;
+
     const { email, password } = this.state;
-    this.props.login({email, password});
+    this.props.login({email, password}).then(() => {
+      that.props.history.push('/created_trips');
+    });
   }
 
   render() {

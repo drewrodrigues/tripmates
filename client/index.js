@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
+import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { logger } from 'redux-logger';
 import thunk from './middleware/thunk';
@@ -26,7 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
   
   render(
     <Provider store={store}>
-      <App />
+      <HashRouter>
+        <App />
+      </HashRouter>
     </Provider>,
     document.getElementById("root")
   );

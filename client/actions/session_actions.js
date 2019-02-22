@@ -1,22 +1,15 @@
 import * as APIUtil from './../utils/session_util';
 
-export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
-export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
-export const LOGOUT = "LOGOUT";
+export const RECEIVE_CURRENT_USER   = "RECEIVE_CURRENT_USER";
+export const LOGOUT                 = "LOGOUT";
 
-export const receiveCurrentUser = user => ({
-  type: RECEIVE_CURRENT_USER,
-  user
-});
+const receiveCurrentUser = user => {
+  return {type: RECEIVE_CURRENT_USER, user}
+};
 
-export const receiveSessionErrors = errors => ({
-  type: RECEIVE_SESSION_ERRORS,
-  errors
-});
-
-export const receiveLogout = () => ({
-  type: LOGOUT
-});
+const receiveLogout = () => {
+  return {type: LOGOUT}
+};
 
 export const logout = () => dispatch => {
   return APIUtil.logout()

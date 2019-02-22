@@ -1,55 +1,42 @@
 import React from 'react';
-import { HashRouter, NavLink, Route } from 'react-router-dom';
-import Home from '../Pages/Home';
-import About from '../Pages/About';
-import MyTripsContainer from '../Trips/MyTripsContainer';
-import SignUp from '../Users/SignUp';
-import SignInContainer from '../Users/SignInContainer';
+import { NavLink } from 'react-router-dom';
 
-class Nav extends React.Component {
+class Nav extends React.Component {  
+  constructor(props) {
+    super(props);
+
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  handleLogout() {
+    let that = this;
+    this.props.logout().then(() => {
+      that.props.history.push('/login');
+    });
+  }
+
   render() {
-    let loggedIn = false;
-    console.log(this.props);
-    try {
-      if (this.props.session.id) {
-        loggedIn = true;
-      }
-    } catch {}
+    const { currentUser } = this.props;
     let nav;
 
-    console.log('run nav');
-
-    if (loggedIn === true) {
-      nav = <>
-        <NavLink to="/home">Home</NavLink>
-        <NavLink to="/about">About</NavLink>
-        <NavLink to="/created_trips">Created Trips</NavLink>
-        <button onClick={this.props.logout}>Logout</button>
-      </>;
+    if (currentUser !== null) {
+      return (
+        <nav>
+          <NavLink to="/home">Home</NavLink>
+          <NavLink to="/about">About</NavLink>
+          <NavLink to="/created_trips">Created Trips</NavLink>
+          <button onClick={this.handleLogout}>Logout</button>
+        </nav>
+      );
     } else {
-      nav = <>
-        <NavLink to="/home">Home</NavLink>
-        <NavLink to="/about">About</NavLink>
-        <NavLink to="/login">Login</NavLink>
-      </>;
+      return (
+        <nav>
+          <NavLink to="/home">Home</NavLink>
+          <NavLink to="/about">About</NavLink>
+          <NavLink to="/login">Login</NavLink>
+        </nav>
+      );
     }
-    
-    return (
-      <div>
-        <HashRouter>
-          <nav>
-            {this.props.session ? this.props.session.id : ""}
-            {nav}
-
-            <Route path="/home" render={Home} />
-            <Route path="/about" render={About} />
-            <Route path="/created_trips" component={MyTripsContainer} />
-            <Route path="/login" component={SignInContainer} />
-            <Route path="/signup" component={SignUp} />
-          </nav>
-        </HashRouter>
-      </div>
-    );
   }
 }
 

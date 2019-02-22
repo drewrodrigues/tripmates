@@ -11,7 +11,7 @@ class Api::SessionsController < ApplicationController
   
   def destroy
     logout!
-    render json: "Successfully logged out"
+    render json: {message: "Successfully logged out"} # TODO: reminder, $.ajax().then isn't called back unless a json object is sent
   end
 
   private

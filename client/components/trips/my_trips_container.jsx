@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { allTripsSelector } from '../../reducers/selectors';
-import MyTrips from './MyTrips';
+import MyTrips from './my_trips';
 import { retrieveMyTrips, createTrip, deleteTrip } from '../../actions/trip_actions';
 
 const mapStateToProps = (state, ownProps) => ({
