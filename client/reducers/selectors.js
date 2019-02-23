@@ -5,3 +5,7 @@ export const allTripsSelector = trips => {
   });
   return result;
 };
+
+export const selectTripById = (trips, id) => {
+  return trips[id];
+}

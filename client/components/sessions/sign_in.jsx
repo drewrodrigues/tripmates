@@ -20,7 +20,7 @@ class SignIn extends React.Component {
 
     const { email, password } = this.state;
     this.props.login({email, password}).then(() => {
-      that.props.history.push('/created_trips');
+      that.props.history.push('/created_trips')
     });
   }
 
