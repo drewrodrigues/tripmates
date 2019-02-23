@@ -24,7 +24,7 @@ class Api::TripsController < ApplicationController
   end
 
   def index
-    @trips = current_user.trips.includes(:creator)
+    @trips = Trip.where(creator_id: params[:user_id]).includes(:creator)
   end
 
   def destroy

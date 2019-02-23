@@ -11,6 +11,7 @@ export const allTripsSelector = state => {
 
 export const selectTripById = (state, id) => {
   const trip = state.entities.trips[id]
+  if (trip === undefined) return {}
   trip.creator = state.entities.users[trip.creatorId]
   return trip
 }

@@ -328,7 +328,7 @@ var signUp = function signUp(user) {
 /*!********************************!*\
   !*** ./actions/tripActions.js ***!
   \********************************/
-/*! exports provided: RECEIVE_TRIP, RECEIVE_TRIPS, REMOVE_TRIP, receiveTrip, receiveTrips, removeTrip, retrieveMyTrips, createTrip, deleteTrip */
+/*! exports provided: RECEIVE_TRIP, RECEIVE_TRIPS, REMOVE_TRIP, receiveTrip, receiveTrips, removeTrip, retrieveMyTrips, getTripById, createTrip, deleteTrip */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -340,6 +340,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveTrips", function() { return receiveTrips; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeTrip", function() { return removeTrip; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "retrieveMyTrips", function() { return retrieveMyTrips; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTripById", function() { return getTripById; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTrip", function() { return createTrip; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTrip", function() { return deleteTrip; });
 /* harmony import */ var _utils_tripUtil__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/tripUtil */ "./utils/tripUtil.js");
@@ -376,10 +377,20 @@ var retrieveMyTrips = function retrieveMyTrips(userId) {
     });
   };
 };
+window.fetchTrip = _utils_tripUtil__WEBPACK_IMPORTED_MODULE_0__["fetchTrip"];
+var getTripById = function getTripById(id) {
+  return function (dispatch) {
+    return _utils_tripUtil__WEBPACK_IMPORTED_MODULE_0__["fetchTrip"](id).then(function (res) {
+      dispatch(receiveTrips(res.trip));
+      dispatch(Object(_userActions__WEBPACK_IMPORTED_MODULE_1__["receiveUsers"])(res.user));
+    });
+  };
+};
 var createTrip = function createTrip(userId, trip) {
   return function (dispatch) {
     return _utils_tripUtil__WEBPACK_IMPORTED_MODULE_0__["createTrip"](userId, trip).then(function (res) {
-      return dispatch(receiveTrip(res));
+      dispatch(receiveTrip(res.trip));
+      dispatch(receiveUser(res.user));
     });
   };
 };
@@ -397,12 +408,14 @@ var deleteTrip = function deleteTrip(trip) {
 /*!********************************!*\
   !*** ./actions/userActions.js ***!
   \********************************/
-/*! exports provided: RECEIVE_USERS, receiveUsers, signUp */
+/*! exports provided: RECEIVE_USER, RECEIVE_USERS, receiveUser, receiveUsers, signUp */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USER", function() { return RECEIVE_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USERS", function() { return RECEIVE_USERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUser", function() { return receiveUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUsers", function() { return receiveUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signUp", function() { return signUp; });
 /* harmony import */ var _utils_sessionUtil__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/sessionUtil */ "./utils/sessionUtil.js");
@@ -410,7 +423,14 @@ __webpack_require__.r(__webpack_exports__);
  // TODO: pull into user util
 
 
+var RECEIVE_USER = "RECEIVE_USER";
 var RECEIVE_USERS = "RECEIVE_USERS";
+var receiveUser = function receiveUser(user) {
+  return {
+    type: RECEIVE_USERS,
+    user: user
+  };
+};
 var receiveUsers = function receiveUsers(users) {
   return {
     type: RECEIVE_USERS,
@@ -798,7 +818,8 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(MyTrips).call(this, props));
     _this.state = {
-      showForm: false
+      showForm: false,
+      isLoading: true
     };
     _this.toggleForm = _this.toggleForm.bind(_assertThisInitialized(_this));
     return _this;
@@ -807,7 +828,12 @@ function (_React$Component) {
   _createClass(MyTrips, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.retrieveMyTrips(this.props.currentUserID);
+      var that = this;
+      this.props.retrieveMyTrips(this.props.currentUserID).then(function () {
+        return that.setState({
+          isLoading: false
+        });
+      });
     }
   }, {
     key: "toggleForm",
@@ -819,6 +845,10 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      if (this.state.isLoading) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading..."));
+      }
+
       var _this$props = this.props,
           trips = _this$props.trips,
           createTrip = _this$props.createTrip;
@@ -833,7 +863,8 @@ function (_React$Component) {
         className: "card-columns"
       }, trips.map(function (trip) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tripsIndexItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          trip: trip
+          trip: trip,
+          key: trip.id
         });
       })));
     }
@@ -974,11 +1005,24 @@ function (_React$Component) {
     _classCallCheck(this, TripShow);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TripShow).call(this, props));
+    _this.state = {
+      isLoading: true
+    };
     _this.deleteTrip = _this.deleteTrip.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(TripShow, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var that = this;
+      this.props.getTripById(this.props.match.params.id).then(function () {
+        return that.setState({
+          isLoading: false
+        });
+      });
+    }
+  }, {
     key: "deleteTrip",
     value: function deleteTrip(trip) {
       var _this2 = this;
@@ -986,10 +1030,12 @@ function (_React$Component) {
       var that = this;
       return function (e) {
         e.stopPropagation();
-        console.log('delete trip');
+
+        _this2.setState({
+          isLoading: true
+        });
 
         _this2.props.deleteTrip(trip).then(function () {
-          console.log('trip delete');
           that.props.history.push('/created_trips');
         });
       };
@@ -997,8 +1043,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      if (this.state.isLoading === true) return null;
       var trip = this.props.trip;
-      if (this.props.trip === undefined || this.props.trip.creator === undefined) return null;
       var startDate = trip.startDate,
           endDate = trip.endDate,
           imageUrl = trip.imageUrl,
@@ -1055,8 +1101,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     deleteTrip: function deleteTrip(trip) {
       return dispatch(Object(_actions_tripActions__WEBPACK_IMPORTED_MODULE_3__["deleteTrip"])(trip));
     },
-    updateTrip: function updateTrip() {
-      return dispatch();
+    getTripById: function getTripById(id) {
+      return dispatch(Object(_actions_tripActions__WEBPACK_IMPORTED_MODULE_3__["getTripById"])(id));
     }
   };
 };
@@ -32473,6 +32519,7 @@ var allTripsSelector = function allTripsSelector(state) {
 };
 var selectTripById = function selectTripById(state, id) {
   var trip = state.entities.trips[id];
+  if (trip === undefined) return {};
   trip.creator = state.entities.users[trip.creatorId];
   return trip;
 };
@@ -32530,7 +32577,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_tripActions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/tripActions */ "./actions/tripActions.js");
 
 
-var tripReducer = function tripReducer() {
+var tripsReducer = function tripsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
@@ -32552,11 +32599,9 @@ var tripReducer = function tripReducer() {
     default:
       return state;
   }
-
-  ;
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (tripReducer);
+/* harmony default export */ __webpack_exports__["default"] = (tripsReducer);
 
 /***/ }),
 
@@ -32578,8 +32623,11 @@ var usersReducer = function usersReducer() {
   Object.freeze(state);
 
   switch (action.type) {
+    case _actions_userActions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER"]:
+      return Object.assign({}, state, action.users);
+
     case _actions_userActions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USERS"]:
-      return action.users;
+      return Object.assign({}, state, action.users);
 
     default:
       return state;

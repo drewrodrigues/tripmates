@@ -25,10 +25,21 @@ export const retrieveMyTrips = userId => dispatch => {
       dispatch(receiveUsers(res.users))
     })
 }
+window.fetchTrip = APIUtil.fetchTrip
+export const getTripById = id => dispatch => {
+  return APIUtil.fetchTrip(id)
+  .then(res => {
+      dispatch(receiveTrips(res.trip))
+      dispatch(receiveUsers(res.user))
+    })
+}
 
 export const createTrip = (userId, trip) => dispatch => {
   return APIUtil.createTrip(userId, trip)
-    .then(res => dispatch(receiveTrip(res)))
+    .then(res => {
+      dispatch(receiveTrip(res.trip))
+      dispatch(receiveUser(res.user))
+    })
 }
 
 export const deleteTrip = (trip) => dispatch => {

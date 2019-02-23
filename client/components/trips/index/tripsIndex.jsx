@@ -1,18 +1,20 @@
 import React from 'react'
 import TripForm from '../tripForm'
 import { Link } from 'react-router-dom'
-import MyTripsItem from './tripsIndexItem';
+import MyTripsItem from './tripsIndexItem'
 
 class MyTrips extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {showForm: false}
+    this.state = {showForm: false, isLoading: true}
     this.toggleForm = this.toggleForm.bind(this)
   }
   
   componentDidMount() {
+    const that = this
     this.props.retrieveMyTrips(this.props.currentUserID)
+      .then(() => that.setState({isLoading: false}))
   }
 
   toggleForm() {
@@ -20,6 +22,13 @@ class MyTrips extends React.Component {
   }
 
   render() {
+    if (this.state.isLoading) {
+      return (
+        <div>
+          <div>Loading...</div>
+        </div>
+      )
+    }
     const {trips, createTrip} = this.props
     const { deleteTrip } = this
 
@@ -32,7 +41,7 @@ class MyTrips extends React.Component {
 
         <div className="card-columns">
           {trips.map(trip => (
-            <MyTripsItem trip={trip}/>
+            <MyTripsItem trip={trip} key={trip.id}/>
           ))}
         </div>
       </div>

@@ -4,7 +4,15 @@ class TripShow extends React.Component {
   constructor(props) {
     super(props)
 
+    this.state = {isLoading: true}
+
     this.deleteTrip = this.deleteTrip.bind(this)
+  }
+
+  componentDidMount() {
+    const that = this
+    this.props.getTripById(this.props.match.params.id)
+      .then(() => that.setState({isLoading: false}))
   }
 
   deleteTrip(trip) {
@@ -12,18 +20,17 @@ class TripShow extends React.Component {
 
     return (e) => {
       e.stopPropagation()
-      console.log('delete trip')
+      this.setState({isLoading: true})
       this.props.deleteTrip(trip).then(() => {
-        console.log('trip delete')
         that.props.history.push('/created_trips')
       })
     }
   }
   
   render() {
+    if (this.state.isLoading === true) return null
+
     const trip = this.props.trip
-    if (this.props.trip === undefined || this.props.trip.creator === undefined) return null;
-    
     const { startDate, endDate, imageUrl, title, creator } = trip
     const { deleteTrip } = this
 

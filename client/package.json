@@ -29,6 +29,8 @@
   "author": "Drew Rodrigues",
   "license": "ISC",
   "devDependencies": {
-    "redux-devtools": "^3.5.0"
+    "file-loader": "^3.0.1",
+    "redux-devtools": "^3.5.0",
+    "url-loader": "^1.1.2"
   }
 }
