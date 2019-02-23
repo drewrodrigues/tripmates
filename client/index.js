@@ -5,16 +5,13 @@ import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { logger } from 'redux-logger';
 import thunk from './middleware/thunk';
-import rootReducer from './reducers/root_reducer';
+import rootReducer from './reducers/rootReducer';
 import App from './App';
-
-import { retrieveMyTrips } from './actions/trip_actions';
 
 document.addEventListener("DOMContentLoaded", () => {
   let store;
   if (window.currentUser) {
     const currentUser = Object.values(window.currentUser)[0];
-    console.log(currentUser)
     const { id } = currentUser;
     const preloadedState = {
       session: { id }

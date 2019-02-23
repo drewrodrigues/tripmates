@@ -30,7 +30,7 @@ class MyTrips extends React.Component {
           <TripForm currentUserID={this.props.currentUserID} createTrip={createTrip}/>
         ) : null}
 
-        <div class="card-columns">
+        <div className="card-columns">
           {trips.map(trip => (
             <MyTripsItem trip={trip}/>
           ))}

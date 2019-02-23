@@ -21,7 +21,7 @@ class Nav extends React.Component {
 
     if (currentUser !== null) {
       return (
-        <nav class="nav flex-column nav-pills">
+        <nav className="nav flex-column nav-pills">
           <NavLink className="nav-link" to="/home">Home</NavLink>
           <NavLink className="nav-link" to="/about">About</NavLink>
           <NavLink className="nav-link" to="/created_trips">Created Trips</NavLink>
@@ -30,7 +30,7 @@ class Nav extends React.Component {
       );
     } else {
       return (
-        <nav class="nav flex-column nav-pills">
+        <nav className="nav flex-column nav-pills">
           <NavLink className="nav-link" to="/home">Home</NavLink>
           <NavLink className="nav-link" to="/about">About</NavLink>
           <NavLink className="nav-link" to="/login">Login</NavLink>

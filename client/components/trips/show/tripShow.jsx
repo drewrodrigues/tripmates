@@ -12,8 +12,9 @@ class TripShow extends React.Component {
 
     return (e) => {
       e.stopPropagation()
-      console.log(this.props)
+      console.log('delete trip')
       this.props.deleteTrip(trip).then(() => {
+        console.log('trip delete')
         that.props.history.push('/created_trips')
       })
     }
@@ -21,7 +22,7 @@ class TripShow extends React.Component {
   
   render() {
     const trip = this.props.trip
-    if (this.props.trip === undefined) return null;
+    if (this.props.trip === undefined || this.props.trip.creator === undefined) return null;
     
     const { startDate, endDate, imageUrl, title, creator } = trip
     const { deleteTrip } = this
@@ -37,7 +38,7 @@ class TripShow extends React.Component {
 
           <h2>{title}</h2>
           <p>From {startDate} to {endDate}</p>
-          Created by <span class="badge badge-primary">{creator.fullName}</span>
+          Created by <span className="badge badge-primary">{creator.fullName}</span>
         </div>
 
         <div>

@@ -1,10 +1,9 @@
-import { RECEIVE_TRIP, RECEIVE_TRIPS, REMOVE_TRIP } from "../actions/trip_actions";
+import { RECEIVE_TRIP, RECEIVE_TRIPS, REMOVE_TRIP } from "../actions/tripActions";
 
 const tripReducer = (state = {}, action) => {
   Object.freeze(state);
 
   let newState;
-  
   switch (action.type) {
     case REMOVE_TRIP:
       newState = Object.assign({}, state);

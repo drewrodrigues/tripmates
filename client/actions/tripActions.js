@@ -1,6 +1,6 @@
-import * as APIUtil from '../utils/trip_util'
+import * as APIUtil from '../utils/tripUtil'
 
-import { receiveUsers } from '../actions/user_actions'
+import { receiveUsers } from './userActions'
 
 export const RECEIVE_TRIP  = "RECEIVE_TRIP"
 export const RECEIVE_TRIPS = "RECEIVE_TRIPS"

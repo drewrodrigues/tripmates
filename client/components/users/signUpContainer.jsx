@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import SignUp from './signUp';
-import { signUp } from '../../actions/user_actions';
+import { signUp } from '../../actions/userActions';
 
 const mapStateToProps = (store) => {
   return {/*TODO: errors at some point*/};

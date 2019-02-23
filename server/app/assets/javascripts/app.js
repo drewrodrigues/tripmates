@@ -218,11 +218,11 @@ function (_React$Component) {
 
       if (user === null) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          class: "row"
+          className: "row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          class: "col-md-2"
+          className: "col-md-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_shared_navContainer__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          class: "col-md-10 offset-md-2 main"
+          className: "col-md-10 offset-md-2 main"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/about",
           render: _components_pages_about__WEBPACK_IMPORTED_MODULE_3__["default"]
@@ -238,13 +238,13 @@ function (_React$Component) {
         }))));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          class: "row"
+          className: "row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          class: "sidebar col-md-2"
+          className: "sidebar col-md-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_shared_navContainer__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          class: "main col-md-10 offset-md-2"
+          className: "main col-md-10 offset-md-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          class: ""
+          className: ""
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/home",
           render: _components_pages_home__WEBPACK_IMPORTED_MODULE_2__["default"]
@@ -269,10 +269,10 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ "./actions/session_actions.js":
-/*!************************************!*\
-  !*** ./actions/session_actions.js ***!
-  \************************************/
+/***/ "./actions/sessionActions.js":
+/*!***********************************!*\
+  !*** ./actions/sessionActions.js ***!
+  \***********************************/
 /*! exports provided: RECEIVE_CURRENT_USER, LOGOUT, receiveCurrentUser, receiveLogout, logout, signIn, signUp */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -285,7 +285,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signIn", function() { return signIn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signUp", function() { return signUp; });
-/* harmony import */ var _utils_session_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../utils/session_util */ "./utils/session_util.js");
+/* harmony import */ var _utils_sessionUtil__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/sessionUtil */ "./utils/sessionUtil.js");
 
 var RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 var LOGOUT = "LOGOUT";
@@ -302,21 +302,21 @@ var receiveLogout = function receiveLogout() {
 };
 var logout = function logout() {
   return function (dispatch) {
-    return _utils_session_util__WEBPACK_IMPORTED_MODULE_0__["logout"]().then(function (res) {
+    return _utils_sessionUtil__WEBPACK_IMPORTED_MODULE_0__["logout"]().then(function (res) {
       return dispatch(receiveLogout());
     });
   };
 };
 var signIn = function signIn(user) {
   return function (dispatch) {
-    return _utils_session_util__WEBPACK_IMPORTED_MODULE_0__["login"](user).then(function (res) {
+    return _utils_sessionUtil__WEBPACK_IMPORTED_MODULE_0__["login"](user).then(function (res) {
       return dispatch(receiveCurrentUser(res));
     });
   };
 };
 var signUp = function signUp(user) {
   return function (dispatch) {
-    return _utils_session_util__WEBPACK_IMPORTED_MODULE_0__["signup"](user).then(function (res) {
+    return _utils_sessionUtil__WEBPACK_IMPORTED_MODULE_0__["signup"](user).then(function (res) {
       return dispatch(receiveCurrentUser(res));
     });
   };
@@ -324,10 +324,10 @@ var signUp = function signUp(user) {
 
 /***/ }),
 
-/***/ "./actions/trip_actions.js":
-/*!*********************************!*\
-  !*** ./actions/trip_actions.js ***!
-  \*********************************/
+/***/ "./actions/tripActions.js":
+/*!********************************!*\
+  !*** ./actions/tripActions.js ***!
+  \********************************/
 /*! exports provided: RECEIVE_TRIP, RECEIVE_TRIPS, REMOVE_TRIP, receiveTrip, receiveTrips, removeTrip, retrieveMyTrips, createTrip, deleteTrip */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -342,8 +342,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "retrieveMyTrips", function() { return retrieveMyTrips; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTrip", function() { return createTrip; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTrip", function() { return deleteTrip; });
-/* harmony import */ var _utils_trip_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/trip_util */ "./utils/trip_util.js");
-/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/user_actions */ "./actions/user_actions.js");
+/* harmony import */ var _utils_tripUtil__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/tripUtil */ "./utils/tripUtil.js");
+/* harmony import */ var _userActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./userActions */ "./actions/userActions.js");
 
 
 var RECEIVE_TRIP = "RECEIVE_TRIP";
@@ -369,23 +369,23 @@ var removeTrip = function removeTrip(trip) {
 };
 var retrieveMyTrips = function retrieveMyTrips(userId) {
   return function (dispatch) {
-    return _utils_trip_util__WEBPACK_IMPORTED_MODULE_0__["fetchMyTrips"](userId).then(function (res) {
+    return _utils_tripUtil__WEBPACK_IMPORTED_MODULE_0__["fetchMyTrips"](userId).then(function (res) {
       // FIXME: better way to do this?
       dispatch(receiveTrips(res.trips));
-      dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["receiveUsers"])(res.users));
+      dispatch(Object(_userActions__WEBPACK_IMPORTED_MODULE_1__["receiveUsers"])(res.users));
     });
   };
 };
 var createTrip = function createTrip(userId, trip) {
   return function (dispatch) {
-    return _utils_trip_util__WEBPACK_IMPORTED_MODULE_0__["createTrip"](userId, trip).then(function (res) {
+    return _utils_tripUtil__WEBPACK_IMPORTED_MODULE_0__["createTrip"](userId, trip).then(function (res) {
       return dispatch(receiveTrip(res));
     });
   };
 };
 var deleteTrip = function deleteTrip(trip) {
   return function (dispatch) {
-    return _utils_trip_util__WEBPACK_IMPORTED_MODULE_0__["deleteTrip"](trip).then(function () {
+    return _utils_tripUtil__WEBPACK_IMPORTED_MODULE_0__["deleteTrip"](trip).then(function () {
       return dispatch(removeTrip(trip));
     });
   };
@@ -393,10 +393,10 @@ var deleteTrip = function deleteTrip(trip) {
 
 /***/ }),
 
-/***/ "./actions/user_actions.js":
-/*!*********************************!*\
-  !*** ./actions/user_actions.js ***!
-  \*********************************/
+/***/ "./actions/userActions.js":
+/*!********************************!*\
+  !*** ./actions/userActions.js ***!
+  \********************************/
 /*! exports provided: RECEIVE_USERS, receiveUsers, signUp */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -405,8 +405,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USERS", function() { return RECEIVE_USERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUsers", function() { return receiveUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signUp", function() { return signUp; });
-/* harmony import */ var _utils_session_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/session_util */ "./utils/session_util.js");
-/* harmony import */ var _session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_actions */ "./actions/session_actions.js");
+/* harmony import */ var _utils_sessionUtil__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/sessionUtil */ "./utils/sessionUtil.js");
+/* harmony import */ var _sessionActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sessionActions */ "./actions/sessionActions.js");
  // TODO: pull into user util
 
 
@@ -419,8 +419,8 @@ var receiveUsers = function receiveUsers(users) {
 };
 var signUp = function signUp(user) {
   return function (dispatch) {
-    return _utils_session_util__WEBPACK_IMPORTED_MODULE_0__["signUp"](user).then(function (res) {
-      return dispatch(Object(_session_actions__WEBPACK_IMPORTED_MODULE_1__["receiveCurrentUser"])(res));
+    return _utils_sessionUtil__WEBPACK_IMPORTED_MODULE_0__["signUp"](user).then(function (res) {
+      return dispatch(Object(_sessionActions__WEBPACK_IMPORTED_MODULE_1__["receiveCurrentUser"])(res));
     });
   };
 };
@@ -590,7 +590,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _signIn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./signIn */ "./components/sessions/signIn.jsx");
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/session_actions */ "./actions/session_actions.js");
+/* harmony import */ var _actions_sessionActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/sessionActions */ "./actions/sessionActions.js");
 
 
 
@@ -599,7 +599,7 @@ __webpack_require__.r(__webpack_exports__);
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     login: function login(user) {
-      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["signIn"])(user));
+      return dispatch(Object(_actions_sessionActions__WEBPACK_IMPORTED_MODULE_3__["signIn"])(user));
     }
   };
 };
@@ -672,7 +672,7 @@ function (_React$Component) {
 
       if (currentUser !== null) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-          class: "nav flex-column nav-pills"
+          className: "nav flex-column nav-pills"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
           className: "nav-link",
           to: "/home"
@@ -688,7 +688,7 @@ function (_React$Component) {
         }, "Logout"));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-          class: "nav flex-column nav-pills"
+          className: "nav flex-column nav-pills"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
           className: "nav-link",
           to: "/home"
@@ -724,7 +724,7 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _nav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./nav */ "./components/shared/nav.jsx");
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./actions/session_actions.js");
+/* harmony import */ var _actions_sessionActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/sessionActions */ "./actions/sessionActions.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
 
@@ -740,7 +740,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     logout: function logout() {
-      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["logout"])());
+      return dispatch(Object(_actions_sessionActions__WEBPACK_IMPORTED_MODULE_2__["logout"])());
     }
   };
 };
@@ -830,7 +830,7 @@ function (_React$Component) {
         currentUserID: this.props.currentUserID,
         createTrip: createTrip
       }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        class: "card-columns"
+        className: "card-columns"
       }, trips.map(function (trip) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tripsIndexItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
           trip: trip
@@ -858,7 +858,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../reducers/selectors */ "./reducers/selectors.js");
 /* harmony import */ var _tripsIndex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tripsIndex */ "./components/trips/index/tripsIndex.jsx");
-/* harmony import */ var _actions_trip_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/trip_actions */ "./actions/trip_actions.js");
+/* harmony import */ var _actions_tripActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/tripActions */ "./actions/tripActions.js");
 
 
 
@@ -874,10 +874,10 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
   return {
     retrieveMyTrips: function retrieveMyTrips(id) {
-      return dispatch(Object(_actions_trip_actions__WEBPACK_IMPORTED_MODULE_3__["retrieveMyTrips"])(id));
+      return dispatch(Object(_actions_tripActions__WEBPACK_IMPORTED_MODULE_3__["retrieveMyTrips"])(id));
     },
     createTrip: function createTrip(userId, trip) {
-      return dispatch(Object(_actions_trip_actions__WEBPACK_IMPORTED_MODULE_3__["createTrip"])(userId, trip));
+      return dispatch(Object(_actions_tripActions__WEBPACK_IMPORTED_MODULE_3__["createTrip"])(userId, trip));
     }
   };
 };
@@ -911,7 +911,7 @@ var MyTripsItem = function MyTripsItem(props) {
     key: props.trip.id
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: props.trip.imageUrl,
-    class: "card-img-top",
+    className: "card-img-top",
     alt: ""
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-body"
@@ -922,9 +922,9 @@ var MyTripsItem = function MyTripsItem(props) {
   }, props.trip.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "card-text"
   }, props.trip.location), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    class: "light"
+    className: "light"
   }, "Created by ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    class: "badge badge-primary"
+    className: "badge badge-primary"
   }, props.trip.creator.fullName))));
 };
 
@@ -986,9 +986,10 @@ function (_React$Component) {
       var that = this;
       return function (e) {
         e.stopPropagation();
-        console.log(_this2.props);
+        console.log('delete trip');
 
         _this2.props.deleteTrip(trip).then(function () {
+          console.log('trip delete');
           that.props.history.push('/created_trips');
         });
       };
@@ -997,7 +998,7 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var trip = this.props.trip;
-      if (this.props.trip === undefined) return null;
+      if (this.props.trip === undefined || this.props.trip.creator === undefined) return null;
       var startDate = trip.startDate,
           endDate = trip.endDate,
           imageUrl = trip.imageUrl,
@@ -1013,7 +1014,7 @@ function (_React$Component) {
         onClick: deleteTrip(trip),
         className: "btn btn-sm btn-light float-right"
       }, "X"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "From ", startDate, " to ", endDate), "Created by ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        class: "badge badge-primary"
+        className: "badge badge-primary"
       }, creator.fullName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null));
     }
   }]);
@@ -1037,7 +1038,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _tripShow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tripShow */ "./components/trips/show/tripShow.jsx");
 /* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../reducers/selectors */ "./reducers/selectors.js");
-/* harmony import */ var _actions_trip_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/trip_actions */ "./actions/trip_actions.js");
+/* harmony import */ var _actions_tripActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/tripActions */ "./actions/tripActions.js");
 
 
 
@@ -1052,7 +1053,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     deleteTrip: function deleteTrip(trip) {
-      return dispatch(Object(_actions_trip_actions__WEBPACK_IMPORTED_MODULE_3__["deleteTrip"])(trip));
+      return dispatch(Object(_actions_tripActions__WEBPACK_IMPORTED_MODULE_3__["deleteTrip"])(trip));
     },
     updateTrip: function updateTrip() {
       return dispatch();
@@ -1341,7 +1342,7 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _signUp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./signUp */ "./components/users/signUp.jsx");
-/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/user_actions */ "./actions/user_actions.js");
+/* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/userActions */ "./actions/userActions.js");
 
 
 
@@ -1355,7 +1356,7 @@ var mapStateToProps = function mapStateToProps(store) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     signUp: function signUp(user) {
-      return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_2__["signUp"])(user));
+      return dispatch(Object(_actions_userActions__WEBPACK_IMPORTED_MODULE_2__["signUp"])(user));
     }
   };
 };
@@ -1383,10 +1384,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _middleware_thunk__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./middleware/thunk */ "./middleware/thunk.js");
-/* harmony import */ var _reducers_root_reducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./reducers/root_reducer */ "./reducers/root_reducer.js");
+/* harmony import */ var _reducers_rootReducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./reducers/rootReducer */ "./reducers/rootReducer.js");
 /* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./App */ "./App.jsx");
-/* harmony import */ var _actions_trip_actions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./actions/trip_actions */ "./actions/trip_actions.js");
-
 
 
 
@@ -1401,16 +1400,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (window.currentUser) {
     var currentUser = Object.values(window.currentUser)[0];
-    console.log(currentUser);
     var id = currentUser.id;
     var preloadedState = {
       session: {
         id: id
       }
     };
-    store = Object(redux__WEBPACK_IMPORTED_MODULE_2__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_7__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_2__["applyMiddleware"])(redux_logger__WEBPACK_IMPORTED_MODULE_5__["logger"], _middleware_thunk__WEBPACK_IMPORTED_MODULE_6__["default"]));
+    store = Object(redux__WEBPACK_IMPORTED_MODULE_2__["createStore"])(_reducers_rootReducer__WEBPACK_IMPORTED_MODULE_7__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_2__["applyMiddleware"])(redux_logger__WEBPACK_IMPORTED_MODULE_5__["logger"], _middleware_thunk__WEBPACK_IMPORTED_MODULE_6__["default"]));
   } else {
-    store = Object(redux__WEBPACK_IMPORTED_MODULE_2__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_7__["default"], Object(redux__WEBPACK_IMPORTED_MODULE_2__["applyMiddleware"])(redux_logger__WEBPACK_IMPORTED_MODULE_5__["logger"], _middleware_thunk__WEBPACK_IMPORTED_MODULE_6__["default"]));
+    store = Object(redux__WEBPACK_IMPORTED_MODULE_2__["createStore"])(_reducers_rootReducer__WEBPACK_IMPORTED_MODULE_7__["default"], Object(redux__WEBPACK_IMPORTED_MODULE_2__["applyMiddleware"])(redux_logger__WEBPACK_IMPORTED_MODULE_5__["logger"], _middleware_thunk__WEBPACK_IMPORTED_MODULE_6__["default"]));
   }
 
   window.store = store;
@@ -32408,46 +32406,46 @@ module.exports = warning;
 
 /***/ }),
 
-/***/ "./reducers/entities_reducer.js":
-/*!**************************************!*\
-  !*** ./reducers/entities_reducer.js ***!
-  \**************************************/
+/***/ "./reducers/entitiesReducer.js":
+/*!*************************************!*\
+  !*** ./reducers/entitiesReducer.js ***!
+  \*************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _trips_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./trips_reducer */ "./reducers/trips_reducer.js");
-/* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users_reducer */ "./reducers/users_reducer.js");
+/* harmony import */ var _tripsReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tripsReducer */ "./reducers/tripsReducer.js");
+/* harmony import */ var _usersReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./usersReducer */ "./reducers/usersReducer.js");
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  trips: _trips_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  trips: _tripsReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  users: _usersReducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 }));
 
 /***/ }),
 
-/***/ "./reducers/root_reducer.js":
-/*!**********************************!*\
-  !*** ./reducers/root_reducer.js ***!
-  \**********************************/
+/***/ "./reducers/rootReducer.js":
+/*!*********************************!*\
+  !*** ./reducers/rootReducer.js ***!
+  \*********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _entities_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./entities_reducer */ "./reducers/entities_reducer.js");
-/* harmony import */ var _sessions_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sessions_reducer */ "./reducers/sessions_reducer.js");
+/* harmony import */ var _entitiesReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./entitiesReducer */ "./reducers/entitiesReducer.js");
+/* harmony import */ var _sessionsReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sessionsReducer */ "./reducers/sessionsReducer.js");
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  entities: _entities_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  session: _sessions_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  entities: _entitiesReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  session: _sessionsReducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 }));
 
 /***/ }),
@@ -32481,16 +32479,16 @@ var selectTripById = function selectTripById(state, id) {
 
 /***/ }),
 
-/***/ "./reducers/sessions_reducer.js":
-/*!**************************************!*\
-  !*** ./reducers/sessions_reducer.js ***!
-  \**************************************/
+/***/ "./reducers/sessionsReducer.js":
+/*!*************************************!*\
+  !*** ./reducers/sessionsReducer.js ***!
+  \*************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./actions/session_actions.js");
+/* harmony import */ var _actions_sessionActions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/sessionActions */ "./actions/sessionActions.js");
 
 var _nullUser = {
   id: null
@@ -32499,16 +32497,16 @@ var _nullUser = {
 var sessionReducer = function sessionReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _nullUser;
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  console.log(action.type);
+  Object.freeze(state);
 
   switch (action.type) {
-    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
+    case _actions_sessionActions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       var id = action.user.id;
       return Object.assign({}, {
         id: id
       });
 
-    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["LOGOUT"]:
+    case _actions_sessionActions__WEBPACK_IMPORTED_MODULE_0__["LOGOUT"]:
       return _nullUser;
 
     default:
@@ -32520,16 +32518,16 @@ var sessionReducer = function sessionReducer() {
 
 /***/ }),
 
-/***/ "./reducers/trips_reducer.js":
-/*!***********************************!*\
-  !*** ./reducers/trips_reducer.js ***!
-  \***********************************/
+/***/ "./reducers/tripsReducer.js":
+/*!**********************************!*\
+  !*** ./reducers/tripsReducer.js ***!
+  \**********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_trip_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/trip_actions */ "./actions/trip_actions.js");
+/* harmony import */ var _actions_tripActions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/tripActions */ "./actions/tripActions.js");
 
 
 var tripReducer = function tripReducer() {
@@ -32539,16 +32537,16 @@ var tripReducer = function tripReducer() {
   var newState;
 
   switch (action.type) {
-    case _actions_trip_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_TRIP"]:
+    case _actions_tripActions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_TRIP"]:
       newState = Object.assign({}, state);
       delete newState[action.trip.id];
       return newState;
 
-    case _actions_trip_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_TRIP"]:
+    case _actions_tripActions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_TRIP"]:
       newState = Object.assign({}, state, action.trip);
       return newState;
 
-    case _actions_trip_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_TRIPS"]:
+    case _actions_tripActions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_TRIPS"]:
       return action.trips;
 
     default:
@@ -32562,16 +32560,16 @@ var tripReducer = function tripReducer() {
 
 /***/ }),
 
-/***/ "./reducers/users_reducer.js":
-/*!***********************************!*\
-  !*** ./reducers/users_reducer.js ***!
-  \***********************************/
+/***/ "./reducers/usersReducer.js":
+/*!**********************************!*\
+  !*** ./reducers/usersReducer.js ***!
+  \**********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/user_actions */ "./actions/user_actions.js");
+/* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/userActions */ "./actions/userActions.js");
 
 
 var usersReducer = function usersReducer() {
@@ -32580,7 +32578,7 @@ var usersReducer = function usersReducer() {
   Object.freeze(state);
 
   switch (action.type) {
-    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USERS"]:
+    case _actions_userActions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USERS"]:
       return action.users;
 
     default:
@@ -32592,10 +32590,10 @@ var usersReducer = function usersReducer() {
 
 /***/ }),
 
-/***/ "./utils/session_util.js":
-/*!*******************************!*\
-  !*** ./utils/session_util.js ***!
-  \*******************************/
+/***/ "./utils/sessionUtil.js":
+/*!******************************!*\
+  !*** ./utils/sessionUtil.js ***!
+  \******************************/
 /*! exports provided: signUp, login, logout */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -32631,10 +32629,10 @@ var logout = function logout() {
 
 /***/ }),
 
-/***/ "./utils/trip_util.js":
-/*!****************************!*\
-  !*** ./utils/trip_util.js ***!
-  \****************************/
+/***/ "./utils/tripUtil.js":
+/*!***************************!*\
+  !*** ./utils/tripUtil.js ***!
+  \***************************/
 /*! exports provided: createTrip, fetchMyTrips, fetchTrip, deleteTrip, updateTrip */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

@@ -1,5 +1,5 @@
-import * as APIUtil from "../utils/session_util"; // TODO: pull into user util
-import { receiveCurrentUser } from './session_actions';
+import * as APIUtil from "../utils/sessionUtil"; // TODO: pull into user util
+import { receiveCurrentUser } from './sessionActions';
 
 export const RECEIVE_USERS = "RECEIVE_USERS"
 

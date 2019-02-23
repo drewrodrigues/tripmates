@@ -19,12 +19,12 @@ class App extends React.Component {
 
     if (user === null) {
       return(
-        <div class="row">
-          <div class="col-md-2">
+        <div className="row">
+          <div className="col-md-2">
             <NavContainer />
           </div>
 
-          <div class="col-md-10 offset-md-2 main">
+          <div className="col-md-10 offset-md-2 main">
             <Switch>
               <Route path="/about" render={About} />
               <Route path="/login" component={SignInContainer} />
@@ -36,13 +36,13 @@ class App extends React.Component {
       );
     } else {
       return(
-        <div class="row">
-          <div class="sidebar col-md-2">
+        <div className="row">
+          <div className="sidebar col-md-2">
             <NavContainer />
           </div>
 
-          <div class="main col-md-10 offset-md-2">
-            <div class="">
+          <div className="main col-md-10 offset-md-2">
+            <div className="">
               <Switch>
                 <Route path="/home" render={Home} />
                 <Route path="/about" render={About} />
