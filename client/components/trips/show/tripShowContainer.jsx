@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
-import TripShow from './trip_show'
-import { selectTripById } from '../../reducers/selectors'
-import { deleteTrip } from '../../actions/trip_actions'
+import TripShow from './tripShow'
+import { selectTripById } from '../../../reducers/selectors'
+import { deleteTrip } from '../../../actions/trip_actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {trip: selectTripById(state, ownProps.match.params.id)}

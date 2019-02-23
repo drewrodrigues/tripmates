@@ -1,7 +1,7 @@
 import React from 'react'
-import TripForm from './trip_form'
+import TripForm from '../tripForm'
 import { Link } from 'react-router-dom'
-import MyTripsItem from './my_trips_item';
+import MyTripsItem from './tripsIndexItem';
 
 class MyTrips extends React.Component {
   constructor(props) {
