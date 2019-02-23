@@ -1,7 +1,7 @@
 import React from 'react'
 import TripForm from '../tripForm'
 import { Link } from 'react-router-dom'
-import MyTripsItem from './tripsIndexItem'
+import TripsIndexItem from './tripsIndexItem'
 
 class MyTrips extends React.Component {
   constructor(props) {
@@ -39,9 +39,9 @@ class MyTrips extends React.Component {
           <TripForm currentUserID={this.props.currentUserID} createTrip={createTrip}/>
         ) : null}
 
-        <div className="card-columns">
+        <div>
           {trips.map(trip => (
-            <MyTripsItem trip={trip} key={trip.id}/>
+            <TripsIndexItem trip={trip} key={trip.id}/>
           ))}
         </div>
       </div>

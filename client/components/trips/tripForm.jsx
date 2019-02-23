@@ -28,7 +28,6 @@ class TripForm extends React.Component {
     const that = this
 
     this.props.createTrip(this.props.currentUserID, this.state).then(() => {
-      console.log('clear form')
       that.clearForm()
     })
   }
@@ -36,7 +35,7 @@ class TripForm extends React.Component {
   clearForm() {
     this.setState({
       title: "", start_date: this.today, end_date: this.today, location: "",
-      creator_id: this.props.currentUserID
+      creator_id: this.props.currentUserID, image_url: ""
     })
   }
   

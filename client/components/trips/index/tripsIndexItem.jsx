@@ -9,13 +9,19 @@ const MyTripsItem = (props) => {
 
   return (
     <div className="card" key={props.trip.id}>
-      <img src={props.trip.imageUrl} className="card-img-top" alt="" />
       <div className="card-body">
-        <Link to={`/trips/${props.trip.id}`}>
-          <h5 className="card-title">{props.trip.title}</h5>
-        </Link>
-        <p className="card-text">{props.trip.location}</p>
-        <p className="light">Created by <span className="badge badge-primary">{props.trip.creator.fullName}</span></p>
+        <img src={props.trip.imageUrl} className="card-thumb" alt="" />
+
+        <div class="card-content">
+          <p className="card-date">From <span>{props.trip.startDate}</span> to <span>{props.trip.endDate}</span></p>
+          <Link to={`/trips/${props.trip.id}`}>
+            <h5 className="card-title">{props.trip.title}</h5>
+          </Link>
+
+          <p className="card-location">{props.trip.location}</p>
+
+          <p className="light">Created by <span className="badge badge-primary">{props.trip.creator.fullName}</span></p>
+        </div>
       </div>
     </div>
   )

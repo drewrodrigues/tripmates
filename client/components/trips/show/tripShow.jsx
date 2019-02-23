@@ -36,7 +36,7 @@ class TripShow extends React.Component {
 
     return (
       <>
-        <div className="jumbotron" style={{backgroundImage: `url(${imageUrl})`}}>
+        <div className="jumbotron trip-show" style={{backgroundImage: `url(${imageUrl})`}}>
           <button 
             onClick={deleteTrip(trip)}
             className="btn btn-sm btn-light float-right">

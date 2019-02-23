@@ -5,3 +5,54 @@
   position: fixed;
   background-color: #cecece;
 }
+
+.container.main {
+  margin-top: 20px;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.card-thumb {
+  float: left;
+  width: 200px;
+  height: 150px;
+  margin-right: 20px;
+}
+
+.card-title {
+  margin-bottom: 0;
+}
+
+.card-location {
+  font-size: 12px;
+}
+
+.card-date {
+  float: right;
+  font-size: 12px;
+
+  span {
+    font-weight: 700;
+  }
+}
+
+.card-body {
+  float: left;
+  padding: 0;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.trip-show {
+  text-align: center;
+  color: #fff;
+
+  h2 {
+    font-size: 72px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  }
+}

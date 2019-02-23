@@ -42,7 +42,7 @@ class App extends React.Component {
           </div>
 
           <div className="main col-md-10 offset-md-2">
-            <div className="">
+            <div className="container main">
               <Switch>
                 <Route path="/home" render={Home} />
                 <Route path="/about" render={About} />

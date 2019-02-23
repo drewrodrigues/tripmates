@@ -244,7 +244,7 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_shared_navContainer__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "main col-md-10 offset-md-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: ""
+          className: "container main"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/home",
           render: _components_pages_home__WEBPACK_IMPORTED_MODULE_2__["default"]
@@ -377,7 +377,6 @@ var retrieveMyTrips = function retrieveMyTrips(userId) {
     });
   };
 };
-window.fetchTrip = _utils_tripUtil__WEBPACK_IMPORTED_MODULE_0__["fetchTrip"];
 var getTripById = function getTripById(id) {
   return function (dispatch) {
     return _utils_tripUtil__WEBPACK_IMPORTED_MODULE_0__["fetchTrip"](id).then(function (res) {
@@ -390,7 +389,7 @@ var createTrip = function createTrip(userId, trip) {
   return function (dispatch) {
     return _utils_tripUtil__WEBPACK_IMPORTED_MODULE_0__["createTrip"](userId, trip).then(function (res) {
       dispatch(receiveTrip(res.trip));
-      dispatch(receiveUser(res.user));
+      dispatch(Object(_userActions__WEBPACK_IMPORTED_MODULE_1__["receiveUser"])(res.user));
     });
   };
 };
@@ -859,9 +858,7 @@ function (_React$Component) {
       }, "Add a trip"), this.state.showForm === true ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tripForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
         currentUserID: this.props.currentUserID,
         createTrip: createTrip
-      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-columns"
-      }, trips.map(function (trip) {
+      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, trips.map(function (trip) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tripsIndexItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
           trip: trip,
           key: trip.id
@@ -940,23 +937,27 @@ var MyTripsItem = function MyTripsItem(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card",
     key: props.trip.id
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: props.trip.imageUrl,
-    className: "card-img-top",
+    className: "card-thumb",
     alt: ""
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-body"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    class: "card-content"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "card-date"
+  }, "From ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, props.trip.startDate), " to ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, props.trip.endDate)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/trips/".concat(props.trip.id)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
     className: "card-title"
   }, props.trip.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "card-text"
+    className: "card-location"
   }, props.trip.location), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "light"
   }, "Created by ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "badge badge-primary"
-  }, props.trip.creator.fullName))));
+  }, props.trip.creator.fullName)))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (MyTripsItem);
@@ -1052,7 +1053,7 @@ function (_React$Component) {
           creator = trip.creator;
       var deleteTrip = this.deleteTrip;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "jumbotron",
+        className: "jumbotron trip-show",
         style: {
           backgroundImage: "url(".concat(imageUrl, ")")
         }
@@ -1186,7 +1187,6 @@ function (_React$Component) {
       console.log(e);
       var that = this;
       this.props.createTrip(this.props.currentUserID, this.state).then(function () {
-        console.log('clear form');
         that.clearForm();
       });
     }
@@ -1198,7 +1198,8 @@ function (_React$Component) {
         start_date: this.today,
         end_date: this.today,
         location: "",
-        creator_id: this.props.currentUserID
+        creator_id: this.props.currentUserID,
+        image_url: ""
       });
     }
   }, {
