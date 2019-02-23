@@ -10,6 +10,7 @@ class SignUp extends React.Component {
 
     this.update = this.update.bind(this);
     this.submit = this.submit.bind(this);
+    this.yo = 'yo'
   }
 
   update(attribute, e) {

@@ -8,8 +8,8 @@
 /.bundle
 
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
+*/log/*
+*/tmp/*
 !/log/.keep
 !/tmp/.keep
 
@@ -17,7 +17,7 @@
 /storage/*
 !/storage/.keep
 
-/node_modules
+*/node_modules
 /yarn-error.log
 
 /public/assets
@@ -25,5 +25,3 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-
-/node_modules
