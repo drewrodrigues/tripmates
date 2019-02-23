@@ -1,7 +1,10 @@
-export const allTripsSelector = trips => {
+// [{...tripDetails, ...creatorDetails}]
+export const allTripsSelector = state => {
   const result = [];
-  Object.values(trips).forEach(value => {
-    result.push(value);
+  Object.values(state.entities.trips).forEach(trip => {
+    let thisTrip = trip
+    thisTrip.creator = state.entities.users[trip.creator_id]
+    result.push(thisTrip);
   });
   return result;
 };

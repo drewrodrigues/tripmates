@@ -13,10 +13,11 @@ import { retrieveMyTrips } from './actions/trip_actions';
 document.addEventListener("DOMContentLoaded", () => {
   let store;
   if (window.currentUser) {
-    const { currentUser } = window;
+    const currentUser = Object.values(window.currentUser)[0];
+    console.log(currentUser)
     const { id } = currentUser;
     const preloadedState = {
-      session: { id: currentUser.id }
+      session: { id }
     };
     store = createStore(rootReducer, preloadedState, applyMiddleware(logger, thunk));
   } else {

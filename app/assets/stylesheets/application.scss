@@ -1,5 +1,7 @@
 @import "bootstrap";
 
- .active {
-   font-weight: 700;
- }
+.sidebar {
+  height: 100vh;
+  position: fixed;
+  background-color: #cecece;
+}

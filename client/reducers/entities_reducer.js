@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import tripReducer from './trips_reducer';
+import tripsReducer from './trips_reducer';
+import usersReducer from './users_reducer';
 
 export default combineReducers({
-  trips: tripReducer
+  trips: tripsReducer,
+  users: usersReducer
 });

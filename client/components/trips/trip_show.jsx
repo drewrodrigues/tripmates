@@ -27,18 +27,22 @@ class TripShow extends React.Component {
     const { deleteTrip } = this
 
     return (
-      <div>
-        <h2>{trip.title}</h2>
-        <h2>{trip.start_date}</h2>
-        <h2>{trip.end_date}</h2>
-        <img src={trip.image_url} />
+      <>
+        <div className="jumbotron" style={{backgroundImage: `url(${image_url})`}}>
+          <button 
+            onClick={deleteTrip(trip)}
+            className="btn btn-sm btn-light float-right">
+            X
+          </button>
 
-        <button 
-          onClick={deleteTrip(trip)}
-          className="btn btn-sm btn-light float-right">
-          X
-        </button>
-      </div>
+          <h2>{title}</h2>
+          <p>From {start_date} to {end_date}</p>
+        </div>
+
+        <div>
+
+        </div>
+      </>
     )
   }
 }

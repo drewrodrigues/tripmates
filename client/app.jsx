@@ -16,28 +16,38 @@ class App extends React.Component {
 
     if (user === null) {
       return(
-        <div class="container">
-          <NavContainer />
+        <div class="row">
+          <div class="col-md-2">
+            <NavContainer />
+          </div>
 
-          <Switch>
-            <Route path="/about" render={About} />
-            <Route path="/login" component={SignInContainer} />
-            <Route path="/signup" component={SignUpContainer} />
-            <Route path="/" render={Home} />
-          </Switch>
+          <div class="col-md-10 offset-md-2 main">
+            <Switch>
+              <Route path="/about" render={About} />
+              <Route path="/login" component={SignInContainer} />
+              <Route path="/signup" component={SignUpContainer} />
+              <Route path="/" render={Home} />
+            </Switch>
+          </div>
         </div>
       );
     } else {
       return(
-        <div class="container">
-          <NavContainer />
+        <div class="row">
+          <div class="sidebar col-md-2">
+            <NavContainer />
+          </div>
 
-          <Switch>
-            <Route path="/home" render={Home} />
-            <Route path="/about" render={About} />
-            <Route path="/created_trips" component={MyTripsContainer} />
-            <Route path="/trips/:id" component={TripShowContainer} />
-          </Switch>
+          <div class="main col-md-10 offset-md-2">
+            <div class="">
+              <Switch>
+                <Route path="/home" render={Home} />
+                <Route path="/about" render={About} />
+                <Route path="/created_trips" component={MyTripsContainer} />
+                <Route path="/trips/:id" component={TripShowContainer} />
+              </Switch>
+            </div>
+          </div>
         </div>
       );
     }

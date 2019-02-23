@@ -4,7 +4,7 @@ import MyTrips from './my_trips';
 import { retrieveMyTrips, createTrip } from '../../actions/trip_actions'
 
 const mapStateToProps = (state, ownProps) => ({
-  trips: allTripsSelector(state.entities.trips),
+  trips: allTripsSelector(state),
   currentUserID: state.session.id
 });
 
