@@ -4,7 +4,7 @@ import { selectTripById } from '../../reducers/selectors'
 import { deleteTrip } from '../../actions/trip_actions'
 
 const mapStateToProps = (state, ownProps) => {
-  return {trip: selectTripById(state.entities.trips, ownProps.match.params.id)}
+  return {trip: selectTripById(state, ownProps.match.params.id)}
 }
 
 const mapDispatchToProps = (dispatch) => {

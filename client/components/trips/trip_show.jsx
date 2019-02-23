@@ -23,12 +23,12 @@ class TripShow extends React.Component {
     const trip = this.props.trip
     if (this.props.trip === undefined) return null;
     
-    const { start_date, end_date, image_url, title } = trip
+    const { startDate, endDate, imageUrl, title, creator } = trip
     const { deleteTrip } = this
 
     return (
       <>
-        <div className="jumbotron" style={{backgroundImage: `url(${image_url})`}}>
+        <div className="jumbotron" style={{backgroundImage: `url(${imageUrl})`}}>
           <button 
             onClick={deleteTrip(trip)}
             className="btn btn-sm btn-light float-right">
@@ -36,7 +36,8 @@ class TripShow extends React.Component {
           </button>
 
           <h2>{title}</h2>
-          <p>From {start_date} to {end_date}</p>
+          <p>From {startDate} to {endDate}</p>
+          Created by <span class="badge badge-primary">{creator.fullName}</span>
         </div>
 
         <div>

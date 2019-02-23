@@ -13,6 +13,7 @@ json.set! "users" do
 
     json.set! creator.id do
       json.extract! creator, :id, :first_name, :last_name, :email
+      json.full_name "#{creator.first_name} #{creator.last_name}"
     end
   end
 end
