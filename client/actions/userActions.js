@@ -5,7 +5,7 @@ export const RECEIVE_USER  = "RECEIVE_USER"
 export const RECEIVE_USERS = "RECEIVE_USERS"
 
 export const receiveUser = user => {
-  return {type: RECEIVE_USERS, user}
+  return {type: RECEIVE_USER, user}
 }
 
 export const receiveUsers = users => {
@@ -14,5 +14,8 @@ export const receiveUsers = users => {
 
 export const signUp = user => dispatch => {
   return APIUtil.signUp(user)
-    .then(res => dispatch(receiveCurrentUser(res)));
+    .then(res => {
+      dispatch(receiveCurrentUser(res))
+      dispatch(receiveUser(res))
+    })
 };

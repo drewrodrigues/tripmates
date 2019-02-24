@@ -261,7 +261,7 @@ function (_React$Component) {
 /*!***********************************!*\
   !*** ./actions/sessionActions.js ***!
   \***********************************/
-/*! exports provided: RECEIVE_CURRENT_USER, LOGOUT, receiveCurrentUser, receiveLogout, logout, signIn, signUp */
+/*! exports provided: RECEIVE_CURRENT_USER, LOGOUT, receiveCurrentUser, receiveLogout, logout, signIn */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -272,8 +272,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveLogout", function() { return receiveLogout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signIn", function() { return signIn; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signUp", function() { return signUp; });
 /* harmony import */ var _utils_sessionUtil__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/sessionUtil */ "./utils/sessionUtil.js");
+/* harmony import */ var _userActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./userActions */ "./actions/userActions.js");
+
 
 var RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 var LOGOUT = "LOGOUT";
@@ -298,14 +299,8 @@ var logout = function logout() {
 var signIn = function signIn(user) {
   return function (dispatch) {
     return _utils_sessionUtil__WEBPACK_IMPORTED_MODULE_0__["login"](user).then(function (res) {
-      return dispatch(receiveCurrentUser(res));
-    });
-  };
-};
-var signUp = function signUp(user) {
-  return function (dispatch) {
-    return _utils_sessionUtil__WEBPACK_IMPORTED_MODULE_0__["signup"](user).then(function (res) {
-      return dispatch(receiveCurrentUser(res));
+      dispatch(receiveCurrentUser(res));
+      dispatch(Object(_userActions__WEBPACK_IMPORTED_MODULE_1__["receiveUser"])(res));
     });
   };
 };
@@ -414,7 +409,7 @@ var RECEIVE_USER = "RECEIVE_USER";
 var RECEIVE_USERS = "RECEIVE_USERS";
 var receiveUser = function receiveUser(user) {
   return {
-    type: RECEIVE_USERS,
+    type: RECEIVE_USER,
     user: user
   };
 };
@@ -427,7 +422,8 @@ var receiveUsers = function receiveUsers(users) {
 var signUp = function signUp(user) {
   return function (dispatch) {
     return _utils_sessionUtil__WEBPACK_IMPORTED_MODULE_0__["signUp"](user).then(function (res) {
-      return dispatch(Object(_sessionActions__WEBPACK_IMPORTED_MODULE_1__["receiveCurrentUser"])(res));
+      dispatch(Object(_sessionActions__WEBPACK_IMPORTED_MODULE_1__["receiveCurrentUser"])(res));
+      dispatch(receiveUser(res));
     });
   };
 };
@@ -32631,7 +32627,7 @@ var usersReducer = function usersReducer() {
 
   switch (action.type) {
     case _actions_userActions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER"]:
-      return Object.assign({}, state, action.users);
+      return Object.assign({}, state, action.user);
 
     case _actions_userActions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USERS"]:
       return Object.assign({}, state, action.users);
