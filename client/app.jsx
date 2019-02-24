@@ -9,6 +9,8 @@ import NavContainer from './components/shared/navContainer'
 import TripIndexContainer from './components/trips/index/tripsIndexContainer'
 import TripShowContainer from './components/trips/show/tripShowContainer'
 
+import UsersIndexContainer from './components/users/index/usersIndexContainer'
+
 import SignUpContainer from './components/users/signUpContainer'
 import SignInContainer from './components/sessions/signInContainer'
 
@@ -39,8 +41,9 @@ class App extends React.Component {
 
           <div className="container main">
             <Switch>
-              <Route exact path="/trips" component={TripIndexContainer} />
               <Route path="/trips/:id" component={TripShowContainer} />
+              <Route path="/trips" component={TripIndexContainer} />
+              <Route path="/users" component={UsersIndexContainer} />
               <Route path="/" component={TripIndexContainer} />
             </Switch>
           </div>

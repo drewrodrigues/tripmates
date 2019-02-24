@@ -1,5 +1,6 @@
-import * as APIUtil from "../utils/sessionUtil"; // TODO: pull into user util
-import { receiveCurrentUser } from './sessionActions';
+import * as SessionUtil from "../utils/sessionUtil" // TODO: pull into user util
+import * as UserUtil from '../utils/userUtil'
+import { receiveCurrentUser } from './sessionActions'
 
 export const RECEIVE_USER  = "RECEIVE_USER"
 export const RECEIVE_USERS = "RECEIVE_USERS"
@@ -13,9 +14,16 @@ export const receiveUsers = users => {
 }
 
 export const signUp = user => dispatch => {
-  return APIUtil.signUp(user)
+  return SessionUtil.signUp(user)
     .then(res => {
       dispatch(receiveCurrentUser(res))
       dispatch(receiveUser(res))
     })
-};
+}
+
+export const getAllUsers = () => dispatch => {
+  return UserUtil.getAllUsers()
+    .then(res => {
+      dispatch(receiveUsers(res))
+    })
+}

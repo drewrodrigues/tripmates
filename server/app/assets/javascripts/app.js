@@ -169,8 +169,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_shared_navContainer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/shared/navContainer */ "./components/shared/navContainer.jsx");
 /* harmony import */ var _components_trips_index_tripsIndexContainer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/trips/index/tripsIndexContainer */ "./components/trips/index/tripsIndexContainer.jsx");
 /* harmony import */ var _components_trips_show_tripShowContainer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/trips/show/tripShowContainer */ "./components/trips/show/tripShowContainer.jsx");
-/* harmony import */ var _components_users_signUpContainer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/users/signUpContainer */ "./components/users/signUpContainer.jsx");
-/* harmony import */ var _components_sessions_signInContainer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/sessions/signInContainer */ "./components/sessions/signInContainer.jsx");
+/* harmony import */ var _components_users_index_usersIndexContainer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/users/index/usersIndexContainer */ "./components/users/index/usersIndexContainer.jsx");
+/* harmony import */ var _components_users_signUpContainer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/users/signUpContainer */ "./components/users/signUpContainer.jsx");
+/* harmony import */ var _components_sessions_signInContainer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/sessions/signInContainer */ "./components/sessions/signInContainer.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -188,6 +189,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -224,10 +226,10 @@ function (_React$Component) {
           render: _components_pages_about__WEBPACK_IMPORTED_MODULE_3__["default"]
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/login",
-          component: _components_sessions_signInContainer__WEBPACK_IMPORTED_MODULE_8__["default"]
+          component: _components_sessions_signInContainer__WEBPACK_IMPORTED_MODULE_9__["default"]
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/signup",
-          component: _components_users_signUpContainer__WEBPACK_IMPORTED_MODULE_7__["default"]
+          component: _components_users_signUpContainer__WEBPACK_IMPORTED_MODULE_8__["default"]
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/",
           render: _components_pages_home__WEBPACK_IMPORTED_MODULE_2__["default"]
@@ -236,12 +238,14 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_shared_navContainer__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "container main"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-          exact: true,
+          path: "/trips/:id",
+          component: _components_trips_show_tripShowContainer__WEBPACK_IMPORTED_MODULE_6__["default"]
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/trips",
           component: _components_trips_index_tripsIndexContainer__WEBPACK_IMPORTED_MODULE_5__["default"]
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-          path: "/trips/:id",
-          component: _components_trips_show_tripShowContainer__WEBPACK_IMPORTED_MODULE_6__["default"]
+          path: "/users",
+          component: _components_users_index_usersIndexContainer__WEBPACK_IMPORTED_MODULE_7__["default"]
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/",
           component: _components_trips_index_tripsIndexContainer__WEBPACK_IMPORTED_MODULE_5__["default"]
@@ -390,7 +394,7 @@ var deleteTrip = function deleteTrip(trip) {
 /*!********************************!*\
   !*** ./actions/userActions.js ***!
   \********************************/
-/*! exports provided: RECEIVE_USER, RECEIVE_USERS, receiveUser, receiveUsers, signUp */
+/*! exports provided: RECEIVE_USER, RECEIVE_USERS, receiveUser, receiveUsers, signUp, getAllUsers */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -400,9 +404,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUser", function() { return receiveUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUsers", function() { return receiveUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signUp", function() { return signUp; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllUsers", function() { return getAllUsers; });
 /* harmony import */ var _utils_sessionUtil__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/sessionUtil */ "./utils/sessionUtil.js");
-/* harmony import */ var _sessionActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sessionActions */ "./actions/sessionActions.js");
+/* harmony import */ var _utils_userUtil__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/userUtil */ "./utils/userUtil.js");
+/* harmony import */ var _sessionActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sessionActions */ "./actions/sessionActions.js");
  // TODO: pull into user util
+
 
 
 var RECEIVE_USER = "RECEIVE_USER";
@@ -422,8 +429,15 @@ var receiveUsers = function receiveUsers(users) {
 var signUp = function signUp(user) {
   return function (dispatch) {
     return _utils_sessionUtil__WEBPACK_IMPORTED_MODULE_0__["signUp"](user).then(function (res) {
-      dispatch(Object(_sessionActions__WEBPACK_IMPORTED_MODULE_1__["receiveCurrentUser"])(res));
+      dispatch(Object(_sessionActions__WEBPACK_IMPORTED_MODULE_2__["receiveCurrentUser"])(res));
       dispatch(receiveUser(res));
+    });
+  };
+};
+var getAllUsers = function getAllUsers() {
+  return function (dispatch) {
+    return _utils_userUtil__WEBPACK_IMPORTED_MODULE_1__["getAllUsers"]().then(function (res) {
+      dispatch(receiveUsers(res));
     });
   };
 };
@@ -684,9 +698,13 @@ function (_React$Component) {
           className: "nav-link logo",
           to: "/"
         }, "TripMates"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+          exact: true,
           className: "nav-link",
           to: "/"
-        }, "Trips"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, "Trips"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+          className: "nav-link",
+          to: "/users"
+        }, "Users"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           className: "btn btn-link",
           onClick: this.handleLogout
         }, "Logout"))));
@@ -1255,6 +1273,106 @@ function (_React$Component) {
 
 /***/ }),
 
+/***/ "./components/users/index/usersIndex.jsx":
+/*!***********************************************!*\
+  !*** ./components/users/index/usersIndex.jsx ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var UsersIndex =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(UsersIndex, _React$Component);
+
+  function UsersIndex() {
+    _classCallCheck(this, UsersIndex);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(UsersIndex).apply(this, arguments));
+  }
+
+  _createClass(UsersIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      // TODO: query for all users, other than myself
+      this.props.getAllUsers();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.users.map(function (user) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, user.fullName);
+      }));
+    }
+  }]);
+
+  return UsersIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (UsersIndex);
+
+/***/ }),
+
+/***/ "./components/users/index/usersIndexContainer.jsx":
+/*!********************************************************!*\
+  !*** ./components/users/index/usersIndexContainer.jsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _usersIndex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./usersIndex */ "./components/users/index/usersIndex.jsx");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../reducers/selectors */ "./reducers/selectors.js");
+/* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/userActions */ "./actions/userActions.js");
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    users: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["selectAllOtherUsers"])(state)
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    getAllUsers: function getAllUsers() {
+      return dispatch(Object(_actions_userActions__WEBPACK_IMPORTED_MODULE_3__["getAllUsers"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_usersIndex__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
 /***/ "./components/users/signUp.jsx":
 /*!*************************************!*\
   !*** ./components/users/signUp.jsx ***!
@@ -1451,6 +1569,11 @@ document.addEventListener("DOMContentLoaded", function () {
     var currentUser = Object.values(window.currentUser)[0];
     var id = currentUser.id;
     var preloadedState = {
+      entities: {
+        users: {
+          id: currentUser
+        }
+      },
       session: {
         id: id
       }
@@ -32503,13 +32626,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************!*\
   !*** ./reducers/selectors.js ***!
   \*******************************/
-/*! exports provided: allTripsSelector, selectTripById */
+/*! exports provided: allTripsSelector, selectTripById, selectAllOtherUsers */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "allTripsSelector", function() { return allTripsSelector; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectTripById", function() { return selectTripById; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllOtherUsers", function() { return selectAllOtherUsers; });
 // [{...tripDetails, ...creatorDetails}]
 var allTripsSelector = function allTripsSelector(state) {
   var result = [];
@@ -32525,6 +32649,16 @@ var selectTripById = function selectTripById(state, id) {
   if (trip === undefined) return {};
   trip.creator = state.entities.users[trip.creatorId];
   return trip;
+};
+var selectAllOtherUsers = function selectAllOtherUsers(state) {
+  var currentUserId = state.session.id;
+  var users = [];
+  Object.values(state.entities.users).forEach(function (user) {
+    if (user.id !== currentUserId) {
+      users.push(user);
+    }
+  });
+  return users;
 };
 
 /***/ }),
@@ -32739,6 +32873,24 @@ window.fetchMyTrips = fetchMyTrips;
 window.fetchTrip = fetchTrip;
 window.deleteTrip = deleteTrip;
 window.updateTrip = updateTrip;
+
+/***/ }),
+
+/***/ "./utils/userUtil.js":
+/*!***************************!*\
+  !*** ./utils/userUtil.js ***!
+  \***************************/
+/*! exports provided: getAllUsers */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllUsers", function() { return getAllUsers; });
+var getAllUsers = function getAllUsers() {
+  return $.ajax({
+    url: "/api/users"
+  });
+};
 
 /***/ })
 

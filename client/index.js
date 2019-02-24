@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentUser = Object.values(window.currentUser)[0];
     const { id } = currentUser;
     const preloadedState = {
+      entities: { users: { id: currentUser } },
       session: { id }
     };
     store = createStore(rootReducer, preloadedState, applyMiddleware(logger, thunk));
