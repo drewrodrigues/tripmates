@@ -217,12 +217,8 @@ function (_React$Component) {
       // TODO: once a link is clicked, is this whole thing re-rendered?
 
       if (user === null) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "row"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-md-2"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_shared_navContainer__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-md-10 offset-md-2 main"
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_shared_navContainer__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "container main"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/about",
           render: _components_pages_about__WEBPACK_IMPORTED_MODULE_3__["default"]
@@ -237,27 +233,19 @@ function (_React$Component) {
           render: _components_pages_home__WEBPACK_IMPORTED_MODULE_2__["default"]
         }))));
       } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "row"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "sidebar col-md-2"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_shared_navContainer__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "main col-md-10 offset-md-2"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_shared_navContainer__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "container main"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-          path: "/home",
-          render: _components_pages_home__WEBPACK_IMPORTED_MODULE_2__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-          path: "/about",
-          render: _components_pages_about__WEBPACK_IMPORTED_MODULE_3__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-          path: "/created_trips",
+          exact: true,
+          path: "/trips",
           component: _components_trips_index_tripsIndexContainer__WEBPACK_IMPORTED_MODULE_5__["default"]
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/trips/:id",
           component: _components_trips_show_tripShowContainer__WEBPACK_IMPORTED_MODULE_6__["default"]
-        })))));
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+          path: "/",
+          component: _components_trips_index_tripsIndexContainer__WEBPACK_IMPORTED_MODULE_5__["default"]
+        }))));
       }
     }
   }]);
@@ -690,25 +678,33 @@ function (_React$Component) {
       var nav;
 
       if (currentUser !== null) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-          className: "nav flex-column nav-pills"
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          class: "navbar"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          class: "container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+          className: "nav nav-pills"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+          className: "nav-link logo",
+          to: "/"
+        }, "TripMates"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
           className: "nav-link",
-          to: "/home"
-        }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-          className: "nav-link",
-          to: "/about"
-        }, "About"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-          className: "nav-link",
-          to: "/created_trips"
-        }, "Created Trips"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          to: "/"
+        }, "Trips"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           className: "btn btn-link",
           onClick: this.handleLogout
-        }, "Logout"));
+        }, "Logout"))));
       } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-          className: "nav flex-column nav-pills"
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          class: "navbar"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          class: "container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+          className: "nav nav-pills"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+          className: "nav-link logo",
+          to: "/"
+        }, "TripMates"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
           className: "nav-link",
           to: "/home"
         }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
@@ -720,7 +716,7 @@ function (_React$Component) {
         }, "Login"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
           className: "nav-link",
           to: "/signup"
-        }, "Sign Up"));
+        }, "Sign Up"))));
       }
     }
   }]);
@@ -858,7 +854,9 @@ function (_React$Component) {
       }, "Add a trip"), this.state.showForm === true ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tripForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
         currentUserID: this.props.currentUserID,
         createTrip: createTrip
-      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, trips.map(function (trip) {
+      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "tripsIndex"
+      }, trips.map(function (trip) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tripsIndexItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
           trip: trip,
           key: trip.id

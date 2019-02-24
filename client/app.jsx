@@ -19,12 +19,10 @@ class App extends React.Component {
 
     if (user === null) {
       return(
-        <div className="row">
-          <div className="col-md-2">
-            <NavContainer />
-          </div>
+        <>
+          <NavContainer />
 
-          <div className="col-md-10 offset-md-2 main">
+          <div className="container main">
             <Switch>
               <Route path="/about" render={About} />
               <Route path="/login" component={SignInContainer} />
@@ -32,26 +30,21 @@ class App extends React.Component {
               <Route path="/" render={Home} />
             </Switch>
           </div>
-        </div>
+        </>
       );
     } else {
       return(
-        <div className="row">
-          <div className="sidebar col-md-2">
-            <NavContainer />
-          </div>
+        <>
+          <NavContainer />
 
-          <div className="main col-md-10 offset-md-2">
-            <div className="container main">
-              <Switch>
-                <Route path="/home" render={Home} />
-                <Route path="/about" render={About} />
-                <Route path="/created_trips" component={TripIndexContainer} />
-                <Route path="/trips/:id" component={TripShowContainer} />
-              </Switch>
-            </div>
+          <div className="container main">
+            <Switch>
+              <Route exact path="/trips" component={TripIndexContainer} />
+              <Route path="/trips/:id" component={TripShowContainer} />
+              <Route path="/" component={TripIndexContainer} />
+            </Switch>
           </div>
-        </div>
+        </>
       );
     }
   }

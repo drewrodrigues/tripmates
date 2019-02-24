@@ -21,21 +21,29 @@ class Nav extends React.Component {
 
     if (currentUser !== null) {
       return (
-        <nav className="nav flex-column nav-pills">
-          <NavLink className="nav-link" to="/home">Home</NavLink>
-          <NavLink className="nav-link" to="/about">About</NavLink>
-          <NavLink className="nav-link" to="/created_trips">Created Trips</NavLink>
-          <button className="btn btn-link" onClick={this.handleLogout}>Logout</button>
-        </nav>
+        <div class="navbar">
+          <div class="container">
+            <nav className="nav nav-pills">
+              <NavLink className="nav-link logo" to="/">TripMates</NavLink>
+              <NavLink className="nav-link" to="/">Trips</NavLink>
+              <button className="btn btn-link" onClick={this.handleLogout}>Logout</button>
+            </nav>
+          </div>
+        </div>
       );
     } else {
       return (
-        <nav className="nav flex-column nav-pills">
-          <NavLink className="nav-link" to="/home">Home</NavLink>
-          <NavLink className="nav-link" to="/about">About</NavLink>
-          <NavLink className="nav-link" to="/login">Login</NavLink>
-          <NavLink className="nav-link" to="/signup">Sign Up</NavLink>
-        </nav>
+        <div class="navbar">
+          <div class="container">
+            <nav className="nav nav-pills">
+              <NavLink className="nav-link logo" to="/">TripMates</NavLink>
+              <NavLink className="nav-link" to="/home">Home</NavLink>
+              <NavLink className="nav-link" to="/about">About</NavLink>
+              <NavLink className="nav-link" to="/login">Login</NavLink>
+              <NavLink className="nav-link" to="/signup">Sign Up</NavLink>
+            </nav>
+          </div>
+        </div>
       );
     }
   }

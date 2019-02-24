@@ -30,7 +30,7 @@ ActiveRecord::Base.transaction do
       location: Faker::Nation.capital_city,
       creator_id: user_ids.sample,
       title: Faker::Marketing.buzzwords.titleize,
-      image_url: "https://picsum.photos/420/320?image=#{i + 10}"
+      image_url: "https://picsum.photos/1600/900?image=#{i + 10}"
     )
   end
 end
