@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_21_043250) do
+ActiveRecord::Schema.define(version: 2019_02_24_232504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "friend_requests", force: :cascade do |t|
+    t.integer "requester_id", null: false
+    t.integer "requestee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["requestee_id"], name: "index_friend_requests_on_requestee_id"
+    t.index ["requester_id"], name: "index_friend_requests_on_requester_id"
+  end
 
   create_table "trips", force: :cascade do |t|
     t.date "start_date", null: false

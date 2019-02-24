@@ -26,6 +26,11 @@ class User < ApplicationRecord
 
   attr_reader :password
 
+  has_many :friend_requests,
+    foreign_key: :requestee_id
+  has_many :requested_friends,
+    foreign_key: :requester_id,
+    class_name: :FriendRequest
   has_many :trips,
     foreign_key: :creator_id
 
