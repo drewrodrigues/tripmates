@@ -689,9 +689,9 @@ function (_React$Component) {
 
       if (currentUser !== null) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          class: "navbar"
+          className: "navbar"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          class: "container"
+          className: "container"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
           className: "nav nav-pills"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
@@ -710,9 +710,9 @@ function (_React$Component) {
         }, "Logout"))));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          class: "navbar"
+          className: "navbar"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          class: "container"
+          className: "container"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
           className: "nav nav-pills"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
@@ -1325,7 +1325,9 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.users.map(function (user) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, user.fullName);
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: user.id
+        }, user.id, " - ", user.fullName);
       }));
     }
   }]);
@@ -1553,6 +1555,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _middleware_thunk__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./middleware/thunk */ "./middleware/thunk.js");
 /* harmony import */ var _reducers_rootReducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./reducers/rootReducer */ "./reducers/rootReducer.js");
 /* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./App */ "./App.jsx");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1570,9 +1574,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var id = currentUser.id;
     var preloadedState = {
       entities: {
-        users: {
-          id: currentUser
-        }
+        users: _defineProperty({}, currentUser.id, currentUser)
       },
       session: {
         id: id
@@ -32685,10 +32687,10 @@ var sessionReducer = function sessionReducer() {
 
   switch (action.type) {
     case _actions_sessionActions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
-      var id = action.user.id;
-      return Object.assign({}, {
+      var id = parseInt(Object.keys(action.user)[0]);
+      return {
         id: id
-      });
+      };
 
     case _actions_sessionActions__WEBPACK_IMPORTED_MODULE_0__["LOGOUT"]:
       return _nullUser;

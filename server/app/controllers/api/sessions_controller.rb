@@ -1,9 +1,9 @@
 class Api::SessionsController < ApplicationController
   def create
-    user = User.find_by_credentials(email, password)
-    if user
-      login!(user)
-      render json: user
+    @user = User.find_by_credentials(email, password)
+    if @user
+      login!(@user)
+      render "api/users/show"
     else
       render json: {errors: "Failed to login"}, status: 400
     end
