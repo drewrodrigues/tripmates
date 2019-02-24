@@ -20,4 +20,14 @@ class Trip < ApplicationRecord
   validates :start_date, :end_date, :title, presence: true
 
   # TODO: add validation start_date <= end_date
+
+  def duration
+    day_count = (end_date - start_date).round + 1
+    "#{day_count} day" + (day_count > 1 ? "s" : "")
+  end
+
+  def days_until
+    day_count = (start_date - Date.today).round
+    "#{day_count} day" + (day_count > 1 ? "s" : "") + " until"
+  end
 end

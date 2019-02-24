@@ -943,8 +943,10 @@ var MyTripsItem = function MyTripsItem(props) {
     src: props.trip.imageUrl,
     className: "card-thumb",
     alt: ""
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    class: "card-content"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "badge badge-light card-duration "
+  }, props.trip.duration, " long"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-content clear"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "card-date"
   }, "From ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, props.trip.startDate), " to ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, props.trip.endDate)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -954,10 +956,16 @@ var MyTripsItem = function MyTripsItem(props) {
   }, props.trip.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "card-location"
   }, props.trip.location), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "light"
-  }, "Created by ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "card-description"
+  }, "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,  Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "footer"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "card-creator"
+  }, "Created by ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "badge badge-primary"
-  }, props.trip.creator.fullName)))));
+  }, props.trip.creator.fullName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "card-days-until badge badge-warning"
+  }, props.trip.daysUntil))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (MyTripsItem);

@@ -14,11 +14,17 @@
   margin-bottom: 20px;
 }
 
+.card-duration {
+  font-size: 12px;
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+}
+
 .card-thumb {
   float: left;
-  width: 200px;
-  height: 150px;
-  margin-right: 20px;
+  height: 300px;
+  margin-right: 40px;
 }
 
 .card-title {
@@ -39,12 +45,39 @@
 }
 
 .card-body {
-  float: left;
   padding: 0;
+  position: relative;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 0;
+  left: 0;
+  padding: 20px;
+
+  p {
+    margin-bottom: 0;
+  }
 }
 
 .card-content {
-  padding: 20px;
+  padding: 40px;
+}
+
+.card-creator {
+  font-size: 14px !important;
+  float: right;
+  color: #bbb;
+
+  a {
+    color: #fff !important;
+  }
+}
+
+.card-description {
+  font-size: 14px;
 }
 
 .trip-show {
