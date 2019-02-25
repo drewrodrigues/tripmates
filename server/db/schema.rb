@@ -20,8 +20,7 @@ ActiveRecord::Schema.define(version: 2019_02_24_232504) do
     t.integer "requestee_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["requestee_id"], name: "index_friend_requests_on_requestee_id"
-    t.index ["requester_id"], name: "index_friend_requests_on_requester_id"
+    t.index ["requester_id", "requestee_id"], name: "index_friend_requests_on_requester_id_and_requestee_id"
   end
 
   create_table "trips", force: :cascade do |t|

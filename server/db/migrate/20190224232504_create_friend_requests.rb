@@ -7,7 +7,6 @@ class CreateFriendRequests < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    add_index :friend_requests, :requester_id
-    add_index :friend_requests, :requestee_id
+    add_index :friend_requests, [:requester_id, :requestee_id]
   end
 end
