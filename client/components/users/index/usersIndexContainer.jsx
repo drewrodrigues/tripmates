@@ -1,18 +1,23 @@
 import { connect } from 'react-redux'
 import UsersIndex from './usersIndex'
 
-import { selectAllOtherUsers } from '../../../reducers/selectors'
+import { selectAllOtherUsers, selectAllFriendRequests, selectAllRequestedFriends } from '../../../reducers/selectors'
 import { getAllUsers } from '../../../actions/userActions'
 
-const mapStateToProps = (state) => {
+import { getAllFriendRequests } from '../../../actions/friendRequestActions'
+
+const mapStateToProps = state => {
   return {
-    users: selectAllOtherUsers(state)
+    users: selectAllOtherUsers(state),
+    requestedFriends: selectAllRequestedFriends(state),
+    friendRequests: selectAllFriendRequests(state)
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    getAllUsers: () => dispatch(getAllUsers())
+    getAllUsers: () => dispatch(getAllUsers()),
+    getAllFriendRequests: () => dispatch(getAllFriendRequests())
   }
 }
 

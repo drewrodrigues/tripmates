@@ -16,7 +16,7 @@ export const selectTripById = (state, id) => {
   return trip
 }
 
-export const selectAllOtherUsers = (state) => {
+export const selectAllOtherUsers = state => {
   const currentUserId = state.session.id
   const users = []
   Object.values(state.entities.users).forEach(user => {
@@ -25,4 +25,81 @@ export const selectAllOtherUsers = (state) => {
     }
   })
   return users
+}
+
+// {friendId: true, friendId: true}
+// check if key existss
+export const selectAllFriendRequests = state => {
+  const currentUserId = state.session.id
+  const keyHash = {}
+  Object.values(state.entities.friendRequests).forEach(friendRequest => {
+    if (friendRequest.requesteeId === currentUserId) {
+      keyHash[friendRequest.requesteeId] = true
+    }
+  })
+  return keyHash
+}
+
+export const selectAllRequestedFriends = state => {
+  const currentUserId = state.session.id
+  const keyHash = {}
+  Object.values(state.entities.friendRequests).forEach(friendRequest => {
+    if (friendRequest.requesterId === currentUserId) {
+      keyHash[friendRequest.requesteeId] = true
+    }
+  })
+  return keyHash
+}
+
+const friendRequestArray = state => {
+  const output = []
+  Object.values(state.entities.friendRequests).forEach(friendRequest => {
+    output.push(friendRequest)
+  })
+  return output
+}
+
+export const checkIfFriend = (state, userId) => {
+  const currentUserId = state.session.id
+  Object.values(state.entities.friendRequests).forEach(
+    // if
+  )
+  return false
+}
+
+export const checkIfRequested = (state, userId) => {
+  // FIXME: come up with a better way to do this
+  const currentUserId = state.session.id
+  const friendRequests = friendRequestArray(state)
+  for (let i = 0; i < friendRequests.length; i++) {
+    if (friendRequests[i].requesterId === currentUserId && friendRequests[i].requesteeId === userId) {
+      return true
+    }
+  }
+  return false
+}
+
+export const checkIfFriendRequestPending = (state, userId) => {
+  // FIXME: come up with a better way to do this
+  const currentUserId = state.session.id
+  const friendRequests = friendRequestArray(state)
+  for (let i = 0; i < friendRequests.length; i++) {
+    if (friendRequests[i].requesterId === userId && friendRequests[i].requesteeId === currentUserId) {
+      return true
+    }
+  }
+  return false
+}
+
+export const selectFriendRequest = (state, userId) => {
+  const currentUserId = state.session.id
+  let friendRequest = {}
+  const friendRequests = friendRequestArray(state)
+  for (let i = 0; i < friendRequests.length; i++) {
+    if ((friendRequests[i].requesterId === userId && friendRequests[i].requesteeId === currentUserId)
+        || (friendRequests[i].requesterId === currentUserId && friendRequests[i].requesteeId === userId)) {
+      return friendRequests[i]
+    }
+  }
+  return friendRequest
 }

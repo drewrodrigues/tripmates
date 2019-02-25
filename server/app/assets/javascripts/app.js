@@ -509,6 +509,133 @@ var getAllUsers = function getAllUsers() {
 
 /***/ }),
 
+/***/ "./components/friendRequests/friendRequest.jsx":
+/*!*****************************************************!*\
+  !*** ./components/friendRequests/friendRequest.jsx ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var FriendRequest =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(FriendRequest, _React$Component);
+
+  function FriendRequest() {
+    _classCallCheck(this, FriendRequest);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(FriendRequest).apply(this, arguments));
+  }
+
+  _createClass(FriendRequest, [{
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      var button;
+
+      if (this.props.isRequested) {
+        button = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "badge badge-warning",
+          onClick: function onClick() {
+            return _this.props.cancelRequest(_this.props.friendRequest.id);
+          }
+        }, "Requested");
+      } else if (this.props.friendRequestPending) {
+        button = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "badge badge-success"
+        }, "Accept Friend Request"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "badge badge-danger",
+          onClick: function onClick() {
+            return _this.props.cancelRequest(_this.props.friendRequest.id);
+          }
+        }, "Deny Friend Request"));
+      } else {
+        button = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "badge badge-light",
+          onClick: this.props.addRequest
+        }, "Add friend");
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, button);
+    }
+  }]);
+
+  return FriendRequest;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (FriendRequest);
+
+/***/ }),
+
+/***/ "./components/friendRequests/friendRequestContainer.jsx":
+/*!**************************************************************!*\
+  !*** ./components/friendRequests/friendRequestContainer.jsx ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _friendRequest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./friendRequest */ "./components/friendRequests/friendRequest.jsx");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../reducers/selectors */ "./reducers/selectors.js");
+/* harmony import */ var _actions_friendRequestActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/friendRequestActions */ "./actions/friendRequestActions.js");
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    // TODO: fetch this record first before getting other props?
+    // isFriend: checkIfFriend(state, ownProps.userId),
+    friendRequest: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["selectFriendRequest"])(state, ownProps.userId),
+    isRequested: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["checkIfRequested"])(state, ownProps.userId),
+    // TODO: pull these into state? based upon currentUser passed down and the record that was found
+    friendRequestPending: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["checkIfFriendRequestPending"])(state, ownProps.userId)
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    cancelRequest: function cancelRequest(id) {
+      return dispatch(Object(_actions_friendRequestActions__WEBPACK_IMPORTED_MODULE_3__["deleteFriendRequest"])(id));
+    },
+    addRequest: function addRequest() {
+      return dispatch(Object(_actions_friendRequestActions__WEBPACK_IMPORTED_MODULE_3__["createFriendRequest"])(ownProps.userId));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_friendRequest__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
 /***/ "./components/pages/about.jsx":
 /*!************************************!*\
   !*** ./components/pages/about.jsx ***!
@@ -1349,6 +1476,7 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _friendRequests_friendRequestContainer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../friendRequests/friendRequestContainer */ "./components/friendRequests/friendRequestContainer.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1369,6 +1497,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var UsersIndex =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1384,15 +1513,22 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       // TODO: query for all users, other than myself
+      // TODO: getAllUsersWithFriendRequestData
       this.props.getAllUsers();
+      this.props.getAllFriendRequests();
     }
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.users.map(function (user) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "list-group"
+      }, this.props.users.map(function (user) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: user.id
-        }, user.id, " - ", user.fullName);
+          key: user.id,
+          className: "list-group-item"
+        }, user.fullName, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_friendRequests_friendRequestContainer__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          userId: user.id
+        }));
       }));
     }
   }]);
@@ -1417,6 +1553,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _usersIndex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./usersIndex */ "./components/users/index/usersIndex.jsx");
 /* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../reducers/selectors */ "./reducers/selectors.js");
 /* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/userActions */ "./actions/userActions.js");
+/* harmony import */ var _actions_friendRequestActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../actions/friendRequestActions */ "./actions/friendRequestActions.js");
+
 
 
 
@@ -1424,7 +1562,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    users: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["selectAllOtherUsers"])(state)
+    users: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["selectAllOtherUsers"])(state),
+    requestedFriends: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["selectAllRequestedFriends"])(state),
+    friendRequests: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["selectAllFriendRequests"])(state)
   };
 };
 
@@ -1432,6 +1572,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     getAllUsers: function getAllUsers() {
       return dispatch(Object(_actions_userActions__WEBPACK_IMPORTED_MODULE_3__["getAllUsers"])());
+    },
+    getAllFriendRequests: function getAllFriendRequests() {
+      return dispatch(Object(_actions_friendRequestActions__WEBPACK_IMPORTED_MODULE_4__["getAllFriendRequests"])());
     }
   };
 };
@@ -32736,7 +32879,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************!*\
   !*** ./reducers/selectors.js ***!
   \*******************************/
-/*! exports provided: allTripsSelector, selectTripById, selectAllOtherUsers */
+/*! exports provided: allTripsSelector, selectTripById, selectAllOtherUsers, selectAllFriendRequests, selectAllRequestedFriends, checkIfFriend, checkIfRequested, checkIfFriendRequestPending, selectFriendRequest */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32744,6 +32887,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "allTripsSelector", function() { return allTripsSelector; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectTripById", function() { return selectTripById; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllOtherUsers", function() { return selectAllOtherUsers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllFriendRequests", function() { return selectAllFriendRequests; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllRequestedFriends", function() { return selectAllRequestedFriends; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkIfFriend", function() { return checkIfFriend; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkIfRequested", function() { return checkIfRequested; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkIfFriendRequestPending", function() { return checkIfFriendRequestPending; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFriendRequest", function() { return selectFriendRequest; });
 // [{...tripDetails, ...creatorDetails}]
 var allTripsSelector = function allTripsSelector(state) {
   var result = [];
@@ -32769,6 +32918,81 @@ var selectAllOtherUsers = function selectAllOtherUsers(state) {
     }
   });
   return users;
+}; // {friendId: true, friendId: true}
+// check if key existss
+
+var selectAllFriendRequests = function selectAllFriendRequests(state) {
+  var currentUserId = state.session.id;
+  var keyHash = {};
+  Object.values(state.entities.friendRequests).forEach(function (friendRequest) {
+    if (friendRequest.requesteeId === currentUserId) {
+      keyHash[friendRequest.requesteeId] = true;
+    }
+  });
+  return keyHash;
+};
+var selectAllRequestedFriends = function selectAllRequestedFriends(state) {
+  var currentUserId = state.session.id;
+  var keyHash = {};
+  Object.values(state.entities.friendRequests).forEach(function (friendRequest) {
+    if (friendRequest.requesterId === currentUserId) {
+      keyHash[friendRequest.requesteeId] = true;
+    }
+  });
+  return keyHash;
+};
+
+var friendRequestArray = function friendRequestArray(state) {
+  var output = [];
+  Object.values(state.entities.friendRequests).forEach(function (friendRequest) {
+    output.push(friendRequest);
+  });
+  return output;
+};
+
+var checkIfFriend = function checkIfFriend(state, userId) {
+  var currentUserId = state.session.id;
+  Object.values(state.entities.friendRequests).forEach();
+  return false;
+};
+var checkIfRequested = function checkIfRequested(state, userId) {
+  // FIXME: come up with a better way to do this
+  var currentUserId = state.session.id;
+  var friendRequests = friendRequestArray(state);
+
+  for (var i = 0; i < friendRequests.length; i++) {
+    if (friendRequests[i].requesterId === currentUserId && friendRequests[i].requesteeId === userId) {
+      return true;
+    }
+  }
+
+  return false;
+};
+var checkIfFriendRequestPending = function checkIfFriendRequestPending(state, userId) {
+  // FIXME: come up with a better way to do this
+  var currentUserId = state.session.id;
+  var friendRequests = friendRequestArray(state);
+
+  for (var i = 0; i < friendRequests.length; i++) {
+    if (friendRequests[i].requesterId === userId && friendRequests[i].requesteeId === currentUserId) {
+      return true;
+    }
+  }
+
+  return false;
+};
+var selectFriendRequest = function selectFriendRequest(state, userId) {
+  var currentUserId = state.session.id;
+  var friendRequest = {};
+  var friendRequests = friendRequestArray(state);
+
+  for (var i = 0; i < friendRequests.length; i++) {
+    if (friendRequests[i].requesterId === userId && friendRequests[i].requesteeId === currentUserId || friendRequests[i].requesterId === currentUserId && friendRequests[i].requesteeId === userId) {
+      return friendRequests[i];
+    }
+  }
+
+  return friendRequest;
 };
 
 /***/ }),
