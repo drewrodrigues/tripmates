@@ -8,6 +8,8 @@ import thunk from './middleware/thunk';
 import rootReducer from './reducers/rootReducer';
 import App from './App';
 
+import { } from './actions/friendRequestActions'
+
 document.addEventListener("DOMContentLoaded", () => {
   let store;
   if (window.currentUser) {

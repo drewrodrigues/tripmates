@@ -261,6 +261,71 @@ function (_React$Component) {
 
 /***/ }),
 
+/***/ "./actions/friendRequestActions.js":
+/*!*****************************************!*\
+  !*** ./actions/friendRequestActions.js ***!
+  \*****************************************/
+/*! exports provided: RECEIVE_FRIEND_REQUEST, RECEIVE_FRIEND_REQUESTS, REMOVE_FRIEND_REQUEST, receiveFriendRequest, receiveFriendRequests, removeFriendRequest, getAllFriendRequests, deleteFriendRequest, createFriendRequest */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_FRIEND_REQUEST", function() { return RECEIVE_FRIEND_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_FRIEND_REQUESTS", function() { return RECEIVE_FRIEND_REQUESTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FRIEND_REQUEST", function() { return REMOVE_FRIEND_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveFriendRequest", function() { return receiveFriendRequest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveFriendRequests", function() { return receiveFriendRequests; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeFriendRequest", function() { return removeFriendRequest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllFriendRequests", function() { return getAllFriendRequests; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteFriendRequest", function() { return deleteFriendRequest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFriendRequest", function() { return createFriendRequest; });
+/* harmony import */ var _utils_friendRequestUtil__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/friendRequestUtil */ "./utils/friendRequestUtil.js");
+
+var RECEIVE_FRIEND_REQUEST = "RECEIVE_FRIEND_REQUEST";
+var RECEIVE_FRIEND_REQUESTS = "RECEIVE_FRIEND_REQUESTS";
+var REMOVE_FRIEND_REQUEST = "REMOVE_FRIEND_REQUEST";
+var receiveFriendRequest = function receiveFriendRequest(friendRequest) {
+  return {
+    type: RECEIVE_FRIEND_REQUEST,
+    friendRequest: friendRequest
+  };
+};
+var receiveFriendRequests = function receiveFriendRequests(friendRequests) {
+  return {
+    type: RECEIVE_FRIEND_REQUESTS,
+    friendRequests: friendRequests
+  };
+};
+var removeFriendRequest = function removeFriendRequest(id) {
+  return {
+    type: REMOVE_FRIEND_REQUEST,
+    id: id
+  };
+};
+var getAllFriendRequests = function getAllFriendRequests() {
+  return function (dispatch) {
+    return _utils_friendRequestUtil__WEBPACK_IMPORTED_MODULE_0__["getAllFriendRequests"]().then(function (friendRequestResponse) {
+      dispatch(receiveFriendRequests(friendRequestResponse));
+    });
+  };
+};
+var deleteFriendRequest = function deleteFriendRequest(id) {
+  return function (dispatch) {
+    return _utils_friendRequestUtil__WEBPACK_IMPORTED_MODULE_0__["deleteFriendRequest"](id).then(function () {
+      dispatch(removeFriendRequest(id));
+    });
+  };
+};
+var createFriendRequest = function createFriendRequest(id) {
+  return function (dispatch) {
+    return _utils_friendRequestUtil__WEBPACK_IMPORTED_MODULE_0__["createFriendRequest"](id).then(function (friendRequestResponse) {
+      dispatch(receiveFriendRequest(friendRequestResponse));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./actions/sessionActions.js":
 /*!***********************************!*\
   !*** ./actions/sessionActions.js ***!
@@ -1555,7 +1620,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _middleware_thunk__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./middleware/thunk */ "./middleware/thunk.js");
 /* harmony import */ var _reducers_rootReducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./reducers/rootReducer */ "./reducers/rootReducer.js");
 /* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./App */ "./App.jsx");
+/* harmony import */ var _actions_friendRequestActions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./actions/friendRequestActions */ "./actions/friendRequestActions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -32592,13 +32659,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _tripsReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tripsReducer */ "./reducers/tripsReducer.js");
 /* harmony import */ var _usersReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./usersReducer */ "./reducers/usersReducer.js");
+/* harmony import */ var _friendRequestsReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./friendRequestsReducer */ "./reducers/friendRequestsReducer.js");
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   trips: _tripsReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  users: _usersReducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  users: _usersReducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  friendRequests: _friendRequestsReducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 }));
+
+/***/ }),
+
+/***/ "./reducers/friendRequestsReducer.js":
+/*!*******************************************!*\
+  !*** ./reducers/friendRequestsReducer.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_friendRequestActions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/friendRequestActions */ "./actions/friendRequestActions.js");
+
+
+var friendRequestsReducers = function friendRequestsReducers() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_friendRequestActions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_FRIEND_REQUEST"]:
+      return Object.assign({}, state, action.friendRequest);
+
+    case _actions_friendRequestActions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_FRIEND_REQUESTS"]:
+      return Object.assign({}, state, action.friendRequests);
+
+    case _actions_friendRequestActions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_FRIEND_REQUEST"]:
+      var newState = Object.assign({}, state);
+      delete newState[action.id];
+      return newState;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (friendRequestsReducers);
 
 /***/ }),
 
@@ -32774,6 +32882,41 @@ var usersReducer = function usersReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (usersReducer);
+
+/***/ }),
+
+/***/ "./utils/friendRequestUtil.js":
+/*!************************************!*\
+  !*** ./utils/friendRequestUtil.js ***!
+  \************************************/
+/*! exports provided: getAllFriendRequests, deleteFriendRequest, createFriendRequest */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllFriendRequests", function() { return getAllFriendRequests; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteFriendRequest", function() { return deleteFriendRequest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFriendRequest", function() { return createFriendRequest; });
+var getAllFriendRequests = function getAllFriendRequests() {
+  return $.ajax({
+    url: "/api/friend_requests"
+  });
+};
+var deleteFriendRequest = function deleteFriendRequest(id) {
+  return $.ajax({
+    url: "/api/friend_requests/".concat(id),
+    type: "DELETE"
+  });
+};
+var createFriendRequest = function createFriendRequest(id) {
+  return $.ajax({
+    url: '/api/friend_requests',
+    type: "POST",
+    data: {
+      id: id
+    }
+  });
+};
 
 /***/ }),
 
