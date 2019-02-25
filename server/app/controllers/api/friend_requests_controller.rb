@@ -4,21 +4,20 @@ class Api::FriendRequestsController < ApplicationController
   def create
     @friend_request = current_user.requested_friends.build(requestee_id: params[:id])
     if @friend_request.save
-      render json: {messages: "SUCCESS"}
+      render :show
     else
       render json: @friend_request.errors.full_messages
     end
   end
 
   def index
-    @friend_requests = current_user.friend_requests
-    render json: @friend_requests
+    @friend_requests = current_user.friend_requests + current_user.requested_friends
   end
 
   def destroy
     @friend_request = FriendRequest.find(params[:id])
     @friend_request.destroy
-    render json: {messages: "SUCCESS"}
+    render :show
   end
 
   private
