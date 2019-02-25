@@ -21,7 +21,6 @@ class FriendRequest < ApplicationRecord
 
   def unique_friend_request_between_users
     user1, user2 = [requester_id, requestee_id].sort
-    byebug
     if FriendRequest.where(requestee_id: user1, requester_id: user2)
                     .or(FriendRequest.where(requestee_id: user2, requester_id: user1))
                     .exists?
