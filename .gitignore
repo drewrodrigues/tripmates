@@ -10,6 +10,7 @@
 # Ignore all logfiles and tempfiles.
 */log/*
 */tmp/*
+/tmp
 !/log/.keep
 !/tmp/.keep
 
@@ -17,7 +18,7 @@
 /storage/*
 !/storage/.keep
 
-*/node_modules
+/node_modules
 /yarn-error.log
 
 /public/assets

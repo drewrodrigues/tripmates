@@ -1,15 +1,20 @@
-import { RECEIVE_USER, RECEIVE_USERS } from '../actions/userActions'
+import {
+  RECEIVE_USER,
+  RECEIVE_USERS
+} from '../actions/userActions'
 
-const usersReducer = (state = {}, action) => {
-  Object.freeze(state)
+const usersReducer = (oldState = {}, action) => {
+  Object.freeze(oldState)
+  let newState = Object.assign({}, oldState)
 
   switch (action.type) {
     case RECEIVE_USER:
-      return Object.assign({}, state, action.user)
+      newState[action.user.id] = action.user
+      return newState
     case RECEIVE_USERS:
-      return Object.assign({}, state, action.users)
+      return action.users
     default:
-      return state
+      return oldState
   }
 }
 

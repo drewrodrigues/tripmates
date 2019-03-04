@@ -1,24 +1,24 @@
-import { 
+import {
   RECEIVE_FRIEND_REQUEST,
   RECEIVE_FRIEND_REQUESTS,
   REMOVE_FRIEND_REQUEST
-} from "../actions/friendRequestActions"
+} from '../actions/friendRequestActions'
 
-const friendRequestsReducers = (state = {}, action) => {
-  Object.freeze(state)
+const friendRequestsReducer = (oldState = {}, action) => {
+  Object.freeze(oldState)
+  let newState = Object.assign({}, oldState)
 
   switch (action.type) {
     case RECEIVE_FRIEND_REQUEST:
-      return Object.assign({}, state, action.friendRequest)
+      return Object.assign(newState, action.friendRequest)
     case RECEIVE_FRIEND_REQUESTS:
-      return Object.assign({}, state, action.friendRequests)
+      return action.friendRequests
     case REMOVE_FRIEND_REQUEST:
-      let newState = Object.assign({}, state)
       delete newState[action.id]
       return newState
     default:
-      return state;
+      return oldState
   }
 }
 
-export default friendRequestsReducers
+export default friendRequestsReducer

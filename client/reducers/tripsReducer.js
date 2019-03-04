@@ -1,21 +1,24 @@
-import { RECEIVE_TRIP, RECEIVE_TRIPS, REMOVE_TRIP } from "../actions/tripActions"
+import {
+  RECEIVE_TRIP,
+  RECEIVE_TRIPS,
+  REMOVE_TRIP
+} from '../actions/tripActions'
 
-const tripsReducer = (state = {}, action) => {
-  Object.freeze(state)
+const tripsReducer = (oldState = {}, action) => {
+  Object.freeze(oldState)
+  let newState = Object.assign({}, oldState)
 
-  let newState
   switch (action.type) {
-    case REMOVE_TRIP:
-      newState = Object.assign({}, state)
-      delete newState[action.trip.id]
-      return newState
     case RECEIVE_TRIP:
-      newState = Object.assign({}, state, action.trip)
+      newState[action.trip.id] = action.trip
       return newState
     case RECEIVE_TRIPS:
       return action.trips
+    case REMOVE_TRIP:
+      delete newState[action.id]
+      return newState
     default:
-      return state
+      return oldState
   }
 }
 

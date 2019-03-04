@@ -10,7 +10,7 @@ class UsersIndex extends React.Component {
   }
   
   render() {
-    return (
+  return (
       <ul className="list-group">
         {this.props.users.map(user => (
           <li key={user.id} className="list-group-item">
