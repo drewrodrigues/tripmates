@@ -28,3 +28,4 @@
 /config/master.key
 log/*
 *.swp
+coverage/
