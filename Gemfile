@@ -32,4 +32,9 @@ group :development do
   gem "guard-rspec", "4.2.9"
 end
 
+group :test do
+  gem "shoulda-matchers"
+  gem "rails-controller-testing"
+end
+
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
