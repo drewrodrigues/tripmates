@@ -14,20 +14,23 @@
 #
 
 class Trip < ApplicationRecord
-  belongs_to :creator,
-    class_name: :User
+  belongs_to :creator, class_name: :User
   
-  validates :start_date, :end_date, :title, presence: true
-
-  # TODO: add validation start_date <= end_date
+  validates :start_date, :end_date, :title, :location, presence: true
+  validate :valid_date_range
 
   def duration
-    day_count = (end_date - start_date).round + 1
-    "#{day_count} day" + (day_count > 1 ? "s" : "")
+    (end_date - start_date).round + 1
   end
 
   def days_until
-    day_count = (start_date - Date.today).round
-    "#{day_count} day" + (day_count > 1 ? "s" : "") + " until"
+    (start_date - Date.today).round
+  end
+
+  def valid_date_range
+    return if [start_date, end_date].any?(&:nil?)
+    if start_date > end_date
+      errors.add(:start_date, "must be before or the same as end date.")
+    end
   end
 end
