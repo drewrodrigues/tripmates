@@ -1,37 +1,17 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
-import { HashRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { logger } from 'redux-logger';
-import thunk from './middleware/thunk';
-import rootReducer from './reducers/rootReducer';
-import App from './App';
-
-import { } from './actions/friendRequestActions'
+import React from 'react'
+import { render } from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import App from './App'
+import createStore from './store/store'
 
 document.addEventListener("DOMContentLoaded", () => {
-  let store;
-  if (window.currentUser) {
-    const currentUser = Object.values(window.currentUser)[0];
-    const { id } = currentUser;
-    const preloadedState = {
-      entities: {users: {[currentUser.id]: currentUser}},
-      session: {id}
-    };
-    store = createStore(rootReducer, preloadedState, applyMiddleware(logger, thunk));
-  } else {
-    store = createStore(rootReducer, applyMiddleware(logger, thunk));
-  }
-
-  window.store = store;
-  
   render(
-    <Provider store={store}>
-      <HashRouter>
+    <Provider store={createStore()}>
+      <BrowserRouter>
         <App />
-      </HashRouter>
+      </BrowserRouter>
     </Provider>,
     document.getElementById("root")
-  );
-});
+  )
+})
