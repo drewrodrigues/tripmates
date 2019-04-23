@@ -1,52 +1,20 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+
+import Routes from './routes'
+import NavLoggedIn from './navLoggedIn'
+import NavLoggedOut from './navLoggedOut'
 
 class Nav extends React.Component {  
-  constructor(props) {
-    super(props);
-
-    this.handleLogout = this.handleLogout.bind(this);
-  }
-
-  handleLogout() {
-    let that = this;
-    this.props.logout().then(() => {
-      that.props.history.push('/login');
-    });
-  }
-
   render() {
-    const { currentUser } = this.props;
-    let nav;
+    const { currentUser, logout } = this.props;
+    const Nav = currentUser ? <NavLoggedIn logout={ logout } /> : <NavLoggedOut />
 
-    if (currentUser !== null) {
-      return (
-        <div className="navbar">
-          <div className="container">
-            <nav className="nav nav-pills">
-              <NavLink className="nav-link logo" to="/">TripMates</NavLink>
-              <NavLink exact className="nav-link" to="/">Trips</NavLink>
-              <NavLink className="nav-link" to="/users">Users</NavLink>
-              <button className="btn btn-link" onClick={this.handleLogout}>Logout</button>
-            </nav>
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <div className="navbar">
-          <div className="container">
-            <nav className="nav nav-pills">
-              <NavLink className="nav-link logo" to="/">TripMates</NavLink>
-              <NavLink className="nav-link" to="/home">Home</NavLink>
-              <NavLink className="nav-link" to="/about">About</NavLink>
-              <NavLink className="nav-link" to="/login">Login</NavLink>
-              <NavLink className="nav-link" to="/signup">Sign Up</NavLink>
-            </nav>
-          </div>
-        </div>
-      );
-    }
+    return (
+      <>
+        { Nav }
+        <Routes loggedIn={ currentUser }/>
+      </>
+    )
   }
 }
 
