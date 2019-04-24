@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: trips
+#
+#  id         :bigint(8)        not null, primary key
+#  start_date :date             not null
+#  end_date   :date             not null
+#  title      :string           not null
+#  location   :string
+#  creator_id :integer          not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require "rails_helper"
 
 RSpec.describe Trip, type: :model do

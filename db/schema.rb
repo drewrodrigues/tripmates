@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_24_232504) do
+ActiveRecord::Schema.define(version: 2019_04_24_044839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "friend_requests", force: :cascade do |t|
     t.integer "requester_id", null: false
@@ -23,10 +44,19 @@ ActiveRecord::Schema.define(version: 2019_02_24_232504) do
     t.index ["requester_id", "requestee_id"], name: "index_friend_requests_on_requester_id_and_requestee_id"
   end
 
+  create_table "friends", force: :cascade do |t|
+    t.integer "user_one_id", null: false
+    t.integer "user_two_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_one_id", "user_two_id"], name: "index_friends_on_user_one_id_and_user_two_id", unique: true
+    t.index ["user_one_id"], name: "index_friends_on_user_one_id"
+    t.index ["user_two_id"], name: "index_friends_on_user_two_id"
+  end
+
   create_table "trips", force: :cascade do |t|
     t.date "start_date", null: false
     t.date "end_date", null: false
-    t.string "image_url"
     t.string "title", null: false
     t.string "location"
     t.integer "creator_id", null: false
@@ -48,4 +78,5 @@ ActiveRecord::Schema.define(version: 2019_02_24_232504) do
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
 end

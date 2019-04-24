@@ -5,7 +5,6 @@
 #  id         :bigint(8)        not null, primary key
 #  start_date :date             not null
 #  end_date   :date             not null
-#  image_url  :string
 #  title      :string           not null
 #  location   :string
 #  creator_id :integer          not null

@@ -19,4 +19,9 @@ FactoryBot.define do
     association :requester, factory: :user, strategy: :build_stubbed
     association :requestee, factory: :user, strategy: :build_stubbed
   end
+
+  factory :friend do
+    association :user_one, factory: :user, strategy: :build_stubbed
+    association :user_two, factory: :user, strategy: :build_stubbed
+  end
 end
