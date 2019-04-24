@@ -21,6 +21,7 @@ class FriendRequest < ApplicationRecord
   private
 
   def unique_friend_request_between_users
+    return if [requester_id, requestee_id].any?(&:nil?) # FIXME: better way to do this?
     user1, user2 = [requester_id, requestee_id].sort
     if FriendRequest.where(requestee_id: user1, requester_id: user2)
                     .or(FriendRequest.where(requestee_id: user2, requester_id: user1))
