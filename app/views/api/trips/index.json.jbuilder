@@ -1,4 +1,5 @@
 json.trips({})
+json.users({})
 
 json.set! "trips" do
   @trips.each do |trip|
