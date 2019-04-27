@@ -15,6 +15,7 @@
 
 class Trip < ApplicationRecord
   belongs_to :creator, class_name: :User
+  has_one_attached :cover_photo
   
   validates :start_date, :end_date, :title, :location, presence: true
   validate :valid_date_range
