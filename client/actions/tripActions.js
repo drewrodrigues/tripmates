@@ -20,7 +20,7 @@ export const removeTrip = trip => {
 
 export const retrieveMyTrips = userId => dispatch => {
   return APIUtil.fetchMyTrips(userId)
-    .then(res => { // FIXME: better way to do this?
+    .then(res => {
       dispatch(receiveTrips(res.trips))
       dispatch(receiveUsers(res.users))
     })
@@ -28,7 +28,7 @@ export const retrieveMyTrips = userId => dispatch => {
 
 export const getTripById = id => dispatch => {
   return APIUtil.fetchTrip(id)
-  .then(res => {
+    .then(res => {
       dispatch(receiveTrips(res.trip))
       dispatch(receiveUsers(res.user))
     })

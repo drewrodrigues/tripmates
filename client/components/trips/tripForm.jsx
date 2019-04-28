@@ -5,15 +5,20 @@ class TripForm extends React.Component {
     super(props)
   
     this.today = new Date().toISOString().split('T')[0];
-  
+    this.formShown = false
     this.state = {
-      title: "", start_date: this.today, end_date: this.today, location: "",
-      creator_id: this.props.currentUserID, image_url: ""
+      title: "", 
+      start_date: this.today,
+      end_date: this.today,
+      location: "",
+      cover_photo: ""
     }
 
+    this.handleImage = this.handleImage.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.clearForm    = this.clearForm.bind(this)
+    this.clearForm = this.clearForm.bind(this)
+    this.displayForm = this.displayForm.bind(this)
   }
 
   handleUpdate(prop) {
@@ -24,58 +29,90 @@ class TripForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log(e)
     const that = this
+    const formData = new FormData()
 
-    this.props.createTrip(this.props.currentUserID, this.state).then(() => {
+    formData.append('trip[title]', this.state.title)
+    formData.append('trip[start_date]', this.state.start_date)
+    formData.append('trip[end_date]', this.state.end_date)
+    formData.append('trip[location]', this.state.location)
+    formData.append('trip[cover_photo]', this.state.cover_photo_file)
+    console.log(formData)
+
+    this.props.createTrip(this.props.currentUserID, formData).then(() => {
+      this.formShown = false
       that.clearForm()
     })
   }
 
+  handleImage(e) {
+    const file = e.currentTarget.files[0];
+    const fileReader = new FileReader();
+
+    fileReader.onloadend = () => {
+      this.setState({ cover_photo_file: file, cover_photo_url: fileReader.result })
+    }
+
+    if (file) {
+      fileReader.readAsDataURL(file)
+    }
+  }
+
   clearForm() {
     this.setState({
-      title: "", start_date: this.today, end_date: this.today, location: "",
-      creator_id: this.props.currentUserID, image_url: ""
+      title: "", 
+      start_date: this.today,
+      end_date: this.today,
+      location: "",
+      cover_photo: ""
     })
+  }
+
+  displayForm() {
+    this.formShown = true
+    this.forceUpdate()
   }
   
   render() {
-    const {handleUpdate, handleSubmit, today} = this
+    if (!this.formShown) {
+      return <button onClick={ this.displayForm } className="btn btn-sm btn-success">Add a trip</button>
+    }
+
+    const { handleUpdate, handleSubmit, handleImage } = this
 
     return(
       <div>
         <form onSubmit={handleSubmit}>
           <input type="text" 
             className="form-control"
-            onChange={handleUpdate('title')}
+            onChange={ handleUpdate('title') }
             placeholder="Title"
-            value={this.state.title}
+            value={ this.state.title }
           />
 
           <input type="date" 
-            onChange={handleUpdate('start_date')}
+            onChange={ handleUpdate('start_date') }
             className="form-control"
-            value={this.state.start_date}
+            value={ this.state.start_date }
           />
 
           <input type="date" 
-            onChange={handleUpdate('end_date')}
+            onChange={ handleUpdate('end_date') }
             className="form-control"
-            value={this.state.end_date}
+            value={ this.state.end_date }
           />
 
           <input type="text"
             placeholder="Location"
-            onChange={handleUpdate('location')}
+            onChange={ handleUpdate('location') }
             className="form-control"
-            value={this.state.location}
+            value={ this.state.location }
           />
 
-          <input type="text"
-            placeholder="Image Url"
-            onChange={handleUpdate('image_url')}
+          <input type="file"
+            onChange={ handleImage }
             className="form-control"
-            value={this.state.image_url}
+            value={ this.state.cover_photo }
           />
 
           <input type="submit"

@@ -31,12 +31,12 @@ class TripShow extends React.Component {
     if (this.state.isLoading === true) return null
 
     const trip = this.props.trip
-    const { startDate, endDate, imageUrl, title, creator } = trip
+    const { startDate, endDate, coverPhoto, title, creator } = trip
     const { deleteTrip } = this
 
     return (
       <>
-        <div className="jumbotron trip-show" style={{backgroundImage: `url(${imageUrl})`}}>
+        <div className="jumbotron trip-show" style={{ backgroundImage: `url(${coverPhoto})` }}>
           <button 
             onClick={deleteTrip(trip)}
             className="btn btn-sm btn-light float-right">
