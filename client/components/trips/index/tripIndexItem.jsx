@@ -1,16 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const MyTripsItem = (props) => {
-  if (props.trip === undefined || props.trip.creator === undefined) {
-    return null
-  }
-  
+const TripIndexItem = (props) => {
+  if (props.trip === undefined || props.creator === undefined) return null
 
   return (
     <div className="card" key={props.trip.id}>
       <div className="card-body">
-        <img src={props.trip.imageUrl} className="card-thumb" alt="" />
+        <img src={props.trip.coverPhoto} className="card-thumb" alt="" />
         <p className="badge badge-light card-duration ">{props.trip.duration} long</p>
 
         <div className="card-content clear">
@@ -34,4 +31,4 @@ const MyTripsItem = (props) => {
   )
 }
 
-export default MyTripsItem
+export default TripIndexItem

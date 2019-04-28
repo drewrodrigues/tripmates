@@ -97,7 +97,8 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_shared_navContainer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/shared/navContainer */ "./client/components/shared/navContainer.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _components_shared_navContainer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/shared/navContainer */ "./client/components/shared/navContainer.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -119,6 +120,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var App =
 /*#__PURE__*/
 function (_React$Component) {
@@ -133,14 +135,15 @@ function (_React$Component) {
   _createClass(App, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_shared_navContainer__WEBPACK_IMPORTED_MODULE_1__["default"], null);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_shared_navContainer__WEBPACK_IMPORTED_MODULE_2__["default"], null);
     }
   }]);
 
   return App;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component); // TODO: review why we're using withRouter here
 
-/* harmony default export */ __webpack_exports__["default"] = (withRouter(App));
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(App));
 
 /***/ }),
 
@@ -306,7 +309,6 @@ var removeTrip = function removeTrip(trip) {
 var retrieveMyTrips = function retrieveMyTrips(userId) {
   return function (dispatch) {
     return _utils_tripUtil__WEBPACK_IMPORTED_MODULE_0__["fetchMyTrips"](userId).then(function (res) {
-      // FIXME: better way to do this?
       dispatch(receiveTrips(res.trips));
       dispatch(Object(_userActions__WEBPACK_IMPORTED_MODULE_1__["receiveUsers"])(res.users));
     });
@@ -953,7 +955,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _pages_home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/home */ "./client/components/pages/home.jsx");
 /* harmony import */ var _pages_about__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/about */ "./client/components/pages/about.jsx");
-/* harmony import */ var _trips_index_tripsIndexContainer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../trips/index/tripsIndexContainer */ "./client/components/trips/index/tripsIndexContainer.jsx");
+/* harmony import */ var _trips_index_tripIndexContainer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../trips/index/tripIndexContainer */ "./client/components/trips/index/tripIndexContainer.jsx");
 /* harmony import */ var _trips_show_tripShowContainer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../trips/show/tripShowContainer */ "./client/components/trips/show/tripShowContainer.jsx");
 /* harmony import */ var _users_index_usersIndexContainer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../users/index/usersIndexContainer */ "./client/components/users/index/usersIndexContainer.jsx");
 /* harmony import */ var _users_signUpContainer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../users/signUpContainer */ "./client/components/users/signUpContainer.jsx");
@@ -975,13 +977,13 @@ var selectRoutes = function selectRoutes(loggedIn) {
       component: _trips_show_tripShowContainer__WEBPACK_IMPORTED_MODULE_5__["default"]
     }), React__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
       path: "/trips",
-      component: _trips_index_tripsIndexContainer__WEBPACK_IMPORTED_MODULE_4__["default"]
+      component: _trips_index_tripIndexContainer__WEBPACK_IMPORTED_MODULE_4__["default"]
     }), React__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
       path: "/users",
       component: _users_index_usersIndexContainer__WEBPACK_IMPORTED_MODULE_6__["default"]
     }), React__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
       path: "/",
-      component: _trips_index_tripsIndexContainer__WEBPACK_IMPORTED_MODULE_4__["default"]
+      component: _trips_index_tripIndexContainer__WEBPACK_IMPORTED_MODULE_4__["default"]
     }));
   } else {
     return React__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, React__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -1012,10 +1014,10 @@ var Routes = function Routes(_ref) {
 
 /***/ }),
 
-/***/ "./client/components/trips/index/tripsIndex.jsx":
-/*!******************************************************!*\
-  !*** ./client/components/trips/index/tripsIndex.jsx ***!
-  \******************************************************/
+/***/ "./client/components/trips/index/tripIndex.jsx":
+/*!*****************************************************!*\
+  !*** ./client/components/trips/index/tripIndex.jsx ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1024,8 +1026,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _tripForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tripForm */ "./client/components/trips/tripForm.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-/* harmony import */ var _tripsIndexItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tripsIndexItem */ "./client/components/trips/index/tripsIndexItem.jsx");
+/* harmony import */ var _tripIndexItemContainer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tripIndexItemContainer */ "./client/components/trips/index/tripIndexItemContainer.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1048,18 +1049,17 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
-var MyTrips =
+var TripIndex =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(MyTrips, _React$Component);
+  _inherits(TripIndex, _React$Component);
 
-  function MyTrips(props) {
+  function TripIndex(props) {
     var _this;
 
-    _classCallCheck(this, MyTrips);
+    _classCallCheck(this, TripIndex);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(MyTrips).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(TripIndex).call(this, props));
     _this.state = {
       showForm: false,
       isLoading: true
@@ -1068,7 +1068,7 @@ function (_React$Component) {
     return _this;
   }
 
-  _createClass(MyTrips, [{
+  _createClass(TripIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       var that = this;
@@ -1095,17 +1095,13 @@ function (_React$Component) {
       var _this$props = this.props,
           trips = _this$props.trips,
           createTrip = _this$props.createTrip;
-      var deleteTrip = this.deleteTrip;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.toggleForm,
-        className: "btn btn-sm btn-success"
-      }, "Add a trip"), this.state.showForm === true ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tripForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tripForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
         currentUserID: this.props.currentUserID,
         createTrip: createTrip
-      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "tripsIndex"
       }, trips.map(function (trip) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tripsIndexItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tripIndexItemContainer__WEBPACK_IMPORTED_MODULE_2__["default"], {
           trip: trip,
           key: trip.id
         });
@@ -1113,17 +1109,17 @@ function (_React$Component) {
     }
   }]);
 
-  return MyTrips;
+  return TripIndex;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (MyTrips);
+/* harmony default export */ __webpack_exports__["default"] = (TripIndex);
 
 /***/ }),
 
-/***/ "./client/components/trips/index/tripsIndexContainer.jsx":
-/*!***************************************************************!*\
-  !*** ./client/components/trips/index/tripsIndexContainer.jsx ***!
-  \***************************************************************/
+/***/ "./client/components/trips/index/tripIndexContainer.jsx":
+/*!**************************************************************!*\
+  !*** ./client/components/trips/index/tripIndexContainer.jsx ***!
+  \**************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1131,21 +1127,21 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../reducers/selectors */ "./client/reducers/selectors.js");
-/* harmony import */ var _tripsIndex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tripsIndex */ "./client/components/trips/index/tripsIndex.jsx");
+/* harmony import */ var _tripIndex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tripIndex */ "./client/components/trips/index/tripIndex.jsx");
 /* harmony import */ var _actions_tripActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/tripActions */ "./client/actions/tripActions.js");
 
 
 
 
 
-var mapStateToProps = function mapStateToProps(state, ownProps) {
+var mapStateToProps = function mapStateToProps(state) {
   return {
     trips: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_1__["allTripsSelector"])(state),
     currentUserID: state.session.id
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     retrieveMyTrips: function retrieveMyTrips(id) {
       return dispatch(Object(_actions_tripActions__WEBPACK_IMPORTED_MODULE_3__["retrieveMyTrips"])(id));
@@ -1156,14 +1152,14 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_tripsIndex__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_tripIndex__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
-/***/ "./client/components/trips/index/tripsIndexItem.jsx":
-/*!**********************************************************!*\
-  !*** ./client/components/trips/index/tripsIndexItem.jsx ***!
-  \**********************************************************/
+/***/ "./client/components/trips/index/tripIndexItem.jsx":
+/*!*********************************************************!*\
+  !*** ./client/components/trips/index/tripIndexItem.jsx ***!
+  \*********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1175,18 +1171,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var MyTripsItem = function MyTripsItem(props) {
-  if (props.trip === undefined || props.trip.creator === undefined) {
-    return null;
-  }
-
+var TripIndexItem = function TripIndexItem(props) {
+  if (props.trip === undefined || props.creator === undefined) return null;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card",
     key: props.trip.id
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-body"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: props.trip.imageUrl,
+    src: props.trip.coverPhoto,
     className: "card-thumb",
     alt: ""
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -1214,7 +1207,34 @@ var MyTripsItem = function MyTripsItem(props) {
   }, props.trip.daysUntil))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (MyTripsItem);
+/* harmony default export */ __webpack_exports__["default"] = (TripIndexItem);
+
+/***/ }),
+
+/***/ "./client/components/trips/index/tripIndexItemContainer.jsx":
+/*!******************************************************************!*\
+  !*** ./client/components/trips/index/tripIndexItemContainer.jsx ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _tripIndexItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tripIndexItem */ "./client/components/trips/index/tripIndexItem.jsx");
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    creator: state.entities.users[ownProps.trip.creatorId]
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, null)(_tripIndexItem__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
@@ -1302,14 +1322,14 @@ function (_React$Component) {
       var trip = this.props.trip;
       var startDate = trip.startDate,
           endDate = trip.endDate,
-          imageUrl = trip.imageUrl,
+          coverPhoto = trip.coverPhoto,
           title = trip.title,
           creator = trip.creator;
       var deleteTrip = this.deleteTrip;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "jumbotron trip-show",
         style: {
-          backgroundImage: "url(".concat(imageUrl, ")")
+          backgroundImage: "url(".concat(coverPhoto, ")")
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: deleteTrip(trip),
@@ -1411,17 +1431,19 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TripForm).call(this, props));
     _this.today = new Date().toISOString().split('T')[0];
+    _this.formShown = false;
     _this.state = {
       title: "",
       start_date: _this.today,
       end_date: _this.today,
       location: "",
-      creator_id: _this.props.currentUserID,
-      image_url: ""
+      cover_photo: ""
     };
+    _this.handleImage = _this.handleImage.bind(_assertThisInitialized(_this));
     _this.handleUpdate = _this.handleUpdate.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.clearForm = _this.clearForm.bind(_assertThisInitialized(_this));
+    _this.displayForm = _this.displayForm.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1437,12 +1459,40 @@ function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      var _this3 = this;
+
       e.preventDefault();
-      console.log(e);
       var that = this;
-      this.props.createTrip(this.props.currentUserID, this.state).then(function () {
+      var formData = new FormData();
+      formData.append('trip[title]', this.state.title);
+      formData.append('trip[start_date]', this.state.start_date);
+      formData.append('trip[end_date]', this.state.end_date);
+      formData.append('trip[location]', this.state.location);
+      formData.append('trip[cover_photo]', this.state.cover_photo_file);
+      console.log(formData);
+      this.props.createTrip(this.props.currentUserID, formData).then(function () {
+        _this3.formShown = false;
         that.clearForm();
       });
+    }
+  }, {
+    key: "handleImage",
+    value: function handleImage(e) {
+      var _this4 = this;
+
+      var file = e.currentTarget.files[0];
+      var fileReader = new FileReader();
+
+      fileReader.onloadend = function () {
+        _this4.setState({
+          cover_photo_file: file,
+          cover_photo_url: fileReader.result
+        });
+      };
+
+      if (file) {
+        fileReader.readAsDataURL(file);
+      }
     }
   }, {
     key: "clearForm",
@@ -1452,16 +1502,28 @@ function (_React$Component) {
         start_date: this.today,
         end_date: this.today,
         location: "",
-        creator_id: this.props.currentUserID,
-        image_url: ""
+        cover_photo: ""
       });
+    }
+  }, {
+    key: "displayForm",
+    value: function displayForm() {
+      this.formShown = true;
+      this.forceUpdate();
     }
   }, {
     key: "render",
     value: function render() {
+      if (!this.formShown) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.displayForm,
+          className: "btn btn-sm btn-success"
+        }, "Add a trip");
+      }
+
       var handleUpdate = this.handleUpdate,
           handleSubmit = this.handleSubmit,
-          today = this.today;
+          handleImage = this.handleImage;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -1487,11 +1549,10 @@ function (_React$Component) {
         className: "form-control",
         value: this.state.location
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        placeholder: "Image Url",
-        onChange: handleUpdate('image_url'),
+        type: "file",
+        onChange: handleImage,
         className: "form-control",
-        value: this.state.image_url
+        value: this.state.cover_photo
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         className: "btn btn-success btn-sm",
@@ -1810,7 +1871,7 @@ __webpack_require__.r(__webpack_exports__);
 document.addEventListener("DOMContentLoaded", function () {
   Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
     store: Object(_store_store__WEBPACK_IMPORTED_MODULE_5__["default"])()
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App__WEBPACK_IMPORTED_MODULE_4__["default"], null))), document.getElementById("root"));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App__WEBPACK_IMPORTED_MODULE_4__["default"], null))), document.getElementById("root"));
 });
 
 /***/ }),
@@ -2081,8 +2142,7 @@ var tripsReducer = function tripsReducer() {
 
   switch (action.type) {
     case _actions_tripActions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_TRIP"]:
-      newState[action.trip.id] = action.trip;
-      return newState;
+      return Object.assign(newState, action.trip);
 
     case _actions_tripActions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_TRIPS"]:
       return action.trips;
@@ -2120,8 +2180,7 @@ var usersReducer = function usersReducer() {
 
   switch (action.type) {
     case _actions_userActions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER"]:
-      newState[action.user.id] = action.user;
-      return newState;
+      return Object.assign(newState, action.user);
 
     case _actions_userActions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USERS"]:
       return action.users;
@@ -2268,41 +2327,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTrip", function() { return fetchTrip; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTrip", function() { return deleteTrip; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTrip", function() { return updateTrip; });
-var createTrip = function createTrip(userId, trip) {
+var createTrip = function createTrip(userId, formData) {
   return $.ajax({
     type: "POST",
-    url: "api/users/".concat(userId, "/trips"),
-    data: {
-      trip: trip
-    },
-    dataType: "JSON"
+    url: "/api/users/".concat(userId, "/trips"),
+    // TODO: remove ${userId} from backend route
+    data: formData,
+    dataType: "JSON",
+    contentType: false,
+    processData: false
   });
 };
 var fetchMyTrips = function fetchMyTrips(userId) {
   return $.ajax({
     type: "GET",
-    url: "api/users/".concat(userId, "/trips"),
+    url: "/api/users/".concat(userId, "/trips"),
     dataType: "JSON"
   });
 };
 var fetchTrip = function fetchTrip(id) {
   return $.ajax({
     type: "GET",
-    url: "api/trips/".concat(id),
+    url: "/api/trips/".concat(id),
     dataType: "JSON"
   });
 };
 var deleteTrip = function deleteTrip(trip) {
   return $.ajax({
     type: "DELETE",
-    url: "api/trips/".concat(trip.id),
+    url: "/api/trips/".concat(trip.id),
     dataType: "JSON"
   });
 };
 var updateTrip = function updateTrip(trip) {
   return $.ajax({
     type: "PUT",
-    url: "api/trips/".concat(trip.id),
+    url: "/api/trips/".concat(trip.id),
     data: {
       trip: trip
     },

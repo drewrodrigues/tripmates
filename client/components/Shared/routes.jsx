@@ -3,7 +3,7 @@ import { Switch, Route, withRouter } from 'react-router-dom'
 
 import Home from '../pages/home'
 import About from '../pages/about'
-import TripIndexContainer from '../trips/index/tripsIndexContainer'
+import TripIndexContainer from '../trips/index/tripIndexContainer'
 import TripShowContainer from '../trips/show/tripShowContainer'
 import UsersIndexContainer from '../users/index/usersIndexContainer'
 import SignUpContainer from '../users/signUpContainer'

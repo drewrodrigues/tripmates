@@ -1,6 +1,14 @@
 json.set! "trip" do
   json.set! @trip.id do
-    json.extract! @trip, :id, :start_date, :end_date, :title, :location, :creator_id, :duration, :days_until
+    json.extract! @trip, :id, 
+      :start_date, 
+      :end_date, 
+      :title, 
+      :location, 
+      :creator_id,
+      :duration, 
+      :days_until
+    json.coverPhoto url_for(@trip.cover_photo)
   end
 end
 
