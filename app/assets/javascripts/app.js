@@ -1437,7 +1437,8 @@ function (_React$Component) {
       start_date: _this.today,
       end_date: _this.today,
       location: "",
-      cover_photo: ""
+      cover_photo: "",
+      spaces: 0
     };
     _this.handleImage = _this.handleImage.bind(_assertThisInitialized(_this));
     _this.handleUpdate = _this.handleUpdate.bind(_assertThisInitialized(_this));
@@ -1469,6 +1470,7 @@ function (_React$Component) {
       formData.append('trip[end_date]', this.state.end_date);
       formData.append('trip[location]', this.state.location);
       formData.append('trip[cover_photo]', this.state.cover_photo_file);
+      formData.append('trip[spaces]', this.state.spaces);
       console.log(formData);
       this.props.createTrip(this.props.currentUserID, formData).then(function () {
         _this3.formShown = false;
@@ -1502,7 +1504,8 @@ function (_React$Component) {
         start_date: this.today,
         end_date: this.today,
         location: "",
-        cover_photo: ""
+        cover_photo: "",
+        spaces: 0
       });
     }
   }, {
@@ -1553,6 +1556,11 @@ function (_React$Component) {
         onChange: handleImage,
         className: "form-control",
         value: this.state.cover_photo
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        onChange: handleUpdate('spaces'),
+        className: "form-control",
+        value: this.state.spaces
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         className: "btn btn-success btn-sm",

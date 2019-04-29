@@ -11,7 +11,8 @@ class TripForm extends React.Component {
       start_date: this.today,
       end_date: this.today,
       location: "",
-      cover_photo: ""
+      cover_photo: "",
+      spaces: 0
     }
 
     this.handleImage = this.handleImage.bind(this)
@@ -37,6 +38,7 @@ class TripForm extends React.Component {
     formData.append('trip[end_date]', this.state.end_date)
     formData.append('trip[location]', this.state.location)
     formData.append('trip[cover_photo]', this.state.cover_photo_file)
+    formData.append('trip[spaces]', this.state.spaces)
     console.log(formData)
 
     this.props.createTrip(this.props.currentUserID, formData).then(() => {
@@ -64,7 +66,8 @@ class TripForm extends React.Component {
       start_date: this.today,
       end_date: this.today,
       location: "",
-      cover_photo: ""
+      cover_photo: "",
+      spaces: 0
     })
   }
 
@@ -113,6 +116,12 @@ class TripForm extends React.Component {
             onChange={ handleImage }
             className="form-control"
             value={ this.state.cover_photo }
+          />
+
+          <input type="text"
+            onChange={ handleUpdate('spaces') }
+            className="form-control"
+            value={ this.state.spaces }
           />
 
           <input type="submit"

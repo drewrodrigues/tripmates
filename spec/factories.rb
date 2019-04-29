@@ -7,6 +7,7 @@ FactoryBot.define do
     end_date { Date.today + 1 }
     title { "Supai" }
     location { "Arizona" }
+    spaces { 5 }
     
     association :creator, factory: :user, strategy: :build
   end

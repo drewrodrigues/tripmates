@@ -47,7 +47,8 @@ class Api::TripsController < ApplicationController
       :end_date, 
       :location,
       :title,
-      :cover_photo
+      :cover_photo,
+      :spaces
     )
   end
 end

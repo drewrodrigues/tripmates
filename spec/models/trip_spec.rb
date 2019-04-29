@@ -12,6 +12,7 @@ RSpec.describe Trip, type: :model do
     it { is_expected.to validate_presence_of(:end_date) }
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_presence_of(:location) }
+    it { is_expected.to validate_presence_of(:spaces) }
 
     it "has a valid factory" do
       expect(build(:trip)).to be_valid
@@ -36,6 +37,29 @@ RSpec.describe Trip, type: :model do
         it "is valid" do
           trip = build(:trip, start_date: Date.today, end_date: Date.today)
           expect(trip).to be_valid
+        end
+      end
+    end
+
+    describe "#positive_spaces" do
+      context "when zero" do
+        it "is valid" do
+          trip = build(:trip, spaces: 0)
+          expect(trip).to be_valid
+        end
+      end
+
+      context "when positive" do
+        it "is valid" do
+          trip = build(:trip, spaces: 1)
+          expect(trip).to be_valid
+        end
+      end
+
+      context "when negative" do
+        it "is invalid" do
+          trip = build(:trip, spaces: -1)
+          expect(trip).to_not be_valid
         end
       end
     end
@@ -66,6 +90,20 @@ RSpec.describe Trip, type: :model do
         Timecop.travel(future_day)
 
         expect(trip.days_until).to be_negative
+      end
+    end
+  end
+
+  describe "#spaces_left" do
+    it "counts the leader as a space" do
+      trip = build(:trip, spaces: 5)
+      expect(trip.spaces_left).to eq(4)
+    end
+
+    context "when set to 0" do
+      it "returns 'unlimited'" do
+        trip = build(:trip, spaces: 0)
+        expect(trip.spaces_left).to eq("Unlimited")
       end
     end
   end

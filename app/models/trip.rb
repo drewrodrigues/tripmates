@@ -17,8 +17,9 @@ class Trip < ApplicationRecord
   belongs_to :creator, class_name: :User
   has_one_attached :cover_photo
   
-  validates :start_date, :end_date, :title, :location, presence: true
+  validates :start_date, :end_date, :title, :location, :spaces, presence: true
   validate :valid_date_range
+  validate :positive_spaces
 
   def duration
     (end_date - start_date).round + 1
@@ -28,10 +29,21 @@ class Trip < ApplicationRecord
     (start_date - Date.today).round
   end
 
+  def spaces_left
+    return "Unlimited" if spaces.zero?
+    spaces - 1
+  end
+
+  private
+
   def valid_date_range
     return if [start_date, end_date].any?(&:nil?)
     if start_date > end_date
       errors.add(:start_date, "must be before or the same as end date.")
     end
+  end
+
+  def positive_spaces
+    errors.add(:spaces, 'must be positive') if spaces&.negative?
   end
 end

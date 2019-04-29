@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_27_011600) do
+ActiveRecord::Schema.define(version: 2019_04_28_210143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2019_04_27_011600) do
     t.integer "creator_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "spaces", null: false
     t.index ["creator_id"], name: "index_trips_on_creator_id"
     t.index ["title"], name: "index_trips_on_title"
   end
