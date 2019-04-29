@@ -39,6 +39,7 @@ export const createTrip = (userId, trip) => dispatch => {
     .then(res => {
       dispatch(receiveTrip(res.trip))
       dispatch(receiveUser(res.user))
+      return res
     })
 }
 

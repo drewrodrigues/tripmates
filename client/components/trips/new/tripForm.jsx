@@ -42,8 +42,10 @@ class TripForm extends React.Component {
     formData.append('trip[spaces]', this.state.spaces)
     formData.append('trip[privacy]', this.state.privacy)
 
-    this.props.createTrip(this.props.currentUserID, formData).then(() => {
+    this.props.createTrip(this.props.currentUserID, formData).then(res => {
       that.clearForm()
+      const id = Object.keys(res.trip)[0]
+      that.props.history.push(`/trips/${id}`)
     })
   }
 

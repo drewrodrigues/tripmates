@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { createTrip } from '../../../actions/tripActions'
 import TripForm from './tripForm';
 
 const mapDispatchToProps = dispatch => ({

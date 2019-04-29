@@ -327,6 +327,7 @@ var createTrip = function createTrip(userId, trip) {
     return _utils_tripUtil__WEBPACK_IMPORTED_MODULE_0__["createTrip"](userId, trip).then(function (res) {
       dispatch(receiveTrip(res.trip));
       dispatch(Object(_userActions__WEBPACK_IMPORTED_MODULE_1__["receiveUser"])(res.user));
+      return res;
     });
   };
 };
@@ -1322,8 +1323,10 @@ function (_React$Component) {
       formData.append('trip[cover_photo]', this.state.cover_photo_file);
       formData.append('trip[spaces]', this.state.spaces);
       formData.append('trip[privacy]', this.state.privacy);
-      this.props.createTrip(this.props.currentUserID, formData).then(function () {
+      this.props.createTrip(this.props.currentUserID, formData).then(function (res) {
         that.clearForm();
+        var id = Object.keys(res.trip)[0];
+        that.props.history.push("/trips/".concat(id));
       });
     }
   }, {
@@ -1433,29 +1436,21 @@ function (_React$Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _tripForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tripForm */ "./client/components/trips/new/tripForm.jsx");
+/* harmony import */ var _actions_tripActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../actions/tripActions */ "./client/actions/tripActions.js");
+/* harmony import */ var _tripForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tripForm */ "./client/components/trips/new/tripForm.jsx");
+
 
 
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    createTrip: function (_createTrip) {
-      function createTrip(_x, _x2) {
-        return _createTrip.apply(this, arguments);
-      }
-
-      createTrip.toString = function () {
-        return _createTrip.toString();
-      };
-
-      return createTrip;
-    }(function (userId, trip) {
-      return dispatch(createTrip(userId, trip));
-    })
+    createTrip: function createTrip(userId, trip) {
+      return dispatch(Object(_actions_tripActions__WEBPACK_IMPORTED_MODULE_1__["createTrip"])(userId, trip));
+    }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, mapDispatchToProps)(_tripForm__WEBPACK_IMPORTED_MODULE_1__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, mapDispatchToProps)(_tripForm__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
