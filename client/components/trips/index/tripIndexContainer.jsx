@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import { allTripsSelector } from '../../../reducers/selectors'
 import TripIndex from './tripIndex'
-import { retrieveMyTrips, createTrip } from '../../../actions/tripActions'
+import { retrieveMyTrips } from '../../../actions/tripActions'
 
 const mapStateToProps = state => ({
   trips: allTripsSelector(state),
@@ -10,8 +10,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  retrieveMyTrips: (id) => dispatch(retrieveMyTrips(id)),
-  createTrip: (userId, trip) => dispatch(createTrip(userId, trip))
+  retrieveMyTrips: (id) => dispatch(retrieveMyTrips(id))
 })
 
 export default connect(

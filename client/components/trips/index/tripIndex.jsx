@@ -1,6 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-import TripForm from '../tripForm'
 import TripIndexItemContainer from './tripIndexItemContainer'
 
 class TripIndex extends React.Component {
@@ -29,15 +29,12 @@ class TripIndex extends React.Component {
         </div>
       )
     }
-    const { trips, createTrip } = this.props
+    const { trips } = this.props
 
     return(
       <div>
-        <TripForm 
-          currentUserID={ this.props.currentUserID } 
-          createTrip={ createTrip }/>
-
         <div className="tripsIndex">
+          <Link to="/new-trip" className="btn btn-success btn-sm">New Trip</Link>
           {trips.map(trip => (
             <TripIndexItemContainer 
               trip={trip} 

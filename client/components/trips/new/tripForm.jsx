@@ -15,14 +15,12 @@ class TripForm extends React.Component {
   constructor(props) {
     super(props)
   
-    this.formShown = false
     this.state = defaultState
 
     this.handleImage = this.handleImage.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.clearForm = this.clearForm.bind(this)
-    this.displayForm = this.displayForm.bind(this)
   }
 
   handleUpdate(prop) {
@@ -45,7 +43,6 @@ class TripForm extends React.Component {
     formData.append('trip[privacy]', this.state.privacy)
 
     this.props.createTrip(this.props.currentUserID, formData).then(() => {
-      this.formShown = false
       that.clearForm()
     })
   }
@@ -66,17 +63,8 @@ class TripForm extends React.Component {
   clearForm() {
     this.setState(defaultState)
   }
-
-  displayForm() {
-    this.formShown = true
-    this.forceUpdate()
-  }
   
   render() {
-    if (!this.formShown) {
-      return <button onClick={ this.displayForm } className="btn btn-sm btn-success">Add a trip</button>
-    }
-
     const { handleUpdate, handleSubmit, handleImage } = this
 
     return(
