@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: trips
+#
+#  id         :bigint(8)        not null, primary key
+#  start_date :date             not null
+#  end_date   :date             not null
+#  title      :string           not null
+#  location   :string
+#  creator_id :integer          not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  spaces     :integer          not null
+#  privacy    :integer          default("visible"), not null
+#
+
 require "rails_helper"
 
 RSpec.describe Trip, type: :model do
@@ -13,6 +29,9 @@ RSpec.describe Trip, type: :model do
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_presence_of(:location) }
     it { is_expected.to validate_presence_of(:spaces) }
+    it { is_expected.to validate_presence_of(:privacy) }
+
+    it { is_expected.to define_enum_for(:privacy).with(Trip::PRIVACIES) }
 
     it "has a valid factory" do
       expect(build(:trip)).to be_valid
@@ -61,6 +80,14 @@ RSpec.describe Trip, type: :model do
           trip = build(:trip, spaces: -1)
           expect(trip).to_not be_valid
         end
+      end
+    end
+  end
+
+  describe "defaults" do
+    describe "#privacy" do
+      it "defaults to 'visible'" do
+        expect(Trip.new.privacy).to eq("visible")
       end
     end
   end

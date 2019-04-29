@@ -1418,6 +1418,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
+var today = new Date().toISOString().split('T')[0];
+var defaultState = {
+  title: "",
+  start_date: today,
+  end_date: today,
+  location: "",
+  cover_photo: "",
+  spaces: 0,
+  privacy: "visible"
+};
 
 var TripForm =
 /*#__PURE__*/
@@ -1430,16 +1440,8 @@ function (_React$Component) {
     _classCallCheck(this, TripForm);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TripForm).call(this, props));
-    _this.today = new Date().toISOString().split('T')[0];
     _this.formShown = false;
-    _this.state = {
-      title: "",
-      start_date: _this.today,
-      end_date: _this.today,
-      location: "",
-      cover_photo: "",
-      spaces: 0
-    };
+    _this.state = defaultState;
     _this.handleImage = _this.handleImage.bind(_assertThisInitialized(_this));
     _this.handleUpdate = _this.handleUpdate.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -1471,7 +1473,7 @@ function (_React$Component) {
       formData.append('trip[location]', this.state.location);
       formData.append('trip[cover_photo]', this.state.cover_photo_file);
       formData.append('trip[spaces]', this.state.spaces);
-      console.log(formData);
+      formData.append('trip[privacy]', this.state.privacy);
       this.props.createTrip(this.props.currentUserID, formData).then(function () {
         _this3.formShown = false;
         that.clearForm();
@@ -1499,14 +1501,7 @@ function (_React$Component) {
   }, {
     key: "clearForm",
     value: function clearForm() {
-      this.setState({
-        title: "",
-        start_date: this.today,
-        end_date: this.today,
-        location: "",
-        cover_photo: "",
-        spaces: 0
-      });
+      this.setState(defaultState);
     }
   }, {
     key: "displayForm",
@@ -1561,6 +1556,24 @@ function (_React$Component) {
         onChange: handleUpdate('spaces'),
         className: "form-control",
         value: this.state.spaces
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Privacy"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "#privacy-public"
+      }, "Visible"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "radio",
+        onChange: handleUpdate('privacy'),
+        className: "form-control",
+        value: "visible",
+        id: "privacy-public",
+        checked: this.state.privacy == "visible"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "#privacy-private"
+      }, "Hidden"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "radio",
+        onChange: handleUpdate('privacy'),
+        className: "form-control",
+        value: "hidden",
+        id: "privacy-private",
+        checked: this.state.privacy == "hidden"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         className: "btn btn-success btn-sm",

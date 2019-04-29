@@ -48,7 +48,8 @@ class Api::TripsController < ApplicationController
       :location,
       :title,
       :cover_photo,
-      :spaces
+      :spaces,
+      :privacy
     )
   end
 end

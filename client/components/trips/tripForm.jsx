@@ -1,19 +1,22 @@
 import React from 'react'
 
+const today = new Date().toISOString().split('T')[0];
+const defaultState = {
+  title: "", 
+  start_date: today,
+  end_date: today,
+  location: "",
+  cover_photo: "",
+  spaces: 0,
+  privacy: "visible"
+}
+
 class TripForm extends React.Component {
   constructor(props) {
     super(props)
   
-    this.today = new Date().toISOString().split('T')[0];
     this.formShown = false
-    this.state = {
-      title: "", 
-      start_date: this.today,
-      end_date: this.today,
-      location: "",
-      cover_photo: "",
-      spaces: 0
-    }
+    this.state = defaultState
 
     this.handleImage = this.handleImage.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
@@ -39,7 +42,7 @@ class TripForm extends React.Component {
     formData.append('trip[location]', this.state.location)
     formData.append('trip[cover_photo]', this.state.cover_photo_file)
     formData.append('trip[spaces]', this.state.spaces)
-    console.log(formData)
+    formData.append('trip[privacy]', this.state.privacy)
 
     this.props.createTrip(this.props.currentUserID, formData).then(() => {
       this.formShown = false
@@ -61,14 +64,7 @@ class TripForm extends React.Component {
   }
 
   clearForm() {
-    this.setState({
-      title: "", 
-      start_date: this.today,
-      end_date: this.today,
-      location: "",
-      cover_photo: "",
-      spaces: 0
-    })
+    this.setState(defaultState)
   }
 
   displayForm() {
@@ -122,6 +118,26 @@ class TripForm extends React.Component {
             onChange={ handleUpdate('spaces') }
             className="form-control"
             value={ this.state.spaces }
+          />
+
+          <h5>Privacy</h5>
+
+          <label for="#privacy-public">Visible</label>
+          <input type="radio"
+            onChange={ handleUpdate('privacy') }
+            className="form-control"
+            value="visible"
+            id="privacy-public"
+            checked={ this.state.privacy == "visible" }
+          />
+
+          <label for="#privacy-private">Hidden</label>
+          <input type="radio"
+            onChange={ handleUpdate('privacy') }
+            className="form-control"
+            value="hidden"
+            id="privacy-private"
+            checked={ this.state.privacy == "hidden" }
           />
 
           <input type="submit"
