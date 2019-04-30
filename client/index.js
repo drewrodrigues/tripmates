@@ -4,6 +4,7 @@ import { HashRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import App from './App'
 import createStore from './store/store'
+import fontAwesome from './dependencies/fontAwesome'
 
 document.addEventListener("DOMContentLoaded", () => {
   render(
