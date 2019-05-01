@@ -1,4 +1,5 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const today = new Date().toISOString().split('T')[0];
 const defaultState = {
@@ -91,6 +92,10 @@ class TripForm extends React.Component {
             value={ this.state.end_date }
           />
 
+          <label>
+            <FontAwesomeIcon icon="map-marker-alt" />
+            Location
+          </label>
           <input type="text"
             placeholder="Location"
             onChange={ handleUpdate('location') }
@@ -104,6 +109,10 @@ class TripForm extends React.Component {
             value={ this.state.cover_photo }
           />
 
+          <label>
+            <FontAwesomeIcon icon="users" />
+            Spaces
+          </label>
           <input type="text"
             onChange={ handleUpdate('spaces') }
             className="form-control"
@@ -111,8 +120,10 @@ class TripForm extends React.Component {
           />
 
           <h5>Privacy</h5>
-
-          <label for="#privacy-public">Visible</label>
+          <label for="#privacy-public">
+            <FontAwesomeIcon icon="eye" />
+            Visible
+          </label>
           <input type="radio"
             onChange={ handleUpdate('privacy') }
             className="form-control"
@@ -121,7 +132,10 @@ class TripForm extends React.Component {
             checked={ this.state.privacy == "visible" }
           />
 
-          <label for="#privacy-private">Hidden</label>
+          <label for="#privacy-private">
+            <FontAwesomeIcon icon="eye-slash" />
+            Hidden
+          </label>
           <input type="radio"
             onChange={ handleUpdate('privacy') }
             className="form-control"
@@ -130,10 +144,10 @@ class TripForm extends React.Component {
             checked={ this.state.privacy == "hidden" }
           />
 
-          <input type="submit"
-            className="btn btn-success btn-sm"
-            value="Create Trip"  
-          />
+          <button className="btn btn-success btn-sm">
+            <FontAwesomeIcon icon="plus" />
+            Create Trip
+          </button>
         </form>    
       </div>
     )

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { allTripsSelector } from '../../../reducers/selectors'
+import { allTripsSelector } from '../../../helpers/selectors'
 import TripIndex from './tripIndex'
 import { retrieveMyTrips } from '../../../actions/tripActions'
 

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { prettyDate, prettyDaysUntil, prettyDuration } from '../../../helpers/formatters'
+
 class TripShow extends React.Component {
   constructor(props) {
     super(props)
@@ -15,37 +17,36 @@ class TripShow extends React.Component {
       .then(() => that.setState({isLoading: false}))
   }
 
-  deleteTrip(trip) {
+  deleteTrip() {
     const that = this
-
-    return (e) => {
-      e.stopPropagation()
-      this.setState({isLoading: true})
-      this.props.deleteTrip(trip).then(() => {
-        that.props.history.push('/created_trips')
-      })
-    }
+    this.setState({isLoading: true})
+    console.log(this.props)
+    this.props.deleteTrip(this.props.match.params.id).then(() => {
+      console.log('delete trip')
+      that.props.history.push('/created_trips')
+    })
   }
   
   render() {
     if (this.state.isLoading === true) return null
 
-    const trip = this.props.trip
-    const { startDate, endDate, coverPhoto, title, creator } = trip
-    const { deleteTrip } = this
+    const { trip } = this.props
 
     return (
       <>
-        <div className="jumbotron trip-show" style={{ backgroundImage: `url(${coverPhoto})` }}>
+        <div className="jumbotron trip-show" style={{ backgroundImage: `url(${trip.coverPhoto})` }}>
           <button 
-            onClick={deleteTrip(trip)}
+            onClick={ deleteTrip }
             className="btn btn-sm btn-light float-right">
             X
           </button>
 
-          <h2>{title}</h2>
-          <p>From {startDate} to {endDate}</p>
-          Created by <span className="badge badge-primary">{creator.fullName}</span>
+          <h2>{trip.title}</h2>
+          <p>{trip.location}</p>
+          <p>From {prettyDate(trip.startDate)} to {prettyDate(trip.endDate)}</p>
+          <p>{prettyDaysUntil(trip.daysUntil)}</p>
+          <p>{prettyDuration(trip.duration)}</p>
+          Created by <span className="badge badge-primary">{trip.creator.fullName}</span>
         </div>
 
         <div>

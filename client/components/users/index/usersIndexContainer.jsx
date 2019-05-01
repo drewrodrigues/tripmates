@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import UsersIndex from './usersIndex'
 
-import { selectAllOtherUsers, selectAllFriendRequests, selectAllRequestedFriends } from '../../../reducers/selectors'
+import { selectAllOtherUsers, selectAllFriendRequests, selectAllRequestedFriends } from '../../../helpers/selectors'
 import { getAllUsers } from '../../../actions/userActions'
 
 import { getAllFriendRequests } from '../../../actions/friendRequestActions'

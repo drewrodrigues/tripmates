@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import TripIndexItemContainer from './tripIndexItemContainer'
 
@@ -34,7 +35,11 @@ class TripIndex extends React.Component {
     return(
       <div>
         <div className="tripsIndex">
-          <Link to="/new-trip" className="btn btn-success btn-sm">New Trip</Link>
+          <Link to="/new-trip" className="btn btn-success btn-sm">
+            <FontAwesomeIcon icon="plus" />
+            New Trip
+          </Link>
+
           {trips.map(trip => (
             <TripIndexItemContainer 
               trip={trip} 

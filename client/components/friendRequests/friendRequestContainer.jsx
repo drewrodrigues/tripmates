@@ -5,7 +5,7 @@ import {
   checkIfRequested,
   checkIfFriendRequestPending,
   selectFriendRequest
-} from '../../reducers/selectors'
+} from '../../helpers/selectors'
 import {
   deleteFriendRequest,
   createFriendRequest,

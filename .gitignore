@@ -29,3 +29,4 @@
 log/*
 *.swp
 coverage/
+.DS_Store
