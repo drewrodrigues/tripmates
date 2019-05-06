@@ -8,7 +8,8 @@ import {
   faEye,
   faEyeSlash,
   faUsers,
-  faMapMarkerAlt
+  faMapMarkerAlt,
+  faUser
 } from '@fortawesome/free-solid-svg-icons'
 
 export default (() => {
@@ -21,4 +22,5 @@ export default (() => {
   library.add(faEyeSlash)
   library.add(faUsers)
   library.add(faMapMarkerAlt)
+  library.add(faUser)
 })()

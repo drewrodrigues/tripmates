@@ -1,13 +1,14 @@
 import React from 'react'
-
-import { prettyDate, prettyDaysUntil, prettyDuration } from '../../../helpers/formatters'
+import TripDaysUntil from '../shared/tripDaysUntil'
+import TripLeader from '../shared/tripLeader'
+import TripLocation from '../shared/tripLocation'
+import TripDateRange from '../shared/tripDateRange'
+import TripDuration from '../shared/tripDuration'
 
 class TripShow extends React.Component {
   constructor(props) {
     super(props)
-
     this.state = {isLoading: true}
-
     this.deleteTrip = this.deleteTrip.bind(this)
   }
 
@@ -20,39 +21,30 @@ class TripShow extends React.Component {
   deleteTrip() {
     const that = this
     this.setState({isLoading: true})
-    console.log(this.props)
     this.props.deleteTrip(this.props.match.params.id).then(() => {
-      console.log('delete trip')
       that.props.history.push('/created_trips')
     })
   }
   
   render() {
     if (this.state.isLoading === true) return null
-
-    const { trip } = this.props
+    const {trip, leader} = this.props
 
     return (
-      <>
-        <div className="jumbotron trip-show" style={{ backgroundImage: `url(${trip.coverPhoto})` }}>
-          <button 
-            onClick={ deleteTrip }
-            className="btn btn-sm btn-light float-right">
-            X
-          </button>
+      <div className="jumbotron trip-show" style={{backgroundImage: `url(${trip.coverPhoto})`}}>
+        <button
+          onClick={deleteTrip}
+          className="btn btn-sm btn-light float-right">
+          X
+        </button>
 
-          <h2>{trip.title}</h2>
-          <p>{trip.location}</p>
-          <p>From {prettyDate(trip.startDate)} to {prettyDate(trip.endDate)}</p>
-          <p>{prettyDaysUntil(trip.daysUntil)}</p>
-          <p>{prettyDuration(trip.duration)}</p>
-          Created by <span className="badge badge-primary">{trip.creator.fullName}</span>
-        </div>
-
-        <div>
-
-        </div>
-      </>
+        <h2>{trip.title}</h2>
+        <TripLocation location={trip.location}/>
+        <TripDateRange startDate={trip.startDate} endDate={trip.endDate}/>
+        <TripDaysUntil daysUntil={trip.daysUntil}/>
+        <TripDuration duration={trip.duration}/>
+        <TripLeader leader={leader}/>
+      </div>
     )
   }
 }

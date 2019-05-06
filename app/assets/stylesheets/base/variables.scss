@@ -1,0 +1,14 @@
+$blue: limegreen;
+$orange: orange;
+
+// badges
+$badge-font-size: 12px;
+$badge-padding: 3px 6px;
+$border-radius: 3px;
+
+@mixin badge($background-color) {
+  background: $background-color;
+  border-radius: $border-radius;
+  font-size: $badge-font-size;
+  padding: $badge-padding;
+}

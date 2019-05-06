@@ -1,5 +1,8 @@
 @import "bootstrap";
+@import "./base/variables";
+@import "./base/typography";
 @import "./trips/base";
+@import "./trips/tripIndexItem";
 
 body {
   background-color: #dedede;
@@ -34,13 +37,6 @@ body {
   margin-top: 20px;
 }
 
-.card-duration {
-  font-size: 12px;
-  position: absolute;
-  bottom: 50px;
-  left: 40px;
-}
-
 .card-thumb {
   border-radius: 3px 0 0 3px;
   float: left;
@@ -54,53 +50,18 @@ body {
   margin-bottom: 0;
 }
 
-.card-location {
-  font-size: 12px;
-}
-
-.card-date {
-  float: right;
-  font-size: 12px;
-
-  span {
-    font-weight: 700;
-  }
-}
-
 .card-body {
   padding: 0;
   position: relative;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 0;
-  left: 0;
-  padding: 40px;
-
-  p {
-    margin-bottom: 0;
-  }
-}
-
-.card-content {
-  padding: 40px;
-}
-
 .card-creator {
-  font-size: 14px !important;
   float: right;
   color: #bbb;
 
   a {
     color: #fff !important;
   }
-}
-
-.card-description {
-  font-size: 14px;
 }
 
 .trip-show {

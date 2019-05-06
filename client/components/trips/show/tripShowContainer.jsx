@@ -1,12 +1,13 @@
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import TripShow from './tripShow'
-import { prettyDate } from '../../../helpers/formatters'
-import { selectTripById } from '../../../helpers/selectors'
-import { deleteTrip, getTripById } from '../../../actions/tripActions'
+import {selectTripById} from '../../../helpers/selectors'
+import {deleteTrip, getTripById} from '../../../actions/tripActions'
 
 const mapStateToProps = (state, ownProps) => {
+  const trip = selectTripById(state, ownProps.match.params.id)
   return {
-    trip: selectTripById(state, ownProps.match.params.id),
+    trip,
+    leader: state.entities.users[trip.creatorId]
   }
 }
 
