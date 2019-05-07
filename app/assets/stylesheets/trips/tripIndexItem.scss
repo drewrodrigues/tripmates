@@ -1,64 +1,79 @@
 .tripIndexItem {
-  width: 49%;
-  margin-right: 1%;
-  float: left;
-  margin-bottom: 1%;
-  line-height: 1.6;
+  @include box-shadow;
+  background-size: cover;
+  background-position: center;
   position: relative;
+  margin-bottom: 1%;
+  color: white;
 
-  .tripIndexItem-relativeDates,
-  .tripLocation,
-  .tripLeader,
-  .tripDateRange {
+  .tripIndexItem-relativeDates {
     position: absolute;
-    font-size: 12px;
-  }
-
-  .tripIndexItem-relativeDates {    
-    top: 10px;
-    left: 10px;
+    top: 20px;
+    right: 20px;
   }
 
   .tripDaysUntil {
-    @include badge($orange);
+    @include badge;
+    margin-right: 5px;
   }
 
   .tripDuration {
-    @include badge($blue)
+    @include badge;
   }
 
   .tripLocation {
-    @include badge(white);
-
-    bottom: 10px;
-    left: 10px;
+    @include badge;
+    margin-bottom: 0;
   }
 
   .tripLeader {
-    @include badge(white);
-
-    bottom: 10px;
-    right: 10px;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    height: 30px;
+    width: 30px;
+    background: white;
+    border-radius: 50%;
   }
 
   .tripDateRange {
-    @include badge(white);
+    @include badge;
+  }
 
-    top: 10px;
-    right: 10px;
+  .tripAttendees {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+  }
+
+  .tripAttendee {
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    background: #ddd;
+    border: 3px solid white;
+    border-radius: 50%;
+    margin-left: -15px;
   }
 }
 
 .tripIndexItem-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: white;
   padding: 100px 0;
   text-align: center;
-  font-size: 32px;
-  font-weight: 700;
-  text-shadow: 0 0 10px rgba(0,0,0,0.3);
-  color: white;
+  text-shadow: 0 0 10px rgba(0,0,0,0.75);
 }
 
-.tripIndexItem-title {
-  font-weight: 700;
-  justify-content: center;
+.tripIndexItem-header {
+  padding: 20px;
+}
+
+.tripIndexItem-footer {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  padding: 20px;
 }

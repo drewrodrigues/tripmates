@@ -25,10 +25,10 @@ export const fetchTrip = id => {
   })
 }
 
-export const deleteTrip = trip => {
+export const deleteTrip = id => {
   return $.ajax({
     type: "DELETE",
-    url: `/api/trips/${trip.id}`,
+    url: `/api/trips/${id}`,
     dataType: "JSON"
   })
 }

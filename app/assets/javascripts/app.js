@@ -1147,7 +1147,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    trips: Object(_helpers_selectors__WEBPACK_IMPORTED_MODULE_1__["allTripsSelector"])(state),
+    trips: Object(_helpers_selectors__WEBPACK_IMPORTED_MODULE_1__["tripsByStartDate"])(state),
     currentUserID: state.session.id
   };
 };
@@ -1181,6 +1181,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_tripLocation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/tripLocation */ "./client/components/trips/shared/tripLocation.jsx");
 /* harmony import */ var _shared_tripDateRange__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/tripDateRange */ "./client/components/trips/shared/tripDateRange.jsx");
 /* harmony import */ var _shared_tripDuration__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/tripDuration */ "./client/components/trips/shared/tripDuration.jsx");
+/* harmony import */ var _shared_tripAttendees__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../shared/tripAttendees */ "./client/components/trips/shared/tripAttendees.jsx");
+
 
 
 
@@ -1200,35 +1202,31 @@ var TripIndexItem = function TripIndexItem(props) {
       creator = _props$trip.creator,
       startDate = _props$trip.startDate,
       endDate = _props$trip.endDate;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/trips/".concat(id),
     className: "card tripIndexItem",
-    key: id,
     style: {
       "backgroundImage": "url(".concat(coverPhoto, ")")
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-body"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-content clear"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/trips/".concat(id)
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "card-title tripIndexItem-title"
-  }, title)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
+    className: "tripIndexItem-header"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripDateRange__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    startDate: startDate,
+    endDate: endDate
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "tripIndexItem-title"
+  }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "tripIndexItem-relativeDates"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripDaysUntil__WEBPACK_IMPORTED_MODULE_2__["default"], {
     daysUntil: daysUntil
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripDuration__WEBPACK_IMPORTED_MODULE_6__["default"], {
     duration: duration
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripLocation__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", {
+    className: "tripIndexItem-footer"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripLocation__WEBPACK_IMPORTED_MODULE_4__["default"], {
     location: location,
     className: "tripIndexItem-location"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripLeader__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    leader: creator
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripDateRange__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    startDate: startDate,
-    endDate: endDate
-  }));
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripAttendees__WEBPACK_IMPORTED_MODULE_7__["default"], null)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TripIndexItem);
@@ -1402,28 +1400,34 @@ function (_React$Component) {
         onChange: handleUpdate('end_date'),
         className: "form-control",
         value: this.state.end_date
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "trip-location"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
         icon: "map-marker-alt"
       }), "Location"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         placeholder: "Location",
         onChange: handleUpdate('location'),
         className: "form-control",
-        value: this.state.location
+        value: this.state.location,
+        id: "trip-location"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
         onChange: handleImage,
         className: "form-control",
         value: this.state.cover_photo
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "trip-spaces"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
         icon: "users"
       }), "Spaces"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         onChange: handleUpdate('spaces'),
         className: "form-control",
-        value: this.state.spaces
+        value: this.state.spaces,
+        id: "trip-spaces"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Privacy"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        for: "#privacy-public"
+        htmlFor: "privacy-public"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
         icon: "eye"
       }), "Visible"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -1434,7 +1438,7 @@ function (_React$Component) {
         id: "privacy-public",
         checked: this.state.privacy == "visible"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        for: "#privacy-private"
+        htmlFor: "privacy-private"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
         icon: "eye-slash"
       }), "Hidden"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -1484,6 +1488,48 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, mapDispatchToProps)(_tripForm__WEBPACK_IMPORTED_MODULE_2__["default"]));
+
+/***/ }),
+
+/***/ "./client/components/trips/shared/tripAttendees.jsx":
+/*!**********************************************************!*\
+  !*** ./client/components/trips/shared/tripAttendees.jsx ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+
+
+
+var tripAttendees = function tripAttendees() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "tripAttendees"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "#",
+    className: "tripAttendee"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "#",
+    className: "tripAttendee"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "#",
+    className: "tripAttendee"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "#",
+    className: "tripAttendee"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "#",
+    className: "tripAttendee"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (tripAttendees);
 
 /***/ }),
 
@@ -1591,19 +1637,16 @@ var TripDuration = function TripDuration(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
 
 
 var TripLeader = function TripLeader(_ref) {
   var leader = _ref.leader;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "#",
     className: "tripLeader"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
-    icon: "user"
-  }), leader.fullName));
+  });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TripLeader);
@@ -1627,7 +1670,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var TripLocation = function TripLocation(_ref) {
   var location = _ref.location;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "tripLocation"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
     icon: "map-marker-alt"
@@ -1714,8 +1757,9 @@ function (_React$Component) {
       this.setState({
         isLoading: true
       });
+      console.log(this.props.match.params.id);
       this.props.deleteTrip(this.props.match.params.id).then(function () {
-        that.props.history.push('/created_trips');
+        that.props.history.push('/');
       });
     }
   }, {
@@ -1731,7 +1775,7 @@ function (_React$Component) {
           backgroundImage: "url(".concat(trip.coverPhoto, ")")
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: deleteTrip,
+        onClick: this.deleteTrip,
         className: "btn btn-sm btn-light float-right"
       }, "X"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, trip.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripLocation__WEBPACK_IMPORTED_MODULE_3__["default"], {
         location: trip.location
@@ -1783,8 +1827,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    deleteTrip: function deleteTrip(trip) {
-      return dispatch(Object(_actions_tripActions__WEBPACK_IMPORTED_MODULE_3__["deleteTrip"])(trip));
+    deleteTrip: function deleteTrip(id) {
+      return dispatch(Object(_actions_tripActions__WEBPACK_IMPORTED_MODULE_3__["deleteTrip"])(id));
     },
     getTripById: function getTripById(id) {
       return dispatch(Object(_actions_tripActions__WEBPACK_IMPORTED_MODULE_3__["getTripById"])(id));
@@ -2151,12 +2195,13 @@ var prettyDaysUntil = function prettyDaysUntil(days) {
 /*!*************************************!*\
   !*** ./client/helpers/selectors.js ***!
   \*************************************/
-/*! exports provided: allTripsSelector, selectTripById, selectAllOtherUsers, selectAllFriendRequests, selectAllRequestedFriends, checkIfFriend, checkIfRequested, checkIfFriendRequestPending, selectFriendRequest */
+/*! exports provided: allTripsSelector, tripsByStartDate, selectTripById, selectAllOtherUsers, selectAllFriendRequests, selectAllRequestedFriends, checkIfFriend, checkIfRequested, checkIfFriendRequestPending, selectFriendRequest */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "allTripsSelector", function() { return allTripsSelector; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tripsByStartDate", function() { return tripsByStartDate; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectTripById", function() { return selectTripById; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllOtherUsers", function() { return selectAllOtherUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllFriendRequests", function() { return selectAllFriendRequests; });
@@ -2174,6 +2219,15 @@ var allTripsSelector = function allTripsSelector(state) {
     result.push(thisTrip);
   });
   return result;
+}; // TODO: break apart selectors
+
+var tripsByStartDate = function tripsByStartDate(state) {
+  var allTrips = allTripsSelector(state);
+  return allTrips.sort(function (a, b) {
+    var aStart = new Date(a.startDate),
+        bStart = new Date(b.startDate);
+    return aStart - bStart;
+  });
 };
 var selectTripById = function selectTripById(state, id) {
   var trip = state.entities.trips[id];
@@ -2656,10 +2710,10 @@ var fetchTrip = function fetchTrip(id) {
     dataType: "JSON"
   });
 };
-var deleteTrip = function deleteTrip(trip) {
+var deleteTrip = function deleteTrip(id) {
   return $.ajax({
     type: "DELETE",
-    url: "/api/trips/".concat(trip.id),
+    url: "/api/trips/".concat(id),
     dataType: "JSON"
   });
 };

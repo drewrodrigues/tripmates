@@ -31,10 +31,10 @@ class User < ApplicationRecord
   has_many :requested_friends,
     foreign_key: :requester_id,
     class_name: :FriendRequest
-  has_many :trips,
+  has_many :created_trips,
     foreign_key: :creator_id
 
-  validates :first_name, :last_name, :email, 
+  validates :first_name, :last_name, :email,
             :password_digest, :session_token, presence: true
   validates :email, :session_token, uniqueness: true
   validates :password, length: { minimum: 8, allow_nil: true }

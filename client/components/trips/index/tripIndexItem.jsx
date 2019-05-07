@@ -5,6 +5,7 @@ import TripLeader from '../shared/tripLeader'
 import TripLocation from '../shared/tripLocation'
 import TripDateRange from '../shared/tripDateRange'
 import TripDuration from '../shared/tripDuration'
+import TripAttendees from '../shared/tripAttendees'
 
 const TripIndexItem = (props) => {
   const {
@@ -18,28 +19,30 @@ const TripIndexItem = (props) => {
     startDate,
     endDate
   } = props.trip
-  
+
   return (
-    <div className="card tripIndexItem" key={id} style={{"backgroundImage": `url(${coverPhoto})`}}>
-      <div className="card-body">
-        <div className="card-content clear">
-          <Link to={`/trips/${id}`}>
-            <h5 className="card-title tripIndexItem-title">{title}</h5>
-          </Link>
-        </div>
-      </div>
+    <Link to={ `/trips/${id}` }
+      className="card tripIndexItem"
+      style={{ "backgroundImage": `url(${ coverPhoto })` }}>
+
+      <header className="tripIndexItem-header">
+        <TripDateRange
+          startDate={startDate}
+          endDate={endDate}/>
+      </header>
+
+      <h3  className="tripIndexItem-title">{title}</h3>
 
       <div className="tripIndexItem-relativeDates">
         <TripDaysUntil daysUntil={daysUntil}/>
         <TripDuration duration={duration}/>
       </div>
 
-      <TripLocation location={location} className="tripIndexItem-location"/>
-      <TripLeader leader={creator}/>
-      <TripDateRange
-        startDate={startDate}
-        endDate={endDate}/>
-    </div>
+      <footer className="tripIndexItem-footer">
+        <TripLocation location={location} className="tripIndexItem-location"/>
+        <TripAttendees/>
+      </footer>
+    </Link>
   )
 }
 

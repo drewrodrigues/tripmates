@@ -15,9 +15,7 @@ const defaultState = {
 class TripForm extends React.Component {
   constructor(props) {
     super(props)
-  
     this.state = defaultState
-
     this.handleImage = this.handleImage.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -66,33 +64,33 @@ class TripForm extends React.Component {
   clearForm() {
     this.setState(defaultState)
   }
-  
+
   render() {
     const { handleUpdate, handleSubmit, handleImage } = this
 
     return(
       <div>
         <form onSubmit={handleSubmit}>
-          <input type="text" 
+          <input type="text"
             className="form-control"
             onChange={ handleUpdate('title') }
             placeholder="Title"
             value={ this.state.title }
           />
 
-          <input type="date" 
+          <input type="date"
             onChange={ handleUpdate('start_date') }
             className="form-control"
             value={ this.state.start_date }
           />
 
-          <input type="date" 
+          <input type="date"
             onChange={ handleUpdate('end_date') }
             className="form-control"
             value={ this.state.end_date }
           />
 
-          <label>
+          <label htmlFor="trip-location">
             <FontAwesomeIcon icon="map-marker-alt" />
             Location
           </label>
@@ -101,6 +99,7 @@ class TripForm extends React.Component {
             onChange={ handleUpdate('location') }
             className="form-control"
             value={ this.state.location }
+            id="trip-location"
           />
 
           <input type="file"
@@ -109,7 +108,7 @@ class TripForm extends React.Component {
             value={ this.state.cover_photo }
           />
 
-          <label>
+          <label htmlFor="trip-spaces">
             <FontAwesomeIcon icon="users" />
             Spaces
           </label>
@@ -117,10 +116,11 @@ class TripForm extends React.Component {
             onChange={ handleUpdate('spaces') }
             className="form-control"
             value={ this.state.spaces }
+            id="trip-spaces"
           />
 
           <h5>Privacy</h5>
-          <label for="#privacy-public">
+          <label htmlFor="privacy-public">
             <FontAwesomeIcon icon="eye" />
             Visible
           </label>
@@ -132,7 +132,7 @@ class TripForm extends React.Component {
             checked={ this.state.privacy == "visible" }
           />
 
-          <label for="#privacy-private">
+          <label htmlFor="privacy-private">
             <FontAwesomeIcon icon="eye-slash" />
             Hidden
           </label>
@@ -148,7 +148,7 @@ class TripForm extends React.Component {
             <FontAwesomeIcon icon="plus" />
             Create Trip
           </button>
-        </form>    
+        </form>
       </div>
     )
   }

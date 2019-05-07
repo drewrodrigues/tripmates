@@ -13,7 +13,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteTrip: trip => dispatch(deleteTrip(trip)),
+    deleteTrip: id => dispatch(deleteTrip(id)),
     getTripById: id => dispatch(getTripById(id))
   }
 }

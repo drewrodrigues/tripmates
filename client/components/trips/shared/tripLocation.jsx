@@ -3,10 +3,10 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 const TripLocation = ({location}) => {
   return (
-    <div className="tripLocation">
+    <p className="tripLocation">
       <FontAwesomeIcon icon="map-marker-alt"/>
       {location}
-    </div>
+    </p>
   )
 }
 

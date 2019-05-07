@@ -10,7 +10,7 @@ class TripIndex extends React.Component {
     this.state = {showForm: false, isLoading: true}
     this.toggleForm = this.toggleForm.bind(this)
   }
-  
+
   componentDidMount() {
     const that = this
     this.props.retrieveMyTrips(this.props.currentUserID)

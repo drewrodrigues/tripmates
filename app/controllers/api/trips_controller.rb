@@ -10,7 +10,7 @@ class Api::TripsController < ApplicationController
       render json: @trip.errors.full_messages, status: 422
     end
   end
-  
+
   def show
     @trip = Trip.find(params[:id])
   end
@@ -24,7 +24,7 @@ class Api::TripsController < ApplicationController
   end
 
   def index
-    @trips = Trip.where(creator_id: params[:user_id]).includes(:creator)
+    @trips = Trip.all.includes(:creator)
   end
 
   def destroy
@@ -43,8 +43,8 @@ class Api::TripsController < ApplicationController
 
   def trip_params
     params.require(:trip).permit(
-      :start_date, 
-      :end_date, 
+      :start_date,
+      :end_date,
       :location,
       :title,
       :cover_photo,

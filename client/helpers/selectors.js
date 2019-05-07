@@ -9,6 +9,16 @@ export const allTripsSelector = state => {
   return result
 }
 
+// TODO: break apart selectors
+export const tripsByStartDate = state => {
+  let allTrips = allTripsSelector(state)
+  return allTrips.sort((a, b) => {
+    const aStart = new Date(a.startDate),
+          bStart = new Date(b.startDate)
+    return aStart - bStart
+  })
+}
+
 export const selectTripById = (state, id) => {
   const trip = state.entities.trips[id]
   if (trip === undefined) return {}

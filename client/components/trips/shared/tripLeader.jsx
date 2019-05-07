@@ -1,14 +1,11 @@
 import React from 'react'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {Link} from 'react-router-dom'
 
 const TripLeader = ({leader})  => {
   return (
-    <div className="tripLeader">
-      <a className="#">
-        <FontAwesomeIcon icon="user" />
-        {leader.fullName}
-      </a>
-    </div>
+    <Link to="#" className="tripLeader">
+      {/* TODO: add user photo */}
+    </Link>
   )
 }
 

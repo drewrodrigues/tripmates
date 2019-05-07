@@ -2,13 +2,19 @@ $blue: limegreen;
 $orange: orange;
 
 // badges
-$badge-font-size: 12px;
+$badge-font-size: 10px;
 $badge-padding: 3px 6px;
 $border-radius: 3px;
 
-@mixin badge($background-color) {
-  background: $background-color;
+@mixin badge {
   border-radius: $border-radius;
   font-size: $badge-font-size;
   padding: $badge-padding;
+  background: white;
+  display: inline-block;
+  color: #222;
+}
+
+@mixin box-shadow {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }

@@ -17,11 +17,16 @@
 class Trip < ApplicationRecord
   PRIVACIES = %w(visible hidden)
 
+  default_scope { order(:start_date) }
+  scope :upcoming, -> { where("start_date >= ?", Date.today) }
+  scope :today, -> { where("start_date = ?", Date.today) }
+  scope :passed, -> { where("start_date < ?", Date.today) }
+
   belongs_to :creator, class_name: :User
   has_one_attached :cover_photo
 
   enum privacy: PRIVACIES
-  
+
   validates :start_date, :end_date, :title, :location, :spaces, :privacy,
     presence: true
   validates :privacy, inclusion: { in: PRIVACIES }
