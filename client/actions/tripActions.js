@@ -34,8 +34,8 @@ export const getTripById = id => dispatch => {
     })
 }
 
-export const createTrip = (userId, trip) => dispatch => {
-  return APIUtil.createTrip(userId, trip)
+export const createTrip = trip => dispatch => {
+  return APIUtil.createTrip(trip)
     .then(res => {
       dispatch(receiveTrip(res.trip))
       dispatch(receiveUser(res.user))

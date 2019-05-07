@@ -1,7 +1,7 @@
-export const createTrip = (userId, formData) => {
+export const createTrip = formData => {
   return $.ajax({
     type: "POST",
-    url: `/api/users/${userId}/trips`, // TODO: remove ${userId} from backend route
+    url: `/api/trips`,
     data: formData,
     dataType: "JSON",
     contentType: false,
