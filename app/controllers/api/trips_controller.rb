@@ -1,9 +1,8 @@
 class Api::TripsController < ApplicationController
-  before_action :set_trip, only: [:show, :destroy, :update]
+  before_action :set_trip_for_current_user, only: [:update, :destroy]
 
   def create
-    @trip = Trip.new(trip_params)
-    @trip.creator_id = current_user.id
+    @trip = current_user.created_trips.build(trip_params)
     if @trip.save
       render :show
     else
@@ -37,8 +36,9 @@ class Api::TripsController < ApplicationController
 
   private
 
-  def set_trip
-    @trip = Trip.find(params[:id])
+  def set_trip_for_current_user
+    # TODO: add includes for creator/leader?
+    @trip = current_user.created_trips.find(params[:id])
   end
 
   def trip_params

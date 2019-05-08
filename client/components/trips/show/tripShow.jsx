@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import TripDaysUntil from '../shared/tripDaysUntil'
 import TripLeader from '../shared/tripLeader'
 import TripLocation from '../shared/tripLocation'
@@ -38,8 +39,9 @@ class TripShow extends React.Component {
           className="btn btn-sm btn-light float-right">
           X
         </button>
+        <Link to={ `/trips/${trip.id}/edit` }>Edit</Link>
 
-        <h2>{trip.title}</h2>
+        <h2>{ trip.title }</h2>
         <TripLocation location={ trip.location } />
         <TripDateRange startDate={ trip.startDate} endDate={ trip.endDate } />
         <TripDaysUntil daysUntil={ trip.daysUntil } />

@@ -266,7 +266,7 @@ var signIn = function signIn(user) {
 /*!***************************************!*\
   !*** ./client/actions/tripActions.js ***!
   \***************************************/
-/*! exports provided: RECEIVE_TRIP, RECEIVE_TRIPS, REMOVE_TRIP, receiveTrip, receiveTrips, removeTrip, retrieveMyTrips, getTripById, createTrip, deleteTrip */
+/*! exports provided: RECEIVE_TRIP, RECEIVE_TRIPS, REMOVE_TRIP, receiveTrip, receiveTrips, removeTrip, retrieveMyTrips, getTripById, createTrip, updateTrip, deleteTrip */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -280,6 +280,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "retrieveMyTrips", function() { return retrieveMyTrips; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTripById", function() { return getTripById; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTrip", function() { return createTrip; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTrip", function() { return updateTrip; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTrip", function() { return deleteTrip; });
 /* harmony import */ var _utils_tripUtil__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/tripUtil */ "./client/utils/tripUtil.js");
 /* harmony import */ var _userActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./userActions */ "./client/actions/userActions.js");
@@ -319,6 +320,7 @@ var getTripById = function getTripById(id) {
     return _utils_tripUtil__WEBPACK_IMPORTED_MODULE_0__["fetchTrip"](id).then(function (res) {
       dispatch(receiveTrips(res.trip));
       dispatch(Object(_userActions__WEBPACK_IMPORTED_MODULE_1__["receiveUsers"])(res.user));
+      return res;
     });
   };
 };
@@ -328,6 +330,14 @@ var createTrip = function createTrip(trip) {
       dispatch(receiveTrip(res.trip));
       dispatch(Object(_userActions__WEBPACK_IMPORTED_MODULE_1__["receiveUser"])(res.user));
       return res;
+    });
+  };
+};
+var updateTrip = function updateTrip(trip) {
+  return function (dispatch) {
+    return _utils_tripUtil__WEBPACK_IMPORTED_MODULE_0__["updateTrip"](trip).then(function (trip) {
+      dispatch(receiveTrip(trip));
+      return trip;
     });
   };
 };
@@ -981,14 +991,15 @@ var selectRoutes = function selectRoutes(loggedIn) {
       path: "/trips/:id/edit",
       component: _trips_edit_tripEditContainer__WEBPACK_IMPORTED_MODULE_7__["default"]
     }), React__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+      path: "/trips/new",
+      component: _trips_new_tripNewContainer__WEBPACK_IMPORTED_MODULE_6__["default"],
+      exact: true
+    }), React__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
       path: "/trips/:id",
       component: _trips_show_tripShowContainer__WEBPACK_IMPORTED_MODULE_5__["default"]
     }), React__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
       path: "/trips",
       component: _trips_index_tripIndexContainer__WEBPACK_IMPORTED_MODULE_4__["default"]
-    }), React__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-      path: "/new-trip",
-      component: _trips_new_tripNewContainer__WEBPACK_IMPORTED_MODULE_6__["default"]
     }), React__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
       path: "/users",
       component: _users_index_usersIndexContainer__WEBPACK_IMPORTED_MODULE_8__["default"]
@@ -1041,15 +1052,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    actionType: "Update",
+    trip: state.entities.trips[ownProps.match.params.id]
+  };
+};
+
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    createTrip: function createTrip(userId, trip) {
-      return dispatch(Object(_actions_tripActions__WEBPACK_IMPORTED_MODULE_1__["createTrip"])(userId, trip));
+    action: function action(trip) {
+      return dispatch(Object(_actions_tripActions__WEBPACK_IMPORTED_MODULE_1__["updateTrip"])(trip));
+    },
+    fetchTrip: function fetchTrip(id) {
+      return dispatch(Object(_actions_tripActions__WEBPACK_IMPORTED_MODULE_1__["getTripById"])(id));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, mapDispatchToProps)(_shared_tripForm__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_shared_tripForm__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
@@ -1138,7 +1159,7 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "tripsIndex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/new-trip",
+        to: "/trips/new",
         className: "btn btn-success btn-sm"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], {
         icon: "plus"
@@ -1521,12 +1542,34 @@ function (_React$Component) {
   }
 
   _createClass(TripForm, [{
-    key: "handleUpdate",
-    value: function handleUpdate(prop) {
+    key: "componentDidMount",
+    value: function componentDidMount() {
       var _this2 = this;
 
+      if (this.props.actionType === "Update") {
+        this.props.fetchTrip(this.props.match.params.id).then(function () {
+          var trip = _this2.props.trip;
+
+          _this2.setState({
+            // cover_photo: trip.coverPhoto,
+            id: trip.id,
+            end_date: trip.endDate,
+            location: trip.location,
+            privacy: trip.privacy,
+            spaces: trip.spaces,
+            start_state: trip.startDate,
+            title: trip.title
+          });
+        });
+      }
+    }
+  }, {
+    key: "handleUpdate",
+    value: function handleUpdate(prop) {
+      var _this3 = this;
+
       return function (e) {
-        _this2.setState(_defineProperty({}, prop, e.target.value));
+        _this3.setState(_defineProperty({}, prop, e.target.value));
       };
     }
   }, {
@@ -1535,6 +1578,7 @@ function (_React$Component) {
       e.preventDefault();
       var that = this;
       var formData = new FormData();
+      formData.append('trip[id]', this.state.id);
       formData.append('trip[title]', this.state.title);
       formData.append('trip[start_date]', this.state.start_date);
       formData.append('trip[end_date]', this.state.end_date);
@@ -1542,6 +1586,8 @@ function (_React$Component) {
       formData.append('trip[cover_photo]', this.state.cover_photo_file);
       formData.append('trip[spaces]', this.state.spaces);
       formData.append('trip[privacy]', this.state.privacy);
+      var args = this.props.actionType === "Update" ? [this.state.id, formData] : [formData]; // TODO: spread operator not working?
+
       this.props.action(formData).then(function (res) {
         that.clearForm();
         var id = Object.keys(res.trip)[0];
@@ -1551,13 +1597,13 @@ function (_React$Component) {
   }, {
     key: "handleImage",
     value: function handleImage(e) {
-      var _this3 = this;
+      var _this4 = this;
 
       var file = e.currentTarget.files[0];
       var fileReader = new FileReader();
 
       fileReader.onloadend = function () {
-        _this3.setState({
+        _this4.setState({
           cover_photo_file: file,
           cover_photo_url: fileReader.result
         });
@@ -1648,7 +1694,7 @@ function (_React$Component) {
         className: "btn btn-success btn-sm"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
         icon: "plus"
-      }), "Create Trip")));
+      }), this.props.actionType)));
     }
   }]);
 
@@ -1725,11 +1771,12 @@ var TripLocation = function TripLocation(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _shared_tripDaysUntil__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/tripDaysUntil */ "./client/components/trips/shared/tripDaysUntil.jsx");
-/* harmony import */ var _shared_tripLeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/tripLeader */ "./client/components/trips/shared/tripLeader.jsx");
-/* harmony import */ var _shared_tripLocation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/tripLocation */ "./client/components/trips/shared/tripLocation.jsx");
-/* harmony import */ var _shared_tripDateRange__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/tripDateRange */ "./client/components/trips/shared/tripDateRange.jsx");
-/* harmony import */ var _shared_tripDuration__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/tripDuration */ "./client/components/trips/shared/tripDuration.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _shared_tripDaysUntil__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/tripDaysUntil */ "./client/components/trips/shared/tripDaysUntil.jsx");
+/* harmony import */ var _shared_tripLeader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/tripLeader */ "./client/components/trips/shared/tripLeader.jsx");
+/* harmony import */ var _shared_tripLocation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/tripLocation */ "./client/components/trips/shared/tripLocation.jsx");
+/* harmony import */ var _shared_tripDateRange__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/tripDateRange */ "./client/components/trips/shared/tripDateRange.jsx");
+/* harmony import */ var _shared_tripDuration__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/tripDuration */ "./client/components/trips/shared/tripDuration.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1747,6 +1794,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1810,16 +1858,18 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.deleteTrip,
         className: "btn btn-sm btn-light float-right"
-      }, "X"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, trip.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripLocation__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, "X"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/trips/".concat(trip.id, "/edit")
+      }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, trip.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripLocation__WEBPACK_IMPORTED_MODULE_4__["default"], {
         location: trip.location
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripDateRange__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripDateRange__WEBPACK_IMPORTED_MODULE_5__["default"], {
         startDate: trip.startDate,
         endDate: trip.endDate
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripDaysUntil__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripDaysUntil__WEBPACK_IMPORTED_MODULE_2__["default"], {
         daysUntil: trip.daysUntil
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripDuration__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripDuration__WEBPACK_IMPORTED_MODULE_6__["default"], {
         duration: trip.duration
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripLeader__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripLeader__WEBPACK_IMPORTED_MODULE_3__["default"], {
         leader: leader
       }));
     }
@@ -2718,6 +2768,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTrip", function() { return fetchTrip; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTrip", function() { return deleteTrip; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTrip", function() { return updateTrip; });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var createTrip = function createTrip(formData) {
   return $.ajax({
     type: "POST",
@@ -2749,15 +2801,15 @@ var deleteTrip = function deleteTrip(id) {
     dataType: "JSON"
   });
 };
-var updateTrip = function updateTrip(trip) {
-  return $.ajax({
+var updateTrip = function updateTrip(formData) {
+  var _$$ajax;
+
+  return $.ajax((_$$ajax = {
     type: "PUT",
-    url: "/api/trips/".concat(trip.id),
-    data: {
-      trip: trip
-    },
-    dataType: "JSON"
-  });
+    url: "/api/trips/".concat(formData.get('trip[id]')),
+    dataType: "JSON",
+    data: formData
+  }, _defineProperty(_$$ajax, "dataType", "JSON"), _defineProperty(_$$ajax, "contentType", false), _defineProperty(_$$ajax, "processData", false), _$$ajax));
 };
 window.fetchMyTrips = fetchMyTrips;
 window.fetchTrip = fetchTrip;

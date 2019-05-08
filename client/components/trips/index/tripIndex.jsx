@@ -6,7 +6,6 @@ import TripIndexItemContainer from './tripIndexItemContainer'
 class TripIndex extends React.Component {
   constructor(props) {
     super(props)
-
     this.state = {showForm: false, isLoading: true}
     this.toggleForm = this.toggleForm.bind(this)
   }
@@ -35,7 +34,7 @@ class TripIndex extends React.Component {
     return(
       <div>
         <div className="tripsIndex">
-          <Link to="/new-trip" className="btn btn-success btn-sm">
+          <Link to="/trips/new" className="btn btn-success btn-sm">
             <FontAwesomeIcon icon="plus"/>
             New Trip
           </Link>

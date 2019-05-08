@@ -5,7 +5,8 @@ import Home from '../pages/home'
 import About from '../pages/about'
 import TripIndexContainer from '../trips/index/tripIndexContainer'
 import TripShowContainer from '../trips/show/tripShowContainer'
-import TripFormContainer from '../trips/new/tripFormContainer'
+import TripNewContainer from '../trips/new/tripNewContainer'
+import TripEditContainer from '../trips/edit/tripEditContainer'
 import UsersIndexContainer from '../users/index/usersIndexContainer'
 import SignUpContainer from '../users/signUpContainer'
 import SignInContainer from '../sessions/signInContainer'
@@ -13,9 +14,10 @@ import SignInContainer from '../sessions/signInContainer'
 const selectRoutes = loggedIn => {
   if (loggedIn) {
     return <Switch>
+      <Route path="/trips/:id/edit" component={ TripEditContainer } />
+      <Route path="/trips/new" component={ TripNewContainer } exact />
       <Route path="/trips/:id" component={ TripShowContainer } />
       <Route path="/trips" component={ TripIndexContainer } />
-      <Route path="/new-trip" component={ TripFormContainer } />
       <Route path="/users" component={ UsersIndexContainer } />
       <Route path="/" component={ TripIndexContainer } />
     </Switch>

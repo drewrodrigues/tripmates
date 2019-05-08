@@ -31,6 +31,7 @@ export const getTripById = id => dispatch => {
     .then(res => {
       dispatch(receiveTrips(res.trip))
       dispatch(receiveUsers(res.user))
+      return res
     })
 }
 
@@ -43,7 +44,15 @@ export const createTrip = trip => dispatch => {
     })
 }
 
-export const deleteTrip = (trip) => dispatch => {
+export const updateTrip = trip => dispatch => {
+  return APIUtil.updateTrip(trip)
+    .then(trip => {
+      dispatch(receiveTrip(trip))
+      return trip
+    })
+}
+
+export const deleteTrip = trip => dispatch => {
   return APIUtil.deleteTrip(trip)
     .then(() => dispatch(removeTrip(trip)))
 }

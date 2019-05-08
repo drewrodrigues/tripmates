@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const today = new Date().toISOString().split('T')[0];
 const defaultState = {
-  title: "", 
+  title: "",
   start_date: today,
   end_date: today,
   location: "",
@@ -22,6 +22,24 @@ class TripForm extends React.Component {
     this.clearForm = this.clearForm.bind(this)
   }
 
+  componentDidMount() {
+    if (this.props.actionType === "Update") {
+      this.props.fetchTrip(this.props.match.params.id).then(() => {
+        const { trip } = this.props
+        this.setState({
+          // cover_photo: trip.coverPhoto,
+          id: trip.id,
+          end_date: trip.endDate,
+          location: trip.location,
+          privacy: trip.privacy,
+          spaces: trip.spaces,
+          start_state: trip.startDate,
+          title: trip.title
+        })
+      })
+    }
+  }
+
   handleUpdate(prop) {
     return (e) => {
       this.setState({[prop]: e.target.value})
@@ -33,6 +51,7 @@ class TripForm extends React.Component {
     const that = this
     const formData = new FormData()
 
+    formData.append('trip[id]', this.state.id)
     formData.append('trip[title]', this.state.title)
     formData.append('trip[start_date]', this.state.start_date)
     formData.append('trip[end_date]', this.state.end_date)
@@ -41,7 +60,10 @@ class TripForm extends React.Component {
     formData.append('trip[spaces]', this.state.spaces)
     formData.append('trip[privacy]', this.state.privacy)
 
-    this.props.createTrip(this.props.currentUserID, formData).then(res => {
+    const args = this.props.actionType === "Update" ? [this.state.id, formData] : [formData]
+
+    // TODO: spread operator not working?
+    this.props.action(formData).then(res => {
       that.clearForm()
       const id = Object.keys(res.trip)[0]
       that.props.history.push(`/trips/${id}`)
@@ -146,7 +168,7 @@ class TripForm extends React.Component {
 
           <button className="btn btn-success btn-sm">
             <FontAwesomeIcon icon="plus" />
-            Create Trip
+            { this.props.actionType }
           </button>
         </form>
       </div>
