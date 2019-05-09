@@ -1334,7 +1334,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     action: function action(trip) {
       return dispatch(Object(_actions_tripActions__WEBPACK_IMPORTED_MODULE_1__["createTrip"])(trip));
-    }
+    },
+    actionType: "Create"
   };
 };
 
@@ -1551,7 +1552,7 @@ function (_React$Component) {
           var trip = _this2.props.trip;
 
           _this2.setState({
-            // cover_photo: trip.coverPhoto,
+            cover_photo: trip.coverPhoto,
             id: trip.id,
             end_date: trip.endDate,
             location: trip.location,
@@ -1586,8 +1587,6 @@ function (_React$Component) {
       formData.append('trip[cover_photo]', this.state.cover_photo_file);
       formData.append('trip[spaces]', this.state.spaces);
       formData.append('trip[privacy]', this.state.privacy);
-      var args = this.props.actionType === "Update" ? [this.state.id, formData] : [formData]; // TODO: spread operator not working?
-
       this.props.action(formData).then(function (res) {
         that.clearForm();
         var id = Object.keys(res.trip)[0];
@@ -1624,7 +1623,10 @@ function (_React$Component) {
       var handleUpdate = this.handleUpdate,
           handleSubmit = this.handleSubmit,
           handleImage = this.handleImage;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: this.state.cover_photo,
+        className: "tripForm-ImagePreview"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
@@ -1656,8 +1658,9 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
         onChange: handleImage,
-        className: "form-control",
-        value: this.state.cover_photo
+        className: "form-control" // value={ this.state.cover_photo }
+        ,
+        accept: ".jpg,.jpeg,.png"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "trip-spaces"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
@@ -1669,29 +1672,27 @@ function (_React$Component) {
         value: this.state.spaces,
         id: "trip-spaces"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Privacy"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "privacy-public"
+        className: "tripForm-privacy"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
         icon: "eye"
-      }), "Visible"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), "Visible", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "radio",
         onChange: handleUpdate('privacy'),
         className: "form-control",
         value: "visible",
-        id: "privacy-public",
         checked: this.state.privacy == "visible"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "privacy-private"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "tripForm-privacy"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
         icon: "eye-slash"
-      }), "Hidden"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), "Hidden", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "radio",
         onChange: handleUpdate('privacy'),
         className: "form-control",
         value: "hidden",
-        id: "privacy-private",
         checked: this.state.privacy == "hidden"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-success btn-sm"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-success btn-sm tripForm-submit"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
         icon: "plus"
       }), this.props.actionType)));

@@ -27,7 +27,7 @@ class TripForm extends React.Component {
       this.props.fetchTrip(this.props.match.params.id).then(() => {
         const { trip } = this.props
         this.setState({
-          // cover_photo: trip.coverPhoto,
+          cover_photo: trip.coverPhoto,
           id: trip.id,
           end_date: trip.endDate,
           location: trip.location,
@@ -60,9 +60,6 @@ class TripForm extends React.Component {
     formData.append('trip[spaces]', this.state.spaces)
     formData.append('trip[privacy]', this.state.privacy)
 
-    const args = this.props.actionType === "Update" ? [this.state.id, formData] : [formData]
-
-    // TODO: spread operator not working?
     this.props.action(formData).then(res => {
       that.clearForm()
       const id = Object.keys(res.trip)[0]
@@ -92,6 +89,8 @@ class TripForm extends React.Component {
 
     return(
       <div>
+        <img src={ this.state.cover_photo } className="tripForm-ImagePreview" />
+
         <form onSubmit={handleSubmit}>
           <input type="text"
             className="form-control"
@@ -127,7 +126,8 @@ class TripForm extends React.Component {
           <input type="file"
             onChange={ handleImage }
             className="form-control"
-            value={ this.state.cover_photo }
+            // value={ this.state.cover_photo }
+            accept=".jpg,.jpeg,.png"
           />
 
           <label htmlFor="trip-spaces">
@@ -142,31 +142,29 @@ class TripForm extends React.Component {
           />
 
           <h5>Privacy</h5>
-          <label htmlFor="privacy-public">
+          <label className="tripForm-privacy">
             <FontAwesomeIcon icon="eye" />
             Visible
+            <input type="radio"
+              onChange={ handleUpdate('privacy') }
+              className="form-control"
+              value="visible"
+              checked={ this.state.privacy == "visible" }
+            />
           </label>
-          <input type="radio"
-            onChange={ handleUpdate('privacy') }
-            className="form-control"
-            value="visible"
-            id="privacy-public"
-            checked={ this.state.privacy == "visible" }
-          />
 
-          <label htmlFor="privacy-private">
+          <label className="tripForm-privacy">
             <FontAwesomeIcon icon="eye-slash" />
             Hidden
+            <input type="radio"
+              onChange={ handleUpdate('privacy') }
+              className="form-control"
+              value="hidden"
+              checked={ this.state.privacy == "hidden" }
+            />
           </label>
-          <input type="radio"
-            onChange={ handleUpdate('privacy') }
-            className="form-control"
-            value="hidden"
-            id="privacy-private"
-            checked={ this.state.privacy == "hidden" }
-          />
 
-          <button className="btn btn-success btn-sm">
+          <button className="btn btn-success btn-sm tripForm-submit">
             <FontAwesomeIcon icon="plus" />
             { this.props.actionType }
           </button>
