@@ -15,6 +15,8 @@
 class User < ApplicationRecord
   include BCrypt
 
+  has_one_attached :profile_picture
+
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
     user if user.try(:is_password?, password)
@@ -45,7 +47,7 @@ class User < ApplicationRecord
   def ensure_session_token
     self.session_token ||= User.generate_session_token
   end
-  
+
   def is_password?(password)
     Password.new(password_digest).is_password?(password)
   end

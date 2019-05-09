@@ -1577,7 +1577,8 @@ function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      var that = this;
+      var that = this; // TODO: take me out
+
       var formData = new FormData();
       formData.append('trip[id]', this.state.id);
       formData.append('trip[title]', this.state.title);
@@ -1603,8 +1604,7 @@ function (_React$Component) {
 
       fileReader.onloadend = function () {
         _this4.setState({
-          cover_photo_file: file,
-          cover_photo_url: fileReader.result
+          cover_photo_file: file
         });
       };
 
@@ -2090,47 +2090,76 @@ function (_React$Component) {
       first_name: "",
       last_name: "",
       email: "",
-      password: ""
+      password: "",
+      profile_picture: ""
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.submit = _this.submit.bind(_assertThisInitialized(_this));
-    _this.yo = 'yo';
+    _this.handleImage = _this.handleImage.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(SignUp, [{
     key: "update",
     value: function update(attribute, e) {
-      // TODO: better way to do this?
       this.setState(_defineProperty({}, attribute, e.currentTarget.value));
+    }
+  }, {
+    key: "handleImage",
+    value: function handleImage(e) {
+      var _this2 = this;
+
+      // TODO: pull logic into helper
+      var file = e.currentTarget.files[0];
+      var fileReader = new FileReader();
+
+      fileReader.onloadend = function () {
+        _this2.setState({
+          profile_picture: file
+        });
+      };
+
+      if (file) {
+        fileReader.readAsDataURL(file);
+      }
     }
   }, {
     key: "submit",
     value: function submit(e) {
-      e.preventDefault();
-      var _this$state = this.state,
-          first_name = _this$state.first_name,
-          last_name = _this$state.last_name,
-          email = _this$state.email,
-          password = _this$state.password;
-      var that = this;
-      this.props.signUp(this.state).then(function () {
-        that.props.history.push('/created_trips');
+      var _this3 = this;
+
+      e.preventDefault(); // TODO: pull out into helper method
+
+      var formData = new FormData();
+      formData.append('user[first_name]', this.state.first_name);
+      formData.append('user[last_name]', this.state.last_name);
+      formData.append('user[email]', this.state.email);
+      formData.append('user[password]', this.state.password);
+      formData.append('user[profile_picture]', this.state.profile_picture);
+      debugger;
+      this.props.signUp(formData).then(function () {
+        _this3.props.history.push('/created_trips');
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this$state2 = this.state,
-          first_name = _this$state2.first_name,
-          last_name = _this$state2.last_name,
-          email = _this$state2.email,
-          password = _this$state2.password;
-      var submit = this.submit,
+      var _this$state = this.state,
+          first_name = _this$state.first_name,
+          last_name = _this$state.last_name,
+          email = _this$state.email,
+          password = _this$state.password;
+      var handleImage = this.handleImage,
+          submit = this.submit,
           update = this.update;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Sign Up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: submit
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "First Name", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
+        onChange: handleImage,
+        className: "form-control",
+        accept: ".jpg,.jpeg,.png"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "First Name", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         onChange: function onChange(e) {
           return update('first_name', e);
@@ -2728,13 +2757,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signUp", function() { return signUp; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
-var signUp = function signUp(user) {
+// TODO: PULL INTO USER UTIL
+var signUp = function signUp(formData) {
   return $.ajax({
     type: "POST",
     url: "/api/users",
-    data: {
-      user: user
-    }
+    data: formData,
+    dataType: "JSON",
+    contentType: false,
+    processData: false
   });
 };
 var login = function login(user) {

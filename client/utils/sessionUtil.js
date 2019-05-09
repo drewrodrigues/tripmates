@@ -1,8 +1,12 @@
-export const signUp = user => {
+// TODO: PULL INTO USER UTIL
+export const signUp = formData => {
   return $.ajax({
     type: "POST",
     url: "/api/users",
-    data: {user: user}
+    data: formData,
+    dataType: "JSON",
+    contentType: false,
+    processData: false
   });
 };
 

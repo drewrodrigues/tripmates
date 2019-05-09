@@ -1,7 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const today = new Date().toISOString().split('T')[0];
+const today = new Date().toISOString().split('T')[0]
 const defaultState = {
   title: "",
   start_date: today,
@@ -48,7 +48,7 @@ class TripForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    const that = this
+    const that = this // TODO: take me out
     const formData = new FormData()
 
     formData.append('trip[id]', this.state.id)
@@ -68,11 +68,11 @@ class TripForm extends React.Component {
   }
 
   handleImage(e) {
-    const file = e.currentTarget.files[0];
-    const fileReader = new FileReader();
+    const file = e.currentTarget.files[0]
+    const fileReader = new FileReader()
 
     fileReader.onloadend = () => {
-      this.setState({ cover_photo_file: file, cover_photo_url: fileReader.result })
+      this.setState({ cover_photo_file: file })
     }
 
     if (file) {
