@@ -46,6 +46,8 @@ class SignUp extends React.Component {
       <>
         <h2>Sign Up</h2>
         <form onSubmit={submit}>
+          <img src={ this.state.image_preview } />
+
           <label>
             <input type="file"
               onChange={ e => handleImage(e, 'profile_picture') }
