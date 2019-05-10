@@ -1343,6 +1343,81 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./client/components/trips/shared/tripAdminControls.jsx":
+/*!**************************************************************!*\
+  !*** ./client/components/trips/shared/tripAdminControls.jsx ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+
+
+var TripAdminControls = function TripAdminControls(_ref) {
+  var deleteTrip = _ref.deleteTrip,
+      isAdmin = _ref.isAdmin,
+      tripId = _ref.tripId;
+  if (!isAdmin) return null;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/trips/".concat(tripId, "/edit")
+  }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: deleteTrip,
+    className: "btn btn-sm btn-light float-right"
+  }, "X"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TripAdminControls);
+
+/***/ }),
+
+/***/ "./client/components/trips/shared/tripAdminControlsContainer.jsx":
+/*!***********************************************************************!*\
+  !*** ./client/components/trips/shared/tripAdminControlsContainer.jsx ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _tripAdminControls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tripAdminControls */ "./client/components/trips/shared/tripAdminControls.jsx");
+/* harmony import */ var _actions_tripActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/tripActions */ "./client/actions/tripActions.js");
+/* harmony import */ var _helpers_selectors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../helpers/selectors */ "./client/helpers/selectors.js");
+/* harmony import */ var _helpers_permissions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../helpers/permissions */ "./client/helpers/permissions.js");
+
+
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var tripId = ownProps.match.params.id;
+  var trip = Object(_helpers_selectors__WEBPACK_IMPORTED_MODULE_4__["selectTripById"])(state, tripId);
+  return {
+    isAdmin: Object(_helpers_permissions__WEBPACK_IMPORTED_MODULE_5__["isAdminOfTrip"])(state, trip),
+    tripId: tripId
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    deleteTrip: function deleteTrip(id) {
+      return dispatch(Object(_actions_tripActions__WEBPACK_IMPORTED_MODULE_3__["deleteTrip"])(id));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_tripAdminControls__WEBPACK_IMPORTED_MODULE_2__["default"])));
+
+/***/ }),
+
 /***/ "./client/components/trips/shared/tripAttendees.jsx":
 /*!**********************************************************!*\
   !*** ./client/components/trips/shared/tripAttendees.jsx ***!
@@ -1760,12 +1835,12 @@ var TripLocation = function TripLocation(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-/* harmony import */ var _shared_tripDaysUntil__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/tripDaysUntil */ "./client/components/trips/shared/tripDaysUntil.jsx");
-/* harmony import */ var _shared_tripLeader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/tripLeader */ "./client/components/trips/shared/tripLeader.jsx");
-/* harmony import */ var _shared_tripLocation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/tripLocation */ "./client/components/trips/shared/tripLocation.jsx");
-/* harmony import */ var _shared_tripDateRange__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/tripDateRange */ "./client/components/trips/shared/tripDateRange.jsx");
-/* harmony import */ var _shared_tripDuration__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/tripDuration */ "./client/components/trips/shared/tripDuration.jsx");
+/* harmony import */ var _shared_tripDaysUntil__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/tripDaysUntil */ "./client/components/trips/shared/tripDaysUntil.jsx");
+/* harmony import */ var _shared_tripLeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/tripLeader */ "./client/components/trips/shared/tripLeader.jsx");
+/* harmony import */ var _shared_tripLocation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/tripLocation */ "./client/components/trips/shared/tripLocation.jsx");
+/* harmony import */ var _shared_tripDateRange__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/tripDateRange */ "./client/components/trips/shared/tripDateRange.jsx");
+/* harmony import */ var _shared_tripDuration__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/tripDuration */ "./client/components/trips/shared/tripDuration.jsx");
+/* harmony import */ var _shared_tripAdminControlsContainer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/tripAdminControlsContainer */ "./client/components/trips/shared/tripAdminControlsContainer.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1844,21 +1919,16 @@ function (_React$Component) {
         style: {
           backgroundImage: "url(".concat(trip.coverPhoto, ")")
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.deleteTrip,
-        className: "btn btn-sm btn-light float-right"
-      }, "X"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/trips/".concat(trip.id, "/edit")
-      }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, trip.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripLocation__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripAdminControlsContainer__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, trip.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripLocation__WEBPACK_IMPORTED_MODULE_3__["default"], {
         location: trip.location
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripDateRange__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripDateRange__WEBPACK_IMPORTED_MODULE_4__["default"], {
         startDate: trip.startDate,
         endDate: trip.endDate
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripDaysUntil__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripDaysUntil__WEBPACK_IMPORTED_MODULE_1__["default"], {
         daysUntil: trip.daysUntil
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripDuration__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripDuration__WEBPACK_IMPORTED_MODULE_5__["default"], {
         duration: trip.duration
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripLeader__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripLeader__WEBPACK_IMPORTED_MODULE_2__["default"], {
         leader: leader
       }));
     }
@@ -1899,9 +1969,6 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    deleteTrip: function deleteTrip(id) {
-      return dispatch(Object(_actions_tripActions__WEBPACK_IMPORTED_MODULE_3__["deleteTrip"])(id));
-    },
     getTripById: function getTripById(id) {
       return dispatch(Object(_actions_tripActions__WEBPACK_IMPORTED_MODULE_3__["getTripById"])(id));
     }
@@ -2309,6 +2376,22 @@ function handleImage(e, property) {
     fileReader.readAsDataURL(file);
   }
 }
+
+/***/ }),
+
+/***/ "./client/helpers/permissions.js":
+/*!***************************************!*\
+  !*** ./client/helpers/permissions.js ***!
+  \***************************************/
+/*! exports provided: isAdminOfTrip */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isAdminOfTrip", function() { return isAdminOfTrip; });
+var isAdminOfTrip = function isAdminOfTrip(state, trip) {
+  return state.session.id === trip.creatorId;
+};
 
 /***/ }),
 

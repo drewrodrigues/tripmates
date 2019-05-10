@@ -1,7 +1,7 @@
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import TripShow from './tripShow'
-import {selectTripById} from '../../../helpers/selectors'
-import {deleteTrip, getTripById} from '../../../actions/tripActions'
+import { selectTripById } from '../../../helpers/selectors'
+import { getTripById } from '../../../actions/tripActions'
 
 const mapStateToProps = (state, ownProps) => {
   const trip = selectTripById(state, ownProps.match.params.id)
@@ -13,7 +13,6 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteTrip: id => dispatch(deleteTrip(id)),
     getTripById: id => dispatch(getTripById(id))
   }
 }

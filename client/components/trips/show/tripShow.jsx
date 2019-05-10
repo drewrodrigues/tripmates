@@ -1,10 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import TripDaysUntil from '../shared/tripDaysUntil'
 import TripLeader from '../shared/tripLeader'
 import TripLocation from '../shared/tripLocation'
 import TripDateRange from '../shared/tripDateRange'
 import TripDuration from '../shared/tripDuration'
+import TripAdminControlsContainer from '../shared/tripAdminControlsContainer'
 
 class TripShow extends React.Component {
   constructor(props) {
@@ -34,12 +34,8 @@ class TripShow extends React.Component {
 
     return (
       <div className="jumbotron trip-show" style={{ backgroundImage: `url(${ trip.coverPhoto })` }}>
-        <button
-          onClick={ this.deleteTrip }
-          className="btn btn-sm btn-light float-right">
-          X
-        </button>
-        <Link to={ `/trips/${trip.id}/edit` }>Edit</Link>
+
+        <TripAdminControlsContainer />
 
         <h2>{ trip.title }</h2>
         <TripLocation location={ trip.location } />
