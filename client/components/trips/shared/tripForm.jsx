@@ -1,5 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { handleImage } from "../../../helpers/handlers"
 
 const today = new Date().toISOString().split('T')[0]
 const defaultState = {
@@ -16,7 +17,7 @@ class TripForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = defaultState
-    this.handleImage = this.handleImage.bind(this)
+    this.handleImage = handleImage.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.clearForm = this.clearForm.bind(this)
@@ -48,7 +49,6 @@ class TripForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    const that = this // TODO: take me out
     const formData = new FormData()
 
     formData.append('trip[id]', this.state.id)
@@ -56,28 +56,15 @@ class TripForm extends React.Component {
     formData.append('trip[start_date]', this.state.start_date)
     formData.append('trip[end_date]', this.state.end_date)
     formData.append('trip[location]', this.state.location)
-    formData.append('trip[cover_photo]', this.state.cover_photo_file)
+    formData.append('trip[cover_photo]', this.state.cover_photo)
     formData.append('trip[spaces]', this.state.spaces)
     formData.append('trip[privacy]', this.state.privacy)
 
     this.props.action(formData).then(res => {
-      that.clearForm()
+      this.clearForm()
       const id = Object.keys(res.trip)[0]
-      that.props.history.push(`/trips/${id}`)
+      this.props.history.push(`/trips/${id}`)
     })
-  }
-
-  handleImage(e) {
-    const file = e.currentTarget.files[0]
-    const fileReader = new FileReader()
-
-    fileReader.onloadend = () => {
-      this.setState({ cover_photo_file: file })
-    }
-
-    if (file) {
-      fileReader.readAsDataURL(file)
-    }
   }
 
   clearForm() {
@@ -89,7 +76,7 @@ class TripForm extends React.Component {
 
     return(
       <div>
-        <img src={ this.state.cover_photo } className="tripForm-ImagePreview" />
+        <img src={ this.state.image_preview } className="tripForm-ImagePreview" />
 
         <form onSubmit={handleSubmit}>
           <input type="text"
@@ -124,9 +111,8 @@ class TripForm extends React.Component {
           />
 
           <input type="file"
-            onChange={ handleImage }
+            onChange={ e => handleImage(e, "cover_photo") }
             className="form-control"
-            // value={ this.state.cover_photo }
             accept=".jpg,.jpeg,.png"
           />
 
@@ -173,5 +159,7 @@ class TripForm extends React.Component {
     )
   }
 }
+
+Object.assign(TripForm.prototype, handleImage)
 
 export default TripForm

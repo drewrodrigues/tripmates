@@ -1,4 +1,5 @@
 import React from 'react';
+import { handleImage } from '../../helpers/handlers'
 
 // TODO: disable button until form is valid
 
@@ -14,24 +15,11 @@ class SignUp extends React.Component {
     };
     this.update = this.update.bind(this)
     this.submit = this.submit.bind(this)
-    this.handleImage = this.handleImage.bind(this)
+    this.handleImage = handleImage.bind(this)
   }
 
   update(attribute, e) {
     this.setState({[attribute]: e.currentTarget.value});
-  }
-
-  handleImage(e) {
-    // TODO: pull logic into helper
-    const file = e.currentTarget.files[0]
-    const fileReader = new FileReader()
-    fileReader.onloadend = () => {
-      this.setState({ profile_picture: file })
-    }
-
-    if (file) {
-      fileReader.readAsDataURL(file)
-    }
   }
 
   submit(e) {
@@ -45,7 +33,6 @@ class SignUp extends React.Component {
     formData.append('user[password]', this.state.password)
     formData.append('user[profile_picture]', this.state.profile_picture)
 
-    debugger
     this.props.signUp(formData).then(() => {
       this.props.history.push('/created_trips');
     });
@@ -61,7 +48,7 @@ class SignUp extends React.Component {
         <form onSubmit={submit}>
           <label>
             <input type="file"
-              onChange={ handleImage }
+              onChange={ e => handleImage(e, 'profile_picture') }
               className="form-control"
               accept=".jpg,.jpeg,.png"
             />
@@ -101,5 +88,7 @@ class SignUp extends React.Component {
     );
   }
 }
+
+Object.assign(SignUp.prototype, handleImage)
 
 export default SignUp;

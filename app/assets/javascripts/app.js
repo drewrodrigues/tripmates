@@ -1490,6 +1490,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _helpers_handlers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../helpers/handlers */ "./client/helpers/handlers.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1509,6 +1510,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1535,7 +1537,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TripForm).call(this, props));
     _this.state = defaultState;
-    _this.handleImage = _this.handleImage.bind(_assertThisInitialized(_this));
+    _this.handleImage = _helpers_handlers__WEBPACK_IMPORTED_MODULE_2__["handleImage"].bind(_assertThisInitialized(_this));
     _this.handleUpdate = _this.handleUpdate.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.clearForm = _this.clearForm.bind(_assertThisInitialized(_this));
@@ -1576,41 +1578,25 @@ function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      e.preventDefault();
-      var that = this; // TODO: take me out
+      var _this4 = this;
 
+      e.preventDefault();
       var formData = new FormData();
       formData.append('trip[id]', this.state.id);
       formData.append('trip[title]', this.state.title);
       formData.append('trip[start_date]', this.state.start_date);
       formData.append('trip[end_date]', this.state.end_date);
       formData.append('trip[location]', this.state.location);
-      formData.append('trip[cover_photo]', this.state.cover_photo_file);
+      formData.append('trip[cover_photo]', this.state.cover_photo);
       formData.append('trip[spaces]', this.state.spaces);
       formData.append('trip[privacy]', this.state.privacy);
       this.props.action(formData).then(function (res) {
-        that.clearForm();
+        _this4.clearForm();
+
         var id = Object.keys(res.trip)[0];
-        that.props.history.push("/trips/".concat(id));
+
+        _this4.props.history.push("/trips/".concat(id));
       });
-    }
-  }, {
-    key: "handleImage",
-    value: function handleImage(e) {
-      var _this4 = this;
-
-      var file = e.currentTarget.files[0];
-      var fileReader = new FileReader();
-
-      fileReader.onloadend = function () {
-        _this4.setState({
-          cover_photo_file: file
-        });
-      };
-
-      if (file) {
-        fileReader.readAsDataURL(file);
-      }
     }
   }, {
     key: "clearForm",
@@ -1624,7 +1610,7 @@ function (_React$Component) {
           handleSubmit = this.handleSubmit,
           handleImage = this.handleImage;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: this.state.cover_photo,
+        src: this.state.image_preview,
         className: "tripForm-ImagePreview"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: handleSubmit
@@ -1657,9 +1643,10 @@ function (_React$Component) {
         id: "trip-location"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
-        onChange: handleImage,
-        className: "form-control" // value={ this.state.cover_photo }
-        ,
+        onChange: function onChange(e) {
+          return handleImage(e, "cover_photo");
+        },
+        className: "form-control",
         accept: ".jpg,.jpeg,.png"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "trip-spaces"
@@ -1702,6 +1689,7 @@ function (_React$Component) {
   return TripForm;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
+Object.assign(TripForm.prototype, _helpers_handlers__WEBPACK_IMPORTED_MODULE_2__["handleImage"]);
 /* harmony default export */ __webpack_exports__["default"] = (TripForm);
 
 /***/ }),
@@ -2053,6 +2041,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _helpers_handlers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helpers/handlers */ "./client/helpers/handlers.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2072,6 +2061,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
  // TODO: disable button until form is valid
 
@@ -2095,7 +2085,7 @@ function (_React$Component) {
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.submit = _this.submit.bind(_assertThisInitialized(_this));
-    _this.handleImage = _this.handleImage.bind(_assertThisInitialized(_this));
+    _this.handleImage = _helpers_handlers__WEBPACK_IMPORTED_MODULE_1__["handleImage"].bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2105,28 +2095,9 @@ function (_React$Component) {
       this.setState(_defineProperty({}, attribute, e.currentTarget.value));
     }
   }, {
-    key: "handleImage",
-    value: function handleImage(e) {
-      var _this2 = this;
-
-      // TODO: pull logic into helper
-      var file = e.currentTarget.files[0];
-      var fileReader = new FileReader();
-
-      fileReader.onloadend = function () {
-        _this2.setState({
-          profile_picture: file
-        });
-      };
-
-      if (file) {
-        fileReader.readAsDataURL(file);
-      }
-    }
-  }, {
     key: "submit",
     value: function submit(e) {
-      var _this3 = this;
+      var _this2 = this;
 
       e.preventDefault(); // TODO: pull out into helper method
 
@@ -2136,9 +2107,8 @@ function (_React$Component) {
       formData.append('user[email]', this.state.email);
       formData.append('user[password]', this.state.password);
       formData.append('user[profile_picture]', this.state.profile_picture);
-      debugger;
       this.props.signUp(formData).then(function () {
-        _this3.props.history.push('/created_trips');
+        _this2.props.history.push('/created_trips');
       });
     }
   }, {
@@ -2156,7 +2126,9 @@ function (_React$Component) {
         onSubmit: submit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
-        onChange: handleImage,
+        onChange: function onChange(e) {
+          return handleImage(e, 'profile_picture');
+        },
         className: "form-control",
         accept: ".jpg,.jpeg,.png"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "First Name", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -2192,6 +2164,7 @@ function (_React$Component) {
   return SignUp;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
+Object.assign(SignUp.prototype, _helpers_handlers__WEBPACK_IMPORTED_MODULE_1__["handleImage"]);
 /* harmony default export */ __webpack_exports__["default"] = (SignUp);
 
 /***/ }),
@@ -2301,6 +2274,39 @@ var prettyDaysUntil = function prettyDaysUntil(days) {
     return "".concat(days, " ").concat(dayString, " until");
   }
 };
+
+/***/ }),
+
+/***/ "./client/helpers/handlers.js":
+/*!************************************!*\
+  !*** ./client/helpers/handlers.js ***!
+  \************************************/
+/*! exports provided: handleImage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleImage", function() { return handleImage; });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function handleImage(e, property) {
+  var _this = this;
+
+  var file = e.currentTarget.files[0];
+  var fileReader = new FileReader();
+
+  var changeState = function () {
+    var _this$setState;
+
+    return _this.setState((_this$setState = {}, _defineProperty(_this$setState, property, file), _defineProperty(_this$setState, "image_preview", fileReader.result), _this$setState));
+  }.bind(this);
+
+  fileReader.onloadend = changeState;
+
+  if (file) {
+    fileReader.readAsDataURL(file);
+  }
+}
 
 /***/ }),
 
