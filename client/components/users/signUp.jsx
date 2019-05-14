@@ -1,5 +1,6 @@
 import React from 'react';
 import { handleImage } from '../../helpers/handlers'
+import FormErrors from '../Shared/formErrors'
 
 // TODO: disable button until form is valid
 
@@ -38,13 +39,18 @@ class SignUp extends React.Component {
     });
   }
 
-  render() {
-    const { first_name, last_name, email, password } = this.state;
-    const { handleImage, submit, update } = this;
+  componentWillUnmount() {
+    this.props.clearUserErrors()
+  }
 
+  render() {
+    const { first_name, last_name, email, password } = this.state,
+          { handleImage, submit, update } = this,
+          { errors } = this.props
     return (
       <>
         <h2>Sign Up</h2>
+        <FormErrors errors={ errors } />
         <form onSubmit={submit}>
           <img src={ this.state.image_preview } />
 

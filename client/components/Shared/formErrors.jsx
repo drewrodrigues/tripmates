@@ -1,10 +1,10 @@
 import React from 'react'
 
-const FormErrors = ({ errors, show }) => {
+const FormErrors = ({ errors }) => {
   return (
-    <ul className={ `formErrors formErrors-${ show }` }>
+    <ul className="formErrors">
       { errors.map(error => (
-        <li className={ `formError` }>{ error }</li>
+        <li className="formError">{ error }</li>
       ) ) }
     </ul>
   )

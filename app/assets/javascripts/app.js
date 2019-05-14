@@ -375,15 +375,19 @@ var deleteTrip = function deleteTrip(trip) {
 /*!***************************************!*\
   !*** ./client/actions/userActions.js ***!
   \***************************************/
-/*! exports provided: RECEIVE_USER, RECEIVE_USERS, receiveUser, receiveUsers, signUp, getAllUsers */
+/*! exports provided: RECEIVE_USER, RECEIVE_USERS, RECEIVE_USER_ERRORS, CLEAR_USER_ERRORS, receiveUser, receiveUsers, receiveUserErrors, clearUserErrors, signUp, getAllUsers */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USER", function() { return RECEIVE_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USERS", function() { return RECEIVE_USERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USER_ERRORS", function() { return RECEIVE_USER_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_USER_ERRORS", function() { return CLEAR_USER_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUser", function() { return receiveUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUsers", function() { return receiveUsers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUserErrors", function() { return receiveUserErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearUserErrors", function() { return clearUserErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signUp", function() { return signUp; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllUsers", function() { return getAllUsers; });
 /* harmony import */ var _utils_sessionUtil__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/sessionUtil */ "./client/utils/sessionUtil.js");
@@ -395,6 +399,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var RECEIVE_USER = "RECEIVE_USER";
 var RECEIVE_USERS = "RECEIVE_USERS";
+var RECEIVE_USER_ERRORS = "RECEIVE_USER_ERRORS";
+var CLEAR_USER_ERRORS = "CLEAR_USER_ERRORS";
 var receiveUser = function receiveUser(user) {
   return {
     type: RECEIVE_USER,
@@ -407,11 +413,24 @@ var receiveUsers = function receiveUsers(users) {
     users: users
   };
 };
+var receiveUserErrors = function receiveUserErrors(errors) {
+  return {
+    type: RECEIVE_USER_ERRORS,
+    errors: errors
+  };
+};
+var clearUserErrors = function clearUserErrors() {
+  return {
+    type: CLEAR_USER_ERRORS
+  };
+};
 var signUp = function signUp(user) {
   return function (dispatch) {
     return _utils_sessionUtil__WEBPACK_IMPORTED_MODULE_0__["signUp"](user).then(function (res) {
       dispatch(Object(_sessionActions__WEBPACK_IMPORTED_MODULE_2__["receiveCurrentUser"])(res));
       dispatch(receiveUser(res));
+    }).fail(function (errors) {
+      return dispatch(receiveUserErrors(errors.responseJSON));
     });
   };
 };
@@ -439,10 +458,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FormErrors = function FormErrors(_ref) {
-  var errors = _ref.errors,
-      show = _ref.show;
+  var errors = _ref.errors;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "formErrors formErrors-".concat(show)
+    className: "formErrors"
   }, errors.map(function (error) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
       className: "formError"
@@ -2220,6 +2238,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _helpers_handlers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helpers/handlers */ "./client/helpers/handlers.js");
+/* harmony import */ var _Shared_formErrors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Shared/formErrors */ "./client/components/Shared/formErrors.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2239,6 +2258,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
  // TODO: disable button until form is valid
@@ -2290,17 +2310,25 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.clearUserErrors();
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$state = this.state,
           first_name = _this$state.first_name,
           last_name = _this$state.last_name,
           email = _this$state.email,
-          password = _this$state.password;
-      var handleImage = this.handleImage,
+          password = _this$state.password,
+          handleImage = this.handleImage,
           submit = this.submit,
-          update = this.update;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Sign Up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+          update = this.update,
+          errors = this.props.errors;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Sign Up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Shared_formErrors__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        errors: errors
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: submit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: this.state.image_preview
@@ -2365,9 +2393,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(store) {
+var mapStateToProps = function mapStateToProps(state) {
   return {
-    /*TODO: errors at some point*/
+    errors: state.errors.userErrors
   };
 };
 
@@ -2375,11 +2403,14 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     signUp: function signUp(user) {
       return dispatch(Object(_actions_userActions__WEBPACK_IMPORTED_MODULE_2__["signUp"])(user));
+    },
+    clearUserErrors: function clearUserErrors() {
+      return dispatch(Object(_actions_userActions__WEBPACK_IMPORTED_MODULE_2__["clearUserErrors"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, mapDispatchToProps)(_signUp__WEBPACK_IMPORTED_MODULE_1__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_signUp__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -2728,6 +2759,38 @@ var sessionErrorsReducer = function sessionErrorsReducer() {
 
 /***/ }),
 
+/***/ "./client/reducers/errors/userErrorsReducer.js":
+/*!*****************************************************!*\
+  !*** ./client/reducers/errors/userErrorsReducer.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/userActions */ "./client/actions/userActions.js");
+
+
+var userErrorsReducer = function userErrorsReducer() {
+  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_userActions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER_ERRORS"]:
+      return action.errors;
+
+    case _actions_userActions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_USER_ERRORS"]:
+      return [];
+
+    default:
+      return oldState;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (userErrorsReducer);
+
+/***/ }),
+
 /***/ "./client/reducers/errorsReducer.js":
 /*!******************************************!*\
   !*** ./client/reducers/errorsReducer.js ***!
@@ -2739,10 +2802,13 @@ var sessionErrorsReducer = function sessionErrorsReducer() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _errors_sessionErrorsReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./errors/sessionErrorsReducer */ "./client/reducers/errors/sessionErrorsReducer.js");
+/* harmony import */ var _errors_userErrorsReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./errors/userErrorsReducer */ "./client/reducers/errors/userErrorsReducer.js");
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  sessionErrors: _errors_sessionErrorsReducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  sessionErrors: _errors_sessionErrorsReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  userErrors: _errors_userErrorsReducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 }));
 
 /***/ }),
