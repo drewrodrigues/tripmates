@@ -1,10 +1,15 @@
 @import "bootstrap"; // TODO: remove and add reset
 @import "./base/variables";
 @import "./base/typography";
+
+// shared
+@import "./shared/formErrors";
+@import "./shared/navLoggedIn";
+
+// trips
 @import "./trips/base";
 @import "./trips/tripIndexItem";
 @import "./trips/tripForm";
-@import "./shared/navLoggedIn";
 @import "./trips/show/tripShow";
 
 * {

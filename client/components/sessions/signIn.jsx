@@ -1,49 +1,61 @@
 import React from 'react'
+import FormErrors from '../Shared/formErrors'
 
 class SignIn extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { email: "", password: "" }
+    this.state = { email: "", password: "", showErrors: false }
     this.update = this.update.bind(this)
     this.submit = this.submit.bind(this)
   }
 
   update(attribute, e) {
-    this.setState({[attribute]: e.currentTarget.value})
+    this.setState({
+      [attribute]: e.currentTarget.value,
+      showErrors: false
+    })
   }
 
   submit(e) {
     e.preventDefault()
+    const { email, password } = this.state
+    this.props.login({email, password})
+      .then(() => {
+        this.props.history.push('/created_trips')
+      })
+      .fail(() => {
+        this.setState({ showErrors: true })
+      })
+  }
 
-    const { email, password } = this.state;
-    this.props.login({email, password}).then(() => {
-      this.props.history.push('/created_trips')
-    });
+  componentWillUnmount() {
+    this.props.clearSessionErrors()
   }
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, showErrors } = this.state
     const { submit, update } = this
-
+    const { errors } = this.props
     return (
       <>
         <h3>Sign In</h3>
-        <form onSubmit={submit}>
+        <FormErrors errors={ errors } show={ showErrors } />
+        <form onSubmit={ submit }>
           <label>Email
             <input type="email"
-              onChange={(e) => update('email', e)}
-              value={email}>
-            </input>
+              onChange={ (e) => update('email', e) }
+              value={ email }
+            />
           </label>
 
           <label>Password
             <input type="password"
-              onChange={(e) => update('password', e)}
-              value={password}>
-            </input>
+              onChange={ (e) => update('password', e) }
+              value={ password }
+            />
           </label>
 
-          <input type="submit"></input>
+          <input type="submit" />
         </form>
       </>
     )

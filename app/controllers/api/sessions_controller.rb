@@ -5,10 +5,10 @@ class Api::SessionsController < ApplicationController
       login!(@user)
       render "api/users/show"
     else
-      render json: {errors: "Failed to login"}, status: 400
+      render json: ["Failed to login"], status: 422
     end
   end
-  
+
   def destroy
     logout!
     render json: {message: "Successfully logged out"} # TODO: reminder, $.ajax().then isn't called back unless a json object is sent

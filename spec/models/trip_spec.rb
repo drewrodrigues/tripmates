@@ -93,6 +93,7 @@ RSpec.describe Trip, type: :model do
   end
 
   describe "#duration" do
+    # TODO: make this computed on front end
     it "accounts for the start day" do
       trip = build(:trip, start_date: Date.today, end_date: Date.today)
       expect(trip.duration).to eq(1)
@@ -100,6 +101,7 @@ RSpec.describe Trip, type: :model do
   end
 
   describe "#days_until" do
+    # TODO: make this computer on frontend
     it "accounts for the current user's timezone"
 
     context "when start date is today" do

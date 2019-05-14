@@ -1,0 +1,22 @@
+.formErrors {
+  padding: 0;
+}
+
+.formErrors {
+  display: block;
+  opacity: 0;
+  transition: all 1s;
+  height: 50px;
+}
+
+.formErrors-true {
+  opacity: 1;
+}
+
+.formError {
+  border-left: 3px solid red;
+  background: salmon;
+  padding: 5px 8px;
+  color: white;
+  font-weight: 700;
+}

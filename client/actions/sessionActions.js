@@ -4,13 +4,23 @@ import { receiveUser } from './userActions'
 
 export const RECEIVE_CURRENT_USER   = "RECEIVE_CURRENT_USER"
 export const LOGOUT                 = "LOGOUT"
+export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS"
+export const CLEAR_SESSION_ERRORS   = "CLEAR_SESSION_ERRORS"
 
 export const receiveCurrentUser = user => {
-  return {type: RECEIVE_CURRENT_USER, user}
+  return { type: RECEIVE_CURRENT_USER, user }
 }
 
-export const receiveLogout = () => {
-  return {type: LOGOUT}
+const receiveLogout = () => {
+  return { type: LOGOUT }
+}
+
+const receiveSessionErrors = errors => {
+  return { type: RECEIVE_SESSION_ERRORS, errors }
+}
+
+export const clearSessionErrors = () => {
+  return { type: CLEAR_SESSION_ERRORS }
 }
 
 export const logout = () => dispatch => {
@@ -24,4 +34,5 @@ export const signIn = (user) => dispatch => {
       dispatch(receiveCurrentUser(res))
       dispatch(receiveUser(res))
     })
+    .fail(errors => dispatch(receiveSessionErrors(errors.responseJSON)))
 }

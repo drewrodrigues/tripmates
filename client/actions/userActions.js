@@ -15,7 +15,7 @@ export const receiveUsers = users => {
 
 export const signUp = user => dispatch => {
   return SessionUtil.signUp(user)
-    .then(res => {
+  .then(res => {
       dispatch(receiveCurrentUser(res))
       dispatch(receiveUser(res))
     })
