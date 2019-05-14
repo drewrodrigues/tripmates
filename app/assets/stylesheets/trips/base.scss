@@ -1,3 +1,42 @@
-.svg-inline--fa {
+.tripDaysUntil {
+  @include badge(#e67e22, white);
   margin-right: 5px;
+}
+
+.tripDuration {
+  @include badge(#3498db, white);
+}
+
+.tripLocation {
+  @include badge(#9b59b6, white);
+  margin-bottom: 0;
+}
+
+.tripLeader {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  height: 30px;
+  width: 30px;
+  background: white;
+  border-radius: 50%;
+}
+
+.tripDateRange {
+  @include badge(white, #222);
+}
+
+.tripAttendees {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+
+.tripAttendee {
+  height: 45px;
+  width: 45px;
+  background: #ddd;
+  border: 3px solid white;
+  border-radius: 50%;
+  margin-left: -15px;
 }

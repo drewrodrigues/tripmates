@@ -15,8 +15,5 @@ json.set! "trip" do
 end
 
 json.set! "user" do
-  json.set! @trip.creator.id do
-    json.extract! @trip.creator, :first_name, :last_name, :email, :id
-    json.fullName "#{@trip.creator.first_name} #{@trip.creator.last_name}"
-  end
+  json.partial! "api/users/user", user: @trip.creator
 end

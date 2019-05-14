@@ -1,0 +1,23 @@
+.tripShow {
+  text-align: center;
+  border-radius: 0;
+  margin-top: 0;
+  padding: 150px 0;
+  background-size: cover;
+  position: relative;
+
+  div {
+    display: inline-block;
+    border-radius: 0;
+  }
+
+  .tripDaysUntil {
+    margin-right: 0;
+  }
+}
+
+.tripShow-title {
+  font-size: 72px;
+  text-shadow: 0 0 10px black;
+  color: #fff;
+}

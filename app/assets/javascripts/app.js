@@ -1827,7 +1827,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _shared_tripDaysUntil__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/tripDaysUntil */ "./client/components/trips/shared/tripDaysUntil.jsx");
-/* harmony import */ var _shared_tripLeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/tripLeader */ "./client/components/trips/shared/tripLeader.jsx");
+/* harmony import */ var _shared_tripAttendees__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/tripAttendees */ "./client/components/trips/shared/tripAttendees.jsx");
 /* harmony import */ var _shared_tripLocation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/tripLocation */ "./client/components/trips/shared/tripLocation.jsx");
 /* harmony import */ var _shared_tripDateRange__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/tripDateRange */ "./client/components/trips/shared/tripDateRange.jsx");
 /* harmony import */ var _shared_tripDuration__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/tripDuration */ "./client/components/trips/shared/tripDuration.jsx");
@@ -1892,10 +1892,6 @@ function (_React$Component) {
     value: function deleteTrip() {
       var _this3 = this;
 
-      this.setState({
-        isLoading: true
-      });
-      console.log(this.props.match.params.id);
       this.props.deleteTrip(this.props.match.params.id).then(function () {
         _this3.props.history.push('/');
       });
@@ -1907,12 +1903,15 @@ function (_React$Component) {
       var _this$props = this.props,
           trip = _this$props.trip,
           leader = _this$props.leader;
+      console.log(leader);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "jumbotron trip-show",
+        className: "jumbotron tripShow",
         style: {
           backgroundImage: "url(".concat(trip.coverPhoto, ")")
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripAdminControlsContainer__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, trip.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripLocation__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripAdminControlsContainer__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "tripShow-title"
+      }, trip.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripLocation__WEBPACK_IMPORTED_MODULE_3__["default"], {
         location: trip.location
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripDateRange__WEBPACK_IMPORTED_MODULE_4__["default"], {
         startDate: trip.startDate,
@@ -1921,8 +1920,8 @@ function (_React$Component) {
         daysUntil: trip.daysUntil
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripDuration__WEBPACK_IMPORTED_MODULE_5__["default"], {
         duration: trip.duration
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripLeader__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        leader: leader
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_tripAttendees__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        creator: leader
       }));
     }
   }]);
