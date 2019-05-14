@@ -11,7 +11,7 @@ const usersReducer = (oldState = {}, action) => {
     case RECEIVE_USER:
       return Object.assign(newState, action.user)
     case RECEIVE_USERS:
-      return action.users
+      return Object.assign(newState, action.users)
     default:
       return oldState
   }
