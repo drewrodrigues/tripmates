@@ -6,11 +6,10 @@ class NavLoggedIn extends React.Component {
     super(props)
     this.handleLogout = this.handleLogout.bind(this)
   }
-  
+
   handleLogout() {
-    let that = this
     this.props.logout().then(() => {
-      that.props.history.push('/login')
+      this.props.history.push('/login')
     })
   }
 

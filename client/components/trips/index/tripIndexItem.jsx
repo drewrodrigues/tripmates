@@ -21,26 +21,28 @@ const TripIndexItem = (props) => {
   } = props.trip
 
   return (
-    <Link to={ `/trips/${id}` }
+    <Link
+      to={ `/trips/${id}` }
       className="card tripIndexItem"
-      style={{ "backgroundImage": `url(${ coverPhoto })` }}>
+      style={{ "backgroundImage": `url(${ coverPhoto })` }}
+    >
 
       <header className="tripIndexItem-header">
         <TripDateRange
-          startDate={startDate}
-          endDate={endDate}/>
+          startDate={ startDate }
+          endDate={ endDate } />
       </header>
 
-      <h3  className="tripIndexItem-title">{title}</h3>
+      <h3  className="tripIndexItem-title">{ title }</h3>
 
       <div className="tripIndexItem-relativeDates">
-        <TripDaysUntil daysUntil={daysUntil}/>
-        <TripDuration duration={duration}/>
+        <TripDaysUntil daysUntil={ daysUntil } />
+        <TripDuration duration={ duration } />
       </div>
 
       <footer className="tripIndexItem-footer">
-        <TripLocation location={location} className="tripIndexItem-location"/>
-        <TripAttendees/>
+        <TripLocation location={ location } className="tripIndexItem-location"/>
+        <TripAttendees creator={ creator } />
       </footer>
     </Link>
   )

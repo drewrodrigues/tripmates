@@ -14,17 +14,15 @@ class TripShow extends React.Component {
   }
 
   componentDidMount() {
-    const that = this
     this.props.getTripById(this.props.match.params.id)
-      .then(() => that.setState({ isLoading: false }))
+      .then(() => this.setState({ isLoading: false }))
   }
 
   deleteTrip() {
-    const that = this
     this.setState({ isLoading: true })
     console.log(this.props.match.params.id)
     this.props.deleteTrip(this.props.match.params.id).then(() => {
-      that.props.history.push('/')
+      this.props.history.push('/')
     })
   }
 

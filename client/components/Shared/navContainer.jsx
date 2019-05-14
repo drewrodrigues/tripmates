@@ -9,9 +9,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout())
-});
+})
 
 export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Nav));
+)(Nav))

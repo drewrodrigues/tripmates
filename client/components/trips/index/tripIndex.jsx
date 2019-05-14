@@ -1,6 +1,7 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Loader from '../../Shared/loader'
 import TripIndexItemContainer from './tripIndexItemContainer'
 
 class TripIndex extends React.Component {
@@ -11,9 +12,8 @@ class TripIndex extends React.Component {
   }
 
   componentDidMount() {
-    const that = this
     this.props.retrieveMyTrips(this.props.currentUserID)
-      .then(() => that.setState({isLoading: false}))
+      .then(() => this.setState({isLoading: false}))
   }
 
   toggleForm() {

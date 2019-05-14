@@ -1,13 +1,11 @@
-import React from 'react';
+import React from 'react'
 
 class SignIn extends React.Component {
   constructor(props) {
-    super(props);
-
-    this.state = { email: "", password: "" };
-
-    this.update = this.update.bind(this);
-    this.submit = this.submit.bind(this);
+    super(props)
+    this.state = { email: "", password: "" }
+    this.update = this.update.bind(this)
+    this.submit = this.submit.bind(this)
   }
 
   update(attribute, e) {
@@ -15,33 +13,32 @@ class SignIn extends React.Component {
   }
 
   submit(e) {
-    e.preventDefault();
-    const that = this;
+    e.preventDefault()
 
     const { email, password } = this.state;
     this.props.login({email, password}).then(() => {
-      that.props.history.push('/created_trips')
+      this.props.history.push('/created_trips')
     });
   }
 
   render() {
     const { email, password } = this.state;
-    const { submit, update } = this;
+    const { submit, update } = this
 
     return (
       <>
         <h3>Sign In</h3>
         <form onSubmit={submit}>
           <label>Email
-            <input type="email" 
-              onChange={(e) => update('email', e)} 
+            <input type="email"
+              onChange={(e) => update('email', e)}
               value={email}>
             </input>
           </label>
 
           <label>Password
-            <input type="password" 
-              onChange={(e) => update('password', e)} 
+            <input type="password"
+              onChange={(e) => update('password', e)}
               value={password}>
             </input>
           </label>
@@ -49,8 +46,8 @@ class SignIn extends React.Component {
           <input type="submit"></input>
         </form>
       </>
-    );
+    )
   }
 }
 
-export default SignIn;
+export default SignIn
