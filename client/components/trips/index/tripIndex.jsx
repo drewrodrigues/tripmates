@@ -22,12 +22,7 @@ class TripIndex extends React.Component {
 
   render() {
     if (this.state.isLoading) {
-      // TODO: replace with a cool shared loader
-      return (
-        <div>
-          <div>Loading...</div>
-        </div>
-      )
+      return <Loader />
     }
     const {trips} = this.props
 
