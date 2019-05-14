@@ -13,16 +13,16 @@
   }
 
   .tripDaysUntil {
-    @include badge;
+    @include badge(#e67e22, white);
     margin-right: 5px;
   }
 
   .tripDuration {
-    @include badge;
+    @include badge(#3498db, white);
   }
 
   .tripLocation {
-    @include badge;
+    @include badge(#9b59b6, white);
     margin-bottom: 0;
   }
 
@@ -37,7 +37,7 @@
   }
 
   .tripDateRange {
-    @include badge;
+    @include badge(white, #222);
   }
 
   .tripAttendees {

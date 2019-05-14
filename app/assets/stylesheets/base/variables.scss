@@ -3,16 +3,22 @@ $orange: orange;
 
 // badges
 $badge-font-size: 10px;
-$badge-padding: 3px 6px;
+$badge-padding: 10px;
 $border-radius: 3px;
 
-@mixin badge {
+@mixin badge($background, $text) {
   border-radius: $border-radius;
   font-size: $badge-font-size;
   padding: $badge-padding;
-  background: white;
+  background: $background;
   display: inline-block;
-  color: #222;
+  color: $text;
+  box-shadow: 0 0 10px $background;
+
+  svg {
+    font-weight: 700;
+    margin-right: 10px;
+  }
 }
 
 @mixin box-shadow {
