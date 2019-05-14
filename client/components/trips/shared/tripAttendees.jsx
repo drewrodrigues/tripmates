@@ -1,25 +1,10 @@
 import React from 'react'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {Link} from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const tripAttendees = () => {
+const tripAttendees = ({ creator }) => {
   return (
     <div className="tripAttendees">
-      <Link to="#" className="tripAttendee">
-        {/* TODO: add user photo */}
-      </Link>
-      <Link to="#" className="tripAttendee">
-        {/* TODO: add user photo */}
-      </Link>
-      <Link to="#" className="tripAttendee">
-        {/* TODO: add user photo */}
-      </Link>
-      <Link to="#" className="tripAttendee">
-        {/* TODO: add user photo */}
-      </Link>
-      <Link to="#" className="tripAttendee">
-        {/* TODO: add user photo */}
-      </Link>
+      <img src={ creator.profilePicture } className="tripAttendee" />
     </div>
   )
 }

@@ -4,6 +4,7 @@
 @import "./trips/base";
 @import "./trips/tripIndexItem";
 @import "./trips/tripForm";
+@import "./shared/navLoggedIn";
 
 * {
   line-height: 1;
@@ -13,6 +14,10 @@
   height: 100vh;
   position: fixed;
   background-color: #cecece;
+}
+
+.container {
+  position: relative;
 }
 
 .container.main {

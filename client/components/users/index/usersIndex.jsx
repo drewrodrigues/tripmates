@@ -1,25 +1,27 @@
 import React from 'react'
-import FriendRequest from '../../friendRequests/friendRequestContainer'
+import UserIndexItem from './userIndexItem'
 
 class UsersIndex extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { loading: true }
+  }
+
   componentDidMount() {
     // TODO: query for all users, other than myself
     // TODO: getAllUsersWithFriendRequestData
-    this.props.getAllUsers()
+    this.props.getAllUsers().then(() => {
+      this.setState({ loading: false })
+    })
     this.props.getAllFriendRequests()
   }
-  
-  render() {
-  return (
-      <ul className="list-group">
-        {this.props.users.map(user => (
-          <li key={user.id} className="list-group-item">
-            {user.fullName}
-            <br/>
 
-            <FriendRequest userId={user.id} />
-          </li>
-        ))}
+  render() {
+    return (
+      <ul className="list-group">
+        { this.props.users.map(user => (
+          <UserIndexItem key={ user.id } user={ user } />
+        ) ) }
       </ul>
     )
   }

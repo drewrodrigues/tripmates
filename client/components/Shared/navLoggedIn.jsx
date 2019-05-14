@@ -22,6 +22,15 @@ class NavLoggedIn extends React.Component {
             <NavLink exact className="nav-link" to="/">Trips</NavLink>
             <NavLink className="nav-link" to="/users">Users</NavLink>
             <button className="btn btn-link" onClick={this.handleLogout}>Logout</button>
+            <div className="navLoggedIn-right">
+              <span className="navLoggedIn-name">
+                { this.props.currentUser.firstName }
+              </span>
+              <img
+                src={ this.props.currentUser.profilePicture }
+                className="navLoggedIn-profilePicture"
+              />
+            </div>
           </nav>
         </div>
       </div>
