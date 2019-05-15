@@ -27,8 +27,6 @@ class TripShow extends React.Component {
   render() {
     if (this.state.isLoading === true) return null
     const { trip, leader } = this.props
-    console.log(leader)
-
     return (
       <div className="jumbotron tripShow" style={{ backgroundImage: `url(${ trip.coverPhoto })` }}>
 
@@ -45,4 +43,4 @@ class TripShow extends React.Component {
   }
 }
 
-export default TripShow;
+export default TripShow

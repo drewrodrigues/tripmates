@@ -1,9 +1,9 @@
 const thunk = ({dispatch}) => next => action => {
   if (typeof action === 'function') {
-    return action(dispatch);
-  };
+    return action(dispatch)
+  }
 
-  next(action);
-};
+  next(action)
+}
 
-export default thunk;
+export default thunk

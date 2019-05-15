@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { handleImage } from '../../helpers/handlers'
 import FormErrors from '../Shared/formErrors'
 
@@ -6,25 +6,25 @@ import FormErrors from '../Shared/formErrors'
 
 class SignUp extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       first_name: "",
       last_name: "",
       email: "",
       password: "",
       profile_picture: ""
-    };
+    }
     this.update = this.update.bind(this)
     this.submit = this.submit.bind(this)
     this.handleImage = handleImage.bind(this)
   }
 
   update(attribute, e) {
-    this.setState({[attribute]: e.currentTarget.value});
+    this.setState({[attribute]: e.currentTarget.value})
   }
 
   submit(e) {
-    e.preventDefault();
+    e.preventDefault()
 
     // TODO: pull out into helper method
     const formData = new FormData()
@@ -35,8 +35,8 @@ class SignUp extends React.Component {
     formData.append('user[profile_picture]', this.state.profile_picture)
 
     this.props.signUp(formData).then(() => {
-      this.props.history.push('/created_trips');
-    });
+      this.props.history.push('/created_trips')
+    })
   }
 
   componentWillUnmount() {
@@ -93,10 +93,10 @@ class SignUp extends React.Component {
           <input type="submit" />
         </form>
       </>
-    );
+    )
   }
 }
 
 Object.assign(SignUp.prototype, handleImage)
 
-export default SignUp;
+export default SignUp

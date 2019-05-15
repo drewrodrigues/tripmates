@@ -2041,7 +2041,6 @@ function (_React$Component) {
       var _this$props = this.props,
           trip = _this$props.trip,
           leader = _this$props.leader;
-      console.log(leader);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "jumbotron tripShow",
         style: {
