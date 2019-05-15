@@ -30,3 +30,6 @@ log/*
 *.swp
 coverage/
 .DS_Store
+
+# rspec
+spec/examples.txt
