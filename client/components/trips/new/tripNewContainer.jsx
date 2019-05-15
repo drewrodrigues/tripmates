@@ -1,13 +1,15 @@
 import { connect } from 'react-redux'
-import { createTrip } from '../../../actions/tripActions'
-import TripForm from '../shared/tripForm';
+import { createTrip, clearTripErrors } from '../../../actions/tripActions'
+import TripForm from '../shared/tripForm'
+
+const mapStateToProps = state => ({
+  actionType: "Create",
+  errors: state.errors.tripErrors
+})
 
 const mapDispatchToProps = dispatch => ({
   action: trip => dispatch(createTrip(trip)),
-  actionType: "Create"
+  clearTripErrors: () => dispatch(clearTripErrors())
 })
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(TripForm)
+export default connect(mapStateToProps, mapDispatchToProps)(TripForm)

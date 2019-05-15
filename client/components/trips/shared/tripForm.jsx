@@ -1,6 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { handleImage } from "../../../helpers/handlers"
+import FormErrors from '../../Shared/formErrors'
 
 const today = new Date().toISOString().split('T')[0]
 const defaultState = {
@@ -41,6 +42,10 @@ class TripForm extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.clearTripErrors()
+  }
+
   handleUpdate(prop) {
     return (e) => {
       this.setState({[prop]: e.target.value})
@@ -73,9 +78,11 @@ class TripForm extends React.Component {
 
   render() {
     const { handleUpdate, handleSubmit, handleImage } = this
+    const { errors } = this.props
 
     return(
       <div>
+        <FormErrors errors={ errors } />
         <img src={ this.state.image_preview } className="tripForm-ImagePreview" />
 
         <form onSubmit={handleSubmit}>
