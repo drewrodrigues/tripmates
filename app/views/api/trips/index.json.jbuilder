@@ -2,12 +2,7 @@ json.trips({})
 json.users({})
 
 json.set! "trips" do
-  @trips.each do |trip|
-    json.set! trip.id do
-      json.extract! trip, :id, :start_date, :end_date, :title, :location, :creator_id, :duration, :days_until
-      json.coverPhoto url_for(trip.cover_photo)
-    end
-  end
+  json.partial! @trips
 end
 
 json.set! "users" do
