@@ -33,3 +33,6 @@ coverage/
 
 # rspec
 spec/examples.txt
+
+# webpack output
+app/assets/javascripts/app.js*
