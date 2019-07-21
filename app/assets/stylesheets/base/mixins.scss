@@ -1,0 +1,7 @@
+@mixin card-shadow {
+  box-shadow: 0 0 10px #ccc;
+}
+
+@mixin text-shadow {
+  text-shadow: 0 0 10px #000;
+}

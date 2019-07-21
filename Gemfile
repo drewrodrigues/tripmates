@@ -6,7 +6,6 @@ ruby "2.5.1"
 gem "aws-sdk-s3", require: false
 gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", ">= 1.1.0", require: false
-gem "bootstrap", "~> 4.3.1"
 gem "coffee-rails", "~> 4.2"
 gem "faker"
 gem "jbuilder", "~> 2.5"
@@ -27,6 +26,7 @@ end
 group :development do
   gem "annotate"
   gem "guard-rspec", "4.2.9"
+  gem "guard-livereload", "~>2.5", require: false
   gem "listen", ">= 3.0.5", "< 3.2"
   gem "pry-rails"
   gem "spring-watcher-listen", "~> 2.0.0"

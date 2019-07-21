@@ -15,10 +15,10 @@ class NavLoggedIn extends React.Component {
 
   render() {
     return (
-      <div className="navbar">
+      <div className="Nav">
         <div className="container">
           <nav className="nav nav-pills">
-            <NavLink className="nav-link logo" to="/">TripMates</NavLink>
+            <NavLink className="Nav-logo" to="/">tripmates</NavLink>
             <NavLink exact className="nav-link" to="/">Trips</NavLink>
             <NavLink className="nav-link" to="/users">Users</NavLink>
             <button className="btn btn-link" onClick={this.handleLogout}>Logout</button>
