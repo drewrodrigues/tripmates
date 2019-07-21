@@ -29,10 +29,23 @@ class TripIndex extends React.Component {
     return(
       <div>
         <div className="tripsIndex">
-          <Link to="/trips/new" className="btn btn-success btn-sm">
-            <FontAwesomeIcon icon="plus"/>
-            New Trip
-          </Link>
+          <header className="tripIndex-header">
+            <div className="tripIndex-header-left">
+              <a href="#" className="button button-white">All</a>
+            </div>
+
+            <div className="tripIndex-header-center">
+              <a href="#" className="button button-white">Past</a>
+              <a href="#" className="button button-blue button-heavy">Upcoming</a>
+            </div>
+
+            <div classname="tripIndex-header-right">
+              <Link to="/trips/new" className="button button-green button-heavy">
+                <FontAwesomeIcon icon="plus"/>
+                Add Trip
+              </Link>
+            </div>
+          </header>
 
           <div className="tripIndexItems">
             {trips.map(trip => (

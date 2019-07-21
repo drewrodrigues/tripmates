@@ -1,7 +1,28 @@
-@mixin card-shadow {
+@mixin box-shadow {
   box-shadow: 0 0 10px #ccc;
+  transition: 0.25s box-shadow, 0.25s transform;
+
+  &:hover {
+    box-shadow: 0 0 15px #999;
+    transform: scale(1.025);
+  }
 }
 
 @mixin text-shadow {
   text-shadow: 0 0 10px #000;
+}
+
+@mixin badge($border-color, $text) {
+  border-radius: 5px;
+  font-size: 10px;
+  padding: 8px;
+  border: 1px solid $border-color;
+  display: inline-block;
+  color: $text;
+  margin-right: 5px;
+
+  svg {
+    font-weight: 900;
+    margin-right: 10px;
+  }
 }

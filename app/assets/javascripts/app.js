@@ -761,7 +761,7 @@ function (_React$Component) {
         email: email,
         password: password
       }).then(function () {
-        _this2.props.history.push('/created_trips');
+        _this2.props.history.push('/');
       }).fail(function () {
         _this2.setState({
           showErrors: true

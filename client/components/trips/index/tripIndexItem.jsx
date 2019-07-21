@@ -23,27 +23,56 @@ const TripIndexItem = (props) => {
   return (
     <Link
       to={ `/trips/${id}` }
-      className="card tripIndexItem"
-      style={{ "backgroundImage": `url(${ coverPhoto })` }}
+      className="tripIndexItem"
     >
 
-      <header className="tripIndexItem-header">
-        <TripDateRange
-          startDate={ startDate }
-          endDate={ endDate } />
-      </header>
+      <section className="tripIndexItem-photo" style={{"backgroundImage": `url(${coverPhoto})`}}>
+        <h3  className="tripIndexItem-title">{ title }</h3>
+      </section>
 
-      <h3  className="tripIndexItem-title">{ title }</h3>
+      <section className="tripIndexItem-body">
+        <h4 className="tripIndexItem-location">{location}</h4>
+        <h5 className="tripIndexItem-dates">{startDate} - {endDate}</h5>
 
-      <div className="tripIndexItem-relativeDates">
-        <TripDaysUntil daysUntil={ daysUntil } />
-        <TripDuration duration={ duration } />
-      </div>
+        <div className="tripIndexItem-badges">
+          <span className="tripIndexItem-badge tripIndexItem-badge-blue">{daysUntil} days until</span>
+          <span className="tripIndexItem-badge tripIndexItem-badge-blue">{duration} days long</span>
+          <span className="tripIndexItem-badge tripIndexItem-badge-red">3 spots left</span>
+        </div>
 
-      <footer className="tripIndexItem-footer">
-        <TripLocation location={ location } className="tripIndexItem-location"/>
-        <TripAttendees creator={ creator } />
-      </footer>
+        <p className="tripIndexItem-description">
+          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+        </p>
+
+        <div className="tripindexItem-footer">
+          <div className="tripIndexItem-footer-left">
+            <img
+              src={ creator.profilePicture }
+              className="tripIndexItem-leader-avatar"
+            />
+            <span className="tripIndexItem-led-by">
+              Led by
+              <a className="tripIndexItem-led-by-user"> {creator.firstName} {creator.lastName}</a>
+            </span>
+          </div>
+
+          <div className="tripIndexItem-footer-right">
+            <ul className="tripIndexItem-attendees">
+              <li className="tripIndexItem-attendee">
+                <img src={ creator.profilePicture } className="tripIndexItem-attendee-avatar" />
+              </li>
+              <li className="tripIndexItem-attendee">
+                <img src={ creator.profilePicture } className="tripIndexItem-attendee-avatar" />
+              </li>
+              <li className="tripIndexItem-attendee">
+                <img src={ creator.profilePicture } className="tripIndexItem-attendee-avatar" />
+              </li>
+            </ul>
+            <p className="tripIndexItem-others-count">+ 23 others</p>
+          </div>
+        </div>
+      </section>
+
     </Link>
   )
 }

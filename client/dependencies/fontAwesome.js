@@ -9,7 +9,9 @@ import {
   faEyeSlash,
   faUsers,
   faMapMarkerAlt,
-  faUser
+  faUser,
+  faCog,
+  faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons'
 
 export default (() => {
@@ -23,4 +25,6 @@ export default (() => {
   library.add(faUsers)
   library.add(faMapMarkerAlt)
   library.add(faUser)
+  library.add(faCog)
+  library.add(faSignOutAlt)
 })()

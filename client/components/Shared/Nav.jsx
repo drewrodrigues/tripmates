@@ -16,7 +16,6 @@ const Nav = props => {
 
   return (
     <>
-      <h1>Something</h1>
       { Nav }
       <Routes loggedIn={ currentUser } />
     </>

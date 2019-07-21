@@ -1,40 +1,127 @@
 .tripIndexItem {
   @include box-shadow;
-  background-size: cover;
-  background-position: center;
   position: relative;
-  margin-bottom: 1%;
-  color: white;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background: white;
+  display: flex;
+  overflow:hidden;
+}
 
-  .tripIndexItem-relativeDates {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
+.tripIndexItem-photo-container {
+  width: 50%;
+}
+
+.tripIndexItem-photo {
+  @include text-shadow;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+}
+
+.tripIndexItem-body {
+  width: 50%;
+  padding: 40px;
+  background: white;
 }
 
 .tripIndexItem-title {
   font-size: 36px;
-  font-weight: 700;
+  font-weight: 900;
   color: white;
-  padding: 100px 0;
   text-align: center;
-  text-shadow: 0 0 10px black;
+  text-shadow: 0 0 15px black;
 }
 
-.tripIndexItem {
-  background: white;
-  background-size: cover;
+.tripIndexItem-location {
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 5px;
 }
 
-.tripIndexItem-header {
-  padding: 20px;
+.tripIndexItem-dates {
+  color: $text-muted;
+  font-size: 14px;
+  margin-bottom: 20px;
 }
 
-.tripIndexItem-footer {
-  position: absolute;
+.tripIndexItem-badges {
+  margin-bottom: 20px;
+}
+
+.tripIndexItem-badge {
+  display: inline-block;
+}
+
+.tripIndexItem-badge-blue {
+  @include badge($blue-primary, $blue-primary);
+}
+
+.tripIndexItem-badge-red {
+  @include badge($red-primary, $red-primary);
+}
+
+.tripIndexItem-description {
+  color: $text-muted;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.tripIndexItem-footer-left {
+  display: flex;
+  align-items: center;
+}
+
+.tripIndexItem-leader-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.tripIndexItem-led-by {
+  color: $text-muted
+}
+
+.tripIndexItem-led-by-user {
+  color: $blue-primary;
+  font-weight: 900;
+}
+
+.tripindexItem-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.tripIndexItem-footer-right {
+  display: flex;
+  align-items: center;
+}
+
+.tripIndexItem-attendees {
+  display: flex;
+  align-items: center;
+}
+
+.tripIndexItem-attendee {
+  margin-left: -10px;
+  width: 33px;
+  height: 33px;
+  display: inline-block;
+}
+
+.tripIndexItem-attendee-avatar {
+  border: 3px solid white;
   width: 100%;
-  left: 0;
-  bottom: 0;
-  padding: 20px;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.tripIndexItem-others-count {
+  color: $text-muted;
+  margin-left: 5px;
 }

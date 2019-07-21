@@ -21,7 +21,7 @@ class SignIn extends React.Component {
     const { email, password } = this.state
     this.props.login({email, password})
       .then(() => {
-        this.props.history.push('/created_trips')
+        this.props.history.push('/')
       })
       .fail(() => {
         this.setState({ showErrors: true })
