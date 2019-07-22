@@ -1,14 +1,19 @@
-.tripIndexItem {
-  @include box-shadow;
+@mixin card {
   position: relative;
   margin-bottom: 20px;
   border-radius: 10px;
   background: white;
   display: flex;
   overflow:hidden;
+  @include box-shadow;
 }
 
-.tripIndexItem-photo-container {
+.tripIndexItem {
+  @include card;
+}
+
+.tripIndexItem-photo-container,
+.tripIndexItem-placeholder-photo-container {
   width: 50%;
 }
 
@@ -124,4 +129,11 @@
 .tripIndexItem-others-count {
   color: $text-muted;
   margin-left: 5px;
+}
+
+// placeholder -----------------------------------------------------------------
+
+.tripIndexItem-placeholder {
+  @include card;
+  height: 315px;
 }

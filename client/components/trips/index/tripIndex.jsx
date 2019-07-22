@@ -1,19 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Loader from '../../Shared/loader'
 import TripIndexItemContainer from './tripIndexItemContainer'
+
+const TripIndexItemPlaceholder = () => (
+  <div className="tripIndexItem-placeholder">
+  </div>
+)
 
 class TripIndex extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {showForm: false, isLoading: true}
+    this.state = {showForm: false, loading: true}
     this.toggleForm = this.toggleForm.bind(this)
   }
 
   componentDidMount() {
     this.props.retrieveMyTrips(this.props.currentUserID)
-      .then(() => this.setState({isLoading: false}))
+      .then(() => this.setState({loading: false}))
   }
 
   toggleForm() {
@@ -21,9 +25,6 @@ class TripIndex extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) {
-      return <Loader />
-    }
     const {trips} = this.props
 
     return(
@@ -47,13 +48,19 @@ class TripIndex extends React.Component {
             </div>
           </header>
 
-          <div className="tripIndexItems">
-            {trips.map(trip => (
-              <TripIndexItemContainer
-                trip={trip}
-                key={trip.id}/>
-            ))}
-          </div>
+          { this.state.loading ?
+            <>
+              <TripIndexItemPlaceholder />
+              <TripIndexItemPlaceholder />
+              <TripIndexItemPlaceholder />
+            </>
+            :
+            <div className="tripIndexItems">
+              {trips.map(trip => (
+                <TripIndexItemContainer trip={trip} key={trip.id} />
+              ))}
+            </div>
+          }
         </div>
       </div>
     )
