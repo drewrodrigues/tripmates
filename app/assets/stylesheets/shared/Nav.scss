@@ -42,6 +42,17 @@
   }
 }
 
+.Nav-link-sign-up {
+  box-shadow: 0 5px 5px rgba(0,0,0,0.25);
+  background: $green-primary;
+  transition: 0.25s box-shadow, 0.25s background;
+
+  &:hover {
+    background: $green-secondary;
+    box-shadow: 0 0 5px rgba(0,0,0,0.15);
+  }
+}
+
 .Nav-user {
   display: flex;
   align-items: center;
