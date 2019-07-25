@@ -26,3 +26,16 @@
     margin-right: 10px;
   }
 }
+
+@mixin card {
+  position: relative;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background: white;
+  display: flex;
+  overflow: hidden;
+}
+
+@mixin card-padding {
+  padding: 40px;
+}

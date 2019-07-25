@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import TripDaysUntil from '../shared/tripDaysUntil'
 import TripLeader from '../shared/tripLeader'
 import TripLocation from '../shared/tripLocation'

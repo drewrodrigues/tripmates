@@ -1,15 +1,6 @@
-@mixin card {
-  position: relative;
-  margin-bottom: 20px;
-  border-radius: 10px;
-  background: white;
-  display: flex;
-  overflow:hidden;
-  @include box-shadow;
-}
-
 .tripIndexItem {
   @include card;
+  @include box-shadow;
 }
 
 .tripIndexItem-photo-container,
@@ -27,8 +18,8 @@
 }
 
 .tripIndexItem-body {
+  @include card-padding;
   width: 50%;
-  padding: 40px;
   background: white;
 }
 
@@ -135,5 +126,6 @@
 
 .tripIndexItem-placeholder {
   @include card;
+  @include box-shadow;
   height: 315px;
 }
