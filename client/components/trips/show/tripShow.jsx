@@ -31,13 +31,12 @@ class TripShow extends Component {
     return (
       <div className="tripShow">
 
-        <TripAdminControlsContainer />
-
         <section className="tripShow-detail">
           <h3 className="tripShow-detail-title">{trip.title}</h3>
 
           <div className="tripShow-detail-photo">
             <img src={trip.coverPhoto} alt={`${trip.title} photo`} />
+            <TripAdminControlsContainer />
           </div>
 
           <div className="tripShow-detail-body">

@@ -1,17 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const TripAdminControls = ({ deleteTrip, isAdmin, tripId }) => {
+const TripAdminControls = ({deleteTrip, isAdmin, tripId}) => {
   if (!isAdmin) return null
   return (
-    <>
-      <Link to={ `/trips/${tripId}/edit` }>Edit</Link>
+    <div className="trip-controls-admin">
+      <Link to={`/trips/${tripId}/edit`} className="trip-button-edit">Edit</Link>
       <button
-        onClick={ deleteTrip }
-        className="btn btn-sm btn-light float-right">
+        onClick={deleteTrip}
+        className="trip-button-delete">
         X
       </button>
-    </>
+    </div>
   )
 }
 
