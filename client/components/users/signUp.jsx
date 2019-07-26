@@ -49,64 +49,56 @@ class SignUp extends React.Component {
           {errors} = this.props
     return (
       <>
-        <header className="signUp-header">
-          <h2 className="signUp-title">Sign Up</h2>
-          <h4 className="signUp-subtitle">Let's get to the trips!</h4>
+        <header className="form-header">
+          <h2 className="form-title">Sign Up</h2>
+          <h4 className="form-subtitle">Let's get to the trips!</h4>
         </header>
 
 
-        <form onSubmit={submit} className="signUp-form">
-
+        <form onSubmit={submit} className="form form-signUp">
           <header className="signUp-form-header">
             <img src={this.state.image_preview} className="signUp-avatar" />
           </header>
 
           <FormErrors errors={errors} />
 
-          <label className="form-label">Profile picture
-            <input type="file"
-              onChange={e => handleImage(e, 'profile_picture')}
-              className="signUp-input"
-              accept=".jpg,.jpeg,.png"
-            />
-          </label>
+          <label className="form-label">Profile picture</label>
+          <input type="file"
+            onChange={e => handleImage(e, 'profile_picture')}
+            className="form-input"
+            accept=".jpg,.jpeg,.png"
+          />
 
-          <div className="form-row">
-            <label className="form-label">First Name
-              <input type="text"
-                onChange={(e) => update('first_name', e)}
-                value={first_name}
-                className="signUp-input half"
-              />
-            </label>
+          <label className="form-label">First Name</label>
+          <input type="text"
+            onChange={(e) => update('first_name', e)}
+            value={first_name}
+            className="form-input half"
+          />
 
-            <label className="form-label">Last Name
-              <input type="text"
-                onChange={(e) => update('last_name', e)}
-                value={last_name}
-                className="signUp-input half"
-              />
-            </label>
-          </div>
+          <label className="form-label">Last Name</label>
+          <input type="text"
+            onChange={(e) => update('last_name', e)}
+            value={last_name}
+            className="form-input half"
+          />
 
-          <label className="form-label">Email
-            <input type="email"
-              onChange={(e) => update('email', e)}
-              value={email}
-              className="signUp-input"
-            />
-          </label>
+          <label className="form-label">Email</label>
+          <input type="email"
+            onChange={(e) => update('email', e)}
+            value={email}
+            className="form-input"
+          />
 
-          <label className="form-label">Password
-            <input type="password"
-              onChange={(e) => update('password', e)}
-              value={password}
-              className="signUp-input"
-            />
-          </label>
+          <label className="form-label">Password</label>
+          <input type="password"
+            onChange={(e) => update('password', e)}
+            value={password}
+            className="form-input"
+          />
 
-          <footer className="signUp-footer">
-            <input type="submit" className="signUp-submit" value="Create your account" />
+          <footer className="form-footer">
+            <input type="submit" className="form-submit" value="Create your account" />
           </footer>
         </form>
       </>

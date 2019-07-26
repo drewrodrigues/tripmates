@@ -28,59 +28,10 @@
   width: 150px;
 }
 
-.signUp-form {
-  @include box-shadow;
-  @include card-padding;
-  background: white;
-  border-radius: 10px;
-  max-width: 450px;
-  margin: 0 auto 50px;
-}
-
-.signUp-input {
-  background: #efefef;
-  border: none;
-  border-radius: 10px;
-  display: block;
-  font-size: 16px;
-  font-weight: 900;
-  margin-bottom: 20px;
-  margin-top: 10px;
-  padding: 20px 20px 20px 10px;
-  width: 100%;
-  border-left: 10px solid #efefef;
-
-  &:focus {
-    outline: none;
-    border-left: 10px solid $blue-primary;
-  }
-
-  &.half {
-    width: 95%;
-  }
-}
-
-.form-row {
-  display: flex;
-  justify-content: space-between;
-}
-
 .signUp-footer {
   margin-bottom: -50px;
   margin-top: 40px;
   text-align: center;
-}
-
-.signUp-submit {
-  background: $green-primary;
-  border-radius: 10px;
-  color: white;
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: -50px;
-  padding: 15px 30px;
-  cursor: pointer;
 }
 
 .form-label {

@@ -4,7 +4,7 @@ import FormErrors from '../Shared/formErrors'
 class SignIn extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { email: "", password: "", showErrors: false }
+    this.state = {email: "", password: "", showErrors: false}
     this.update = this.update.bind(this)
     this.submit = this.submit.bind(this)
   }
@@ -18,13 +18,13 @@ class SignIn extends React.Component {
 
   submit(e) {
     e.preventDefault()
-    const { email, password } = this.state
+    const {email, password} = this.state
     this.props.login({email, password})
       .then(() => {
         this.props.history.push('/')
       })
       .fail(() => {
-        this.setState({ showErrors: true })
+        this.setState({showErrors: true})
       })
   }
 
@@ -33,29 +33,37 @@ class SignIn extends React.Component {
   }
 
   render() {
-    const { email, password, showErrors } = this.state
-    const { submit, update } = this
-    const { errors } = this.props
+    const {email, password, showErrors} = this.state
+    const {submit, update} = this
+    const {errors} = this.props
     return (
       <>
-        <h3>Sign In</h3>
-        <FormErrors errors={ errors } show={ showErrors } />
-        <form onSubmit={ submit }>
-          <label>Email
-            <input type="email"
-              onChange={ (e) => update('email', e) }
-              value={ email }
-            />
-          </label>
+        <header className="form-header">
+          <h3 className="form-title">Sign In</h3>
+          <h4 className="form-subtitle">Welcome back</h4>
+        </header>
 
-          <label>Password
-            <input type="password"
-              onChange={ (e) => update('password', e) }
-              value={ password }
-            />
-          </label>
 
-          <input type="submit" />
+        <form onSubmit={submit} className="form">
+          <FormErrors errors={errors} />
+
+          <label className="form-label">Email</label>
+          <input type="email"
+            onChange={(e) => update('email', e)}
+            value={email}
+            className="form-input"
+          />
+
+          <label className="form-label">Password</label>
+          <input type="password"
+            onChange={ (e) => update('password', e)}
+            value={password}
+            className="form-input"
+          />
+
+          <footer className="form-footer">
+            <input type="submit" value="Sign in" className="form-submit" />
+          </footer>
         </form>
       </>
     )
