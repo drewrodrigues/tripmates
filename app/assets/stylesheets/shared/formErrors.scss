@@ -1,11 +1,13 @@
 .formErrors {
   padding: 0;
+  margin-bottom: 20px;
 }
 
 .formError {
-  border-left: 3px solid red;
-  background: salmon;
-  padding: 5px 8px;
-  color: white;
-  font-weight: 900;
+  border-left: 5px solid $red-primary;
+  background: #efefef;
+  border-radius: 0 10px 10px 0;
+  padding: 10px 15px;
+  color: $red-primary;
+  margin-bottom: 5px;
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { handleImage } from '../../helpers/handlers'
+import {handleImage } from '../../helpers/handlers'
 import FormErrors from '../Shared/formErrors'
 
 // TODO: disable button until form is valid
@@ -44,53 +44,70 @@ class SignUp extends React.Component {
   }
 
   render() {
-    const { first_name, last_name, email, password } = this.state,
-          { handleImage, submit, update } = this,
-          { errors } = this.props
+    const {first_name, last_name, email, password} = this.state,
+          {handleImage, submit, update} = this,
+          {errors} = this.props
     return (
       <>
-        <h2>Sign Up</h2>
-        <FormErrors errors={ errors } />
-        <form onSubmit={submit}>
-          <img src={ this.state.image_preview } />
+        <header className="signUp-header">
+          <h2 className="signUp-title">Sign Up</h2>
+          <h4 className="signUp-subtitle">Let's get to the trips!</h4>
+        </header>
 
-          <label>
+
+        <form onSubmit={submit} className="signUp-form">
+
+          <header className="signUp-form-header">
+            <img src={this.state.image_preview} className="signUp-avatar" />
+          </header>
+
+          <FormErrors errors={errors} />
+
+          <label className="form-label">Profile picture
             <input type="file"
-              onChange={ e => handleImage(e, 'profile_picture') }
-              className="form-control"
+              onChange={e => handleImage(e, 'profile_picture')}
+              className="signUp-input"
               accept=".jpg,.jpeg,.png"
             />
           </label>
 
-          <label>First Name
-            <input type="text"
-              onChange={(e) => update('first_name', e)} 
-              value={first_name}>
-            </input>
-          </label>
+          <div className="form-row">
+            <label className="form-label">First Name
+              <input type="text"
+                onChange={(e) => update('first_name', e)}
+                value={first_name}
+                className="signUp-input half"
+              />
+            </label>
 
-          <label>Last Name
-            <input type="text"
-              onChange={(e) => update('last_name', e)} 
-              value={last_name}>
-            </input>
-          </label>
+            <label className="form-label">Last Name
+              <input type="text"
+                onChange={(e) => update('last_name', e)}
+                value={last_name}
+                className="signUp-input half"
+              />
+            </label>
+          </div>
 
-          <label>Email
+          <label className="form-label">Email
             <input type="email"
-              onChange={(e) => update('email', e)} 
-              value={email}>
-            </input>
+              onChange={(e) => update('email', e)}
+              value={email}
+              className="signUp-input"
+            />
           </label>
 
-          <label>Password
+          <label className="form-label">Password
             <input type="password"
-              onChange={(e) => update('password', e)} 
-              value={password}>
-            </input>
+              onChange={(e) => update('password', e)}
+              value={password}
+              className="signUp-input"
+            />
           </label>
 
-          <input type="submit" />
+          <footer className="signUp-footer">
+            <input type="submit" className="signUp-submit" value="Create your account" />
+          </footer>
         </form>
       </>
     )
