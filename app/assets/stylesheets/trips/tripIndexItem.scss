@@ -1,6 +1,7 @@
 .tripIndexItem {
   @include card;
   @include box-shadow;
+  @include box-shadow-hover;
 }
 
 .tripIndexItem-photo-container,
