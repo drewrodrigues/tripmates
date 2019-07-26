@@ -1,9 +1,4 @@
 import React, {Component} from 'react'
-import TripDaysUntil from '../shared/tripDaysUntil'
-import TripAttendees from '../shared/tripAttendees'
-import TripLocation from '../shared/tripLocation'
-import TripDateRange from '../shared/tripDateRange'
-import TripDuration from '../shared/tripDuration'
 import TripAdminControlsContainer from '../shared/tripAdminControlsContainer'
 
 class TripShow extends Component {

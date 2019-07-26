@@ -1,11 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import TripDaysUntil from '../shared/tripDaysUntil'
-import TripLeader from '../shared/tripLeader'
-import TripLocation from '../shared/tripLocation'
-import TripDateRange from '../shared/tripDateRange'
-import TripDuration from '../shared/tripDuration'
-import TripAttendees from '../shared/tripAttendees'
 
 const TripIndexItem = (props) => {
   const {
@@ -46,14 +40,23 @@ const TripIndexItem = (props) => {
 
         <div className="tripindexItem-footer">
           <div className="tripIndexItem-footer-left">
-            <img
-              src={ creator.profilePicture }
-              className="tripIndexItem-leader-avatar"
-            />
-            <span className="tripIndexItem-led-by">
-              Led by
-              <a className="tripIndexItem-led-by-user"> {creator.firstName} {creator.lastName}</a>
-            </span>
+            {props.isAdmin ?
+              <>
+                <Link to={`/trips/${id}/edit`} className="tripIndexItem-button-edit">Edit</Link>
+                <span className="tripIndexItem-led-by">Led by you</span>
+              </>
+            :
+              <>
+                <img
+                  src={ creator.profilePicture }
+                  className="tripIndexItem-leader-avatar"
+                />
+                <span className="tripIndexItem-led-by">
+                  Led by
+                  <a className="tripIndexItem-led-by-user"> {creator.firstName} {creator.lastName}</a>
+                </span>
+              </>
+            }
           </div>
 
           <div className="tripIndexItem-footer-right">
