@@ -22,6 +22,7 @@ class TripForm extends React.Component {
     this.handleUpdate = this.handleUpdate.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.clearForm = this.clearForm.bind(this)
+    this.select = this.select.bind(this)
   }
 
   componentDidMount() {
@@ -76,91 +77,121 @@ class TripForm extends React.Component {
     this.setState(defaultState)
   }
 
+  select(prop, value) {
+    this.setState({[prop]: value})
+  }
+
   render() {
     const { handleUpdate, handleSubmit, handleImage } = this
     const { errors } = this.props
 
     return(
       <div>
-        <FormErrors errors={ errors } />
-        <img src={ this.state.image_preview } className="tripForm-ImagePreview" />
+        <header className="form-header">
+          <h3 className="form-title">
+          {this.props.actionType === 'Create' ?
+            "Let's add a trip"
+          :
+            "Update your trip"
+          }
+          </h3>
+        </header>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="form">
+          <FormErrors errors={ errors } />
+
+          <label className="form-label"><span>What</span> should we call it?</label>
           <input type="text"
-            className="form-control"
+            className="form-input"
             onChange={ handleUpdate('title') }
             placeholder="Title"
             value={ this.state.title }
           />
 
-          <input type="date"
-            onChange={ handleUpdate('start_date') }
-            className="form-control"
-            value={ this.state.start_date }
-          />
-
-          <input type="date"
-            onChange={ handleUpdate('end_date') }
-            className="form-control"
-            value={ this.state.end_date }
-          />
-
-          <label htmlFor="trip-location">
-            <FontAwesomeIcon icon="map-marker-alt" />
-            Location
-          </label>
+          <label className="form-label"><span>Where</span> are you going?</label>
           <input type="text"
             placeholder="Location"
             onChange={ handleUpdate('location') }
-            className="form-control"
+            className="form-input"
             value={ this.state.location }
             id="trip-location"
           />
 
-          <input type="file"
-            onChange={ e => handleImage(e, "cover_photo") }
-            className="form-control"
-            accept=".jpg,.jpeg,.png"
+          <label className="form-label"><span>When</span> are you going?</label>
+          <label className="form-sublabel">From</label>
+          <input type="date"
+            onChange={ handleUpdate('start_date') }
+            className="form-input"
+            value={ this.state.start_date }
           />
 
-          <label htmlFor="trip-spaces">
+          <label className="form-sublabel">To</label>
+          <input type="date"
+            onChange={ handleUpdate('end_date') }
+            className="form-input"
+            value={ this.state.end_date }
+          />
+
+          <label htmlFor="trip-photo" className="form-label">
+            Cover photo
+          </label>
+          <input type="file"
+            onChange={ e => handleImage(e, "cover_photo") }
+            className="form-input"
+            accept=".jpg,.jpeg,.png"
+            id="trip-photo"
+          />
+
+          {this.state.image_preview ?
+            <img src={ this.state.image_preview } className="tripForm-ImagePreview" />
+          :
+            null
+          }
+
+          <label htmlFor="trip-spaces" className="form-label">
             <FontAwesomeIcon icon="users" />
             Spaces
           </label>
-          <input type="text"
-            onChange={ handleUpdate('spaces') }
-            className="form-control"
-            value={ this.state.spaces }
-            id="trip-spaces"
-          />
+          <div className="button-row">
+            <button
+              className={`form-button ${this.state.spaces == 0 ? 'active' : ''}`}
+              onClick={() => this.select('spaces', 0)}
+            >
+              Unlimited
+            </button>
 
-          <h5>Privacy</h5>
-          <label className="tripForm-privacy">
-            <FontAwesomeIcon icon="eye" />
-            Visible
-            <input type="radio"
-              onChange={ handleUpdate('privacy') }
-              className="form-control"
-              value="visible"
-              checked={ this.state.privacy == "visible" }
+            <input
+              className={`form-button ${this.state.spaces != 0 ? 'active' : ''}`}
+              onChange={ handleUpdate('spaces') }
+              value={ this.state.spaces }
             />
-          </label>
+          </div>
 
-          <label className="tripForm-privacy">
-            <FontAwesomeIcon icon="eye-slash" />
-            Hidden
-            <input type="radio"
-              onChange={ handleUpdate('privacy') }
-              className="form-control"
-              value="hidden"
-              checked={ this.state.privacy == "hidden" }
-            />
+          <label className="form-label">
+            Privacy
           </label>
+          <div className="button-row">
+            <button
+              className={`form-button ${this.state.privacy === 'visible' ? 'active' : ''}`}
+              onClick={() => this.select('privacy', 'visible')}
+            >
+              Visible
+            </button>
 
-          <button className="btn btn-success btn-sm tripForm-submit">
-            <FontAwesomeIcon icon="plus" />
-            { this.props.actionType }
-          </button>
+            <button
+              className={`form-button ${this.state.privacy === 'hidden' ? 'active' : ''}`}
+              onClick={() => this.select('privacy', 'hidden')}
+            >
+              Hidden
+            </button>
+          </div>
+
+          <footer className="form-footer">
+            <button className="form-submit">
+              <FontAwesomeIcon icon="plus" />
+              { this.props.actionType }
+            </button>
+          </footer>
         </form>
       </div>
     )
