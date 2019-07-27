@@ -34,11 +34,11 @@ class Api::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name,
-      :last_name,
-      :password,
-      :email,
-      :profile_picture
-    )
+    base_params = [:first_name, :last_name, :password, :email]
+    if params["user"]["profile_picture"] == ""
+      params.require(:user).permit(*base_params)
+    else
+      params.require(:user).permit(*base_params, :profile_picture)
+    end
   end
 end
