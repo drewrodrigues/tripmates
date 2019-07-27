@@ -57,7 +57,11 @@ class SignUp extends React.Component {
 
         <form onSubmit={submit} className="form form-signUp">
           <header className="signUp-form-header">
-            <img src={this.state.image_preview} className="signUp-avatar" />
+            <img
+              src={this.state.image_preview}
+              className="signUp-avatar"
+              data-cy="signUp-avatar-placeholder"
+            />
           </header>
 
           <FormErrors errors={errors} />
@@ -67,6 +71,7 @@ class SignUp extends React.Component {
             onChange={e => handleImage(e, 'profile_picture')}
             className="form-input"
             accept=".jpg,.jpeg,.png"
+            data-cy="signUp-avatar"
           />
 
           <label className="form-label">First Name</label>
@@ -74,6 +79,7 @@ class SignUp extends React.Component {
             onChange={(e) => update('first_name', e)}
             value={first_name}
             className="form-input half"
+            data-cy="signUp-firstName"
           />
 
           <label className="form-label">Last Name</label>
@@ -81,6 +87,7 @@ class SignUp extends React.Component {
             onChange={(e) => update('last_name', e)}
             value={last_name}
             className="form-input half"
+            data-cy="signUp-lastName"
           />
 
           <label className="form-label">Email</label>
@@ -88,6 +95,7 @@ class SignUp extends React.Component {
             onChange={(e) => update('email', e)}
             value={email}
             className="form-input"
+            data-cy="signUp-email"
           />
 
           <label className="form-label">Password</label>
@@ -95,6 +103,7 @@ class SignUp extends React.Component {
             onChange={(e) => update('password', e)}
             value={password}
             className="form-input"
+            data-cy="signUp-password"
           />
 
           <footer className="form-footer">

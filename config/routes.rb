@@ -8,4 +8,11 @@ Rails.application.routes.draw do
     resource  :session, only: [:create, :destroy]
     resources :trips, except: [:index, :new, :edit]
   end
+
+  if Rails.env.test?
+    # for cypress before specs
+    namespace :test do
+      post 'clean_database', to: 'databases#clean_database'
+    end
+  end
 end
