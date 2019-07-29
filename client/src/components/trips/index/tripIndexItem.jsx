@@ -16,7 +16,7 @@ const TripIndexItem = (props) => {
 
   return (
     <Link
-      to={ `/trips/${id}` }
+      to={`/trips/${id}`}
       className="tripIndexItem"
     >
 
@@ -40,10 +40,11 @@ const TripIndexItem = (props) => {
 
         <div className="tripindexItem-footer">
           <div className="tripIndexItem-footer-left">
-            {props.isAdmin ?
+            Led by
+            {props.isLeader ?
               <>
                 <Link to={`/trips/${id}/edit`} className="tripIndexItem-button-edit">Edit</Link>
-                <span className="tripIndexItem-led-by">Led by you</span>
+                <span className="tripIndexItem-led-by">you</span>
               </>
             :
               <>
@@ -52,7 +53,6 @@ const TripIndexItem = (props) => {
                   className="tripIndexItem-leader-avatar"
                 />
                 <span className="tripIndexItem-led-by">
-                  Led by
                   <a className="tripIndexItem-led-by-user"> {creator.firstName} {creator.lastName}</a>
                 </span>
               </>
@@ -62,13 +62,13 @@ const TripIndexItem = (props) => {
           <div className="tripIndexItem-footer-right">
             <ul className="tripIndexItem-attendees">
               <li className="tripIndexItem-attendee">
-                <img src={ creator.profilePicture } className="tripIndexItem-attendee-avatar" />
+                <img src={creator.profilePicture} className="tripIndexItem-attendee-avatar" />
               </li>
               <li className="tripIndexItem-attendee">
-                <img src={ creator.profilePicture } className="tripIndexItem-attendee-avatar" />
+                <img src={creator.profilePicture} className="tripIndexItem-attendee-avatar" />
               </li>
               <li className="tripIndexItem-attendee">
-                <img src={ creator.profilePicture } className="tripIndexItem-attendee-avatar" />
+                <img src={creator.profilePicture} className="tripIndexItem-attendee-avatar" />
               </li>
             </ul>
             <p className="tripIndexItem-others-count">+ 23 others</p>
