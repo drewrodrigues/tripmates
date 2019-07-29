@@ -5,11 +5,11 @@ class Test::DatabasesController < ApplicationController
     tables.each do |t|
       ActiveRecord::Base.connection.execute("TRUNCATE #{t} CASCADE")
     end
+    render plain: 'Truncated database'
+  end
 
-    unless ['false', false].include?(params['database']['should_seed'])
-      Rails.application.load_seed
-    end
-
-    render plain: 'Truncated and seeded database'
+  def seed_database
+    Rails.application.load_seed
+    render plan: 'Seeded database'
   end
 end

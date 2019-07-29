@@ -31,12 +31,14 @@ export const logout = () => dispatch => {
     })
 }
 
-export const signIn = (user) => dispatch => {
+export const signIn = user => dispatch => {
   return APIUtil.login(user)
     .then(res => {
-      dispatch(receiveCurrentUser(res.data))
-      dispatch(receiveUser(res.data))
-      localStorage.setItem('session', JSON.stringify(res.data))
+      dispatch(receiveCurrentUser(res))
+      dispatch(receiveUser(res))
+      localStorage.setItem('session', JSON.stringify(res))
     })
-    .catch(errors => dispatch(receiveSessionErrors(errors.responseJSON)))
+    .fail(errors => {
+      dispatch(receiveSessionErrors(errors.responseJSON))
+    })
 }

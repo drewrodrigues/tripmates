@@ -1,6 +1,6 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { handleImage } from "../../../helpers/handlers"
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {handleImage} from "../../../helpers/handlers"
 import FormErrors from '../../Shared/formErrors'
 
 const today = new Date().toISOString().split('T')[0]
@@ -77,23 +77,29 @@ class TripForm extends React.Component {
     this.setState(defaultState)
   }
 
-  select(prop, value) {
+  select(e, prop, value) {
+    e.preventDefault()
     this.setState({[prop]: value})
   }
 
   render() {
-    const { handleUpdate, handleSubmit, handleImage } = this
-    const { errors } = this.props
+    const {handleUpdate, handleSubmit, handleImage} = this
+    const {actionType, errors} = this.props
+    const {
+      end_date,
+      image_preview,
+      location,
+      privacy,
+      spaces,
+      start_date,
+      title
+    } = this.state
 
     return(
       <div>
         <header className="form-header">
           <h3 className="form-title">
-          {this.props.actionType === 'Create' ?
-            "Let's add a trip"
-          :
-            "Update your trip"
-          }
+          {actionType === 'Create' ? "Let's add a trip" : "Update your trip"}
           </h3>
         </header>
 
@@ -105,7 +111,8 @@ class TripForm extends React.Component {
             className="form-input"
             onChange={ handleUpdate('title') }
             placeholder="Title"
-            value={ this.state.title }
+            value={title}
+            data-cy="tripInput-title"
           />
 
           <label className="form-label"><span>Where</span> are you going?</label>
@@ -113,8 +120,9 @@ class TripForm extends React.Component {
             placeholder="Location"
             onChange={ handleUpdate('location') }
             className="form-input"
-            value={ this.state.location }
+            value={location}
             id="trip-location"
+            data-cy="tripInput-location"
           />
 
           <label className="form-label"><span>When</span> are you going?</label>
@@ -122,14 +130,16 @@ class TripForm extends React.Component {
           <input type="date"
             onChange={ handleUpdate('start_date') }
             className="form-input"
-            value={ this.state.start_date }
+            value={start_date}
+            data-cy="tripInput-startDate"
           />
 
           <label className="form-sublabel">To</label>
           <input type="date"
             onChange={ handleUpdate('end_date') }
             className="form-input"
-            value={ this.state.end_date }
+            value={end_date}
+            data-cy="tripInput-endDate"
           />
 
           <label htmlFor="trip-photo" className="form-label">
@@ -140,11 +150,12 @@ class TripForm extends React.Component {
             className="form-input"
             accept=".jpg,.jpeg,.png"
             id="trip-photo"
+            data-cy="tripInput-photo"
           />
 
-          {this.state.image_preview ?
-            <img src={ this.state.image_preview } className="tripForm-ImagePreview" />
-          :
+          {image_preview ?
+            <img src={image_preview} className="tripForm-ImagePreview" />
+            :
             null
           }
 
@@ -154,16 +165,18 @@ class TripForm extends React.Component {
           </label>
           <div className="button-row">
             <button
-              className={`form-button ${this.state.spaces == 0 ? 'active' : ''}`}
-              onClick={() => this.select('spaces', 0)}
+              className={`form-button ${spaces == 0 ? 'active' : ''}`}
+              onClick={e => this.select(e, 'spaces', 0)}
+              data-cy="tripInput-spaces-unlimited"
             >
               Unlimited
             </button>
 
             <input
-              className={`form-button ${this.state.spaces != 0 ? 'active' : ''}`}
+              className={`form-button ${spaces != 0 ? 'active' : ''}`}
               onChange={ handleUpdate('spaces') }
-              value={ this.state.spaces }
+              value={ spaces }
+              data-cy="tripInput-spaces"
             />
           </div>
 
@@ -172,15 +185,17 @@ class TripForm extends React.Component {
           </label>
           <div className="button-row">
             <button
-              className={`form-button ${this.state.privacy === 'visible' ? 'active' : ''}`}
-              onClick={() => this.select('privacy', 'visible')}
+              className={`form-button ${privacy === 'visible' ? 'active' : ''}`}
+              onClick={e => this.select(e, 'privacy', 'visible')}
+              data-cy="tripInput-privacy-visible"
             >
               Visible
             </button>
 
             <button
-              className={`form-button ${this.state.privacy === 'hidden' ? 'active' : ''}`}
-              onClick={() => this.select('privacy', 'hidden')}
+              className={`form-button ${privacy === 'hidden' ? 'active' : ''}`}
+              onClick={e => this.select(e, 'privacy', 'hidden')}
+              data-cy="tripInput-privacy-hidden"
             >
               Hidden
             </button>
@@ -189,7 +204,7 @@ class TripForm extends React.Component {
           <footer className="form-footer">
             <button className="form-submit">
               <FontAwesomeIcon icon="plus" />
-              { this.props.actionType }
+              {actionType}
             </button>
           </footer>
         </form>

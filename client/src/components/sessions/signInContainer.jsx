@@ -1,7 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import SignIn from './signIn'
-import { signIn, clearSessionErrors } from '../../actions/sessionActions'
+import {signIn, clearSessionErrors} from '../../actions/sessionActions'
 
 const mapStateToProps = state => ({
   errors: state.errors.sessionErrors

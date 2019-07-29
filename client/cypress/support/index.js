@@ -17,4 +17,5 @@ import './commands'
 
 beforeEach(() => {
   cy.cleanDatabase()
+  cy.cleanLocalStorage()
 })

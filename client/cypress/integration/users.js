@@ -1,18 +1,13 @@
 describe('Users', () => {
   beforeEach(() => {
-    cy.visit('/#/signup')
+    cy.visit('/signup')
   })
 
   context('when avatar provided', () => {
     it('allows guest sign up', () => {
       cy.get('[data-cy=signUp-avatar-placeholder]').first().invoke('attr', 'src').should('not.exist')
 
-      cy.fixture('me.jpeg', 'base64').then(fileContent => {
-        cy.get("[data-cy=signUp-avatar").upload(
-          { fileContent, fileName: 'me.jpeg', mimeType: 'image/jpeg' },
-          { subjectType: 'input' }
-        )
-      })
+      cy.uploadPhoto('[data-cy=signUp-avatar]', 'me.jpeg')
 
       cy.get("[data-cy=signUp-firstName]").type('Drew')
       cy.get("[data-cy=signUp-lastName]").type('Rodrigues')

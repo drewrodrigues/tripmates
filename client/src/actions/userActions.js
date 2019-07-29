@@ -27,8 +27,8 @@ export const clearUserErrors = () => {
 export const signUp = user => dispatch => {
   return SessionUtil.signUp(user)
   .then(res => {
-    dispatch(receiveCurrentUser(res.data))
-    dispatch(receiveUser(res.data))
+    dispatch(receiveCurrentUser(res))
+    dispatch(receiveUser(res))
   })
   .catch(errors => dispatch(receiveUserErrors(errors.responseJSON)))
 }
@@ -36,6 +36,6 @@ export const signUp = user => dispatch => {
 export const getAllUsers = () => dispatch => {
   return UserUtil.getAllUsers()
     .then(res => {
-      dispatch(receiveUsers(res.data))
+      dispatch(receiveUsers(res))
     })
 }

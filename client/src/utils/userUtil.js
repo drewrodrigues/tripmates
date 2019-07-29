@@ -1,7 +1,7 @@
-import axios from 'axios'
+import $ from 'jquery'
 
 export const getAllUsers = () => {
-  return axios({
+  return $.ajax({
     url: "/api/users"
   })
 }

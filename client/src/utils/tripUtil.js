@@ -1,8 +1,8 @@
-import axios from 'axios'
+import $ from 'jquery'
 
 export const createTrip = formData => {
-  return axios({
-    method: "POST",
+  return $.ajax({
+    type: "POST",
     url: `/api/trips`,
     data: formData,
     dataType: "JSON",
@@ -12,32 +12,32 @@ export const createTrip = formData => {
 }
 
 export const fetchMyTrips = userId => {
-  return axios({
-    method: "GET",
+  return $.ajax({
+    type: "GET",
     url: `/api/users/${ userId }/trips`,
     dataType: "JSON"
   })
 }
 
 export const fetchTrip = id => {
-  return axios({
-    method: "GET",
+  return $.ajax({
+    type: "GET",
     url: `/api/trips/${ id }`,
     dataType: "JSON"
   })
 }
 
 export const deleteTrip = id => {
-  return axios({
-    method: "DELETE",
+  return $.ajax({
+    type: "DELETE",
     url: `/api/trips/${ id }`,
     dataType: "JSON"
   })
 }
 
 export const updateTrip = formData => {
-  return axios({
-    method: "PUT",
+  return $.ajax({
+    type: "PUT",
     url: `/api/trips/${ formData.get('trip[id]') }`,
     dataType: "JSON",
     data: formData,

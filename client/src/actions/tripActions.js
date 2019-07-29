@@ -30,16 +30,16 @@ export const clearTripErrors = () => ({ type: CLEAR_TRIP_ERRORS })
 export const retrieveMyTrips = userId => dispatch => {
   return APIUtil.fetchMyTrips(userId)
     .then(res => {
-      dispatch(receiveTrips(res.data.trips))
-      dispatch(receiveUsers(res.data.users))
+      dispatch(receiveTrips(res.trips))
+      dispatch(receiveUsers(res.users))
     })
 }
 
 export const getTripById = id => dispatch => {
   return APIUtil.fetchTrip(id)
     .then(res => {
-      dispatch(receiveTrips(res.data.trip))
-      dispatch(receiveUsers(res.data.user))
+      dispatch(receiveTrips(res.trip))
+      dispatch(receiveUsers(res.user))
       return res
     })
 }
@@ -47,7 +47,7 @@ export const getTripById = id => dispatch => {
 export const createTrip = trip => dispatch => {
   return APIUtil.createTrip(trip)
     .then(res => {
-      dispatch(receiveTrip(res.data.trip))
+      dispatch(receiveTrip(res.trip))
       dispatch(receiveUser(res.user))
       return res
     })

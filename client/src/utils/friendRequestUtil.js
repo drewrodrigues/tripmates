@@ -1,22 +1,22 @@
-import axios from 'axios'
+import $ from 'jquery'
 
 export const getAllFriendRequests = () => {
-  return axios({
+  return $.ajax({
     url: "/api/friend_requests"
   })
 }
 
 export const deleteFriendRequest = id => {
-  return axios({
+  return $.ajax({
     url: `/api/friend_requests/${id}`,
-    method: "DELETE"
+    type: "DELETE"
   })
 }
 
 export const createFriendRequest = id => {
-  return axios({
+  return $.ajax({
     url: '/api/friend_requests',
-    method: "POST",
+    type: "POST",
     data: { id }
   })
 }
