@@ -30,7 +30,11 @@ class TripShow extends Component {
           <h3 className="tripShow-detail-title">{trip.title}</h3>
 
           <div className="tripShow-detail-photo">
+            {trip.coverPhoto ?
             <img src={trip.coverPhoto} alt={`${trip.title} photo`} />
+            :
+            <></>
+            }
             <TripAdminControlsContainer />
           </div>
 

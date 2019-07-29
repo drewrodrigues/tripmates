@@ -21,7 +21,7 @@ const TripIndexItem = (props) => {
     >
 
       <section className="tripIndexItem-photo" style={{"backgroundImage": `url(${coverPhoto})`}}>
-        <h3  className="tripIndexItem-title">{ title }</h3>
+        <h3  className="tripIndexItem-title">{title}</h3>
       </section>
 
       <section className="tripIndexItem-body">

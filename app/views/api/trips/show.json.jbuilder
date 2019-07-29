@@ -10,7 +10,7 @@ json.set! "trip" do
       :days_until,
       :spaces,
       :privacy
-    json.coverPhoto url_for(@trip.cover_photo)
+    json.coverPhoto url_for(@trip.cover_photo) if @trip.cover_photo.attached?
   end
 end
 

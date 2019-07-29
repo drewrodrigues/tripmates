@@ -42,14 +42,18 @@ class Api::TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(
+    base_params = [
       :start_date,
       :end_date,
       :location,
       :title,
-      :cover_photo,
       :spaces,
       :privacy
-    )
+    ]
+    if params[:trip][:cover_photo] == ""
+      params.require(:trip).permit(*base_params)
+    else
+      params.require(:trip).permit(*base_params, :cover_photo)
+    end
   end
 end
