@@ -2,12 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import TripIndexItem from './tripIndexItem'
+import { isLeaderOfTrip } from '../../../helpers/permissions'
 
 const mapStateToProps = (state, ownProps) => {
   const creator = state.entities.users[ownProps.trip.creatorId]
   return {
     creator,
-    isLeader: creator.id === state.session.id
+    isLeader: isLeaderOfTrip(state, ownProps.trip)
   }
 }
 

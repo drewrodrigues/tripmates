@@ -1,28 +1,27 @@
-import $ from 'jquery'
+import axios from 'axios'
 
 // TODO: PULL INTO USER UTIL
 export const signUp = formData => {
-  return $.ajax({
-    type: "POST",
+  return axios({
+    method: "post",
     url: "/api/users",
     data: formData,
-    dataType: "JSON",
     contentType: false,
     processData: false
   })
 }
 
 export const login = user => {
-  return $.ajax({
-    type: "POST",
+  return axios({
+    method: "post",
     url: "/api/session",
     data: {user: user}
   })
 }
 
 export const logout = () => {
-  return $.ajax({
-    type: "DELETE",
+  return axios({
+    method: "delete",
     url: "api/session"
   })
 }
