@@ -10,6 +10,6 @@ class Test::DatabasesController < ApplicationController
 
   def seed_database
     Rails.application.load_seed
-    render plan: 'Seeded database'
+    render plain: 'Seeded database'
   end
 end
