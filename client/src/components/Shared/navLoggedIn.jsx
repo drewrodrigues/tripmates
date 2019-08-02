@@ -1,6 +1,7 @@
 import React from 'react'
 import {NavLink, withRouter} from 'react-router-dom'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import AvatarPlaceholder from '../../assets/avatarPlaceholder.jpg'
 
 class NavLoggedIn extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class NavLoggedIn extends React.Component {
 
   render() {
     const dropDownOpenClass = this.state.showDropDown ? "open" : ""
-    
+
     return (
       <div className="Nav">
         <div className="container">
@@ -38,7 +39,12 @@ class NavLoggedIn extends React.Component {
                 { this.props.currentUser.firstName }
               </span>
               <img
-                src={ this.props.currentUser.profilePicture }
+                src={
+                  this.props.currentUser.profilePicture ?
+                    this.props.currentUser.profilePicture
+                    :
+                    AvatarPlaceholder
+                }
                 className="Nav-avatar"
               />
 
@@ -55,7 +61,6 @@ class NavLoggedIn extends React.Component {
                 </ul>
               )}
             </nav>
-
           </nav>
         </div>
       </div>
