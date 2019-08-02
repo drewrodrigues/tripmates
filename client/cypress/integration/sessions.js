@@ -1,12 +1,22 @@
+import {
+  newSessionUrl,
+  sessionSignUpEmailInput,
+  sessionSignUpPasswordInput,
+  signInText,
+  signInFailText,
+  userEmail,
+  userPassword
+} from '../support/fields'
+
 describe('Sessions', () => {
   context('when user exists', () => {
     it('allows user to sign in', () => {
       cy.seedDatabase()
 
-      cy.visit('/login')
-      cy.get("[data-cy=signUp-email]").type("drew@tripmates.io")
-      cy.get("[data-cy=signUp-password]").type("password")
-      cy.contains("Sign in").click()
+      cy.visit(newSessionUrl)
+      cy.get(sessionSignUpEmailInput).type(userEmail)
+      cy.get(sessionSignUpPasswordInput).type(userPassword)
+      cy.contains(signInText).click()
 
       cy.contains("Add Trip").should("exist")
     })
@@ -14,13 +24,13 @@ describe('Sessions', () => {
 
   context("when user doesn't exist", () => {
     it('shows errors', () => {
-      cy.visit('/login')
+      cy.visit(newSessionUrl)
 
-      cy.get("[data-cy=signUp-email]").type("drew@tripmates.io")
-      cy.get("[data-cy=signUp-password]").type("password")
-      cy.contains("Sign in").click()
+      cy.get(sessionSignUpEmailInput).type(userEmail)
+      cy.get(sessionSignUpPasswordInput).type(userPassword)
+      cy.contains(signInText).click()
 
-      cy.contains('Failed to login').should('exist')
+      cy.contains(signInFailText).should('exist')
     })
   })
 })

@@ -1,10 +1,12 @@
-const titleInput = "[data-cy=tripInput-title]"
-const locationInput = "[data-cy=tripInput-location]"
-const startDateInput = "[data-cy=tripInput-startDate]"
-const endDateInput = "[data-cy=tripInput-endDate]"
-const photoInput = '[data-cy=tripInput-photo]'
-const unlimitedSpacesButton = "[data-cy=tripInput-spaces-unlimited]"
-const visiblePrivacyButton = "[data-cy=tripInput-privacy-visible]"
+import {
+  tripTitleInput,
+  tripLocationInput,
+  tripStartDateInput,
+  tripEndDateInput,
+  tripPhotoInput,
+  tripUnlimitedSpacesButton,
+  tripVisiblePrivacyButton
+} from '../support/fields'
 
 describe('Trips', () => {
   beforeEach(() => {
@@ -16,13 +18,13 @@ describe('Trips', () => {
     context('with valid data', () => {
       context('and photo provided', () => {
         it('creates the trip', () => {
-          cy.get(titleInput).type('title')
-          cy.get(locationInput).type('location')
-          cy.get(startDateInput).type('2020-01-01')
-          cy.get(endDateInput).type('2020-01-01')
-          cy.uploadPhoto(photoInput, 'coverPhoto.jpeg')
-          cy.get(unlimitedSpacesButton).click()
-          cy.get(visiblePrivacyButton).click()
+          cy.get(tripTitleInput).type('title')
+          cy.get(tripLocationInput).type('location')
+          cy.get(tripStartDateInput).type('2020-01-01')
+          cy.get(tripEndDateInput).type('2020-01-01')
+          cy.uploadPhoto(tripPhotoInput, 'coverPhoto.jpeg')
+          cy.get(tripUnlimitedSpacesButton).click()
+          cy.get(tripVisiblePrivacyButton).click()
           cy.contains('Create').click()
           cy.contains('Edit').should('exist')
         })
@@ -30,12 +32,12 @@ describe('Trips', () => {
 
       context('and photo not provided', () => {
         it('creates the trip', () => {
-          cy.get(titleInput).type('title')
-          cy.get(locationInput).type('location')
-          cy.get(startDateInput).type('2020-01-01')
-          cy.get(endDateInput).type('2020-01-01')
-          cy.get(unlimitedSpacesButton).click()
-          cy.get(visiblePrivacyButton).click()
+          cy.get(tripTitleInput).type('title')
+          cy.get(tripLocationInput).type('location')
+          cy.get(tripStartDateInput).type('2020-01-01')
+          cy.get(tripEndDateInput).type('2020-01-01')
+          cy.get(tripUnlimitedSpacesButton).click()
+          cy.get(tripVisiblePrivacyButton).click()
           cy.contains('Create').click()
           cy.contains('Edit').should('exist')
         })
@@ -58,7 +60,7 @@ describe('Trips', () => {
 
         const updatedTitle = "Updated Title"
         cy.contains('Edit').click()
-        cy.get(titleInput).clear().type(updatedTitle)
+        cy.get(tripTitleInput).clear().type(updatedTitle)
         cy.contains('Update').click()
 
         cy.contains(updatedTitle).should('exist')
@@ -70,7 +72,7 @@ describe('Trips', () => {
         cy.addTrip()
 
         cy.contains('Edit').click()
-        cy.get(titleInput).clear()
+        cy.get(tripTitleInput).clear()
         cy.contains('Update').click()
 
         cy.contains("Title can't be blank").should('exist')
@@ -82,8 +84,8 @@ describe('Trips', () => {
     context('when delete clicked', () => {
       it('deletes the trip', () => {
         const tripTitle = "Some trip title"
-        cy.get(titleInput).type(tripTitle)
-        cy.get(locationInput).type('location')
+        cy.get(tripTitleInput).type(tripTitle)
+        cy.get(tripLocationInput).type('location')
         cy.contains('Create').click()
         cy.contains('Edit').click()
         cy.contains('Delete').click()

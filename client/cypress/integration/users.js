@@ -1,3 +1,17 @@
+import {
+  newUserEmailInput,
+  newUserFirstNameInput,
+  newUserLastNameInput,
+  newUserPasswordInput,
+  newUserAvatarInput,
+  newUserAvatarPlaceholder,
+  newUserSubmitText,
+  userFirstName,
+  userLastName,
+  userEmail,
+  userPassword,
+} from "../support/fields"
+
 describe('Users', () => {
   beforeEach(() => {
     cy.visit('/signup')
@@ -5,38 +19,37 @@ describe('Users', () => {
 
   context('when avatar provided', () => {
     it('allows guest sign up', () => {
-      cy.get('[data-cy=signUp-avatar-placeholder]')
+      cy.get(newUserAvatarPlaceholder)
         .first()
         .invoke('attr', 'src')
         .should('not.exist')
 
-      cy.uploadPhoto('[data-cy=signUp-avatar]', 'me.jpeg')
+      cy.uploadPhoto(newUserAvatarInput, 'me.jpeg')
 
-      cy.get("[data-cy=signUp-firstName]").type('Drew')
-      cy.get("[data-cy=signUp-lastName]").type('Rodrigues')
-      cy.get("[data-cy=signUp-email]").type('drew@tripmates.io')
-      cy.get("[data-cy=signUp-password]").type('password')
+      cy.get(newUserFirstNameInput).type(userFirstName)
+      cy.get(newUserLastNameInput).type(userLastName)
+      cy.get(newUserEmailInput).type(userEmail)
+      cy.get(newUserPasswordInput).type(userPassword)
+      cy.get(newUserAvatarPlaceholder).first().invoke('attr', 'src').should('exist')
 
-      cy.get('[data-cy=signUp-avatar-placeholder]').first().invoke('attr', 'src').should('exist')
-
-      cy.contains('Create your account').click()
+      cy.contains(newUserSubmitText).click()
       cy.contains('Add Trip').should('exist')
     })
   })
 
   context('when no avatar provided', () => {
     it('allows guest sign up', () => {
-      cy.get('[data-cy=signUp-avatar-placeholder]')
+      cy.get(newUserAvatarPlaceholder)
         .first()
         .invoke('attr', 'src')
         .should('not.exist')
 
-      cy.get("[data-cy=signUp-firstName]").type('Drew')
-      cy.get("[data-cy=signUp-lastName]").type('Rodrigues')
-      cy.get("[data-cy=signUp-email]").type('drew@tripmates.io')
-      cy.get("[data-cy=signUp-password]").type('password')
+      cy.get(newUserFirstNameInput).type(userFirstName)
+      cy.get(newUserLastNameInput).type(userLastName)
+      cy.get(newUserEmailInput).type(userEmail)
+      cy.get("[data-cy=signUp-password]").type(userPassword)
 
-      cy.contains('Create your account').click()
+      cy.contains(newUserSubmitText).click()
       cy.contains('Add Trip').should('exist')
     })
   })
@@ -45,9 +58,9 @@ describe('Users', () => {
     it('shows errors', () => {
       cy.seedDatabase()
 
-      cy.get("[data-cy=signUp-email]").type('drew@tripmates.io')
+      cy.get(newUserEmailInput).type(userEmail)
 
-      cy.contains('Create your account').click()
+      cy.contains(newUserSubmitText).click()
       cy.contains("First name can't be blank").should('exist')
       cy.contains("Last name can't be blank").should('exist')
       cy.contains('Email has already been taken').should('exist')

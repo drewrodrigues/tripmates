@@ -25,7 +25,26 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 import 'cypress-file-upload'
-import $ from 'jquery'
+import axios from 'axios'
+import {
+  newUserUrl,
+  newUserFirstNameInput,
+  newUserLastNameInput,
+  newUserEmailInput,
+  newUserPasswordInput,
+  newUserSubmitText,
+  userFirstName,
+  userLastName,
+  userEmail,
+  userPassword,
+  tripTitleInput,
+  tripLocationInput,
+  tripStartDateInput,
+  tripEndDateInput,
+  tripPhotoInput,
+  tripUnlimitedSpacesButton,
+  tripVisiblePrivacyButton,
+} from "./fields"
 
 Cypress.Commands.add('cleanDatabase', () => {
   return axios({
@@ -59,24 +78,24 @@ Cypress.Commands.add('uploadPhoto', (selector, fixture) => {
 })
 
 Cypress.Commands.add('loginUser', () => {
-  cy.visit('/signup')
+  console.log(newUserUrl)
+  cy.visit(newUserUrl)
 
-  // TODO: setup redux state instead of ui login
-  cy.get("[data-cy=signUp-firstName]").type('Drew')
-  cy.get("[data-cy=signUp-lastName]").type('Rodrigues')
-  cy.get("[data-cy=signUp-email]").type('drew@tripmates.io')
-  cy.get("[data-cy=signUp-password]").type('password')
+  cy.get(newUserFirstNameInput).type(userFirstName)
+  cy.get(newUserLastNameInput).type(userLastName)
+  cy.get(newUserEmailInput).type(userEmail)
+  cy.get(newUserPasswordInput).type(userPassword)
 
-  cy.contains('Create your account').click()
+  cy.contains(newUserSubmitText).click()
 })
 
 Cypress.Commands.add('addTrip', () => {
-  cy.get('[data-cy=tripInput-title]').type('title')
-  cy.get('[data-cy=tripInput-location]').type('location')
-  cy.get('[data-cy=tripInput-startDate]').type('2020-01-01')
-  cy.get('[data-cy=tripInput-endDate]').type('2020-01-01')
-  cy.uploadPhoto('[data-cy=tripInput-photo]', 'coverPhoto.jpeg')
-  cy.get('[data-cy=tripInput-spaces-unlimited]').click()
-  cy.get('[data-cy=tripInput-privacy-visible]').click()
+  cy.get(tripTitleInput).type('title')
+  cy.get(tripLocationInput).type('location')
+  cy.get(tripStartDateInput).type('2020-01-01')
+  cy.get(tripEndDateInput).type('2020-01-01')
+  cy.uploadPhoto(tripPhotoInput, 'coverPhoto.jpeg')
+  cy.get(tripUnlimitedSpacesButton).click()
+  cy.get(tripVisiblePrivacyButton).click()
   cy.contains('Create').click()
 })
