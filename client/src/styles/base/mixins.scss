@@ -1,12 +1,12 @@
 @mixin box-shadow {
-  box-shadow: 0 0 10px #ccc;
+  box-shadow: 0 3px 2px #ccc;
   transition: 0.25s box-shadow, 0.25s transform;
 }
 
 @mixin box-shadow-hover {
   &:hover {
-    box-shadow: 0 0 15px #999;
-    transform: scale(1.025);
+    box-shadow: 0 3px 2px #aaa;
+    transform: scale(1.01);
   }
 }
 

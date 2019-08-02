@@ -4,6 +4,10 @@
   color: white;
   display: inline-block;
   font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: 0.25s background, 0.25s box-shadow;
+  box-shadow: 0 3px 1px #ddd;
 
   svg,
   i {
@@ -22,6 +26,12 @@
 
 .button-green {
   background: $green-primary;
+  box-shadow: 0 3px 1px $green-secondary;
+
+  &:hover {
+    background: #9BED0D;
+    box-shadow: 0 3px 3px $green-secondary;
+  }
 }
 
 .button-white {
@@ -31,4 +41,9 @@
 
 .button-blue {
   background: $blue-primary;
+  box-shadow: 0 3px 1px $blue-secondary;
+
+  &:hover {
+    background: #0D7BFF;
+  }
 }

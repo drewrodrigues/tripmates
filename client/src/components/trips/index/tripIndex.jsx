@@ -2,10 +2,42 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import TripIndexItemContainer from './tripIndexItemContainer'
+import FriendsPlaceholder from '../../../assets/friends.png'
+import WorldPlaceholder from '../../../assets/world.png'
 
-const TripIndexItemPlaceholder = () => (
+const TripIndexItemLoadingPlaceholder = () => (
   <div className="tripIndexItem-placeholder">
   </div>
+)
+
+const TripIndexNoResultsPlaceholder = () => (
+  <>
+    <header className="tripIndex-noResultsHeader">
+      <h3 className="tripIndex-noResults-title">No trips found</h3>
+      <h4 className="tripIndex-noResults-subtitle">Try one of the following</h4>
+    </header>
+
+    <section className="tripIndex-placeholder-cards">
+      <div className="tripIndex-placeholder-card">
+        <img src={FriendsPlaceholder} alt="Add a friend" className="tripIndex-placeholder-image" />
+        <p className="tripIndex-placeholder-body">By adding friends, you’ll be able to see and request to join their public trips</p>
+        <div className="card-buttons">
+          <button className="card-button button button-green button-heavy">Add Friends</button>
+        </div>
+      </div>
+
+      <div className="tripIndex-placeholder-card">
+        <img src={WorldPlaceholder} alt="Add a trip" className="tripIndex-placeholder-image" />
+        <p className="tripIndex-placeholder-body">Add a trip so your friends can join public trips or you can invite them to private trips</p>
+        <div className="card-buttons">
+          <Link to="/trips/new" className="button button-green button-heavy">
+            <FontAwesomeIcon icon="plus"/>
+            Add Trip
+          </Link>
+        </div>
+      </div>
+    </section>
+  </>
 )
 
 class TripIndex extends React.Component {
@@ -48,12 +80,16 @@ class TripIndex extends React.Component {
             </div>
           </header>
 
-          { this.state.loading ?
+          {this.state.loading &&
             <>
-              <TripIndexItemPlaceholder />
-              <TripIndexItemPlaceholder />
-              <TripIndexItemPlaceholder />
+              <TripIndexItemLoadingPlaceholder />
+              <TripIndexItemLoadingPlaceholder />
+              <TripIndexItemLoadingPlaceholder />
             </>
+          }
+
+          {trips.length === 0 ?
+            <TripIndexNoResultsPlaceholder />
             :
             <div className="tripIndexItems">
               {trips.map(trip => (

@@ -3,3 +3,53 @@
   justify-content: space-between;
   margin-bottom: 20px;
 }
+
+.tripIndex-noResultsHeader {
+  text-align: center;
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.tripIndex-noResults-title {
+  font-size: 28px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.tripIndex-noResults-subtitle {
+  color: $text-muted;
+}
+
+.tripIndex-placeholder-cards {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.tripIndex-placeholder-card {
+  @include box-shadow;
+  @include card;
+  @include card-padding;
+  overflow: initial;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  width: 35%;
+}
+
+.tripIndex-placeholder-image {
+  margin-bottom: 40px;
+  max-width: 150px;
+}
+
+.tripIndex-placeholder-body {
+  color: $text-muted;
+  line-height: 1.5;
+  margin-bottom: 40px;
+  max-width: 225px;
+}
+
+.card-buttons {
+  display: flex;
+  justify-content: center;
+}
