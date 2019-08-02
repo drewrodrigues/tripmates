@@ -30,37 +30,44 @@ export const clearTripErrors = () => ({ type: CLEAR_TRIP_ERRORS })
 export const retrieveMyTrips = userId => dispatch => {
   return APIUtil.fetchMyTrips(userId)
     .then(res => {
-      dispatch(receiveTrips(res.trips))
-      dispatch(receiveUsers(res.users))
+      dispatch(receiveTrips(res.data.trips))
+      dispatch(receiveUsers(res.data.users))
     })
 }
 
 export const getTripById = id => dispatch => {
   return APIUtil.fetchTrip(id)
     .then(res => {
-      dispatch(receiveTrips(res.trip))
-      dispatch(receiveUsers(res.user))
-      return res
+      dispatch(receiveTrips(res.data.trip))
+      dispatch(receiveUsers(res.data.user))
+      return res.data
     })
 }
 
 export const createTrip = trip => dispatch => {
   return APIUtil.createTrip(trip)
     .then(res => {
-      dispatch(receiveTrip(res.trip))
-      dispatch(receiveUser(res.user))
-      return res
+      dispatch(receiveTrip(res.data.trip))
+      dispatch(receiveUser(res.data.user))
+      return res.data
     })
-    .catch(errors => dispatch(receiveTripErrors(errors.responseJSON)))
+    .catch(error => {
+      dispatch(receiveTripErrors(error.response.data))
+      return Promise.reject(error.response.data)
+    })
 }
 
 export const updateTrip = trip => dispatch => {
   return APIUtil.updateTrip(trip)
-    .then(trip => {
-      dispatch(receiveTrip(trip))
-      return trip
+    .then(response => {
+      dispatch(receiveTrip(response.data.trip))
+      return response.data
     })
-    .catch(errors => dispatch(receiveTripErrors(errors.responseJSON)))
+    .catch(error => {
+      const errorData = error.response.data
+      dispatch(receiveTripErrors(errorData))
+      return Promise.reject(errorData)
+    })
 }
 
 export const deleteTrip = trip => dispatch => {

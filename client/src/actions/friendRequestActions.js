@@ -18,8 +18,8 @@ export const removeFriendRequest = id => {
 
 export const getAllFriendRequests = () => dispatch => {
   return APIUtil.getAllFriendRequests()
-    .then(friendRequestResponse => {
-      dispatch(receiveFriendRequests(friendRequestResponse))
+    .then(response => {
+      dispatch(receiveFriendRequests(response.data))
     })
 }
 
@@ -32,7 +32,7 @@ export const deleteFriendRequest = id => dispatch => {
 
 export const createFriendRequest = id => dispatch => {
   return APIUtil.createFriendRequest(id)
-    .then(friendRequestResponse => {
-      dispatch(receiveFriendRequest(friendRequestResponse))
+    .then(response => {
+      dispatch(receiveFriendRequest(response.data))
     })
 }

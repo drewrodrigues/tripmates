@@ -21,21 +21,25 @@ export const receiveUserErrors = errors => ({
 })
 
 export const clearUserErrors = () => {
-  return { type: CLEAR_USER_ERRORS }
+  return {type: CLEAR_USER_ERRORS}
 }
 
 export const signUp = user => dispatch => {
   return SessionUtil.signUp(user)
-  .then(res => {
-    dispatch(receiveCurrentUser(res))
-    dispatch(receiveUser(res))
-  })
-  .catch(errors => dispatch(receiveUserErrors(errors.responseJSON)))
+    .then(res => {
+      dispatch(receiveCurrentUser(res.data))
+      dispatch(receiveUser(res.data))
+      return res.data
+    })
+    .catch(error => {
+      dispatch(receiveUserErrors(error.response.data))
+      return Promise.reject(error.response.data)
+    })
 }
 
 export const getAllUsers = () => dispatch => {
   return UserUtil.getAllUsers()
     .then(res => {
-      dispatch(receiveUsers(res))
+      dispatch(receiveUsers(res.data))
     })
 }
