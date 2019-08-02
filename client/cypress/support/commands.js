@@ -28,8 +28,8 @@ import 'cypress-file-upload'
 import $ from 'jquery'
 
 Cypress.Commands.add('cleanDatabase', () => {
-  return $.ajax({
-    type: "POST",
+  return axios({
+    method: "POST",
     url: "http://localhost:3001/test/clean_database"
   })
   .then(res => console.log(res))
@@ -37,8 +37,8 @@ Cypress.Commands.add('cleanDatabase', () => {
 })
 
 Cypress.Commands.add('seedDatabase', () => {
-  return $.ajax({
-    type: "POST",
+  return axios({
+    method: "POST",
     url: "http://localhost:3001/test/seed_database"
   })
   .then(res => console.log(res))
