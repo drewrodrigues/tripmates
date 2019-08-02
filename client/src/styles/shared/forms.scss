@@ -116,22 +116,48 @@
 }
 
 .form-footer {
-  margin-bottom: -50px;
+  margin-bottom: -15px;
   margin-top: 40px;
   text-align: center;
 }
 
-.form-submit {
-  background: $green-primary;
-  border-radius: 10px;
+.form-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+@mixin form-button {
+  @include box-shadow;
   border: none;
   color: white;
   display: inline-block;
-  font-size: 16px;
+  transition: 0.25s background;
+  padding: 5px 25px;
+  color: white;
+  border-radius: 10px;
+  font-size: 12px;
   font-weight: 700;
-  margin-bottom: -50px;
-  padding: 15px 30px;
   cursor: pointer;
+  margin-bottom: -50px;
+}
+
+.form-submit {
+  @include form-button;
+  background: $green-primary;
+
+  &:hover {
+    background: $green-secondary;
+  }
+}
+
+.form-delete {
+  @include form-button;
+  background: $red-primary;
+  cursor: pointer;
+
+  &:hover {
+    background: $red-secondary;
+  }
 }
 
 .form-signUp {
