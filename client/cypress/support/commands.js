@@ -27,11 +27,19 @@
 import 'cypress-file-upload'
 import $ from 'jquery'
 
-Cypress.Commands.add('cleanDatabase', (opts = { seed: false }) => {
+Cypress.Commands.add('cleanDatabase', () => {
   return $.ajax({
     type: "POST",
     url: "http://localhost:3001/test/clean_database"
-    // data: { should_seed: opts.seed }
+  })
+  .then(res => console.log(res))
+  .catch(err => console.log(err))
+})
+
+Cypress.Commands.add('seedDatabase', () => {
+  return $.ajax({
+    type: "POST",
+    url: "http://localhost:3001/test/seed_database"
   })
   .then(res => console.log(res))
   .catch(err => console.log(err))
@@ -60,4 +68,15 @@ Cypress.Commands.add('loginUser', () => {
   cy.get("[data-cy=signUp-password]").type('password')
 
   cy.contains('Create your account').click()
+})
+
+Cypress.Commands.add('addTrip', () => {
+  cy.get('[data-cy=tripInput-title]').type('title')
+  cy.get('[data-cy=tripInput-location]').type('location')
+  cy.get('[data-cy=tripInput-startDate]').type('2020-01-01')
+  cy.get('[data-cy=tripInput-endDate]').type('2020-01-01')
+  cy.uploadPhoto('[data-cy=tripInput-photo]', 'coverPhoto.jpeg')
+  cy.get('[data-cy=tripInput-spaces-unlimited]').click()
+  cy.get('[data-cy=tripInput-privacy-visible]').click()
+  cy.contains('Create').click()
 })

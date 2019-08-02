@@ -23,6 +23,7 @@ class TripForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.clearForm = this.clearForm.bind(this)
     this.select = this.select.bind(this)
+    this.deleteTrip = this.deleteTrip.bind(this)
   }
 
   componentDidMount() {
@@ -37,7 +38,8 @@ class TripForm extends React.Component {
           privacy: trip.privacy,
           spaces: trip.spaces,
           start_state: trip.startDate,
-          title: trip.title
+          title: trip.title,
+          image_preview: trip.coverPhoto
         })
       })
     }
@@ -51,6 +53,13 @@ class TripForm extends React.Component {
     return (e) => {
       this.setState({[prop]: e.target.value})
     }
+  }
+
+  deleteTrip(e) {
+    e.preventDefault()
+    this.props.deleteTrip(this.props.match.params.id).then(() => {
+      this.props.history.push('/')
+    })
   }
 
   handleSubmit(e) {
@@ -67,6 +76,7 @@ class TripForm extends React.Component {
     formData.append('trip[privacy]', this.state.privacy)
 
     this.props.action(formData).then(res => {
+      console.log(res)
       this.clearForm()
       const id = Object.keys(res.trip)[0]
       this.props.history.push(`/trips/${id}`)
@@ -99,7 +109,7 @@ class TripForm extends React.Component {
       <div>
         <header className="form-header">
           <h3 className="form-title">
-          {actionType === 'Create' ? "Let's add a trip" : "Update your trip"}
+          {actionType === 'Create' ? "Let's add a trip" : "Edit your trip"}
           </h3>
         </header>
 
@@ -202,12 +212,20 @@ class TripForm extends React.Component {
           </div>
 
           <footer className="form-footer">
-            <button className="form-submit">
-              <FontAwesomeIcon icon="plus" />
-              {actionType}
-            </button>
+            <div className="form-buttons">
+              <button className="form-submit">
+                <FontAwesomeIcon icon="plus" />
+                {actionType}
+              </button>
+              {actionType === 'Create' ?
+                <></>
+                :
+                <button className="form-delete" onClick={this.deleteTrip}>Delete</button>
+              }
+            </div>
           </footer>
         </form>
+
       </div>
     )
   }

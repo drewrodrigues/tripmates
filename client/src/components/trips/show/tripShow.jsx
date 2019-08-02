@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 import TripAdminControlsContainer from '../shared/tripAdminControlsContainer'
 
 class TripShow extends Component {
   constructor(props) {
     super(props)
     this.state = {loading: true}
-    this.deleteTrip = this.deleteTrip.bind(this)
   }
 
   componentDidMount() {
@@ -13,15 +13,9 @@ class TripShow extends Component {
       .then(() => this.setState({loading: false}))
   }
 
-  deleteTrip() {
-    this.props.deleteTrip(this.props.match.params.id).then(() => {
-      this.props.history.push('/')
-    })
-  }
-
   render() {
     if (this.state.loading === true) return null
-    const {trip, leader} = this.props
+    const {trip, leader, isLeader} = this.props
 
     return (
       <div className="tripShow">
@@ -35,7 +29,6 @@ class TripShow extends Component {
             :
             <></>
             }
-            <TripAdminControlsContainer />
           </div>
 
           <div className="tripShow-detail-body">
@@ -52,12 +45,23 @@ class TripShow extends Component {
 
             <p className="tripShow-detail-description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here’.</p>
 
-            <p className="tripShow-detail-led-by">
-              <img src={leader.profilePicture} />
-              Led by <a href="#" className="tripShow-detail-led-by-user">
-                {leader.firstName} {leader.lastName}
-              </a>
-            </p>
+            {isLeader ?
+              <>
+                <Link to={`/trips/${trip.id}/edit`} className="tripIndexItem-button-edit">Edit</Link>
+                <span className="tripIndexItem-led-by">Led by you</span>
+              </>
+            :
+              <>
+                <img
+                  src={ leader.profilePicture }
+                  className="tripIndexItem-leader-avatar"
+                />
+                <span className="tripIndexItem-led-by">
+                  Led by
+                  <a className="tripIndexItem-led-by-user"> {leader.firstName} {leader.lastName}</a>
+                </span>
+              </>
+            }
           </div>
         </section>
 

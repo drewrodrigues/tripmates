@@ -12,7 +12,8 @@ class SignUp extends React.Component {
       last_name: "",
       email: "",
       password: "",
-      profile_picture: ""
+      profile_picture: "",
+      canSubmit: false
     }
     this.update = this.update.bind(this)
     this.submit = this.submit.bind(this)
@@ -34,9 +35,10 @@ class SignUp extends React.Component {
     formData.append('user[password]', this.state.password)
     formData.append('user[profile_picture]', this.state.profile_picture)
 
-    this.props.signUp(formData).then(() => {
-      this.props.history.push('/created_trips')
-    })
+    this.props.signUp(formData)
+      .then(() => {
+        this.props.history.push('/')
+      })
   }
 
   componentWillUnmount() {
@@ -107,7 +109,9 @@ class SignUp extends React.Component {
           />
 
           <footer className="form-footer">
-            <input type="submit" className="form-submit" value="Create your account" />
+            <div className="form-buttons">
+              <input type="submit" className="form-submit" value="Create your account" />
+            </div>
           </footer>
         </form>
       </>

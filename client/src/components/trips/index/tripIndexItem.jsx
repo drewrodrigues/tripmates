@@ -1,8 +1,8 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-const TripIndexItem = (props) => {
-  const {
+const TripIndexItem = ({
+  trip: {
     id,
     daysUntil,
     duration,
@@ -12,8 +12,9 @@ const TripIndexItem = (props) => {
     creator,
     startDate,
     endDate
-  } = props.trip
-
+  },
+  isLeader
+}) => {
   return (
     <Link
       to={`/trips/${id}`}
@@ -40,11 +41,10 @@ const TripIndexItem = (props) => {
 
         <div className="tripindexItem-footer">
           <div className="tripIndexItem-footer-left">
-            Led by
-            {props.isLeader ?
+            {isLeader ?
               <>
                 <Link to={`/trips/${id}/edit`} className="tripIndexItem-button-edit">Edit</Link>
-                <span className="tripIndexItem-led-by">you</span>
+                <span className="tripIndexItem-led-by">Led by you</span>
               </>
             :
               <>
@@ -53,6 +53,7 @@ const TripIndexItem = (props) => {
                   className="tripIndexItem-leader-avatar"
                 />
                 <span className="tripIndexItem-led-by">
+                  Led by
                   <a className="tripIndexItem-led-by-user"> {creator.firstName} {creator.lastName}</a>
                 </span>
               </>

@@ -3,13 +3,13 @@ import { withRouter } from 'react-router-dom'
 import TripAdminControls from './tripAdminControls'
 import { deleteTrip } from '../../../actions/tripActions'
 import { selectTripById } from '../../../helpers/selectors'
-import { isAdminOfTrip } from '../../../helpers/permissions'
+import { isLeaderOfTrip } from '../../../helpers/permissions'
 
 const mapStateToProps = (state, ownProps) => {
   const tripId = ownProps.match.params.id
   const trip = selectTripById(state, tripId)
   return {
-    isAdmin: isAdminOfTrip(state, trip),
+    isAdmin: isLeaderOfTrip(state, trip),
     tripId
   }
 }

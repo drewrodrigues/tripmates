@@ -4,7 +4,7 @@ import FormErrors from '../Shared/formErrors'
 class SignIn extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {email: "", password: "", showErrors: false}
+    this.state = {email: "", password: ""}
     this.update = this.update.bind(this)
     this.submit = this.submit.bind(this)
   }
@@ -19,13 +19,7 @@ class SignIn extends React.Component {
   submit(e) {
     e.preventDefault()
     const {email, password} = this.state
-    this.props.login({email, password})
-      .then(() => {
-        this.props.history.push('/')
-      })
-      .catch(() => {
-        this.setState({showErrors: true})
-      })
+    this.props.signIn({email, password})
   }
 
   componentWillUnmount() {
@@ -33,7 +27,7 @@ class SignIn extends React.Component {
   }
 
   render() {
-    const {email, password, showErrors} = this.state
+    const {email, password} = this.state
     const {submit, update} = this
     const {errors} = this.props
     return (
@@ -52,6 +46,7 @@ class SignIn extends React.Component {
             onChange={(e) => update('email', e)}
             value={email}
             className="form-input"
+            data-cy="signUp-email"
           />
 
           <label className="form-label">Password</label>
@@ -59,10 +54,13 @@ class SignIn extends React.Component {
             onChange={ (e) => update('password', e)}
             value={password}
             className="form-input"
+            data-cy="signUp-password"
           />
 
           <footer className="form-footer">
-            <input type="submit" value="Sign in" className="form-submit" />
+            <div className="form-buttons">
+              <input type="submit" value="Sign in" className="form-submit" />
+            </div>
           </footer>
         </form>
       </>
