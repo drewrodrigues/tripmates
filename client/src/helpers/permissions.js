@@ -1,3 +1,3 @@
-export const isAdminOfTrip = (state, trip) => {
+export const isLeaderOfTrip = (state, trip) => {
   return state.session.id === trip.creatorId
 }
