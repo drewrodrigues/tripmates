@@ -50,7 +50,8 @@ class Api::TripsController < ApplicationController
       :spaces,
       :privacy
     ]
-    if params[:trip][:cover_photo] == ""
+    cover_photo_param = params[:trip][:cover_photo]
+    if cover_photo_param == "" || cover_photo_param.is_a?(String)
       params.require(:trip).permit(*base_params)
     else
       params.require(:trip).permit(*base_params, :cover_photo)
