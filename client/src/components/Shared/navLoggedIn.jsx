@@ -8,13 +8,20 @@ class NavLoggedIn extends React.Component {
     super(props)
     this.handleLogout = this.handleLogout.bind(this)
     this.toggleDropDown = this.toggleDropDown.bind(this)
-    this.state = { showDropDown: false }
+    this.hideDropDown = this.hideDropDown.bind(this)
+    this.state = {showDropDown: false}
   }
 
   handleLogout() {
     this.props.logout().then(() => {
       this.props.history.push('/login')
     })
+  }
+
+  hideDropDown() {
+    if (!this.state.hideDropDown) {
+      this.setState({showDropDown: false})
+    }
   }
 
   toggleDropDown() {
@@ -48,7 +55,11 @@ class NavLoggedIn extends React.Component {
               Friends
             </NavLink>
 
-            <nav href="#" className={`Nav-user ${dropDownOpenClass}`} onClick={this.toggleDropDown }>
+            <nav href="#"
+              className={`Nav-user ${dropDownOpenClass}`}
+              onClick={this.toggleDropDown}
+              onMouseLeave={this.hideDropDown}
+            >
               <img
                 src={
                   this.props.currentUser.profilePicture ?
