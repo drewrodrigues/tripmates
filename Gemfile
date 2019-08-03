@@ -8,6 +8,7 @@ gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", ">= 1.1.0", require: false
 gem "coffee-rails", "~> 4.2"
 gem "faker"
+gem 'foreman', '~> 0.82.0'
 gem "jbuilder", "~> 2.5"
 gem "jquery-rails"
 gem "pg", ">= 0.18", "< 2.0"
