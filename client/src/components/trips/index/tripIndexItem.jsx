@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 const TripIndexItem = ({
   trip: {
@@ -44,7 +45,10 @@ const TripIndexItem = ({
             <div className="tripIndexItem-footer-left">
               {isLeader ?
                 <>
-                  <Link to={`/trips/${id}/edit`} className="tripIndexItem-button-edit button button-heavy button-blue">Edit</Link>
+                  <Link to={`/trips/${id}/edit`} className="tripIndexItem-button-edit button button-heavy button-blue">
+                    <FontAwesomeIcon icon="edit"/>
+                    Edit
+                  </Link>
                   <span className="tripIndexItem-led-by">Led by you</span>
                 </>
               :

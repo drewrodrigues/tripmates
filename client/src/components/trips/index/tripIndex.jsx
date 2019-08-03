@@ -67,12 +67,21 @@ class TripIndex extends React.Component {
         <div className="tripsIndex">
           <header className="tripIndex-header">
             <div className="tripIndex-header-left">
-              <a href="#" className="button button-white">All</a>
+              <a href="#" className="button button-white">
+                <FontAwesomeIcon icon="filter"/>
+                All
+              </a>
             </div>
 
             <div className="tripIndex-header-center">
-              <a href="#" className="button button-white">Past</a>
-              <a href="#" className="button button-blue button-heavy">Upcoming</a>
+              <a href="#" className="button button-white">
+                <FontAwesomeIcon icon="history"/>
+                Past
+              </a>
+              <a href="#" className="button button-blue button-heavy">
+                <FontAwesomeIcon icon="angle-double-right"/>
+                Upcoming
+              </a>
             </div>
 
             <div className="tripIndex-header-right">

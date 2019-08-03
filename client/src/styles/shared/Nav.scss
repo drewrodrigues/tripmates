@@ -39,9 +39,14 @@
 .Nav-link {
   font-size: 14px;
   margin-left: 10px;
+  display: flex;
 
   &:first-of-type {
     margin-left: 0;
+  }
+
+  svg {
+    margin-right: 10px
   }
 }
 

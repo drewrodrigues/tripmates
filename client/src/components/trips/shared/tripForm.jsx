@@ -213,14 +213,21 @@ class TripForm extends React.Component {
 
           <footer className="form-footer">
             <div className="form-buttons">
-              <button className="form-button button button-heavy button-green form-submit-primary">
-                <FontAwesomeIcon icon="plus" />
+              <button className="form-button button button-heavy button-green">
+                {actionType === 'Create' ?
+                  <FontAwesomeIcon icon="plus" />
+                :
+                  <FontAwesomeIcon icon="edit" />
+                }
                 {actionType}
               </button>
               {actionType === 'Create' ?
                 <></>
                 :
-                <button className="form-button button button-heavy button-red" onClick={this.deleteTrip}>Delete</button>
+                <button className="form-button button button-heavy button-red" onClick={this.deleteTrip}>
+                  <FontAwesomeIcon icon="trash" />
+                  Delete
+                </button>
               }
             </div>
           </footer>

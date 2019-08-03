@@ -32,12 +32,21 @@ class NavLoggedIn extends React.Component {
           </nav>
 
           <nav className="Nav-center">
-            <NavLink to="/explore" exact className="Nav-link Nav-link-primary">Explore</NavLink>
+            <NavLink to="/explore" exact className="Nav-link Nav-link-primary">
+              <FontAwesomeIcon icon="compass" />
+              Explore
+            </NavLink>
           </nav>
 
           <nav className="Nav-right">
-            <NavLink exact className="Nav-link Nav-link-primary" to="/">Trips</NavLink>
-            <NavLink className="Nav-link Nav-link-primary" to="/users">Users</NavLink>
+            <NavLink exact className="Nav-link Nav-link-primary" to="/">
+              <FontAwesomeIcon icon="globe-americas" />
+              Trips
+            </NavLink>
+            <NavLink className="Nav-link Nav-link-primary" to="/users">
+              <FontAwesomeIcon icon="users" />
+              Users
+            </NavLink>
 
             <nav href="#" className={`Nav-user ${dropDownOpenClass}`} onClick={this.toggleDropDown }>
               <img

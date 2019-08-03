@@ -63,10 +63,6 @@
   justify-content: space-between;
 }
 
-.form-half {
-  width: 49%;
-}
-
 .button-row {
   display: flex;
   justify-content: flex-start;
@@ -108,38 +104,8 @@
   width: 100%;
 }
 
-@mixin form-button {
-  @include box-shadow;
-  border: none;
-  color: white;
-  display: inline-block;
-  transition: 0.25s background;
-  padding: 5px 25px;
-  color: white;
-  border-radius: 10px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  margin-bottom: -50px;
-}
-
-.form-submit {
-  @include form-button;
-  background: $green-primary;
-
-  &:hover {
-    background: $green-secondary;
-  }
-}
-
-.form-delete {
-  @include form-button;
-  background: $red-primary;
-  cursor: pointer;
-
-  &:hover {
-    background: $red-secondary;
-  }
+.form-button {
+  flex-grow: 1;
 }
 
 .form-signUp {

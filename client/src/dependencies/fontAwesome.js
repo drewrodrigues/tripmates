@@ -11,7 +11,14 @@ import {
   faMapMarkerAlt,
   faUser,
   faCog,
-  faSignOutAlt
+  faSignOutAlt,
+  faGlobeAmericas,
+  faCompass,
+  faHistory,
+  faAngleDoubleRight,
+  faFilter,
+  faEdit,
+  faTrash
 } from '@fortawesome/free-solid-svg-icons'
 
 export default (() => {
@@ -27,4 +34,11 @@ export default (() => {
   library.add(faUser)
   library.add(faCog)
   library.add(faSignOutAlt)
+  library.add(faGlobeAmericas)
+  library.add(faCompass)
+  library.add(faHistory)
+  library.add(faAngleDoubleRight)
+  library.add(faFilter)
+  library.add(faEdit)
+  library.add(faTrash)
 })()
