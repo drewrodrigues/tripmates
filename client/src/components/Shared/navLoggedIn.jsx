@@ -43,9 +43,9 @@ class NavLoggedIn extends React.Component {
               <FontAwesomeIcon icon="globe-americas" />
               Trips
             </NavLink>
-            <NavLink className="Nav-link Nav-link-primary" to="/users">
+            <NavLink className="Nav-link Nav-link-primary" to="/friends">
               <FontAwesomeIcon icon="users" />
-              Users
+              Friends
             </NavLink>
 
             <nav href="#" className={`Nav-user ${dropDownOpenClass}`} onClick={this.toggleDropDown }>

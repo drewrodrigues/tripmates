@@ -19,7 +19,7 @@ const selectRoutes = loggedIn => {
         <Route path="/trips/new" component={ TripNewContainer } exact />
         <Route path="/trips/:id" component={ TripShowContainer } />
         <Route path="/trips" component={ TripIndexContainer } />
-        <Route path="/users" component={ UsersIndexContainer } />
+        <Route path="/friends" component={ UsersIndexContainer } />
         <Route path="/" component={ TripIndexContainer } />
       </Switch>
     </div>
