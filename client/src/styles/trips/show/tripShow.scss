@@ -103,7 +103,7 @@
   margin-bottom: 5px;
 
   a {
-    border-radius: 5px;
+    border-radius: $border-radius;
     color: $text-muted;
     background: white;
     display: inline-block;
@@ -136,7 +136,7 @@
   color: $text-muted;
   font-size: 12px;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: $border-radius;
   border: none;
 }
 
@@ -144,7 +144,7 @@
   background: $red-primary;
   display: inline-block;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: $border-radius;
   border: none;
   margin-left: 5px;
   color: white;
