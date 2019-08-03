@@ -8,6 +8,7 @@ class SignIn extends React.Component {
     this.state = {email: "", password: ""}
     this.update = this.update.bind(this)
     this.submit = this.submit.bind(this)
+    this.clearErrors = this.clearErrors.bind(this)
   }
 
   update(attribute, e) {
@@ -27,6 +28,12 @@ class SignIn extends React.Component {
     this.props.clearSessionErrors()
   }
 
+  clearErrors() {
+    if (this.props.errors.length > 0) {
+      this.props.clearSessionErrors()
+    }
+  }
+
   render() {
     const {email, password} = this.state
     const {submit, update} = this
@@ -37,7 +44,7 @@ class SignIn extends React.Component {
           <Link className="Nav-logo signUp-logo" to="/">tripmates</Link>
         </header>
 
-        <form onSubmit={submit} className="form">
+        <form onSubmit={submit} className="form" onChange={this.clearErrors}>
           <header className="form-header signUp-form-header">
             <h3 className="form-title">Sign In</h3>
             <h4 className="form-subtitle">Welcome back</h4>
