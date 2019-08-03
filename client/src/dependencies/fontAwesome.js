@@ -18,7 +18,8 @@ import {
   faAngleDoubleRight,
   faFilter,
   faEdit,
-  faTrash
+  faTrash,
+  faUserMinus
 } from '@fortawesome/free-solid-svg-icons'
 
 export default (() => {
@@ -41,4 +42,5 @@ export default (() => {
   library.add(faFilter)
   library.add(faEdit)
   library.add(faTrash)
+  library.add(faUserMinus)
 })()

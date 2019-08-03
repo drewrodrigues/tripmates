@@ -28,12 +28,24 @@ const TripIndexItem = ({
 
       <section className="tripIndexItem-body">
         <h4 className="tripIndexItem-location">{location}</h4>
-        <h5 className="tripIndexItem-dates">{startDate} - {endDate}</h5>
+        <h5 className="tripIndexItem-dates">
+          <FontAwesomeIcon icon="calendar-alt" />
+          {startDate} - {endDate}
+        </h5>
 
         <div className="tripIndexItem-badges">
-          <span className="tripIndexItem-badge tripIndexItem-badge-blue">{daysUntil} days until</span>
-          <span className="tripIndexItem-badge tripIndexItem-badge-blue">{duration} days long</span>
-          <span className="tripIndexItem-badge tripIndexItem-badge-red">3 spots left</span>
+          <span className="tripIndexItem-badge tripIndexItem-badge-blue">
+            <FontAwesomeIcon icon="hourglass-half" />
+            {daysUntil} days until
+          </span>
+          <span className="tripIndexItem-badge tripIndexItem-badge-blue">
+            <FontAwesomeIcon icon="clock" />
+            {duration} days long
+          </span>
+          <span className="tripIndexItem-badge tripIndexItem-badge-red">
+            <FontAwesomeIcon icon="user-minus" />
+            3 spots left
+          </span>
         </div>
 
         <p className="tripIndexItem-description">
