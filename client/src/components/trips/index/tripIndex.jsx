@@ -25,7 +25,10 @@ const TripIndexNoResultsPlaceholder = () => (
         <img src={FriendsPlaceholder} alt="Add a friend" className="tripIndex-placeholder-image" />
         <p className="tripIndex-placeholder-body">By adding friends, you’ll be able to see and request to join their public trips</p>
         <div className="card-buttons">
-          <button className="card-button button button-green button-heavy">Add Friends</button>
+          <button className="card-button button button-green button-heavy">
+            <FontAwesomeIcon icon="plus"/>
+            Add Friends
+          </button>
         </div>
       </div>
 
