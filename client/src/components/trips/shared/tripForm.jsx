@@ -1,13 +1,13 @@
 import React from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {handleImage} from "../../../helpers/handlers"
+import {todayForInput} from "../../../helpers/formatters"
 import FormErrors from '../../Shared/formErrors'
 
-const today = new Date().toISOString().split('T')[0]
 const defaultState = {
   title: "",
-  start_date: today,
-  end_date: today,
+  start_date: todayForInput(),
+  end_date: todayForInput(),
   location: "",
   cover_photo: "",
   spaces: 0,
