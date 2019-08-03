@@ -18,7 +18,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => ({
   action: trip => dispatch(updateTrip(trip)),
   fetchTrip: id => dispatch(getTripById(id)),
-  clearTripErrors: () => dispatch(clearTripErrors),
+  clearTripErrors: () => dispatch(clearTripErrors()),
   deleteTrip: id => dispatch(deleteTrip(id))
 })
 
