@@ -1,12 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import { prettyDaysUntil, prettyDuration } from '../../../helpers/formatters';
+import { prettyDaysUntil, prettyDuration, prettyDate } from '../../../helpers/formatters';
 
 const TripIndexItem = ({
   trip: {
     id,
-    daysUntil,
     duration,
     title,
     coverPhoto,
@@ -31,7 +30,15 @@ const TripIndexItem = ({
         <h4 className="tripIndexItem-location">{location}</h4>
         <h5 className="tripIndexItem-dates">
           <FontAwesomeIcon icon="calendar-alt" />
-          {startDate} - {endDate}
+          { startDate === endDate ?
+            prettyDate(startDate)
+          :
+            <>
+              {prettyDate(startDate)}
+              <FontAwesomeIcon icon="long-arrow-alt-right" />
+              {prettyDate(endDate)}
+            </>
+          }
         </h5>
 
         <div className="tripIndexItem-badges">
