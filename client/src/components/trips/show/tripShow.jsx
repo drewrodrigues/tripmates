@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import TripAdminControlsContainer from '../shared/tripAdminControlsContainer'
+import {prettyDaysUntil, prettyDuration } from '../../../helpers/formatters'
 
 class TripShow extends Component {
   constructor(props) {
@@ -38,8 +38,8 @@ class TripShow extends Component {
             </div>
 
             <div className="tripShow-detail-badges">
-              <span className="tripIndexItem-badge tripIndexItem-badge-blue">{trip.daysUntil} days until</span>
-              <span className="tripIndexItem-badge tripIndexItem-badge-blue">{trip.duration} days long</span>
+              <span className="tripIndexItem-badge tripIndexItem-badge-blue">{prettyDaysUntil(trip.daysUntil)}</span>
+              <span className="tripIndexItem-badge tripIndexItem-badge-blue">{prettyDuration(trip.duration)}</span>
               <span className="tripIndexItem-badge tripIndexItem-badge-red">3 spots left</span>
             </div>
 

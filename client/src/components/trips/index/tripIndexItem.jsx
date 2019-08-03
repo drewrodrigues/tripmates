@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { prettyDaysUntil, prettyDuration } from '../../../helpers/formatters';
 
 const TripIndexItem = ({
   trip: {
@@ -36,11 +37,11 @@ const TripIndexItem = ({
         <div className="tripIndexItem-badges">
           <span className="tripIndexItem-badge tripIndexItem-badge-blue">
             <FontAwesomeIcon icon="hourglass-half" />
-            {daysUntil} days until
+            {prettyDaysUntil(daysUntil)}
           </span>
           <span className="tripIndexItem-badge tripIndexItem-badge-blue">
             <FontAwesomeIcon icon="clock" />
-            {duration} days long
+            {prettyDuration(duration)}
           </span>
           <span className="tripIndexItem-badge tripIndexItem-badge-red">
             <FontAwesomeIcon icon="user-minus" />
