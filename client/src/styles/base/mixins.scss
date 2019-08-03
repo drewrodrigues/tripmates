@@ -5,8 +5,7 @@
 
 @mixin box-shadow-hover {
   &:hover {
-    box-shadow: 0 3px 2px #aaa;
-    transform: scale(1.01);
+    box-shadow: 0 3px 1px #aaa;
   }
 }
 
