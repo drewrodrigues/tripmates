@@ -29,7 +29,7 @@ class TripForm extends React.Component {
   componentDidMount() {
     if (this.props.actionType === "Update") {
       this.props.fetchTrip(this.props.match.params.id).then(() => {
-        const { trip } = this.props
+        const {trip} = this.props
         this.setState({
           cover_photo: trip.coverPhoto,
           id: trip.id,
@@ -37,7 +37,7 @@ class TripForm extends React.Component {
           location: trip.location,
           privacy: trip.privacy,
           spaces: trip.spaces,
-          start_state: trip.startDate,
+          start_date: trip.startDate,
           title: trip.title,
           image_preview: trip.coverPhoto
         })
