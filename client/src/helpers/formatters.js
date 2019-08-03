@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { parseDate } from './parsers'
 
 export const pluralize = (word, count) => {
@@ -21,13 +22,20 @@ export const prettyDuration = days => {
   return `${days} ${pluralize('day', days)} long`
 }
 
-export const prettyDaysUntil = days => {
-  const dayString = pluralize('day', days)
-  if (days < 0) {
-    return `${Math.abs(days)} ${dayString} ago`
-  } else if (days === 0) {
+export const prettyDaysUntil = startDate => {
+  const today = moment(new Date()).startOf('day')
+  const start = moment(startDate).startOf('day')
+  const daysAway = start.diff(today, 'day')
+  const dayString = pluralize('day', daysAway)
+  if (daysAway === -1) {
+    return "Yesterday"
+  } else if (daysAway < 0) {
+    return `${Math.abs(daysAway)} ${dayString} ago`
+  } else if (daysAway === 0) {
     return "Today"
+  } else if (daysAway === 1) {
+    return "Tomorrow"
   } else {
-    return `${days} ${dayString} until`
+    return `${daysAway} ${dayString} away`
   }
 }

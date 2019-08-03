@@ -37,7 +37,7 @@ const TripIndexItem = ({
         <div className="tripIndexItem-badges">
           <span className="tripIndexItem-badge tripIndexItem-badge-blue">
             <FontAwesomeIcon icon="hourglass-half" />
-            {prettyDaysUntil(daysUntil)}
+            {prettyDaysUntil(startDate)}
           </span>
           <span className="tripIndexItem-badge tripIndexItem-badge-blue">
             <FontAwesomeIcon icon="clock" />
