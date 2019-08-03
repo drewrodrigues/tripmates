@@ -175,7 +175,7 @@ class TripForm extends React.Component {
           </label>
           <div className="button-row">
             <button
-              className={`form-button ${spaces == 0 ? 'active' : ''}`}
+              className={`form-button button button-${spaces == 0 ? 'blue' : 'white'}`}
               onClick={e => this.select(e, 'spaces', 0)}
               data-cy="tripInput-spaces-unlimited"
             >
@@ -183,7 +183,7 @@ class TripForm extends React.Component {
             </button>
 
             <input
-              className={`form-button ${spaces != 0 ? 'active' : ''}`}
+              className={`form-button button button-${spaces != 0 ? 'blue' : 'white'}`}
               onChange={ handleUpdate('spaces') }
               value={ spaces }
               data-cy="tripInput-spaces"
@@ -195,7 +195,7 @@ class TripForm extends React.Component {
           </label>
           <div className="button-row">
             <button
-              className={`form-button ${privacy === 'visible' ? 'active' : ''}`}
+              className={`form-button button button-${privacy === 'visible' ? 'blue' : 'white'}`}
               onClick={e => this.select(e, 'privacy', 'visible')}
               data-cy="tripInput-privacy-visible"
             >
@@ -203,7 +203,7 @@ class TripForm extends React.Component {
             </button>
 
             <button
-              className={`form-button ${privacy === 'hidden' ? 'active' : ''}`}
+              className={`form-button button button-${privacy === 'hidden' ? 'blue' : 'white'}`}
               onClick={e => this.select(e, 'privacy', 'hidden')}
               data-cy="tripInput-privacy-hidden"
             >
@@ -213,14 +213,14 @@ class TripForm extends React.Component {
 
           <footer className="form-footer">
             <div className="form-buttons">
-              <button className="form-submit">
+              <button className="form-button button button-heavy button-green form-submit-primary">
                 <FontAwesomeIcon icon="plus" />
                 {actionType}
               </button>
               {actionType === 'Create' ?
                 <></>
                 :
-                <button className="form-delete" onClick={this.deleteTrip}>Delete</button>
+                <button className="form-button button button-heavy button-red" onClick={this.deleteTrip}>Delete</button>
               }
             </div>
           </footer>

@@ -18,6 +18,11 @@
   &:nth-of-type(1n+2) {
     margin-left: 5px;
   }
+
+  &:focus {
+    outline: 0;
+    border: 0;
+  }
 }
 
 .button-heavy {
@@ -30,7 +35,15 @@
 
   &:hover {
     background: #9BED0D;
-    box-shadow: 0 3px 3px $green-secondary;
+  }
+}
+
+.button-red {
+  background: $red-primary;
+  box-shadow: 0 3px 1px $red-secondary;
+
+  &:hover {
+    background: #DD0F28;
   }
 }
 

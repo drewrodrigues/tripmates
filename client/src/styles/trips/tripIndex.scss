@@ -2,6 +2,19 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+
+  div {
+    width: 33.3333%;
+    display: flex;
+  }
+}
+
+.tripIndex-header-center {
+  justify-content: center;
+}
+
+.tripIndex-header-right {
+  justify-content: flex-end;
 }
 
 .tripIndex-noResultsHeader {
@@ -52,4 +65,16 @@
 .card-buttons {
   display: flex;
   justify-content: center;
+}
+
+.tripIndexItem-placeholder {
+  text-align: center;
+  font-size: 12px;
+  flex-direction: column;
+  color: $text-muted;
+
+  img {
+    width: 100px;
+    margin-top: 40px;
+  }
 }

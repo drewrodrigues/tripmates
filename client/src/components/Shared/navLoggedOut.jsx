@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
 const NavLoggedOut = () => (
   <div className="Nav">
@@ -8,11 +8,13 @@ const NavLoggedOut = () => (
         <NavLink className="Nav-logo" to="/">tripmates</NavLink>
       </nav>
 
+      <nav className="Nav-center">
+        <NavLink to="/explore" exact className="Nav-link Nav-link-primary">Explore</NavLink>
+      </nav>
+
       <nav className="Nav-right">
-        <NavLink className="Nav-link" to="/home">Home</NavLink>
-        <NavLink className="Nav-link" to="/about">About</NavLink>
-        <NavLink className="Nav-link" to="/login">Login</NavLink>
-        <NavLink className="Nav-link Nav-link-sign-up" to="/signup">Sign Up</NavLink>
+        <NavLink className="Nav-link Nav-link-primary" to="/login">Login</NavLink>
+        <Link className="Nav-link button button-green button-heavy" to="/signup">Sign Up</Link>
       </nav>
     </div>
   </div>

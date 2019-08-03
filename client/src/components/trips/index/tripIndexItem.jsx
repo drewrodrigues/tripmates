@@ -44,7 +44,7 @@ const TripIndexItem = ({
             <div className="tripIndexItem-footer-left">
               {isLeader ?
                 <>
-                  <Link to={`/trips/${id}/edit`} className="tripIndexItem-button-edit">Edit</Link>
+                  <Link to={`/trips/${id}/edit`} className="tripIndexItem-button-edit button button-heavy button-blue">Edit</Link>
                   <span className="tripIndexItem-led-by">Led by you</span>
                 </>
               :

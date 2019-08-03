@@ -18,17 +18,37 @@
   padding: 15px 0 25px;
 }
 
+.Nav-left,
+.Nav-center,
+.Nav-right {
+  width: 33.3333%;
+}
+
+.Nav-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .Nav-right {
   display: flex;
+  justify-content: flex-end;
   align-items: center;
 }
 
 .Nav-link {
+  font-size: 14px;
+  margin-left: 10px;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+}
+
+.Nav-link-primary {
   color: white;
-  font-size: 16px;
   font-weight: 900;
   text-decoration: none;
-  margin-left: 10px;
   transition: 0.25s background;
   padding: 10px;
   border-radius: 10px;
@@ -56,7 +76,6 @@
 .Nav-user {
   display: flex;
   align-items: center;
-  margin-left: 10px;
   color: white;
   font-weight: 900;
   position: relative;
@@ -117,7 +136,7 @@
   &:hover {
     background: $blue-primary;
     color: white;
-    
+
     svg {
       color: $blue-secondary;
     }

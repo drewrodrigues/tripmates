@@ -4,11 +4,6 @@
   @include box-shadow-hover;
 }
 
-.tripIndexItem-photo-container,
-.tripIndexItem-placeholder-photo-container {
-  width: 50%;
-}
-
 .tripIndexItem-photo {
   @include text-shadow;
   width: 50%;
@@ -125,25 +120,5 @@
 }
 
 .tripIndexItem-button-edit {
-  color: white;
-  display: inline-block;
-  font-weight: 900;
-  padding: 20px 10px;
-  border-radius: 10px;
-  background: $blue-primary;
   margin-right: 10px;
-  padding: 10px 15px;
-  transition: 0.25s background;
-
-  &:hover {
-    background: $blue-secondary;
-  }
-}
-
-// placeholder -----------------------------------------------------------------
-
-.tripIndexItem-placeholder {
-  @include card;
-  @include box-shadow;
-  height: 315px;
 }

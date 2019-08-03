@@ -35,7 +35,8 @@ class User < ApplicationRecord
     class_name: :FriendRequest
   has_many :created_trips,
     foreign_key: :creator_id,
-    class_name: :Trip
+    class_name: :Trip,
+    dependent: :destroy
 
   validates :first_name, :last_name, :email,
             :password_digest, :session_token, presence: true

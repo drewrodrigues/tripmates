@@ -69,32 +69,11 @@
 
 .button-row {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 20px;
 
   .form-button {
-    cursor: pointer;
-    background: white;
-    border: 1px solid #efefef;
-    border-radius: 10px;
-    width: 49%;
-    padding: 20px;
-    transition: 0.25s background;
-    text-align: center;
-
-    &:hover {
-      background: #efefef;
-    }
-
-    &.active {
-      background: $blue-primary;
-      font-weight: 900;
-      color: white;
-    }
-
-    &:focus {
-      outline: none;
-    }
+    margin-right: 10px;
   }
 }
 
@@ -116,7 +95,6 @@
 }
 
 .form-footer {
-  margin-bottom: -15px;
   margin-top: 40px;
   text-align: center;
 }
@@ -124,6 +102,10 @@
 .form-buttons {
   display: flex;
   justify-content: space-around;
+}
+
+.form-submit-primary {
+  width: 100%;
 }
 
 @mixin form-button {

@@ -110,7 +110,7 @@ class SignUp extends React.Component {
 
           <footer className="form-footer">
             <div className="form-buttons">
-              <input type="submit" className="form-submit" value="Create your account" />
+              <input type="submit" className="button button-heavy button-green form-submit-primary" value="Create your account" />
             </div>
           </footer>
         </form>

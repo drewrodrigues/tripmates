@@ -59,7 +59,7 @@ class SignIn extends React.Component {
 
           <footer className="form-footer">
             <div className="form-buttons">
-              <input type="submit" value="Sign in" className="form-submit" />
+              <input type="submit" value="Sign in" className="button button-heavy button-green form-submit-primary" />
             </div>
           </footer>
         </form>

@@ -4,9 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import TripIndexItemContainer from './tripIndexItemContainer'
 import FriendsPlaceholder from '../../../assets/friends.png'
 import WorldPlaceholder from '../../../assets/world.png'
+import Loader from "../../../assets/loader.gif";
 
 const TripIndexItemLoadingPlaceholder = () => (
   <div className="tripIndexItem-placeholder">
+    <img src={Loader} alt="Loading" />
+    <p>Loading</p>
   </div>
 )
 
@@ -72,7 +75,7 @@ class TripIndex extends React.Component {
               <a href="#" className="button button-blue button-heavy">Upcoming</a>
             </div>
 
-            <div classname="tripIndex-header-right">
+            <div className="tripIndex-header-right">
               <Link to="/trips/new" className="button button-green button-heavy">
                 <FontAwesomeIcon icon="plus"/>
                 Add Trip
@@ -80,15 +83,9 @@ class TripIndex extends React.Component {
             </div>
           </header>
 
-          {this.state.loading &&
-            <>
-              <TripIndexItemLoadingPlaceholder />
-              <TripIndexItemLoadingPlaceholder />
-              <TripIndexItemLoadingPlaceholder />
-            </>
-          }
+          {this.state.loading && <TripIndexItemLoadingPlaceholder />}
 
-          {trips.length === 0 ?
+          {!this.state.loading && trips.length === 0 ?
             <TripIndexNoResultsPlaceholder />
             :
             <div className="tripIndexItems">

@@ -30,14 +30,16 @@ class NavLoggedIn extends React.Component {
           <nav className="Nav-left">
             <NavLink className="Nav-logo" to="/">tripmates</NavLink>
           </nav>
+
+          <nav className="Nav-center">
+            <NavLink to="/explore" exact className="Nav-link Nav-link-primary">Explore</NavLink>
+          </nav>
+
           <nav className="Nav-right">
-            <NavLink exact className="Nav-link" to="/">Trips</NavLink>
-            <NavLink className="Nav-link" to="/users">Users</NavLink>
+            <NavLink exact className="Nav-link Nav-link-primary" to="/">Trips</NavLink>
+            <NavLink className="Nav-link Nav-link-primary" to="/users">Users</NavLink>
 
             <nav href="#" className={`Nav-user ${dropDownOpenClass}`} onClick={this.toggleDropDown }>
-              <span className="navLoggedIn-name">
-                { this.props.currentUser.firstName }
-              </span>
               <img
                 src={
                   this.props.currentUser.profilePicture ?
