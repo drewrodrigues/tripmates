@@ -13,32 +13,27 @@ import SignInContainer from '../sessions/signInContainer'
 
 const selectRoutes = loggedIn => {
   if (loggedIn) {
-    return <Switch>
-      <Route path="/trips/:id/edit" component={ TripEditContainer } />
-      <Route path="/trips/new" component={ TripNewContainer } exact />
-      <Route path="/trips/:id" component={ TripShowContainer } />
-      <Route path="/trips" component={ TripIndexContainer } />
-      <Route path="/users" component={ UsersIndexContainer } />
-      <Route path="/" component={ TripIndexContainer } />
-    </Switch>
+    return <div className="container main">
+      <Switch>
+        <Route path="/trips/:id/edit" component={ TripEditContainer } />
+        <Route path="/trips/new" component={ TripNewContainer } exact />
+        <Route path="/trips/:id" component={ TripShowContainer } />
+        <Route path="/trips" component={ TripIndexContainer } />
+        <Route path="/users" component={ UsersIndexContainer } />
+        <Route path="/" component={ TripIndexContainer } />
+      </Switch>
+    </div>
   } else {
-    return <Switch>
-      <Route path="/about" render={ About } />
+    return (<>
       <Route path="/login" component={ SignInContainer } />
       <Route path="/signup" component={ SignUpContainer } />
-      <Route path="/" render={ Home } />
-    </Switch>
+      <Route path="/" exact render={ Home } />
+    </>)
   }
 }
 
 const Routes = ({ loggedIn }) => {
-  const routes = selectRoutes(loggedIn)
-
-  return (
-    <div className="container main">
-      { routes }
-    </div>
-  )
+  return selectRoutes(loggedIn)
 }
 
 export default Routes

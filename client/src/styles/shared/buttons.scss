@@ -29,6 +29,15 @@
   font-weight: 900;
 }
 
+.button-gray {
+  background: #ccc;
+  box-shadow: 0 3px 1px #aaa;
+
+  &:hover {
+    background: #ddd;
+  }
+}
+
 .button-green {
   background: $green-primary;
   box-shadow: 0 3px 1px $green-secondary;

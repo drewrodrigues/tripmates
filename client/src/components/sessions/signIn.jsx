@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import FormErrors from '../Shared/formErrors'
 
 class SignIn extends React.Component {
@@ -31,14 +32,17 @@ class SignIn extends React.Component {
     const {submit, update} = this
     const {errors} = this.props
     return (
-      <>
-        <header className="form-header">
-          <h3 className="form-title">Sign In</h3>
-          <h4 className="form-subtitle">Welcome back</h4>
+      <div className="signUp">
+        <header className="form-header signUp-header">
+          <Link className="Nav-logo signUp-logo" to="/">tripmates</Link>
         </header>
 
-
         <form onSubmit={submit} className="form">
+          <header className="form-header signUp-form-header">
+            <h3 className="form-title">Sign In</h3>
+            <h4 className="form-subtitle">Welcome back</h4>
+          </header>
+
           <FormErrors errors={errors} />
 
           <label className="form-label">Email</label>
@@ -57,13 +61,14 @@ class SignIn extends React.Component {
             data-cy="signUp-password"
           />
 
-          <footer className="form-footer">
+          <footer className="form-footer signUp-footer">
             <div className="form-buttons">
               <input type="submit" value="Sign in" className="button button-heavy button-green form-submit-primary" />
             </div>
           </footer>
+          <p className="signUp-alreadyHaveAccount">Don't have an account? Try <Link to="/signup" className="link">signing up</Link> instead.</p>
         </form>
-      </>
+      </div>
     )
   }
 }

@@ -9,13 +9,12 @@ const Nav = props => {
 
   return (
     <>
-      {currentUser ?
+      {currentUser &&
       <NavLoggedIn
         logout={ logout }
         currentUser={ currentUser }
       />
-      :
-      <NavLoggedOut />}
+      }
 
       <Routes loggedIn={ currentUser } />
     </>

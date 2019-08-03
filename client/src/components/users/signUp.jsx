@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {handleImage } from '../../helpers/handlers'
 import FormErrors from '../Shared/formErrors'
 
@@ -50,12 +51,10 @@ class SignUp extends React.Component {
           {handleImage, submit, update} = this,
           {errors} = this.props
     return (
-      <>
-        <header className="form-header">
-          <h2 className="form-title">Sign Up</h2>
-          <h4 className="form-subtitle">Let's get to the trips!</h4>
+      <div className="signUp">
+        <header className="form-header signUp-header">
+          <Link className="Nav-logo signUp-logo" to="/">tripmates</Link>
         </header>
-
 
         <form onSubmit={submit} className="form form-signUp">
           <header className="signUp-form-header">
@@ -64,6 +63,8 @@ class SignUp extends React.Component {
               className="signUp-avatar"
               data-cy="signUp-avatar-placeholder"
             />
+            <h2 className="form-title">Sign Up</h2>
+            <h4 className="form-subtitle">Let's get out there</h4>
           </header>
 
           <FormErrors errors={errors} />
@@ -108,13 +109,14 @@ class SignUp extends React.Component {
             data-cy="signUp-password"
           />
 
-          <footer className="form-footer">
+          <footer className="form-footer signUp-footer">
             <div className="form-buttons">
               <input type="submit" className="button button-heavy button-green form-submit-primary" value="Create your account" />
             </div>
           </footer>
+          <p className="signUp-alreadyHaveAccount">Already have an account? Try <Link to="/login" className="link">logging in</Link> instead.</p>
         </form>
-      </>
+      </div>
     )
   }
 }
