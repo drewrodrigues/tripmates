@@ -1,6 +1,6 @@
 .form-header {
   margin-top: 20px;
-  margin-bottom: 40px;
+  margin-bottom: $padding-main;
   text-align: center;
 }
 
@@ -12,7 +12,7 @@
 
 .form-subtitle {
   color: $text-muted;
-  margin-bottom: 40px;
+  margin-bottom: $padding-main;
 }
 
 .form {
@@ -27,13 +27,13 @@
 
 .form-errors {
   padding: 0;
-  margin-bottom: 40px;
+  margin-bottom: $padding-main;
 }
 
 .form-error {
   background: $red-primary;
   border-left: 5px solid $red-primary;
-  border-radius: 10px;
+  border-radius: $border-radius;
   padding: 10px;
   color: white;
   margin-bottom: 5px;
@@ -75,7 +75,7 @@
 
 .form-input {
   display: block;
-  border-radius: 10px;
+  border-radius: $border-radius;
   border: 1px solid #efefef;
   outline: none;
   padding: 20px;
@@ -91,7 +91,7 @@
 }
 
 .form-footer {
-  margin-top: 40px;
+  margin-top: $padding-main;
   text-align: center;
 }
 

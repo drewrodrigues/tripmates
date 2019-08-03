@@ -56,7 +56,7 @@
   text-decoration: none;
   transition: 0.25s background;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: $border-radius;
 
   &.active {
     background: $blue-secondary;
@@ -85,7 +85,7 @@
   font-weight: 900;
   position: relative;
   cursor: pointer;
-  border-radius: 10px 10px 0 0;
+  border-radius: $border-radius $border-radius 0 0;
   padding-left: 10px;
   border: 1px solid $blue-primary;
 
@@ -98,14 +98,14 @@
 
 .Nav-avatar,
 .Nav-avatar-placeholder {
-  width: 40px;
-  height: 40px;
+  width: $avatar-size;
+  height: $avatar-size;
   border-radius: 50%;
   border: 3px solid white;
 }
 
 .Nav-dropdown {
-  border-radius: 10px 0 10px 10px;
+  border-radius: $border-radius 0 $border-radius $border-radius;
   position: absolute;
   right: -1px;
   top: 41px;

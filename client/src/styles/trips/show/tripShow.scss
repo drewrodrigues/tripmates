@@ -22,7 +22,7 @@
   position: relative;
 
   img {
-    border-radius: 10px;
+    border-radius: $border-radius;
     width: 100%;
   }
 }
@@ -149,10 +149,4 @@
   margin-left: 5px;
   color: white;
   cursor: pointer;
-}
-
-.trip-controls-admin {
-  position: absolute;
-  right: 40px;
-  bottom: 40px;
 }

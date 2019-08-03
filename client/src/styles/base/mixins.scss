@@ -32,12 +32,12 @@
 @mixin card {
   position: relative;
   margin-bottom: 20px;
-  border-radius: 10px;
+  border-radius: $border-radius;
   background: white;
   display: flex;
   overflow: hidden;
 }
 
 @mixin card-padding {
-  padding: 40px;
+  padding: $padding-main;
 }

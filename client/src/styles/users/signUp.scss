@@ -21,7 +21,7 @@
 
 .signUp-form-header {
   text-align: center;
-  margin: 0 -40px 40px;
+  margin: 0 -40px $padding-main;
   border-bottom: 1px solid #8EE000;
 }
 
@@ -35,7 +35,7 @@
 }
 
 .signUp-footer {
-  margin-bottom: 40px;
+  margin-bottom: $padding-main;
 }
 
 .form-label {

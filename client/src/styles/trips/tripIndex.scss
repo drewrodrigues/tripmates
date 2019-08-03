@@ -51,14 +51,14 @@
 }
 
 .tripIndex-placeholder-image {
-  margin-bottom: 40px;
+  margin-bottom: $padding-main;
   max-width: 150px;
 }
 
 .tripIndex-placeholder-body {
   color: $text-muted;
   line-height: 1.5;
-  margin-bottom: 40px;
+  margin-bottom: $padding-main;
   max-width: 225px;
 }
 
@@ -75,6 +75,6 @@
 
   img {
     width: 100px;
-    margin-top: 40px;
+    margin-top: $padding-main;
   }
 }
