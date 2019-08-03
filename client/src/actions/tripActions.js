@@ -7,6 +7,7 @@ export const RECEIVE_TRIPS = "RECEIVE_TRIPS"
 export const REMOVE_TRIP = "REMOVE_TRIP"
 export const RECEIVE_TRIP_ERRORS = "RECEIVE_TRIP_ERRORS"
 export const CLEAR_TRIP_ERRORS = "CLEAR_TRIP_ERRORS"
+export const CLEAR_TRIPS = "CLEAR_TRIPS"
 
 export const receiveTrip = trip => {
   return {type: RECEIVE_TRIP, trip}
@@ -26,6 +27,7 @@ export const receiveTripErrors = errors => ({
 })
 
 export const clearTripErrors = () => ({ type: CLEAR_TRIP_ERRORS })
+export const clearTrips = () => ({ type: CLEAR_TRIPS })
 
 export const retrieveMyTrips = userId => dispatch => {
   return APIUtil.fetchMyTrips(userId)

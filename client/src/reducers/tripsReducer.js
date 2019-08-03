@@ -1,7 +1,8 @@
 import {
   RECEIVE_TRIP,
   RECEIVE_TRIPS,
-  REMOVE_TRIP
+  REMOVE_TRIP,
+  CLEAR_TRIPS
 } from '../actions/tripActions'
 
 const tripsReducer = (oldState = {}, action) => {
@@ -16,6 +17,8 @@ const tripsReducer = (oldState = {}, action) => {
     case REMOVE_TRIP:
       delete newState[action.trip]
       return newState
+    case CLEAR_TRIPS:
+      return {}
     default:
       return oldState
   }
