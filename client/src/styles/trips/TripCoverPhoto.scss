@@ -1,5 +1,5 @@
 .TripCoverPhoto {
-  @include box-shadow;
+  background: #ccc;
   background-size: cover;
   border-radius: $border-radius;
   padding: 150px 0;
