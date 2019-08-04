@@ -9,6 +9,7 @@ class NavLoggedIn extends React.Component {
     this.handleLogout = this.handleLogout.bind(this)
     this.toggleDropDown = this.toggleDropDown.bind(this)
     this.hideDropDown = this.hideDropDown.bind(this)
+    this.isTripNavActive = this.isTripNavActive.bind(this)
     this.state = {showDropDown: false}
   }
 
@@ -26,6 +27,11 @@ class NavLoggedIn extends React.Component {
 
   toggleDropDown() {
     this.setState({ showDropDown: !this.state.showDropDown })
+  }
+
+  isTripNavActive() {
+    const url = this.props.location.pathname
+    return url.match('trips') || url === "/"
   }
 
   render() {
@@ -46,11 +52,11 @@ class NavLoggedIn extends React.Component {
           </nav>
 
           <nav className="Nav-right">
-            <NavLink exact className="Nav-link Nav-link-primary" to="/">
+            <NavLink className="Nav-link Nav-link-primary" to="/" isActive={this.isTripNavActive}>
               <FontAwesomeIcon icon="globe-americas" />
               Trips
             </NavLink>
-            <NavLink className="Nav-link Nav-link-primary" to="/friends">
+            <NavLink className="Nav-link Nav-link-primary" to="/friends" exact>
               <FontAwesomeIcon icon="users" />
               Friends
             </NavLink>
