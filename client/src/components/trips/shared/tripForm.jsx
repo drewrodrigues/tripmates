@@ -5,6 +5,7 @@ import {todayForInput} from "../../../helpers/formatters"
 import FormErrors from '../../Shared/formErrors'
 import DateRangePicker from '@wojtekmaj/react-daterange-picker'
 import moment from 'moment'
+import ResponseButton from '../shared/ResponseButton'
 
 const today = new Date()
 
@@ -83,7 +84,7 @@ class TripForm extends React.Component {
     formData.append('trip[privacy]', this.state.privacy)
     formData.append('trip[details]', this.state.details)
 
-    this.props.action(formData).then(res => {
+    return this.props.action(formData).then(res => {
       this.clearForm()
       const id = Object.keys(res.trip)[0]
       this.props.history.push(`/trips/${id}`)
@@ -226,22 +227,14 @@ class TripForm extends React.Component {
 
           <footer className="form-footer">
             <div className="form-buttons">
-              <button className="form-button button button-heavy button-green">
-                {actionType === 'Create' ?
-                  <FontAwesomeIcon icon="plus" />
-                :
-                  <FontAwesomeIcon icon="edit" />
-                }
-                {actionType}
-              </button>
-              {actionType === 'Create' ?
-                <></>
-                :
-                <button className="form-button button button-heavy button-red" onClick={this.deleteTrip}>
-                  <FontAwesomeIcon icon="trash" />
-                  Delete
-                </button>
-              }
+              <ResponseButton
+                action={e => this.handleSubmit(e)}
+                actionableText={actionType == "Create" ? "Creating" : "Updating" }
+                className="form-button button button-heavy button-green"
+                modelType="Trip"
+                text={actionType}
+                icon={actionType == "Create" ? "plus" : "edit" }
+              />
             </div>
           </footer>
         </form>
