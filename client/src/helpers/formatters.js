@@ -22,6 +22,14 @@ export const prettyDuration = days => {
   return `${days} ${pluralize('day', days)} long`
 }
 
+export const prettySpaces = spaces => {
+  if (spaces == 0) {
+    return "Unlimited space"
+  } else {
+    return `${spaces} ${pluralize('space', spaces)} left`
+  }
+}
+
 export const prettyDaysUntil = startDate => {
   const today = moment(new Date()).startOf('day')
   const start = moment(startDate).startOf('day')

@@ -1,9 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {prettyDaysUntil, prettyDuration, prettyDate} from '../../helpers/formatters';
+import {prettyDaysUntil, prettyDuration, prettyDate, prettySpaces} from '../../helpers/formatters';
 import { connect } from 'react-redux'
 import { isLeaderOfTrip } from '../../helpers/permissions'
+import TripSpaces from './shared/TripSpaces'
 import Avatar from '../users/Avatar'
 
 const TripDetail = ({
@@ -13,7 +14,8 @@ const TripDetail = ({
     location,
     creator,
     startDate,
-    endDate
+    endDate,
+    spaces
   },
   isLeader
 }) => {
@@ -39,18 +41,15 @@ const TripDetail = ({
         </h5>
 
         <div className="tripIndexItem-badges">
-          <span className="tripIndexItem-badge tripIndexItem-badge-blue">
+          <span className="tripIndexItem-badge badge-blue">
             <FontAwesomeIcon icon="hourglass-half" />
             {prettyDaysUntil(startDate)}
           </span>
-          <span className="tripIndexItem-badge tripIndexItem-badge-blue">
+          <span className="tripIndexItem-badge badge-blue">
             <FontAwesomeIcon icon="clock" />
             {prettyDuration(duration)}
           </span>
-          <span className="tripIndexItem-badge tripIndexItem-badge-red">
-            <FontAwesomeIcon icon="user-minus" />
-            3 spots left
-          </span>
+          <TripSpaces spaces={spaces} />
         </div>
 
         <p className="tripIndexItem-description">

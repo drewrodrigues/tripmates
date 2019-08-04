@@ -37,12 +37,16 @@
   display: inline-block;
 }
 
-.tripIndexItem-badge-blue {
+.badge-blue {
   @include badge($blue-primary, $blue-primary);
 }
 
-.tripIndexItem-badge-red {
+.badge-red {
   @include badge($red-primary, $red-primary);
+}
+
+.badge-green {
+  @include badge($green-primary, $green-primary);
 }
 
 .tripIndexItem-description {
