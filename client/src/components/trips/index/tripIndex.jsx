@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import TripIndexItemContainer from './tripIndexItemContainer'
+import TripDetail from "../TripDetail"
 import FriendsPlaceholder from '../../../assets/friends.png'
 import WorldPlaceholder from '../../../assets/world.png'
 import Loader from "../../../assets/loader.gif";
+import TripCoverPhoto from '../TripCoverPhoto';
 
 const TripIndexItemLoadingPlaceholder = () => (
   <div className="tripIndexItem-placeholder">
@@ -106,7 +107,10 @@ class TripIndex extends React.Component {
             :
             <div className="tripIndexItems">
               {trips.map(trip => (
-                <TripIndexItemContainer trip={trip} key={trip.id} />
+                <div className="tripIndexItem">
+                  <TripCoverPhoto coverPhoto={trip.coverPhoto} title={trip.title} />
+                  <TripDetail trip={trip} key={trip.id} />
+                </div>
               ))}
             </div>
           }

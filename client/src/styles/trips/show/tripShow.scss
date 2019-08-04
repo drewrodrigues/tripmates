@@ -1,8 +1,16 @@
 .tripShow {
   display: flex;
+
+  .TripCoverPhoto {
+    border-radius: $border-radius $border-radius 0 0;
+    box-shadow: none;
+  }
 }
 
 .tripShow-detail {
+  @include card;
+  @include box-shadow;
+  display: block;
   max-width: 50%;
   margin-right: 20px;
 }

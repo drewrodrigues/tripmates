@@ -1,0 +1,14 @@
+.TripCoverPhoto {
+  @include box-shadow;
+  background-size: cover;
+  border-radius: $border-radius;
+  padding: 150px 0;
+}
+
+.TripCoverPhoto-title {
+  @include text-shadow;
+  color: white;
+  font-size: 32px;
+  font-weight: 900;
+  text-align: center;
+}

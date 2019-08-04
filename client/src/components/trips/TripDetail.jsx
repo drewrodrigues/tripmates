@@ -1,14 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import { prettyDaysUntil, prettyDuration, prettyDate } from '../../../helpers/formatters';
+import {prettyDaysUntil, prettyDuration, prettyDate} from '../../helpers/formatters';
+import { connect } from 'react-redux'
+import { isLeaderOfTrip } from '../../helpers/permissions'
 
-const TripIndexItem = ({
+const TripDetail = ({
   trip: {
     id,
     duration,
-    title,
-    coverPhoto,
     location,
     creator,
     startDate,
@@ -18,15 +18,11 @@ const TripIndexItem = ({
 }) => {
   return (
     <Link
-      to={`/trips/${id}`}
-      className="tripIndexItem"
+    to={`/trips/${id}`}
+      className="TripDetail"
     >
 
-      <section className="tripIndexItem-photo" style={{"backgroundImage": `url(${coverPhoto})`}}>
-        <h3  className="tripIndexItem-title">{title}</h3>
-      </section>
-
-      <section className="tripIndexItem-body">
+      <section className="TripDetail-body">
         <h4 className="tripIndexItem-location">{location}</h4>
         <h5 className="tripIndexItem-dates">
           <FontAwesomeIcon icon="calendar-alt" />
@@ -103,9 +99,17 @@ const TripIndexItem = ({
         }
 
       </section>
-
     </Link>
   )
 }
 
-export default TripIndexItem
+const mapStateToProps = (state, ownProps) => {
+  const creator = state.entities.users[ownProps.trip.creatorId]
+  console.log(creator)
+  return {
+    creator,
+    isLeader: isLeaderOfTrip(state, ownProps.trip)
+  }
+}
+
+export default connect(mapStateToProps)(TripDetail)

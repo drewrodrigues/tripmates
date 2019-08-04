@@ -20,6 +20,8 @@
 @import "./trips/tripIndexItem";
 @import "./trips/tripForm";
 @import "./trips/show/tripShow";
+@import "./trips/TripCoverPhoto";
+@import "./trips/TripDetail.scss";
 
 body {
   background: $gray-background;
