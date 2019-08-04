@@ -21,25 +21,23 @@ const TripDetail = ({
   isLeader
 }) => {
   return (
-    <Link
-    to={`/trips/${id}`}
-      className="TripDetail"
-    >
-
+    <div className="TripDetail">
       <section className="TripDetail-body">
-        <h4 className="tripIndexItem-location">{location}</h4>
-        <h5 className="tripIndexItem-dates">
-          <FontAwesomeIcon icon="calendar-alt" />
-          { startDate === endDate ?
-            prettyDate(startDate)
-          :
-            <>
-              {prettyDate(startDate)}
-              <FontAwesomeIcon icon="long-arrow-alt-right" />
-              {prettyDate(endDate)}
-            </>
-          }
-        </h5>
+        <header>
+          <h4 className="tripIndexItem-location">{location}</h4>
+          <h5 className="tripIndexItem-dates">
+            <FontAwesomeIcon icon="calendar-alt" />
+            { startDate === endDate ?
+              prettyDate(startDate)
+            :
+              <>
+                {prettyDate(startDate)}
+                <FontAwesomeIcon icon="long-arrow-alt-right" />
+                {prettyDate(endDate)}
+              </>
+            }
+          </h5>
+        </header>
 
         <div className="tripIndexItem-badges">
           <span className="tripIndexItem-badge badge-blue">
@@ -95,9 +93,8 @@ const TripDetail = ({
             </div>
           </div>
         }
-
       </section>
-    </Link>
+    </div>
   )
 }
 

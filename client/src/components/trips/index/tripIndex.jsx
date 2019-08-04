@@ -153,8 +153,12 @@ class TripIndex extends React.Component {
             <div className="tripIndexItems">
               {trips.map(trip => (
                 <div className="tripIndexItem">
-                  <TripCoverPhoto coverPhoto={trip.coverPhoto} title={trip.title} />
-                  <TripDetail trip={trip} key={trip.id} />
+                  <Link
+                    to={`/trips/${trip.id}`}
+                  >
+                    <TripCoverPhoto coverPhoto={trip.coverPhoto} title={trip.title} />
+                    <TripDetail trip={trip} key={trip.id} />
+                  </Link>
                 </div>
               ))}
             </div>

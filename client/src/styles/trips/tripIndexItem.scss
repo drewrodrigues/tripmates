@@ -1,14 +1,21 @@
+.tripIndexItems {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 .tripIndexItem {
   @include card;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 49%;
 
   .TripCoverPhoto {
-    border-radius: $border-radius 0 0 $border-radius;
-    width: 50%;
+    border-radius: 0;
   }
 
   .TripDetail {
-    width: 50%;
   }
 }
 
@@ -69,7 +76,7 @@
 
 .tripIndexItem-led-by {
   color: $text-muted;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 .tripIndexItem-led-by-user {
