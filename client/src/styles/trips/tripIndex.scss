@@ -39,7 +39,6 @@
 }
 
 .tripIndex-placeholder-card {
-  @include box-shadow;
   @include card;
   @include card-padding;
   overflow: initial;

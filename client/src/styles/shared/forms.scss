@@ -18,10 +18,9 @@
 .form {
   @include card;
   @include card-padding;
-  @include box-shadow;
   overflow: initial;
   display: block;
-  margin: 0 auto 50px;;
+  margin: 0 auto 50px;
   max-width: 400px;
 }
 
@@ -82,12 +81,10 @@
   font-size: 16px;
   width: 100%;
   margin-bottom: $padding-main;
-  transition: 0.25s box-shadow;
   max-width: 100%;
 
   &:focus {
     border: 1px solid #efefef;
-    box-shadow: 0 0 10px $blue-primary;
   }
 }
 
