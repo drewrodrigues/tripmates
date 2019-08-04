@@ -1,7 +1,5 @@
 .tripIndexItem {
   @include card;
-  @include box-shadow;
-  @include box-shadow-hover;
   margin-bottom: 20px;
 
   .TripCoverPhoto {
