@@ -9,7 +9,6 @@
 
 .tripShow-detail {
   @include card;
-  @include box-shadow;
   display: block;
   max-width: 50%;
   margin-right: 20px;
