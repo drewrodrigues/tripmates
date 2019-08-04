@@ -3,11 +3,16 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {handleImage} from "../../../helpers/handlers"
 import {todayForInput} from "../../../helpers/formatters"
 import FormErrors from '../../Shared/formErrors'
+import DateRangePicker from '@wojtekmaj/react-daterange-picker'
+import moment from 'moment'
+
+const today = new Date()
 
 const defaultState = {
   title: "",
-  start_date: todayForInput(),
-  end_date: todayForInput(),
+  start_date: today,
+  end_date: today,
+  dateRange: [today, today],
   location: "",
   cover_photo: "",
   spaces: 0,
@@ -24,6 +29,7 @@ class TripForm extends React.Component {
     this.clearForm = this.clearForm.bind(this)
     this.select = this.select.bind(this)
     this.deleteTrip = this.deleteTrip.bind(this)
+    this.onChange = this.onChange.bind(this)
   }
 
   componentDidMount() {
@@ -33,13 +39,12 @@ class TripForm extends React.Component {
         this.setState({
           cover_photo: trip.coverPhoto,
           id: trip.id,
-          end_date: trip.endDate,
           location: trip.location,
           privacy: trip.privacy,
           spaces: trip.spaces,
-          start_date: trip.startDate,
           title: trip.title,
-          image_preview: trip.coverPhoto
+          image_preview: trip.coverPhoto,
+          dateRange: [moment(trip.startDate), moment(trip.endDate)]
         })
       })
     }
@@ -68,8 +73,8 @@ class TripForm extends React.Component {
 
     formData.append('trip[id]', this.state.id)
     formData.append('trip[title]', this.state.title)
-    formData.append('trip[start_date]', this.state.start_date)
-    formData.append('trip[end_date]', this.state.end_date)
+    formData.append('trip[start_date]', this.state.dateRange[0])
+    formData.append('trip[end_date]', this.state.dateRange[1])
     formData.append('trip[location]', this.state.location)
     formData.append('trip[cover_photo]', this.state.cover_photo)
     formData.append('trip[spaces]', this.state.spaces)
@@ -89,6 +94,10 @@ class TripForm extends React.Component {
   select(e, prop, value) {
     e.preventDefault()
     this.setState({[prop]: value})
+  }
+
+  onChange(dateRange) {
+    this.setState({dateRange})
   }
 
   render() {
@@ -135,21 +144,14 @@ class TripForm extends React.Component {
           />
 
           <label className="form-label"><span>When</span> are you going?</label>
-          <label className="form-sublabel">From</label>
-          <input type="date"
-            onChange={ handleUpdate('start_date') }
-            className="form-input"
-            value={start_date}
-            data-cy="tripInput-startDate"
-          />
-
-          <label className="form-sublabel">To</label>
-          <input type="date"
-            onChange={ handleUpdate('end_date') }
-            className="form-input"
-            value={end_date}
-            data-cy="tripInput-endDate"
-          />
+          <div data-cy="tripInput-dateRange">
+            <DateRangePicker
+              onChange={this.onChange}
+              value={this.state.dateRange}
+              className="form-input form-input-dateRange"
+              data-cy="tripInput-dateRange"
+            />
+          </div>
 
           <label htmlFor="trip-photo" className="form-label">
             Cover photo

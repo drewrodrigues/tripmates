@@ -1,8 +1,7 @@
 import {
   tripTitleInput,
   tripLocationInput,
-  tripStartDateInput,
-  tripEndDateInput,
+  tripDateRangeInput,
   tripPhotoInput,
   tripUnlimitedSpacesButton,
   tripVisiblePrivacyButton
@@ -20,8 +19,9 @@ describe('Trips', () => {
         it('creates the trip', () => {
           cy.get(tripTitleInput).type('title')
           cy.get(tripLocationInput).type('location')
-          cy.get(tripStartDateInput).type('2020-01-01')
-          cy.get(tripEndDateInput).type('2020-01-01')
+          cy.get(tripDateRangeInput).first().click()
+          cy.contains('22').click()
+          cy.contains('23').click()
           cy.uploadPhoto(tripPhotoInput, 'coverPhoto.jpeg')
           cy.get(tripUnlimitedSpacesButton).click()
           cy.get(tripVisiblePrivacyButton).click()
@@ -34,8 +34,9 @@ describe('Trips', () => {
         it('creates the trip', () => {
           cy.get(tripTitleInput).type('title')
           cy.get(tripLocationInput).type('location')
-          cy.get(tripStartDateInput).type('2020-01-01')
-          cy.get(tripEndDateInput).type('2020-01-01')
+          cy.get(tripDateRangeInput).first().click()
+          cy.contains('22').click()
+          cy.contains('23').click()
           cy.get(tripUnlimitedSpacesButton).click()
           cy.get(tripVisiblePrivacyButton).click()
           cy.contains('Create').click()

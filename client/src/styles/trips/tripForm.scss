@@ -12,3 +12,39 @@
 .tripForm-submit {
   display: block;
 }
+
+.form-input .react-calendar {
+  width: 100%;
+  max-width: 100%;
+}
+
+.form-input .react-daterange-picker__calendar {
+  width: 100%;
+}
+
+.form-input .react-daterange-picker__wrapper {
+  border: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-input .react-daterange-picker__range-divider {
+  display: flex;
+  align-items: center;
+}
+
+.react-daterange-picker__clear-button {
+  display: none;
+}
+
+.form-input .react-daterange-picker__inputGroup {
+  min-width: 0;
+  flex-grow: 0;
+}
+
+.react-calendar {
+  padding: 20px;
+  border: 1px solid #efefef;
+  box-shadow: 0 3px 10px #ccc;
+  border-radius: $border-radius;
+}
