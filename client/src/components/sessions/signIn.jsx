@@ -22,6 +22,7 @@ class SignIn extends React.Component {
     e.preventDefault()
     const {email, password} = this.state
     this.props.signIn({email, password})
+      .then(() => this.props.history.push('/'))
   }
 
   componentWillUnmount() {
