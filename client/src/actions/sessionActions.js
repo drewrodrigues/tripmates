@@ -40,5 +40,6 @@ export const signIn = user => dispatch => {
     })
     .catch(error => {
       dispatch(receiveSessionErrors(error.response.data))
+      return Promise.reject(error.response.data)
     })
 }
