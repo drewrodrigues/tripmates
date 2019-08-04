@@ -37,6 +37,14 @@ export const retrieveMyTrips = userId => dispatch => {
     })
 }
 
+export const searchTrips = query => dispatch => {
+  return APIUtil.searchTrips(query)
+    .then(res => {
+      dispatch(receiveTrips(res.data.trips))
+      dispatch(receiveUsers(res.data.users))
+    })
+}
+
 export const getTripById = id => dispatch => {
   return APIUtil.fetchTrip(id)
     .then(res => {

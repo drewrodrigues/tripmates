@@ -23,7 +23,13 @@ class Api::TripsController < ApplicationController
   end
 
   def index
-    @trips = Trip.all.includes(:creator)
+    if params[:when] == "past"
+      @trips = Trip.where("start_date < ?", params[:date].to_date).includes(:creator)
+    elsif params[:when] == "upcoming"
+      @trips = Trip.where("start_date >= ?", params[:date].to_date).includes(:creator)
+    else
+      @trips = Trip.all.includes(:creator)
+    end
   end
 
   def destroy

@@ -13,7 +13,7 @@ const tripsReducer = (oldState = {}, action) => {
     case RECEIVE_TRIP:
       return Object.assign(newState, action.trip)
     case RECEIVE_TRIPS:
-      return Object.assign(newState, action.trips)
+      return Object.assign({}, action.trips)
     case REMOVE_TRIP:
       delete newState[action.trip]
       return newState

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import TripDetail from "../TripDetail"
 import FriendsPlaceholder from '../../../assets/friends.png'
@@ -26,10 +26,10 @@ const TripIndexNoResultsPlaceholder = () => (
         <img src={FriendsPlaceholder} alt="Add a friend" className="tripIndex-placeholder-image" />
         <p className="tripIndex-placeholder-body">By adding friends, you’ll be able to see and request to join their public trips</p>
         <div className="card-buttons">
-          <button className="card-button button button-green button-heavy">
+          <Link to="/friends" className="card-button button button-green button-heavy">
             <FontAwesomeIcon icon="plus"/>
             Add Friends
-          </button>
+          </Link>
         </div>
       </div>
 
@@ -50,8 +50,9 @@ const TripIndexNoResultsPlaceholder = () => (
 class TripIndex extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {showForm: false, loading: true}
-    this.toggleForm = this.toggleForm.bind(this)
+    this.state = {loading: true}
+    this.searchPastTrips = this.searchPastTrips.bind(this)
+    this.searchUpcomingTrips = this.searchUpcomingTrips.bind(this)
   }
 
   componentWillUnmount() {
@@ -59,12 +60,53 @@ class TripIndex extends React.Component {
   }
 
   componentDidMount() {
-    this.props.retrieveMyTrips(this.props.currentUserID)
-      .then(() => this.setState({loading: false}))
+    this.search()
   }
 
-  toggleForm() {
-    this.setState({showForm: !this.state.showForm})
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.path !== this.props.match.path) {
+      this.search()
+    }
+  }
+
+  search() {
+    this.props.clearTrips()
+    this.setState({loading: true})
+    switch (this.props.match.path) {
+      case "/":
+        this.searchUpcomingTrips()
+        break
+      case "/trips/all":
+        this.props.retrieveMyTrips()
+      case "/trips/upcoming":
+        this.searchUpcomingTrips()
+        break
+      case "/trips/past":
+        this.searchPastTrips()
+        break
+      default:
+        this.searchUpcomingTrips()
+        break
+    }
+  }
+
+  searchAllTrips() {
+    this.props.retrieveMyTrips()
+      .then(() => this.doneLoading())
+  }
+
+  searchPastTrips() {
+    this.props.searchTrips({when: "past", date: new Date()})
+      .then(() => this.doneLoading())
+  }
+
+  searchUpcomingTrips() {
+    this.props.searchTrips({when: "upcoming", date: new Date()})
+      .then(() => this.doneLoading())
+  }
+
+  doneLoading() {
+    this.setState({loading: false})
   }
 
   render() {
@@ -82,14 +124,17 @@ class TripIndex extends React.Component {
             </div>
 
             <div className="tripIndex-header-center">
-              <a href="#" className="button button-white">
+              <NavLink to="/trips/past" exact className="tripIndex-button button button-white" onClick={this.searchPastTrips} activeClassName="button-blue button-heavy">
                 <FontAwesomeIcon icon="history"/>
                 Past
-              </a>
-              <a href="#" className="button button-blue button-heavy">
+              </NavLink>
+              <NavLink to="/trips/all" exact className="tripIndex-button button button-white" onClick={this.props.retrieveMyTrips} activeClassName="button-blue button-heavy">
+                All
+              </NavLink>
+              <NavLink to="/" exact className="tripIndex-button button button-white" onClick={this.searchUpcomingTrips} activeClassName="button-blue button-heavy">
                 <FontAwesomeIcon icon="angle-double-right"/>
                 Upcoming
-              </a>
+              </NavLink>
             </div>
 
             <div className="tripIndex-header-right">

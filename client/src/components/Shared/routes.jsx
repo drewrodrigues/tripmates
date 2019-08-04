@@ -2,7 +2,6 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import Home from '../Pages/Home'
-import About from '../Pages/About'
 import TripIndexContainer from '../trips/index/tripIndexContainer'
 import TripShowContainer from '../trips/show/tripShowContainer'
 import TripNewContainer from '../trips/new/tripNewContainer'
@@ -17,6 +16,8 @@ const selectRoutes = loggedIn => {
       <Switch>
         <Route path="/trips/:id/edit" component={ TripEditContainer } />
         <Route path="/trips/new" component={ TripNewContainer } exact />
+        <Route path="/trips/past" component={TripIndexContainer} exact />
+        <Route path="/trips/all" component={TripIndexContainer} exact />
         <Route path="/trips/:id" component={ TripShowContainer } />
         <Route path="/trips" component={ TripIndexContainer } />
         <Route path="/friends" component={ UsersIndexContainer } />

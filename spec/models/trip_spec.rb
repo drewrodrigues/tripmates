@@ -15,6 +15,7 @@
 #
 
 require "rails_helper"
+require "timecop"
 
 RSpec.describe Trip, type: :model do
   subject(:trip) { build(:trip) }

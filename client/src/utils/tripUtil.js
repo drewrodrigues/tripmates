@@ -10,10 +10,18 @@ export const createTrip = formData => {
   })
 }
 
-export const fetchMyTrips = userId => {
+export const fetchMyTrips = () => {
   return axios({
     method: "GET",
-    url: `/api/users/${ userId }/trips`
+    url: `/api/trips`
+  })
+}
+
+export const searchTrips = query => {
+  const queryString = Object.entries(query).map((a) => `${a[0]}=${a[1]}`).join('&')
+  return axios({
+    method: "GET",
+    url: `/api/trips?${queryString}`
   })
 }
 

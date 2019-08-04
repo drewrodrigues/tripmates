@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import { tripsByStartDate } from '../../../helpers/selectors'
 import TripIndex from './tripIndex'
-import { retrieveMyTrips, clearTrips } from '../../../actions/tripActions'
+import { retrieveMyTrips, clearTrips, searchTrips } from '../../../actions/tripActions'
 
 const mapStateToProps = state => ({
   trips: tripsByStartDate(state),
@@ -11,6 +11,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   retrieveMyTrips: (id) => dispatch(retrieveMyTrips(id)),
+  searchTrips: query => dispatch(searchTrips(query)),
   clearTrips: () => dispatch(clearTrips())
 })
 

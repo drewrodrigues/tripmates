@@ -103,7 +103,6 @@ const TripDetail = ({
 
 const mapStateToProps = (state, ownProps) => {
   const creator = state.entities.users[ownProps.trip.creatorId]
-  console.log(creator)
   return {
     creator,
     isLeader: isLeaderOfTrip(state, ownProps.trip)
