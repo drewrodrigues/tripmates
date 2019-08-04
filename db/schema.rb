@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_29_150854) do
+ActiveRecord::Schema.define(version: 2019_08_04_182150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2019_04_29_150854) do
     t.datetime "updated_at", null: false
     t.integer "spaces", null: false
     t.integer "privacy", default: 0, null: false
+    t.text "details", default: "", null: false
     t.index ["creator_id"], name: "index_trips_on_creator_id"
     t.index ["privacy"], name: "index_trips_on_privacy"
     t.index ["title"], name: "index_trips_on_title"

@@ -2,7 +2,7 @@
 #
 # Table name: trips
 #
-#  id         :bigint(8)        not null, primary key
+#  id         :bigint           not null, primary key
 #  start_date :date             not null
 #  end_date   :date             not null
 #  title      :string           not null
@@ -12,6 +12,7 @@
 #  updated_at :datetime         not null
 #  spaces     :integer          not null
 #  privacy    :integer          default("visible"), not null
+#  details    :text             default(""), not null
 #
 
 require "rails_helper"
