@@ -67,7 +67,8 @@
 }
 
 .tripIndexItem-led-by {
-  color: $text-muted
+  color: $text-muted;
+  margin-left: 10px;
 }
 
 .tripIndexItem-led-by-user {
@@ -88,14 +89,12 @@
 
 .tripIndexItem-attendees {
   display: flex;
-  align-items: center;
 }
 
 .tripIndexItem-attendee {
-  margin-left: -10px;
-  width: 33px;
-  height: 33px;
-  display: inline-block;
+  margin-left: -15px;;
+  display: flex;
+  align-items: center;
 }
 
 .tripIndexItem-attendee-avatar {

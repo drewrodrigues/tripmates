@@ -4,6 +4,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {prettyDaysUntil, prettyDuration, prettyDate} from '../../helpers/formatters';
 import { connect } from 'react-redux'
 import { isLeaderOfTrip } from '../../helpers/permissions'
+import Avatar from '../users/Avatar'
 
 const TripDetail = ({
   trip: {
@@ -69,10 +70,7 @@ const TripDetail = ({
                 </>
               :
                 <>
-                  <img
-                    src={ creator.profilePicture }
-                    className="tripIndexItem-leader-avatar"
-                  />
+                  <Avatar image={creator.profilePicture} />
                   <span className="tripIndexItem-led-by">
                     Led by
                     <a className="tripIndexItem-led-by-user"> {creator.firstName} {creator.lastName}</a>
@@ -84,13 +82,13 @@ const TripDetail = ({
             <div className="tripIndexItem-footer-right">
               <ul className="tripIndexItem-attendees">
                 <li className="tripIndexItem-attendee">
-                  <img src={creator.profilePicture} className="tripIndexItem-attendee-avatar" />
+                  <Avatar image={creator.profilePicture} />
                 </li>
                 <li className="tripIndexItem-attendee">
-                  <img src={creator.profilePicture} className="tripIndexItem-attendee-avatar" />
+                  <Avatar image={creator.profilePicture} />
                 </li>
                 <li className="tripIndexItem-attendee">
-                  <img src={creator.profilePicture} className="tripIndexItem-attendee-avatar" />
+                  <Avatar image={creator.profilePicture} />
                 </li>
               </ul>
               <p className="tripIndexItem-others-count">+ 23 others</p>
