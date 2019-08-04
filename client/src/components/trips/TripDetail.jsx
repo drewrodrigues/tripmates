@@ -9,13 +9,14 @@ import Avatar from '../users/Avatar'
 
 const TripDetail = ({
   trip: {
-    id,
-    duration,
-    location,
     creator,
-    startDate,
+    details,
+    duration,
     endDate,
-    spaces
+    id,
+    location,
+    spaces,
+    startDate,
   },
   isLeader
 }) => {
@@ -53,7 +54,7 @@ const TripDetail = ({
         </div>
 
         <p className="tripIndexItem-description">
-          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+          {details}
         </p>
 
         {creator &&

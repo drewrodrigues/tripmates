@@ -28,14 +28,14 @@ class Trip < ApplicationRecord
 
   enum privacy: PRIVACIES
 
-  validates :details,
-    :end_date,
+  validates :end_date,
     :location,
     :privacy,
     :spaces,
     :start_date,
     :title,
     presence: true
+  validates :details, presence: true
   validates :privacy, inclusion: { in: PRIVACIES }
   validate :valid_date_range
   validate :positive_spaces

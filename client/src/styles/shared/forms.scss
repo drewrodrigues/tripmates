@@ -66,7 +66,7 @@
 .button-row {
   display: flex;
   justify-content: flex-start;
-  margin-bottom: 20px;
+  margin-bottom: $padding-main;
 
   .form-button {
     margin-right: 10px;
@@ -81,13 +81,19 @@
   padding: 20px;
   font-size: 16px;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: $padding-main;
   transition: 0.25s box-shadow;
+  max-width: 100%;
 
   &:focus {
     border: 1px solid #efefef;
     box-shadow: 0 0 10px $blue-primary;
   }
+}
+
+.form-textarea {
+  min-height: 150px;
+  min-width: 100%;
 }
 
 .form-footer {

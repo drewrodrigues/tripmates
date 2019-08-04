@@ -180,12 +180,13 @@ ActiveRecord::Base.transaction do
   trips.each do |trip|
     start_date = Faker::Time.between(from: 20.days.from_now, to: 2.years.from_now)
     new_trip = Trip.new(
-      start_date: start_date,
+      creator_id: user_ids.sample,
+      details: Faker::Lorem.paragraph_by_chars(number: 256, supplemental: false),
       end_date: Faker::Time.between(from: start_date, to: start_date + 10.days),
       location: trip[:location],
-      creator_id: user_ids.sample,
-      title: trip[:title],
-      spaces: (2..10).to_a.sample
+      spaces: (2..10).to_a.sample,
+      start_date: start_date,
+      title: trip[:title]
     )
     new_trip.cover_photo.attach(
       io: File.open(trip[:cover_photo]),

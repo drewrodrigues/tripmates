@@ -49,12 +49,13 @@ class Api::TripsController < ApplicationController
 
   def trip_params
     base_params = [
-      :start_date,
+      :details,
       :end_date,
       :location,
-      :title,
+      :privacy,
       :spaces,
-      :privacy
+      :start_date,
+      :title
     ]
     cover_photo_param = params[:trip][:cover_photo]
     if cover_photo_param == "" || cover_photo_param.is_a?(String)

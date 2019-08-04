@@ -1,15 +1,16 @@
 json.set! "trip" do
   json.set! @trip.id do
     json.extract! @trip, :id,
-      :start_date,
-      :end_date,
-      :title,
-      :location,
       :creator_id,
-      :duration,
       :days_until,
+      :details,
+      :duration,
+      :end_date,
+      :location,
+      :privacy,
       :spaces,
-      :privacy
+      :start_date,
+      :title
     json.coverPhoto url_for(@trip.cover_photo) if @trip.cover_photo.attached?
   end
 end

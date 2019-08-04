@@ -16,7 +16,8 @@ const defaultState = {
   location: "",
   cover_photo: "",
   spaces: 0,
-  privacy: "visible"
+  privacy: "visible",
+  details: ""
 }
 
 class TripForm extends React.Component {
@@ -44,7 +45,8 @@ class TripForm extends React.Component {
           spaces: trip.spaces,
           title: trip.title,
           image_preview: trip.coverPhoto,
-          dateRange: [moment(trip.startDate), moment(trip.endDate)]
+          dateRange: [moment(trip.startDate), moment(trip.endDate)],
+          details: trip.details,
         })
       })
     }
@@ -79,6 +81,7 @@ class TripForm extends React.Component {
     formData.append('trip[cover_photo]', this.state.cover_photo)
     formData.append('trip[spaces]', this.state.spaces)
     formData.append('trip[privacy]', this.state.privacy)
+    formData.append('trip[details]', this.state.details)
 
     this.props.action(formData).then(res => {
       this.clearForm()
@@ -104,12 +107,11 @@ class TripForm extends React.Component {
     const {handleUpdate, handleSubmit, handleImage} = this
     const {actionType, errors} = this.props
     const {
-      end_date,
+      details,
       image_preview,
       location,
       privacy,
       spaces,
-      start_date,
       title
     } = this.state
 
@@ -211,6 +213,16 @@ class TripForm extends React.Component {
               Hidden
             </button>
           </div>
+
+          <label className="form-label">
+            Details
+          </label>
+          <textarea
+            className="form-input form-textarea"
+            onChange={ handleUpdate('details') }
+            value={details}
+          />
+
 
           <footer className="form-footer">
             <div className="form-buttons">

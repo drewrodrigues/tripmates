@@ -1,3 +1,7 @@
 .TripDetail-body {
   @include card-padding;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  white-space: pre-line;
 }
