@@ -5,7 +5,8 @@ import {todayForInput} from "../../../helpers/formatters"
 import FormErrors from '../../Shared/formErrors'
 import DateRangePicker from '@wojtekmaj/react-daterange-picker'
 import moment from 'moment'
-import ResponseButton from '../shared/ResponseButton'
+import ResponseButton from './ResponseButton'
+import ResponseButtons from './ResponseButtons';
 
 const today = new Date()
 
@@ -65,7 +66,7 @@ class TripForm extends React.Component {
 
   deleteTrip(e) {
     e.preventDefault()
-    this.props.deleteTrip(this.props.match.params.id).then(() => {
+    return this.props.deleteTrip(this.props.match.params.id).then(() => {
       this.props.history.push('/')
     })
   }
@@ -115,6 +116,37 @@ class TripForm extends React.Component {
       spaces,
       title
     } = this.state
+
+    let responseButtons
+    if (actionType == "Create") {
+      responseButtons = [{
+        action: e => this.handleSubmit(e),
+        actionableText: actionType == "Create" ? "Creating" : "Updating",
+        className: "form-button button button-heavy button-green",
+        modelType: "Trip",
+        text: actionType,
+        icon: actionType == "Create" ? "plus" : "edit",
+      }]
+    } else {
+      responseButtons = [
+        {
+          action: e => this.handleSubmit(e),
+          actionableText: actionType == "Create" ? "Creating" : "Updating",
+          className: "form-button button button-heavy button-green",
+          modelType: "Trip",
+          text: actionType,
+          icon: actionType == "Create" ? "plus" : "edit",
+        },
+        {
+          action: e => this.deleteTrip(e),
+          actionableText: "Deleting",
+          className: "form-button button button-heavy button-red",
+          modelType: "Trip",
+          text: "Delete",
+          icon: "trash"
+        }
+      ]
+    }
 
     return(
       <div>
@@ -227,14 +259,7 @@ class TripForm extends React.Component {
 
           <footer className="form-footer">
             <div className="form-buttons">
-              <ResponseButton
-                action={e => this.handleSubmit(e)}
-                actionableText={actionType == "Create" ? "Creating" : "Updating" }
-                className="form-button button button-heavy button-green"
-                modelType="Trip"
-                text={actionType}
-                icon={actionType == "Create" ? "plus" : "edit" }
-              />
+              <ResponseButtons buttons={responseButtons} />
             </div>
           </footer>
         </form>

@@ -114,3 +114,7 @@
 .form-signUp {
   margin-top: 100px;
 }
+
+button:disabled {
+  cursor: default;
+}
