@@ -269,13 +269,15 @@ class TripForm extends React.Component {
             <footer className="form-footer">
               <div className="form-buttons">
                 <ResponseButtons buttons={responseButtons} />
-                <button
-                  className="form-button button button-heavy button-red"
-                  onClick={this.showConfirmation}
-                >
-                  <FontAwesomeIcon icon={"trash"} />
-                  Delete Trip
-                </button>
+                  {actionType == "Update" && (
+                    <button
+                      className="form-button button button-heavy button-red"
+                      onClick={this.showConfirmation}
+                    >
+                      <FontAwesomeIcon icon={"trash"} />
+                      Delete Trip
+                    </button>
+                  )}
               </div>
             </footer>
           </form>
