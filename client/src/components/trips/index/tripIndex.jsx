@@ -4,14 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import TripDetail from "../TripDetail"
 import FriendsPlaceholder from '../../../assets/friends.png'
 import WorldPlaceholder from '../../../assets/world.png'
-import Loader from "../../../assets/loader.gif";
 import TripCoverPhoto from '../TripCoverPhoto';
+import Loader from "../../Shared/Loader"
 
 const TripIndexItemLoadingPlaceholder = () => (
-  <div className="tripIndexItem-placeholder">
-    <img src={Loader} alt="Loading" />
-    <p>Loading</p>
-  </div>
+  <Loader />
 )
 
 const TripIndexNoResultsPlaceholder = () => (

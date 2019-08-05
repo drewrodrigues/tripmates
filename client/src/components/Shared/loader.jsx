@@ -1,8 +1,12 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Loader = () => {
   return (
-    <img src={ window.loader } className="loader"/>
+    <div className="Loader">
+      <FontAwesomeIcon icon="spinner" spin className="Loader-spinner" />
+      <p className="Loader-text">Loading</p>
+    </div>
   )
 }
 
