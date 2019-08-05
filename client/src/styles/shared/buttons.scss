@@ -6,6 +6,7 @@
   font-size: 14px;
   border: none;
   cursor: pointer;
+  transition: 0.25s background;
 
   svg,
   i {
@@ -49,6 +50,12 @@
   &:hover {
     background: #DD0F28;
   }
+}
+
+.button-disabled {
+  background: $gray-primary;
+  color: white;
+  cursor: default;
 }
 
 .button-white {

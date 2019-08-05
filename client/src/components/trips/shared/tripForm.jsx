@@ -5,8 +5,9 @@ import {todayForInput} from "../../../helpers/formatters"
 import FormErrors from '../../Shared/formErrors'
 import DateRangePicker from '@wojtekmaj/react-daterange-picker'
 import moment from 'moment'
-import ResponseButtons from './ResponseButtons';
+import ResponseButtons from './ResponseButtons'
 import Loader from "../../Shared/Loader"
+import Confirmation from "../../Shared/Confirmation"
 
 const today = new Date()
 
@@ -20,7 +21,8 @@ const defaultState = {
   spaces: 0,
   privacy: "visible",
   details: "",
-  loading: false
+  loading: false,
+  showConfirmation: false
 }
 
 class TripForm extends React.Component {
@@ -34,6 +36,8 @@ class TripForm extends React.Component {
     this.select = this.select.bind(this)
     this.deleteTrip = this.deleteTrip.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.showConfirmation = this.showConfirmation.bind(this)
+    this.hideConfirmation = this.hideConfirmation.bind(this)
   }
 
   componentDidMount() {
@@ -108,6 +112,15 @@ class TripForm extends React.Component {
     this.setState({dateRange})
   }
 
+  showConfirmation(e) {
+    e.preventDefault()
+    this.setState({ showConfirmation: true })
+  }
+
+  hideConfirmation() {
+    this.setState({ showConfirmation: false })
+  }
+
   render() {
     const {handleUpdate, handleSubmit, handleImage} = this
     const {actionType, errors} = this.props
@@ -120,39 +133,28 @@ class TripForm extends React.Component {
       title
     } = this.state
 
-    let responseButtons
-    if (actionType == "Create") {
-      responseButtons = [{
-        action: e => this.handleSubmit(e),
-        actionableText: actionType == "Create" ? "Creating" : "Updating",
-        className: "form-button button button-heavy button-green",
-        modelType: "Trip",
-        text: actionType,
-        icon: actionType == "Create" ? "plus" : "edit",
-      }]
-    } else {
-      responseButtons = [
-        {
-          action: e => this.handleSubmit(e),
-          actionableText: actionType == "Create" ? "Creating" : "Updating",
-          className: "form-button button button-heavy button-green",
-          modelType: "Trip",
-          text: actionType,
-          icon: actionType == "Create" ? "plus" : "edit",
-        },
-        {
-          action: e => this.deleteTrip(e),
-          actionableText: "Deleting",
-          className: "form-button button button-heavy button-red",
-          modelType: "Trip",
-          text: "Delete",
-          icon: "trash"
-        }
-      ]
-    }
+    let responseButtons = [{
+      action: e => this.handleSubmit(e),
+      actionableText: actionType == "Create" ? "Creating" : "Updating",
+      className: "form-button button button-heavy button-green",
+      modelType: "Trip",
+      text: actionType,
+      icon: actionType == "Create" ? "plus" : "edit",
+    }]
 
     return(
       <div>
+        {this.state.showConfirmation &&
+        <Confirmation
+          buttonText="Delete"
+          callback={this.deleteTrip}
+          confirmationText={title}
+          close={this.hideConfirmation}
+          icon="trash"
+          message="Deleting a trip will remove all associated data"
+          title="Are you sure?"
+        />}
+
         <header className="form-header">
           <h3 className="form-title">
           {actionType === 'Create' ? "Let's add a trip" : "Edit your trip"}
@@ -167,6 +169,7 @@ class TripForm extends React.Component {
 
             <label className="form-label"><span>What</span> should we call it?</label>
             <input type="text"
+              autoFocus
               className="form-input"
               onChange={ handleUpdate('title') }
               placeholder="Title"
@@ -266,6 +269,13 @@ class TripForm extends React.Component {
             <footer className="form-footer">
               <div className="form-buttons">
                 <ResponseButtons buttons={responseButtons} />
+                <button
+                  className="form-button button button-heavy button-red"
+                  onClick={this.showConfirmation}
+                >
+                  <FontAwesomeIcon icon={"trash"} />
+                  Delete Trip
+                </button>
               </div>
             </footer>
           </form>

@@ -1,0 +1,43 @@
+.Confirmation {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index:100;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Confirmation-container {
+  @include card-padding;
+  background: white;
+  border-radius: $border-radius;
+  min-width: 400px;
+}
+
+.Confirmation-title {
+  font-weight: 900;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.Confirmation-label {
+  margin-bottom: $padding-half;
+  color: $text-muted;
+  padding-bottom: $padding-half;
+}
+
+.Confirmation-detail {
+  margin-bottom: $padding-main;
+  font-size: 16px;
+
+  b {
+    border-radius: 5px;
+    padding: 3px 5px;
+    color: white;
+    background: $red-primary;
+  }
+}
