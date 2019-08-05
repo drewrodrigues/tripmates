@@ -1,4 +1,5 @@
 class Api::TripsController < ApplicationController
+  before_action :require_sign_in
   before_action :set_trip_for_current_user, only: [:update, :destroy]
 
   def create

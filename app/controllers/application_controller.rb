@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
+  def logged_out?
+    !current_user
+  end
+
   def current_user
     @current_user ||= User.find_by(session_token: session[:session_token])
   end
@@ -18,5 +22,11 @@ class ApplicationController < ActionController::Base
   def logout!
     current_user.try(:reset_session_token!)
     session[:session_token] = nil
+  end
+
+  def require_sign_in
+    if logged_out?
+      render json: { message: "Sign in required" }, status: :unauthorized
+    end
   end
 end
