@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import FormErrors from '../Shared/formErrors'
+import ResponseButtons from '../trips/shared/ResponseButtons';
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class SignIn extends React.Component {
   submit(e) {
     e.preventDefault()
     const {email, password} = this.state
-    this.props.signIn({email, password})
+    return this.props.signIn({email, password})
       .then(() => this.props.history.push('/'))
   }
 
@@ -71,7 +72,15 @@ class SignIn extends React.Component {
 
           <footer className="form-footer signUp-footer">
             <div className="form-buttons">
-              <input type="submit" value="Sign in" className="button button-heavy button-green form-submit-primary" />
+              <ResponseButtons
+                buttons={[{
+                  action: submit,
+                  actionableText: "Signing In",
+                  className: "button button-heavy button-green form-submit-primary",
+                  text: "Sign In",
+                  icon: "sign-in-alt"
+                }]}
+              />
             </div>
           </footer>
           <p className="signUp-alreadyHaveAccount">Don't have an account? Try <Link to="/signup" className="link">signing up</Link> instead.</p>

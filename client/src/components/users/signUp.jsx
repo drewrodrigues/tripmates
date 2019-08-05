@@ -115,10 +115,10 @@ class SignUp extends React.Component {
               <ResponseButtons
                 buttons={[{
                   action: submit,
-                  actionableText: "Signing Up",
+                  actionableText: "Creating Your Account",
                   className: "button button-heavy button-green form-submit-primary",
                   text: "Create Your Account",
-                  icon: "check"
+                  icon: "user-plus"
                 }]}
               />
             </div>
