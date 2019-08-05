@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {handleImage } from '../../helpers/handlers'
 import FormErrors from '../Shared/formErrors'
+import ResponseButtons from '../trips/shared/ResponseButtons';
 
 // TODO: disable button until form is valid
 
@@ -36,7 +37,7 @@ class SignUp extends React.Component {
     formData.append('user[password]', this.state.password)
     formData.append('user[profile_picture]', this.state.profile_picture)
 
-    this.props.signUp(formData)
+    return this.props.signUp(formData)
       .then(() => {
         this.props.history.push('/')
       })
@@ -56,7 +57,7 @@ class SignUp extends React.Component {
           <Link className="Nav-logo signUp-logo" to="/">tripmates</Link>
         </header>
 
-        <form onSubmit={submit} className="form form-signUp">
+        <form className="form form-signUp">
           <header className="signUp-form-header">
             <img
               src={this.state.image_preview}
@@ -111,7 +112,15 @@ class SignUp extends React.Component {
 
           <footer className="form-footer signUp-footer">
             <div className="form-buttons">
-              <input type="submit" className="button button-heavy button-green form-submit-primary" value="Create your account" />
+              <ResponseButtons
+                buttons={[{
+                  action: submit,
+                  actionableText: "Signing Up",
+                  className: "button button-heavy button-green form-submit-primary",
+                  text: "Create Your Account",
+                  icon: "check"
+                }]}
+              />
             </div>
           </footer>
           <p className="signUp-alreadyHaveAccount">Already have an account? Try <Link to="/login" className="link">logging in</Link> instead.</p>
