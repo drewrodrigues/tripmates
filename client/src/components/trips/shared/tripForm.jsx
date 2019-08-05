@@ -5,8 +5,8 @@ import {todayForInput} from "../../../helpers/formatters"
 import FormErrors from '../../Shared/formErrors'
 import DateRangePicker from '@wojtekmaj/react-daterange-picker'
 import moment from 'moment'
-import ResponseButton from './ResponseButton'
 import ResponseButtons from './ResponseButtons';
+import Loader from "../../Shared/Loader"
 
 const today = new Date()
 
@@ -19,7 +19,8 @@ const defaultState = {
   cover_photo: "",
   spaces: 0,
   privacy: "visible",
-  details: ""
+  details: "",
+  loading: false
 }
 
 class TripForm extends React.Component {
@@ -37,6 +38,7 @@ class TripForm extends React.Component {
 
   componentDidMount() {
     if (this.props.actionType === "Update") {
+      this.setState({ loading: true })
       this.props.fetchTrip(this.props.match.params.id).then(() => {
         const {trip} = this.props
         this.setState({
@@ -49,6 +51,7 @@ class TripForm extends React.Component {
           image_preview: trip.coverPhoto,
           dateRange: [moment(trip.startDate), moment(trip.endDate)],
           details: trip.details,
+          loading: false
         })
       })
     }
@@ -156,114 +159,117 @@ class TripForm extends React.Component {
           </h3>
         </header>
 
-        <form onSubmit={handleSubmit} className="form">
-          <FormErrors errors={ errors } />
+        {this.state.loading ?
+          <Loader />
+        :
+          <form onSubmit={handleSubmit} className="form">
+            <FormErrors errors={ errors } />
 
-          <label className="form-label"><span>What</span> should we call it?</label>
-          <input type="text"
-            className="form-input"
-            onChange={ handleUpdate('title') }
-            placeholder="Title"
-            value={title}
-            data-cy="tripInput-title"
-          />
-
-          <label className="form-label"><span>Where</span> are you going?</label>
-          <input type="text"
-            placeholder="Location"
-            onChange={ handleUpdate('location') }
-            className="form-input"
-            value={location}
-            id="trip-location"
-            data-cy="tripInput-location"
-          />
-
-          <label className="form-label"><span>When</span> are you going?</label>
-          <div data-cy="tripInput-dateRange">
-            <DateRangePicker
-              onChange={this.onChange}
-              value={this.state.dateRange}
-              className="form-input form-input-dateRange"
-              data-cy="tripInput-dateRange"
+            <label className="form-label"><span>What</span> should we call it?</label>
+            <input type="text"
+              className="form-input"
+              onChange={ handleUpdate('title') }
+              placeholder="Title"
+              value={title}
+              data-cy="tripInput-title"
             />
-          </div>
 
-          <label htmlFor="trip-photo" className="form-label">
-            Cover photo
-          </label>
-          <input type="file"
-            onChange={ e => handleImage(e, "cover_photo") }
-            className="form-input"
-            accept=".jpg,.jpeg,.png"
-            id="trip-photo"
-            data-cy="tripInput-photo"
-          />
-
-          {image_preview ?
-            <img src={image_preview} className="tripForm-ImagePreview" />
-            :
-            null
-          }
-
-          <label htmlFor="trip-spaces" className="form-label">
-            <FontAwesomeIcon icon="users" />
-            Spaces
-          </label>
-          <div className="button-row">
-            <button
-              className={`form-button button button-${spaces == 0 ? 'blue' : 'white'}`}
-              onClick={e => this.select(e, 'spaces', 0)}
-              data-cy="tripInput-spaces-unlimited"
-            >
-              Unlimited
-            </button>
-
-            <input
-              className={`form-button button button-${spaces != 0 ? 'blue' : 'white'}`}
-              onChange={ handleUpdate('spaces') }
-              value={ spaces }
-              data-cy="tripInput-spaces"
+            <label className="form-label"><span>Where</span> are you going?</label>
+            <input type="text"
+              placeholder="Location"
+              onChange={ handleUpdate('location') }
+              className="form-input"
+              value={location}
+              id="trip-location"
+              data-cy="tripInput-location"
             />
-          </div>
 
-          <label className="form-label">
-            Privacy
-          </label>
-          <div className="button-row">
-            <button
-              className={`form-button button button-${privacy === 'visible' ? 'blue' : 'white'}`}
-              onClick={e => this.select(e, 'privacy', 'visible')}
-              data-cy="tripInput-privacy-visible"
-            >
-              Visible
-            </button>
-
-            <button
-              className={`form-button button button-${privacy === 'hidden' ? 'blue' : 'white'}`}
-              onClick={e => this.select(e, 'privacy', 'hidden')}
-              data-cy="tripInput-privacy-hidden"
-            >
-              Hidden
-            </button>
-          </div>
-
-          <label className="form-label">
-            Details
-          </label>
-          <textarea
-            className="form-input form-textarea"
-            onChange={ handleUpdate('details') }
-            value={details}
-          />
-
-
-          <footer className="form-footer">
-            <div className="form-buttons">
-              <ResponseButtons buttons={responseButtons} />
+            <label className="form-label"><span>When</span> are you going?</label>
+            <div data-cy="tripInput-dateRange">
+              <DateRangePicker
+                onChange={this.onChange}
+                value={this.state.dateRange}
+                className="form-input form-input-dateRange"
+                data-cy="tripInput-dateRange"
+              />
             </div>
-          </footer>
-        </form>
 
+            <label htmlFor="trip-photo" className="form-label">
+              Cover photo
+            </label>
+            <input type="file"
+              onChange={ e => handleImage(e, "cover_photo") }
+              className="form-input"
+              accept=".jpg,.jpeg,.png"
+              id="trip-photo"
+              data-cy="tripInput-photo"
+            />
+
+            {image_preview ?
+              <img src={image_preview} className="tripForm-ImagePreview" />
+              :
+              null
+            }
+
+            <label htmlFor="trip-spaces" className="form-label">
+              <FontAwesomeIcon icon="users" />
+              Spaces
+            </label>
+            <div className="button-row">
+              <button
+                className={`form-button button button-${spaces == 0 ? 'blue' : 'white'}`}
+                onClick={e => this.select(e, 'spaces', 0)}
+                data-cy="tripInput-spaces-unlimited"
+              >
+                Unlimited
+              </button>
+
+              <input
+                className={`form-button button button-${spaces != 0 ? 'blue' : 'white'}`}
+                onChange={ handleUpdate('spaces') }
+                value={ spaces }
+                data-cy="tripInput-spaces"
+              />
+            </div>
+
+            <label className="form-label">
+              Privacy
+            </label>
+            <div className="button-row">
+              <button
+                className={`form-button button button-${privacy === 'visible' ? 'blue' : 'white'}`}
+                onClick={e => this.select(e, 'privacy', 'visible')}
+                data-cy="tripInput-privacy-visible"
+              >
+                Visible
+              </button>
+
+              <button
+                className={`form-button button button-${privacy === 'hidden' ? 'blue' : 'white'}`}
+                onClick={e => this.select(e, 'privacy', 'hidden')}
+                data-cy="tripInput-privacy-hidden"
+              >
+                Hidden
+              </button>
+            </div>
+
+            <label className="form-label">
+              Details
+            </label>
+            <textarea
+              className="form-input form-textarea"
+              onChange={ handleUpdate('details') }
+              value={details}
+            />
+
+
+            <footer className="form-footer">
+              <div className="form-buttons">
+                <ResponseButtons buttons={responseButtons} />
+              </div>
+            </footer>
+          </form>
+        }
       </div>
     )
   }
