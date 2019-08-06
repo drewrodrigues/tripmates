@@ -6,6 +6,7 @@ import FriendsPlaceholder from '../../../assets/friends.png'
 import WorldPlaceholder from '../../../assets/world.png'
 import TripCoverPhoto from '../TripCoverPhoto';
 import Loader from "../../Shared/Loader"
+import queryString from "query-string"
 
 const TripIndexItemLoadingPlaceholder = () => (
   <Loader />
@@ -44,12 +45,16 @@ const TripIndexNoResultsPlaceholder = () => (
   </>
 )
 
+const defaultState = { loading: false, queryWhen: "all", queryLedBy: "anyone" }
+
 class TripIndex extends React.Component {
+
   constructor(props) {
     super(props)
-    this.state = {loading: true}
-    this.searchPastTrips = this.searchPastTrips.bind(this)
-    this.searchUpcomingTrips = this.searchUpcomingTrips.bind(this)
+    this.state = defaultState
+    this.updateFilters = this.updateFilters.bind(this)
+    this.updateSupdateSearchQuery = this.updateSearchQuery.bind(this)
+    this.doneLoading = this.doneLoading.bind(this)
   }
 
   componentWillUnmount() {
@@ -58,52 +63,50 @@ class TripIndex extends React.Component {
 
   componentDidMount() {
     this.search()
+    const query = queryString.parse(this.props.location.search)
+    const queryWhen = query.when || "all"
+    const queryLedBy = query.ledBy || "anyone"
+    this.setState({ queryWhen, queryLedBy })
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.match.path !== this.props.match.path) {
-      this.search()
+    console.log(prevProps)
+    if (prevProps.location.search !== this.props.location.search) {
+      if (this.props.location.search === "") {
+        // coming back to page after mounted
+        this.setState(defaultState, this.search)
+      } else {
+        this.search()
+      }
     }
   }
 
   search() {
     this.props.clearTrips()
-    this.setState({loading: true})
-    switch (this.props.match.path) {
-      case "/":
-        this.searchUpcomingTrips()
-        break
-      case "/trips/all":
-        this.props.retrieveMyTrips()
-      case "/trips/upcoming":
-        this.searchUpcomingTrips()
-        break
-      case "/trips/past":
-        this.searchPastTrips()
-        break
-      default:
-        this.searchUpcomingTrips()
-        break
-    }
-  }
-
-  searchAllTrips() {
-    this.props.retrieveMyTrips()
-      .then(() => this.doneLoading())
-  }
-
-  searchPastTrips() {
-    this.props.searchTrips({when: "past", date: new Date()})
-      .then(() => this.doneLoading())
-  }
-
-  searchUpcomingTrips() {
-    this.props.searchTrips({when: "upcoming", date: new Date()})
-      .then(() => this.doneLoading())
+    this.setState({ loading: true })
+    this.props.searchTrips({
+      led_by: this.state.queryLedBy,
+      when: this.state.queryWhen,
+      date: new Date()
+    }).finally(this.doneLoading)
   }
 
   doneLoading() {
     this.setState({loading: false})
+  }
+
+  updateFilters(prop, value) {
+    return e => {
+      e.preventDefault()
+      this.setState({ [prop]: value }, this.updateSearchQuery)
+    }
+  }
+
+  updateSearchQuery() {
+    this.props.history.push({
+      pathname: '/trips',
+      search: `ledBy=${this.state.queryLedBy}&when=${this.state.queryWhen}`
+    })
   }
 
   render() {
@@ -121,17 +124,35 @@ class TripIndex extends React.Component {
             </div>
 
             <div className="tripIndex-header-center">
-              <NavLink to="/trips/past" exact className="tripIndex-button button button-white" onClick={this.searchPastTrips} activeClassName="button-blue button-heavy">
+              <button to="/trips/past"
+                className={`
+                  tripIndex-button button button-white
+                  ${this.state.queryWhen == 'past' ? "button-blue button-heavy" : ""}`
+                }
+                onClick={this.updateFilters('queryWhen', 'past')}
+              >
                 <FontAwesomeIcon icon="history"/>
                 Past
-              </NavLink>
-              <NavLink to="/trips/all" exact className="tripIndex-button button button-white" onClick={this.props.retrieveMyTrips} activeClassName="button-blue button-heavy">
+              </button>
+              <button to="/trips/all"
+                className={`
+                  tripIndex-button button button-white
+                  ${this.state.queryWhen == 'all' ? "button-blue button-heavy" : ""}`
+                }
+                onClick={this.updateFilters('queryWhen', 'all')}
+              >
                 All
-              </NavLink>
-              <NavLink to="/" exact className="tripIndex-button button button-white" onClick={this.searchUpcomingTrips} activeClassName="button-blue button-heavy">
+              </button>
+              <button to="/"
+                className={`
+                  tripIndex-button button button-white
+                  ${this.state.queryWhen == 'upcoming' ? "button-blue button-heavy" : ""}`
+                }
+                onClick={this.updateFilters('queryWhen', 'upcoming')}
+              >
                 <FontAwesomeIcon icon="angle-double-right"/>
                 Upcoming
-              </NavLink>
+              </button>
             </div>
 
             <div className="tripIndex-header-right">
