@@ -40,6 +40,14 @@ class Trip < ApplicationRecord
   validate :valid_date_range
   validate :positive_spaces
 
+  def self.before(date)
+    Trip.where("start_date < ?", date.to_date)
+  end
+
+  def self.after(date)
+    Trip.where("start_date >= ?", date.to_date)
+  end
+
   def duration
     (end_date - start_date).round + 1
   end
