@@ -18,6 +18,19 @@ class FriendRequest < ApplicationRecord
   validate :unique_friend_request_between_users
   validate :cant_request_self
 
+  def already_sent?
+    FriendRequest.where(requester_id: requester_id).exists?
+  end
+
+  def already_being_requested?
+    FriendRequest.where(requestee_id: requester_id).exists?
+  end
+
+  # TODO:
+  def delete_and_add_friend
+    # Friend
+  end
+
   private
 
   def unique_friend_request_between_users

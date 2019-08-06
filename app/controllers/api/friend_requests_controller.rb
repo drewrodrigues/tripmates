@@ -3,8 +3,10 @@ class Api::FriendRequestsController < ApplicationController
 
   def create
     @friend_request = current_user.requested_friends.build(requestee_id: params[:id])
-    if @friend_request.save
+    if @friend_request.save || @friend_request.already_sent?
       render :show
+    elsif @friend_request.already_being_requested?
+      # TODO: @friend_request.delete_and_add_friend
     else
       render json: @friend_request.errors.full_messages
     end
@@ -24,7 +26,7 @@ class Api::FriendRequestsController < ApplicationController
 
   def ensure_authorized_delete
     @friend_request = FriendRequest.find(params[:id])
-    unless (current_user.id == @friend_request.requestee_id || 
+    unless (current_user.id == @friend_request.requestee_id ||
             current_user.id == @friend_request.requester_id)
       render json: {messages: "Not authorized"}, status: 500
     end
