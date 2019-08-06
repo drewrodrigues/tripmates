@@ -10,7 +10,7 @@ const UserIndexItem = ({ user }) => {
         :
         <img src={AvatarPlaceholder} className="Nav-avatar-placeholder" />
       }
-      { `${ user.firstName } ${ user.lastName }` } {/* TODO: formatter */}
+      { `${ user.fullName }` }
 
       <FriendRequest userId={ user.id } />
     </li>

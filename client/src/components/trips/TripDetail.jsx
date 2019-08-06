@@ -71,7 +71,7 @@ const TripDetail = ({
                   <Avatar image={creator.profilePicture} />
                   <span className="tripIndexItem-led-by">
                     Led by
-                    <a className="tripIndexItem-led-by-user"> {creator.firstName} {creator.lastName}</a>
+                    <a className="tripIndexItem-led-by-user"> { creator.fullName }</a>
                   </span>
                 </>
               }
