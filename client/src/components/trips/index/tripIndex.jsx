@@ -45,7 +45,11 @@ const TripIndexNoResultsPlaceholder = () => (
   </>
 )
 
-const defaultState = { loading: false, queryWhen: "all", queryLedBy: "anyone" }
+const defaultState = {
+  loading: false,
+  queryWhen: "all",
+  queryLedBy: "anyone"
+}
 
 class TripIndex extends React.Component {
 
@@ -116,11 +120,48 @@ class TripIndex extends React.Component {
       <div>
         <div className="tripsIndex">
           <header className="tripIndex-header">
-            <div className="tripIndex-header-left">
-              <a href="#" className="button button-white">
-                <FontAwesomeIcon icon="filter"/>
-                All
-              </a>
+            <div className="tripIndex-header-left" onMouseLeave={ () => this.setState({ showLedByFilter: false })}>
+              <label className="tripIndex-ledByFilter-label">
+                <FontAwesomeIcon icon="user"/>
+                Led by
+              </label>
+
+              <button
+                className={`
+                  tripIndex-button button button-white
+                  ${this.state.queryLedBy == 'anyone' ? "button-blue button-heavy" : ""}`
+                }
+                onClick={this.updateFilters('queryLedBy', 'anyone')}
+              >
+                Anyone
+              </button>
+
+              <button
+                className={`
+                  tripIndex-button button button-white
+                  ${this.state.queryLedBy == 'you' ? "button-blue button-heavy" : ""}`
+                }
+                onClick={this.updateFilters('queryLedBy', 'you')}
+              >
+                You
+              </button>
+
+              <button
+                className={`
+                  tripIndex-button button button-white
+                  ${this.state.queryLedBy == 'friends' ? "button-blue button-heavy" : ""}`
+                }
+                onClick={this.updateFilters('queryLedBy', 'friends')}
+              >
+                Friends
+              </button>
+
+              {this.state.showLedByFilter &&
+                <ul class="tripIndex-ledBy-dropdown">
+                  <a className="tripIndex-ledBy-dropdown-button">Anyone</a>
+                  <a className="tripIndex-ledBy-dropdown-button">You</a>
+                </ul>
+              }
             </div>
 
             <div className="tripIndex-header-center">

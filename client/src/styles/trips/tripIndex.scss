@@ -77,3 +77,14 @@
     margin-top: $padding-main;
   }
 }
+
+.tripIndex-header-left {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.tripIndex-ledByFilter-label {
+  color: $text-muted;
+  margin-right: 10px;
+}
