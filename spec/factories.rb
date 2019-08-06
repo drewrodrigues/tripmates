@@ -1,5 +1,9 @@
 FactoryBot.define do
   factory :user do
+    first_name { "Drew" }
+    last_name { "Rodrigues" }
+    sequence(:email) { |i| "example#{i}@tripmates.io" }
+    password { "password" }
   end
 
   factory :trip do
@@ -9,7 +13,7 @@ FactoryBot.define do
     location { "Arizona" }
     spaces { 5 }
     privacy { Trip::PRIVACIES.sample }
-    
+
     association :creator, factory: :user, strategy: :build
   end
 end
