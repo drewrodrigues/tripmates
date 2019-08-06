@@ -13,6 +13,7 @@ FactoryBot.define do
     location { "Arizona" }
     spaces { 5 }
     privacy { Trip::PRIVACIES.sample }
+    details { "Cool details go here" }
 
     association :creator, factory: :user, strategy: :build
   end
