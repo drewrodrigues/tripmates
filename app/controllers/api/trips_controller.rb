@@ -24,15 +24,23 @@ class Api::TripsController < ApplicationController
   end
 
   def index
-    if params[:when] == "past"
-      @trips = Trip.before(params[:date]).includes(:creator)
-    elsif params[:when] == "upcoming"
-      @trips = Trip.after(params[:date]).includes(:creator)
-    elsif params[:when] == "all"
+    if params[:led_by] == "anyone"
       @trips = Trip.all
+    elsif params[:led_by] == "me"
+      @trips = current_user.created_trips
+    elsif params[:led_by] == "friends"
+      @trips = Trip.where.not(creator: current_user)
     else
-      @trips = Trip.all.includes(:creator)
+      @trips = Trip.all
     end
+
+    if params[:when] == "past"
+      @trips = @trips.before(params[:date])
+    elsif params[:when] == "upcoming"
+      @trips = @trips.after(params[:date])
+    end
+
+    @trips.includes(:creator)
   end
 
   def destroy

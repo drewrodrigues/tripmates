@@ -139,11 +139,11 @@ class TripIndex extends React.Component {
               <button
                 className={`
                   tripIndex-button button button-white
-                  ${this.state.queryLedBy == 'you' ? "button-blue button-heavy" : ""}`
+                  ${this.state.queryLedBy == 'me' ? "button-blue button-heavy" : ""}`
                 }
-                onClick={this.updateFilters('queryLedBy', 'you')}
+                onClick={this.updateFilters('queryLedBy', 'me')}
               >
-                You
+                Me
               </button>
 
               <button
