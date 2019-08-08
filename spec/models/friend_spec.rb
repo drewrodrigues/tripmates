@@ -22,10 +22,23 @@ RSpec.describe Friend, type: :model do
 
           expect {
             Friend.create(
-              friend_one_id: user_one.id, 
+              friend_one_id: user_one.id,
               friend_two_id: user_two.id
             )
           }.to change(Friend, :count).by(1)
+        end
+
+        it "destroys the friend request" do
+          user_one = create(:user)
+          user_two = create(:user)
+          FriendRequest.create(requestee: user_one, requester: user_two)
+
+          expect {
+            Friend.create(
+              friend_one_id: user_one.id,
+              friend_two_id: user_two.id
+            )
+          }.to change(FriendRequest, :count).by(-1)
         end
       end
     end
@@ -37,7 +50,7 @@ RSpec.describe Friend, type: :model do
         FriendRequest.create(requestee: @user_one, requester: @user_two)
 
         Friend.create(
-          friend_one_id: @user_one.id, 
+          friend_one_id: @user_one.id,
           friend_two_id: @user_two.id
         )
       end
@@ -45,7 +58,7 @@ RSpec.describe Friend, type: :model do
       it "doesn't add the friend" do
         expect {
           Friend.create(
-            friend_one_id: @user_one.id, 
+            friend_one_id: @user_one.id,
             friend_two_id: @user_two.id
           )
         }.to_not change(Friend, :count)
@@ -53,7 +66,7 @@ RSpec.describe Friend, type: :model do
 
       it "has errors" do
         friend = Friend.create(
-          friend_one_id: @user_one.id, 
+          friend_one_id: @user_one.id,
           friend_two_id: @user_two.id
         )
 

@@ -40,7 +40,11 @@ class Friend < ApplicationRecord
       errors.add(:friend_request, "not found")
     end
 
-    throw :abort if errors.any?
+    if errors.any?
+      throw :abort
+    else
+      friend_request.destroy!
+    end
   end
 
   def friends_exist?
