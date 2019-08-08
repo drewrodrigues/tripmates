@@ -1,0 +1,31 @@
+class Api::FriendsController < ApplicationController
+  before_action :require_sign_in
+
+  def create
+    @friend_record = Friend.new(
+      friend_one_id: current_user.id,
+      friend_two_id: params[:id]
+    )
+    if @friend_record.friend_request.requester == current_user
+      render json: { errors: ["Friend request pending"] }, status: :bad_request
+    elsif @friend_record.save
+      @friend = @friend_record.other_user(current_user)
+      render :show
+    else
+      render json:
+        { errors: @friend_record.errors.full_messages},
+        status: :unproccessible_entity
+    end
+  end
+
+  def index
+    @friend_records = current_user.friend_records
+    @friends = current_user.friends
+  end
+
+  def destroy
+    friend = Friend.find(params[:id])
+    friend.destroy
+    render json: {}, status: :ok
+  end
+end
