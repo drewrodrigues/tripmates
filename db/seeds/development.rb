@@ -82,6 +82,22 @@ ActiveRecord::Base.transaction do
     new_user.save!
   end
 
+  20.times do
+    FriendRequest.create(
+      requester: User.all.sample,
+      requestee: User.all.sample
+    )
+  end
+  puts "#{FriendRequest.count} friend requests created"
+
+  20.times do
+    Friend.create(
+      friend_one_id: User.all.sample.id,
+      friend_two_id: User.all.sample.id
+    )
+  end
+  puts "#{Friend.count} friends created"
+
   user_ids = User.ids
 
   trips = [
