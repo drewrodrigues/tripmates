@@ -1,11 +1,11 @@
 import axios from "axios"
 
-// friend: user
-export const addFriend = friend => {
+// friend: id of friendRequest
+export const addFriend = friendRequestId => {
   return axios({
     method: "post",
     url: "/api/friends",
-    data: { id: friend.id }
+    data: { id: friendRequestId }
   })
 }
 
@@ -16,7 +16,7 @@ export const getFriends = () => {
   })
 }
 
-// id: of friend record
+// id: of friendRecord
 export const deleteFriend = id => {
   return axios({
     method: "delete",
