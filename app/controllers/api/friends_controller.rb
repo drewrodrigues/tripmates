@@ -2,11 +2,12 @@ class Api::FriendsController < ApplicationController
   before_action :require_sign_in
 
   def create
+    friend_request = current_user.friend_requests.find(params[:id])
     @friend_record = Friend.new(
       friend_one_id: current_user.id,
-      friend_two_id: params[:id]
+      friend_two_id: friend_request.requester_id
     )
-    if @friend_record.friend_request&.requester == current_user
+    if friend_request.requester == current_user
       render json: { errors: ["Friend request pending"] }, status: :bad_request
     elsif @friend_record.save
       @friend = @friend_record.other_user(current_user)
