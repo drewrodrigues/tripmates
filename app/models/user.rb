@@ -67,4 +67,20 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def friend_records
+    query = "friend_one_id = :id OR friend_two_id = :id"
+    Friend.where(query, id: id)
+  end
+
+  def friend_ids
+    friend_records
+      .pluck(:friend_one_id, :friend_two_id)
+      .flatten
+      .reject { |i| i == id }
+  end
+
+  def friends
+    User.where(id: friend_ids)
+  end
 end
