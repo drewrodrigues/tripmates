@@ -8,12 +8,11 @@ class UsersIndex extends React.Component {
   }
 
   componentDidMount() {
-    // TODO: query for all users, other than myself
-    // TODO: getAllUsersWithFriendRequestData
     this.props.getAllUsers().then(() => {
       this.setState({ loading: false })
     })
     this.props.getAllFriendRequests()
+    this.props.getFriends()
   }
 
   render() {

@@ -5,6 +5,7 @@ import { selectAllOtherUsers, selectAllFriendRequests, selectAllRequestedFriends
 import { getAllUsers } from '../../../actions/userActions'
 
 import { getAllFriendRequests } from '../../../actions/friendRequestActions'
+import { getFriends } from "../../../actions/friendActions"
 
 const mapStateToProps = state => {
   return {
@@ -17,7 +18,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getAllUsers: () => dispatch(getAllUsers()),
-    getAllFriendRequests: () => dispatch(getAllFriendRequests())
+    getAllFriendRequests: () => dispatch(getAllFriendRequests()),
+    getFriends: () => dispatch(getFriends())
   }
 }
 
