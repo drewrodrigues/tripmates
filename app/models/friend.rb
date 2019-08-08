@@ -19,6 +19,18 @@
 class Friend < ApplicationRecord
   before_create :ensure_can_create
 
+  after_initialize :set_friend_request
+  attr_reader :friend_request
+  attr_reader :friend_users
+
+  def other_user(current_user)
+    friend_users.where(id: other_user_id(current_user)).first
+  end
+
+  private
+
+  attr_writer :friend_request, :friend_users
+
   def ensure_can_create
     if users_dont_exist?
       errors.add(:user, "doesn't exist")
@@ -30,8 +42,6 @@ class Friend < ApplicationRecord
 
     throw :abort if errors.any?
   end
-
-  private
 
   def friends_exist?
     query = <<~SQL
@@ -46,18 +56,27 @@ class Friend < ApplicationRecord
   end
 
   def users_dont_exist?
-    User.where(id: [friend_one_id, friend_two_id]).count != 2
+    self.friend_users = User.where(id: [friend_one_id, friend_two_id])
+    friend_users.count != 2
   end
 
   def no_friend_request?
+    !self.friend_request
+  end
+
+  def set_friend_request
     query = <<~SQL
       (requestee_id = :friend_one_id OR requester_id = :friend_one_id) AND
       (requestee_id = :friend_two_id OR requester_id = :friend_two_id)
     SQL
-    !FriendRequest.where(
+    self.friend_request = FriendRequest.where(
       query,
       friend_one_id: friend_one_id,
       friend_two_id: friend_two_id
-    ).exists?
+    ).first
+  end
+
+  def other_user_id(current_user)
+    current_user.id == friend_one_id ? friend_two_id : friend_one_id
   end
 end
