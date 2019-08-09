@@ -7,9 +7,7 @@ class Api::FriendsController < ApplicationController
       friend_one_id: current_user.id,
       friend_two_id: friend_request.requester_id
     )
-    if friend_request.requester == current_user
-      render json: { errors: ["Friend request pending"] }, status: :bad_request
-    elsif @friend_record.save
+    if @friend_record.save
       @friend = @friend_record.other_user(current_user)
       render :show
     else
