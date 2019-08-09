@@ -167,9 +167,9 @@ class TripIndex extends React.Component {
             </div>
 
             <div className="tripIndex-header-right">
-              <label className="tripIndex-ledByFilter-label">
-                <FontAwesomeIcon icon="calendar-alt"/>
+              <label className="tripIndex-when-label">
                 When
+                <FontAwesomeIcon icon="calendar-alt"/>
               </label>
 
               <div className="filter-buttons">
