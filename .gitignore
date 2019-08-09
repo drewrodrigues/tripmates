@@ -36,3 +36,8 @@ spec/examples.txt
 
 # react app output
 public/
+
+# random
+.generators
+.idea/
+.rakeTasks
