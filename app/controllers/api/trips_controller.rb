@@ -24,14 +24,12 @@ class Api::TripsController < ApplicationController
   end
 
   def index
-    if params[:led_by] == "anyone"
-      @trips = Trip.all
-    elsif params[:led_by] == "me"
+    if params[:led_by] == "me"
       @trips = current_user.created_trips
     elsif params[:led_by] == "friends"
-      @trips = Trip.where.not(creator: current_user)
+      @trips = current_user.friends_trips
     else
-      @trips = Trip.all
+      @trips = current_user.created_trips + current_user.friends_trips
     end
 
     if params[:when] == "past"

@@ -45,6 +45,10 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
 
+  def friends_trips
+    Trip.where(creator: friend_ids)
+  end
+
   def ensure_session_token
     self.session_token ||= User.generate_session_token
   end

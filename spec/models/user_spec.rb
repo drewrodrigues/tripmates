@@ -15,6 +15,43 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
+  describe "#friends_trips" do
+    context "with trips from friends" do
+      it "returns trips" do
+        user = create(:user)
+        other_user = create(:user)
+        another_user = create(:user)
+        non_friend_user = create(:user)
+        FriendRequest.create(requester: user, requestee: other_user)
+        Friend.create(friend_one_id: user.id, friend_two_id: other_user.id)
+        FriendRequest.create(requester: user, requestee: another_user)
+        Friend.create(friend_one_id: user.id, friend_two_id: another_user.id)
+
+        non_friend_trip = create(:trip, creator: non_friend_user)
+        trip_one = create(:trip, creator: other_user)
+        trip_two = create(:trip, creator: another_user)
+        expect(Trip.count).to eq(3)
+
+        expect(user.friends_trips.count).to eq(2)
+        expect(user.friends_trips).to include(trip_one)
+        expect(user.friends_trips).to include(trip_two)
+        expect(user.friends_trips).to_not include(non_friend_trip)
+      end
+    end
+
+    context "With no trips from friends" do
+      it "returns no trips" do
+        user = create(:user)
+        non_friend_user = create(:user)
+
+        non_friend_trip = create(:trip, creator: non_friend_user)
+        expect(Trip.count).to eq(1)
+
+        expect(user.friends_trips.count).to eq(0)
+      end
+    end
+  end
+
   describe "#friends_records" do
     it "returns all friend records" do
       user = create(:user)
