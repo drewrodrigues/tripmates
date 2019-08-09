@@ -8,10 +8,6 @@ import TripCoverPhoto from '../TripCoverPhoto';
 import Loader from "../../Shared/Loader"
 import queryString from "query-string"
 
-const TripIndexItemLoadingPlaceholder = () => (
-  <Loader />
-)
-
 const TripIndexNoResultsPlaceholder = () => (
   <>
     <header className="tripIndex-noResultsHeader">
@@ -47,7 +43,7 @@ const TripIndexNoResultsPlaceholder = () => (
 
 const defaultState = {
   loading: false,
-  queryWhen: "all",
+  queryWhen: "upcoming",
   queryLedBy: "anyone"
 }
 
@@ -68,8 +64,8 @@ class TripIndex extends React.Component {
   componentDidMount() {
     this.search()
     const query = queryString.parse(this.props.location.search)
-    const queryWhen = query.when || "all"
-    const queryLedBy = query.ledBy || "anyone"
+    const queryWhen = query.when || this.state.queryWhen
+    const queryLedBy = query.ledBy || this.state.queryLedBy
     this.setState({ queryWhen, queryLedBy })
   }
 
@@ -206,7 +202,7 @@ class TripIndex extends React.Component {
             </div>
           </header>
 
-          {this.state.loading && <TripIndexItemLoadingPlaceholder />}
+          {this.state.loading && <Loader />}
 
           {!this.state.loading && trips.length === 0 ?
             <TripIndexNoResultsPlaceholder />
