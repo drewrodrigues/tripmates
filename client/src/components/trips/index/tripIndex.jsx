@@ -146,7 +146,7 @@ class TripIndex extends React.Component {
                 Me
               </button>
 
-              {/* <button
+              <button
                 className={`
                   tripIndex-button button button-white
                   ${this.state.queryLedBy == 'friends' ? "button-blue button-heavy" : ""}`
@@ -154,7 +154,7 @@ class TripIndex extends React.Component {
                 onClick={this.updateFilters('queryLedBy', 'friends')}
               >
                 Friends
-              </button> */}
+              </button>
 
               {this.state.showLedByFilter &&
                 <ul class="tripIndex-ledBy-dropdown">

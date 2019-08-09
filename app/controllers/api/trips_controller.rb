@@ -29,7 +29,7 @@ class Api::TripsController < ApplicationController
     elsif params[:led_by] == "friends"
       @trips = current_user.friends_trips
     else
-      @trips = current_user.created_trips + current_user.friends_trips
+      @trips = current_user.created_trips.or(current_user.friends_trips)
     end
 
     if params[:when] == "past"
