@@ -70,11 +70,44 @@ const friendRequestArray = state => {
 }
 
 export const checkIfFriend = (state, userId) => {
+  if (Object.values(state.entities.friends).length == 0) return
+  let isFriend = false
+
+  Object.values(state.entities.friends).forEach(friendRecord => {
+    if (friendRecord.friendOneId == userId || friendRecord.friendTwoId == userId) {
+      isFriend = true
+    }
+  })
+
+  return isFriend
+}
+
+export const friendRecordId = (state, userId) => {
+  let id = null
   const currentUserId = state.session.id
-  Object.values(state.entities.friendRequests).forEach(
-    // if
-  )
-  return false
+
+  Object.values(state.entities.friends).forEach(friendRecord => {
+    if ((friendRecord.friendOneId == userId || friendRecord.friendTwoId == userId) &&
+        (friendRecord.friendOneId == currentUserId || friendRecord.friendTwoId == currentUserId)) {
+      id = friendRecord.id
+    }
+  })
+
+  return id
+}
+
+export const friendRequestId = (state, userId) => {
+  let id = null
+  const currentUserId = state.session.id
+
+  Object.values(state.entities.friendRequests).forEach(friendRequest => {
+    if ((friendRequest.requesteeId == userId || friendRequest.requesterId == userId) &&
+        (friendRequest.requesteeId == currentUserId || friendRequest.requesterId == currentUserId)) {
+      id = friendRequest.id
+    }
+  })
+
+  return id
 }
 
 export const checkIfRequested = (state, userId) => {

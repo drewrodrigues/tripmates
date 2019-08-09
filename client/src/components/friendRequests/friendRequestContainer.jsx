@@ -4,27 +4,31 @@ import {
   checkIfFriend,
   checkIfRequested,
   checkIfFriendRequestPending,
-  selectFriendRequest
+  friendRecordId,
+  friendRequestId
 } from '../../helpers/selectors'
 import {
   deleteFriendRequest,
   createFriendRequest,
 } from '../../actions/friendRequestActions'
+import { addFriend, deleteFriend } from "../../actions/friendActions"
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    // TODO: fetch this record first before getting other props?
-    // isFriend: checkIfFriend(state, ownProps.userId),
-    friendRequest: selectFriendRequest(state, ownProps.userId),
-    isRequested: checkIfRequested(state, ownProps.userId), // TODO: pull these into state? based upon currentUser passed down and the record that was found
-    friendRequestPending: checkIfFriendRequestPending(state, ownProps.userId)
+    isFriend: checkIfFriend(state, ownProps.userId),
+    isRequested: checkIfRequested(state, ownProps.userId),
+    friendRequestPending: checkIfFriendRequestPending(state, ownProps.userId),
+    friendRecordId: friendRecordId(state, ownProps.userId),
+    friendRequestId: friendRequestId(state, ownProps.userId)
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     cancelRequest: (id) => dispatch(deleteFriendRequest(id)),
-    addRequest: () => dispatch(createFriendRequest(ownProps.userId))
+    addRequest: () => dispatch(createFriendRequest(ownProps.userId)),
+    addFriend: friendRequestId => dispatch(addFriend(friendRequestId)),
+    deleteFriend: friendRecordId => dispatch(deleteFriend(friendRecordId))
   }
 }
 
