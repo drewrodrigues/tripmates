@@ -126,81 +126,83 @@ class TripIndex extends React.Component {
                 Led by
               </label>
 
-              <button
-                className={`
-                  tripIndex-button button button-white
-                  ${this.state.queryLedBy == 'anyone' ? "button-blue button-heavy" : ""}`
-                }
-                onClick={this.updateFilters('queryLedBy', 'anyone')}
-              >
-                Anyone
-              </button>
+              <div className="filter-buttons">
+                <button
+                  className={`
+                    button button-small button-white
+                    ${this.state.queryLedBy == 'anyone' ? "filter-active" : ""}`
+                  }
+                  onClick={this.updateFilters('queryLedBy', 'anyone')}
+                >
+                  Anyone
+                </button>
 
-              <button
-                className={`
-                  tripIndex-button button button-white
-                  ${this.state.queryLedBy == 'me' ? "button-blue button-heavy" : ""}`
-                }
-                onClick={this.updateFilters('queryLedBy', 'me')}
-              >
-                Me
-              </button>
+                <button
+                  className={`
+                    button button-small button-white
+                    ${this.state.queryLedBy == 'me' ? "filter-active" : ""}`
+                  }
+                  onClick={this.updateFilters('queryLedBy', 'me')}
+                >
+                  Me
+                </button>
 
-              <button
-                className={`
-                  tripIndex-button button button-white
-                  ${this.state.queryLedBy == 'friends' ? "button-blue button-heavy" : ""}`
-                }
-                onClick={this.updateFilters('queryLedBy', 'friends')}
-              >
-                Friends
-              </button>
-
-              {this.state.showLedByFilter &&
-                <ul class="tripIndex-ledBy-dropdown">
-                  <a className="tripIndex-ledBy-dropdown-button">Anyone</a>
-                  <a className="tripIndex-ledBy-dropdown-button">You</a>
-                </ul>
-              }
+                <button
+                  className={`
+                    button button-small button-white
+                    ${this.state.queryLedBy == 'friends' ? "filter-active" : ""}`
+                  }
+                  onClick={this.updateFilters('queryLedBy', 'friends')}
+                >
+                  Friends
+                </button>
+              </div>
             </div>
 
             <div className="tripIndex-header-center">
-              <button to="/trips/past"
-                className={`
-                  tripIndex-button button button-white
-                  ${this.state.queryWhen == 'past' ? "button-blue button-heavy" : ""}`
-                }
-                onClick={this.updateFilters('queryWhen', 'past')}
-              >
-                <FontAwesomeIcon icon="history"/>
-                Past
-              </button>
-              <button to="/trips/all"
-                className={`
-                  tripIndex-button button button-white
-                  ${this.state.queryWhen == 'all' ? "button-blue button-heavy" : ""}`
-                }
-                onClick={this.updateFilters('queryWhen', 'all')}
-              >
-                All
-              </button>
-              <button to="/"
-                className={`
-                  tripIndex-button button button-white
-                  ${this.state.queryWhen == 'upcoming' ? "button-blue button-heavy" : ""}`
-                }
-                onClick={this.updateFilters('queryWhen', 'upcoming')}
-              >
-                <FontAwesomeIcon icon="angle-double-right"/>
-                Upcoming
-              </button>
-            </div>
-
-            <div className="tripIndex-header-right">
               <Link to="/trips/new" className="button button-green button-heavy">
                 <FontAwesomeIcon icon="plus"/>
                 Add Trip
               </Link>
+            </div>
+
+            <div className="tripIndex-header-right">
+              <label className="tripIndex-ledByFilter-label">
+                <FontAwesomeIcon icon="calendar-alt"/>
+                When
+              </label>
+
+              <div className="filter-buttons">
+                <button to="/trips/past"
+                  className={`
+                    button button-small button-white
+                    ${this.state.queryWhen == 'past' ? "filter-active" : ""}`
+                  }
+                  onClick={this.updateFilters('queryWhen', 'past')}
+                >
+                  <FontAwesomeIcon icon="history"/>
+                  Past
+                </button>
+                <button to="/trips/all"
+                  className={`
+                    button button-small button-white
+                    ${this.state.queryWhen == 'all' ? "filter-active" : ""}`
+                  }
+                  onClick={this.updateFilters('queryWhen', 'all')}
+                >
+                  All
+                </button>
+                <button to="/"
+                  className={`
+                    button button-small button-white
+                    ${this.state.queryWhen == 'upcoming' ? "filter-active" : ""}`
+                  }
+                  onClick={this.updateFilters('queryWhen', 'upcoming')}
+                >
+                  <FontAwesomeIcon icon="angle-double-right"/>
+                  Upcoming
+                </button>
+              </div>
             </div>
           </header>
 
