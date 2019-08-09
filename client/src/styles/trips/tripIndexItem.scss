@@ -123,4 +123,8 @@
   color: $blue-primary;
   font-weight: 400;
   padding: 9px 15px;
+
+  &:hover {
+    background: #A4CCFF;
+  }
 }
