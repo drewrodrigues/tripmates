@@ -23,6 +23,8 @@ import {
   faSpinner,
   faSignInAlt,
   faUserPlus,
+  faTimes,
+  faCheck,
 } from '@fortawesome/free-solid-svg-icons'
 
 export default (() => {
@@ -49,4 +51,6 @@ export default (() => {
   library.add(faUserMinus)
   library.add(faSpinner)
   library.add(faUserPlus)
+  library.add(faTimes)
+  library.add(faCheck)
 })()

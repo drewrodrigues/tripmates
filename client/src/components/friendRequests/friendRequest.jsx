@@ -1,31 +1,45 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class FriendRequest extends React.Component {
   render() {
     let button
     if (this.props.isRequested) {
-      button = <button className="badge badge-warning" onClick={() => this.props.cancelRequest(this.props.friendRequestId)}>Requested</button>
+      button = <button className="friend-data friend-button friendRequest-requested" onClick={() => this.props.cancelRequest(this.props.friendRequestId)}>
+        <FontAwesomeIcon icon="trash" />
+        Cancel Friend Request
+      </button>
     } else if (this.props.isFriend) {
-      button = <button className="button button-heavy button-red" onClick={() => this.props.deleteFriend(this.props.friendRecordId)}>Remove Friend</button>
+      button = <button className="friend-data friend-button friend-delete" onClick={() => this.props.deleteFriend(this.props.friendRecordId)}>
+        <FontAwesomeIcon icon="user-minus" />
+        Remove Friend
+      </button>
     } else if (this.props.friendRequestPending) {
       button = <>
-        <button className="badge badge-success" onClick={() => this.props.addFriend(this.props.friendRequestId)}>Accept Friend Request</button>
-        <button className="badge badge-danger" onClick={() => this.props.cancelRequest(this.props.friendRequestId)}>Deny Friend Request</button>
+        <button className="friend-data friend-button friendRequest-accept" onClick={() => this.props.addFriend(this.props.friendRequestId)}>
+          <FontAwesomeIcon icon="check" />
+          Accept Friend Request
+        </button>
+        <button className="friend-data friend-button friendRequest-deny" onClick={() => this.props.cancelRequest(this.props.friendRequestId)}>
+          <FontAwesomeIcon icon="times" />
+          Deny Friend Request
+        </button>
       </>
     } else {
       button = <>
         <button
-          className="badge badge-light"
+          className="friend-data friend-button friendRequest-add"
           onClick={() => this.props.addRequest()}
         >
-          Send friend request
+          <FontAwesomeIcon icon="user-plus" />
+          Send Friend Request
         </button>
       </>
     }
 
     return (
       <div>
-        {button}
+        <div className="friend-buttons">{button}</div>
       </div>
     )
   }

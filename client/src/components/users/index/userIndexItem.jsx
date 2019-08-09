@@ -4,16 +4,18 @@ import AvatarPlaceholder from '../../../assets/avatarPlaceholder.jpg'
 
 const UserIndexItem = ({ user }) => {
   return (
-    <li key={ user.id } className="list-group-item">
-      {user.profilePicture ?
-        <img src={ user.profilePicture } className="navLoggedIn-profilePicture" />
-        :
-        <img src={AvatarPlaceholder} className="Nav-avatar-placeholder" />
-      }
-      { `${ user.fullName }` }
+    <>
+      <li key={ user.id } className="userIndexItem">
+        {user.profilePicture ?
+          <img src={ user.profilePicture } className="navLoggedIn-profilePicture userIndexItem-avatar" />
+          :
+          <img src={AvatarPlaceholder} className="Nav-avatar-placeholder userIndexItem-avatar" />
+        }
+        <span className="userIndexItem-name">{ `${ user.fullName }` }</span>
 
-      <FriendRequest userId={ user.id } />
-    </li>
+        <FriendRequest userId={ user.id } />
+      </li>
+    </>
   )
 }
 
