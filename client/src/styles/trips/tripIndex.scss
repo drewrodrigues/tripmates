@@ -107,6 +107,10 @@
 .filter-buttons {
   background: white;
   border-radius: $border-radius;
+
+  .button {
+    margin: 0;
+  }
 }
 
 .filter-active {
