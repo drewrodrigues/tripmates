@@ -117,4 +117,28 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe "friends_with?" do
+    context "when user is friend" do
+      it "returns true" do
+        user = create(:user)
+        other_user = create(:user)
+        FriendRequest.create(requestee: user, requester: other_user)
+        Friend.create(friend_one_id: user.id, friend_two_id: other_user.id)
+
+        expect(user.friends_with?(other_user)).to be true
+        expect(other_user.friends_with?(user)).to be true
+      end
+    end
+
+    context "when user isn't friend" do
+      it "returns false" do
+        user = create(:user)
+        other_user = create(:user)
+
+        expect(user.friends_with?(other_user)).to be false
+        expect(other_user.friends_with?(user)).to be false
+      end
+    end
+  end
 end

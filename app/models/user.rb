@@ -84,6 +84,10 @@ class User < ApplicationRecord
       .reject { |i| i == id }
   end
 
+  def friends_with?(other_user)
+    friend_ids.include?(other_user.id)
+  end
+
   def friends
     User.where(id: friend_ids)
   end
