@@ -20,10 +20,10 @@ RSpec.describe Api::FriendsController, type: :controller do
       before do
         @user = create(:user)
         @other_user = create(:user)
-        FriendRequest.create(requester: @other_user, requestee: @user)
+        friend_request = FriendRequest.create(requester: @other_user, requestee: @user)
         subject.login!(@user)
 
-        post :create, format: :json, params: { id: @other_user.id }
+        post :create, format: :json, params: { id: friend_request.id }
       end
 
       it "creates the record" do
@@ -58,25 +58,16 @@ RSpec.describe Api::FriendsController, type: :controller do
     end
 
     context "when current_user is requester" do
-      before do
+      it "raises RecordNotFound" do
         user = create(:user)
         other_user = create(:user)
-        FriendRequest.create(requester: user, requestee: other_user)
+        @friend_request = FriendRequest.create(requester: user, requestee: other_user)
         subject.login!(user)
 
-        post :create, format: :json, params: { id: other_user.id }
-      end
-
-      it "doesn't create the record" do
+        expect {
+          post :create, format: :json, params: { id: @friend_request.id }
+        }.to raise_error(ActiveRecord::RecordNotFound)
         expect(Friend.count).to eq(0)
-      end
-
-      it "returns error message" do
-        expect(JSON.parse(response.body)).to eq({ "errors"=>["Friend request pending"] })
-      end
-
-      it "returns bad request" do
-        expect(response).to have_http_status(:bad_request)
       end
     end
   end
