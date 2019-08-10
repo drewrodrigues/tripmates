@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Api::FriendsController, type: :controller do
   render_views
 
-  describe "auth" do
-    it "protects all actions for signed out users" do
+  describe "authentication" do
+    it "protects all actions from signed out users" do
       ["post :create, format: :json",
        "get :index, format: :json",
        "delete :destroy, format: :json, params: { id: 2 }"
