@@ -37,6 +37,8 @@ class User < ApplicationRecord
     foreign_key: :creator_id,
     class_name: :Trip,
     dependent: :destroy
+  has_many :attend_requests,
+    dependent: :destroy
 
   validates :first_name, :last_name, :email,
             :password_digest, :session_token, presence: true
