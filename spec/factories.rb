@@ -12,7 +12,7 @@ FactoryBot.define do
     title { "Supai" }
     location { "Arizona" }
     spaces { 5 }
-    privacy { Trip::PRIVACIES.sample }
+    privacy { "visible" }
     details { "Cool details go here" }
 
     association :creator, factory: :user, strategy: :build
