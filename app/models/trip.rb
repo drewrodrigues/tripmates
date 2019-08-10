@@ -25,6 +25,7 @@ class Trip < ApplicationRecord
 
   belongs_to :creator, class_name: :User
   has_one_attached :cover_photo
+  has_many :attend_requests, dependent: :destroy
 
   enum privacy: PRIVACIES
 
