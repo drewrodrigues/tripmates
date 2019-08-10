@@ -43,6 +43,34 @@ RSpec.describe AttendRequest, type: :model do
       ])
     end
 
+    context "when trip public" do
+      it "is valid" do
+        leader = create(:user)
+        user = create(:user)
+        FriendRequest.create(requester: leader, requestee: user)
+        Friend.create(friend_one_id: leader.id, friend_two_id: user.id)
+        trip = create(:trip, creator: leader)
+
+        attend_request = AttendRequest.new(user: user, trip: trip)
+
+        expect(attend_request).to be_valid
+      end
+    end
+
+    context "when trip private" do
+      it "is invalid" do
+        leader = create(:user)
+        user = create(:user)
+        FriendRequest.create(requester: leader, requestee: user)
+        Friend.create(friend_one_id: leader.id, friend_two_id: user.id)
+        trip = create(:trip, creator: leader, privacy: "hidden")
+
+        attend_request = AttendRequest.new(user: user, trip: trip)
+
+        expect(attend_request).to be_invalid
+      end
+    end
+
     context "when user is friends with leader" do
       it "is valid" do
         leader = create(:user)
