@@ -77,7 +77,6 @@ Cypress.Commands.add('uploadPhoto', (selector, fixture) => {
 })
 
 Cypress.Commands.add('loginUser', () => {
-  console.log(newUserUrl)
   cy.visit(newUserUrl)
 
   cy.get(newUserFirstNameInput).type(userFirstName)

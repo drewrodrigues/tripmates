@@ -11,6 +11,9 @@ class Api::TripsController < ApplicationController
     end
   end
 
+  # TODO: add edit so frontend can hit it, and we can scope from current_user/resource a user can handle
+  # otherwise it'll return a 404 and the frontend knows how to handle that
+
   def show
     @trip = Trip.find(params[:id])
   end

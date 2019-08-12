@@ -5,8 +5,15 @@ const service = new Service(axios)
 
 service.register({
   onResponseError(error) {
-    const responseMessage = JSON.parse(error.response.data).message
-    if (responseMessage == "Sign in required") {
+    let responseMessage
+    try {
+      responseMessage = JSON.parse(error.response.data).message
+    }
+    catch {}
+
+    if (error.response.status == 404) {
+      window.location.hash = "#/404"
+    } else if (responseMessage == "Sign in required") {
       localStorage.removeItem("session")
       window.location.hash = "#/login"
       window.location.reload()

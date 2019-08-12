@@ -12,3 +12,33 @@
   justify-content: space-between;
   white-space: pre-line;
 }
+
+.TripDetail-attendance {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.TripDetail-attendance-status {
+  font-size: 10px;
+  padding: 10px;
+  border-radius: $border-radius;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.TripDetail-attendance-request {
+  background: white;
+  color: $text-muted;
+}
+
+.TripDetail-attendance-attending {
+  background: #d6ff93;
+  color: #8ee000;
+}
+
+.TripDetail-attendance-pending {
+  background: #FFC300;
+  color: white;
+}

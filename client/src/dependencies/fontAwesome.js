@@ -25,6 +25,8 @@ import {
   faUserPlus,
   faTimes,
   faCheck,
+  faMapPin,
+  faUserClock,
 } from '@fortawesome/free-solid-svg-icons'
 
 export default (() => {
@@ -53,4 +55,6 @@ export default (() => {
   library.add(faUserPlus)
   library.add(faTimes)
   library.add(faCheck)
+  library.add(faMapPin)
+  library.add(faUserClock)
 })()

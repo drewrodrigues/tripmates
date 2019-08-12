@@ -4,8 +4,10 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {prettyDaysUntil, prettyDuration, prettyDate, prettySpaces} from '../../helpers/formatters';
 import { connect } from 'react-redux'
 import { isLeaderOfTrip } from '../../helpers/permissions'
+import { isRequestingAttendance } from "../../helpers/selectors"
 import TripSpaces from './shared/TripSpaces'
 import Avatar from '../users/Avatar'
+import { createAttendRequest, deleteAttendRequest } from '../../actions/attendRequestActions';
 
 const TripDetail = ({
   trip: {
@@ -18,13 +20,51 @@ const TripDetail = ({
     spaces,
     startDate,
   },
-  isLeader
+  isLeader,
+  isRequestingAttendance,
+  attendRequest,
+  createAttendRequest,
+  deleteAttendRequest,
 }) => {
+  const deleteAttendRequestAndPreventDefault = e => {
+    e.preventDefault()
+    deleteAttendRequest(attendRequest.id)
+  }
+
+  const createAttendRequestAndPreventDefault = e => {
+    e.preventDefault()
+    createAttendRequest(id)
+  }
+
   return (
     <div className="TripDetail">
       <section className="TripDetail-body">
+        <div className="TripDetail-attendance">
+          {!isLeader && (
+            isRequestingAttendance ?
+              <button
+                className="TripDetail-attendance-status TripDetail-attendance-pending"
+                onClick={deleteAttendRequestAndPreventDefault}
+              >
+                <FontAwesomeIcon icon="user-clock" />
+                Join Request Pending
+              </button>
+              :
+              <button
+                className="TripDetail-attendance-status TripDetail-attendance-request"
+                onClick={createAttendRequestAndPreventDefault}
+              >
+                <FontAwesomeIcon icon="user-plus" />
+                Ask to Join
+              </button>
+          )}
+        </div>
+
         <header>
-          <h4 className="tripIndexItem-location">{location}</h4>
+          <h4 className="tripIndexItem-location">
+            <FontAwesomeIcon icon="map-marker-alt"/>
+            {location}
+          </h4>
           <h5 className="tripIndexItem-dates">
             <FontAwesomeIcon icon="calendar-alt" />
             { startDate === endDate ?
@@ -102,8 +142,17 @@ const mapStateToProps = (state, ownProps) => {
   const creator = state.entities.users[ownProps.trip.creatorId]
   return {
     creator,
-    isLeader: isLeaderOfTrip(state, ownProps.trip)
+    isLeader: isLeaderOfTrip(state, ownProps.trip),
+    isRequestingAttendance: isRequestingAttendance(state, ownProps.trip),
+    attendRequest: Object.values(state.entities.attendRequests).find(request => request.tripId == ownProps.trip.id)
   }
 }
 
-export default connect(mapStateToProps)(TripDetail)
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    createAttendRequest: tripId => dispatch(createAttendRequest(tripId)),
+    deleteAttendRequest: id => dispatch(deleteAttendRequest(id))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TripDetail)

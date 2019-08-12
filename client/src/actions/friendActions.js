@@ -56,7 +56,3 @@ export const deleteFriend = id => dispatch => {
     .catch(err => console.log(err.response.data))
     // TODO: add notification box
 }
-
-window.addFriend = addFriend
-window.getFriends = getFriends
-window.deleteFriend = deleteFriend

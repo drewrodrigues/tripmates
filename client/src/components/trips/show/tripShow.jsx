@@ -3,11 +3,21 @@ import {Link} from 'react-router-dom'
 import {prettyDaysUntil, prettyDuration } from '../../../helpers/formatters'
 import TripDetail from "../TripDetail"
 import TripCoverPhoto from "../TripCoverPhoto"
+import Loader from "../../Shared/Loader"
 
 class TripShow extends Component {
   constructor(props) {
     super(props)
     this.state = {loading: true}
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.setState({ loading: true }, () => {
+        this.props.getTripById(this.props.match.params.id)
+          .then(() => this.setState({ loading: false }))
+      })
+    }
   }
 
   componentDidMount() {
@@ -16,8 +26,8 @@ class TripShow extends Component {
   }
 
   render() {
-    if (this.state.loading === true) return null
-    const {trip, leader, isLeader} = this.props
+    if (this.state.loading === true || Object.keys(this.props.trip) == 0) return <Loader />
+    const { trip } = this.props
 
     return (
       <div className="tripShow">

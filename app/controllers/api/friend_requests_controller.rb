@@ -28,9 +28,9 @@ class Api::FriendRequestsController < ApplicationController
 
   def ensure_authorized_delete
     @friend_request = FriendRequest.find_by(id: params[:id])
-    return if !@friend_request
-    unless (current_user.id == @friend_request.requestee_id ||
-            current_user.id == @friend_request.requester_id)
+    return unless @friend_request
+    unless current_user.id == @friend_request.requestee_id ||
+            current_user.id == @friend_request.requester_id
       render json: {messages: "Not authorized"}, status: 500
     end
   end

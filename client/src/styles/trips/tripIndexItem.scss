@@ -11,18 +11,19 @@
   flex-direction: column;
   width: 49%;
 
-  .TripCoverPhoto {
-    border-radius: 0;
-  }
-
   .TripDetail {
   }
 }
 
 .tripIndexItem-location {
   font-size: 24px;
-  font-weight: 900;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+
+  svg {
+    font-size: 14px;
+  }
 }
 
 .tripIndexItem-dates {

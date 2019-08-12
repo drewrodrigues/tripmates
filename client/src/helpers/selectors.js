@@ -146,3 +146,15 @@ export const selectFriendRequest = (state, userId) => {
   }
   return friendRequest
 }
+
+export const isRequestingAttendance = (state, trip) => {
+  let requestedAttendance = false
+
+  Object.values(state.entities.attendRequests).forEach(request => {
+    if (request.tripId == trip.id) {
+      requestedAttendance = true
+    }
+  })
+
+  return requestedAttendance
+}
