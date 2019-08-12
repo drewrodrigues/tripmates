@@ -13,6 +13,9 @@
 @import "./shared/Loader";
 @import "./shared/Confirmation";
 
+// pages
+@import "./pages/ErrorPage";
+
 // users
 @import "./users/signUp";
 @import "./users/Avatar";

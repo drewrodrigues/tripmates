@@ -1,0 +1,24 @@
+.ErrorPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ErrorPage-image {
+  margin-top: $padding-main;
+  margin-bottom: $padding-main;
+}
+
+.ErrorPage-title {
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.ErrorPage-description {
+  color: $text-muted;
+}
+
+.ErrorPage-button {
+  margin-top: $padding-main;
+}
