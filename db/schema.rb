@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_09_222934) do
+ActiveRecord::Schema.define(version: 2019_08_13_011459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,14 @@ ActiveRecord::Schema.define(version: 2019_08_09_222934) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["trip_id", "user_id"], name: "index_attend_requests_on_trip_id_and_user_id", unique: true
+  end
+
+  create_table "attendances", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "trip_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "trip_id"], name: "index_attendances_on_user_id_and_trip_id", unique: true
   end
 
   create_table "friend_requests", force: :cascade do |t|
