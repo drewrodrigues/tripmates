@@ -72,7 +72,7 @@ ActiveRecord::Base.transaction do
     new_user = User.new(
       first_name: user[:first_name],
       last_name: user[:last_name],
-      email: Faker::Internet.email,
+      email: "#{user[:first_name]}@tripmates.io",
       password: "password"
     )
     new_user.profile_picture.attach(
@@ -82,23 +82,20 @@ ActiveRecord::Base.transaction do
     new_user.save!
   end
 
-  20.times do
+  100.times do
     FriendRequest.create(
       requester: User.all.sample,
       requestee: User.all.sample
     )
   end
-  puts "#{FriendRequest.count} friend requests created"
-
-  20.times do
-    Friend.create(
-      friend_one_id: User.all.sample.id,
-      friend_two_id: User.all.sample.id
-    )
-  end
-  puts "#{Friend.count} friends created"
 
   user_ids = User.ids
+  100.times do
+    Friend.create(
+      friend_one_id: user_ids.sample,
+      friend_two_id: user_ids.sample
+    )
+  end
 
   trips = [
     {
@@ -190,6 +187,31 @@ ActiveRecord::Base.transaction do
       cover_photo: SEED_DATA_PATH + "trips/" + "wilderness.jpg",
       title: "Wilderness Backpacking",
       location: "Yosemite, California"
+    },
+    {
+        cover_photo: SEED_DATA_PATH + "trips/" + "florida.jpeg",
+        title: "Christmas at Desiree's",
+        location: "Largo, Florida"
+    },
+    {
+        cover_photo: SEED_DATA_PATH + "trips/" + "wilderness.jpg",
+        title: "Wilderness Backpacking",
+        location: "Yosemite, California"
+    },
+    {
+        cover_photo: SEED_DATA_PATH + "trips/" + "europe.jpg",
+        title: "Backpacking",
+        location: "Europe"
+    },
+    {
+        cover_photo: SEED_DATA_PATH + "trips/" + "scuba.jpg",
+        title: "Scuba Diving",
+        location: "New Zealand"
+    },
+    {
+        cover_photo: SEED_DATA_PATH + "trips/" + "snorkel.jpg",
+        title: "Snorkeling",
+        location: "Cancun, Mexico"
     }
   ]
 
@@ -210,4 +232,27 @@ ActiveRecord::Base.transaction do
     )
     new_trip.save!
   end
+
+  User.all.each do |user|
+    friends = user.friends
+    friends.each do |users_friend|
+      friends_trips = users_friend.created_trips
+
+      friends_trips.each do |trip|
+        next if rand(3) == 1
+
+        AttendRequest.create!(user: user, trip: trip)
+
+        next if rand(2) == 1
+        Attendance.create!(user: user, trip: trip)
+      end
+    end
+  end
+
+  puts "#{User.count} Users created"
+  puts "#{FriendRequest.count} FriendRequests created"
+  puts "#{Friend.count} Friends created"
+  puts "#{Trip.count} Trips created"
+  puts "#{AttendRequest.count} AttendRequest created"
+  puts "#{Attendance.count} Attendance created"
 end
