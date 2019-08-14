@@ -8,7 +8,7 @@ export const acceptAttendance = attendRequestId => {
   })
 }
 
-export const removeAttendance = id => {
+export const deleteAttendance = id => {
   return axios({
     method: "delete",
     url: `/api/attendances/${id}`

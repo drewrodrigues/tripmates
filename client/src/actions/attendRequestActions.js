@@ -19,7 +19,7 @@ const receiveAttendRequest = attendRequest => {
   }
 }
 
-const removeAttendRequest = id => {
+export const removeAttendRequest = id => {
   return {
     type: REMOVE_ATTEND_REQUEST,
     id
