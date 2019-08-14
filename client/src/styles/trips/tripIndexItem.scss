@@ -10,9 +10,8 @@
   display: flex;
   flex-direction: column;
   width: 49%;
-
-  .TripDetail {
-  }
+  overflow: hidden;
+  border-radius: $border-radius;
 }
 
 .tripIndexItem-location {
