@@ -47,6 +47,11 @@ class User < ApplicationRecord
            through: :created_trips,
            source: :attend_requests,
            dependent: :destroy
+  has_many :attendances,
+           dependent: :destroy
+  has_many :managed_attendances,
+           through: :created_trips,
+           source: :attendances
 
   validates :first_name, :last_name, :email,
             :password_digest, :session_token, presence: true

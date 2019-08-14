@@ -13,11 +13,15 @@ class Attendance < ApplicationRecord
   belongs_to :trip
   belongs_to :user
 
+  before_create :destroy_attend_request!
+
   validate :leader_cant_attend
   validate :unique_record
   validate :attend_request_must_exist
 
   private
+
+  attr_accessor :attend_request
 
   def leader_cant_attend
     if trip.creator.id == user_id
@@ -27,7 +31,8 @@ class Attendance < ApplicationRecord
   end
 
   def attend_request_must_exist
-    unless AttendRequest.find_by(user: user, trip: trip)
+    self.attend_request = AttendRequest.find_by(user: user, trip: trip)
+    unless attend_request
       errors.add(:attend_request, "must be made first")
       throw :abort
     end
@@ -43,5 +48,9 @@ class Attendance < ApplicationRecord
   def record_exists_and_not_this_one
     attendance = Attendance.find_by(user: user, trip: trip)
     attendance && attendance.id != id
+  end
+
+  def destroy_attend_request!
+    attend_request.destroy!
   end
 end
