@@ -1,7 +1,7 @@
 @mixin badge($border-color, $text) {
   border-radius: $border-radius;
   font-size: 10px;
-  padding: 8px;
+  padding: 5px 10px;
   border: 1px solid $border-color;
   display: inline-block;
   color: $text;
