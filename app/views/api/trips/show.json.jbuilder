@@ -4,7 +4,6 @@ json.set! "trip" do
   json.set! @trip.id do
     json.extract! @trip, :id,
       :creator_id,
-      :days_until,
       :details,
       :duration,
       :end_date,

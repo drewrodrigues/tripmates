@@ -19,6 +19,8 @@ class Trip < ApplicationRecord
   PRIVACIES = %w(visible hidden)
 
   default_scope { order(:start_date) }
+  scope :visible, -> { where(privacy: "visible") }
+  scope :hidden, -> { where(privacy: "hidden") }
 
   belongs_to :creator, class_name: :User
   has_one_attached :cover_photo
@@ -48,10 +50,6 @@ class Trip < ApplicationRecord
 
   def duration
     (end_date - start_date).round + 1
-  end
-
-  def days_until
-    (start_date - Date.today).round
   end
 
   def spaces_left
