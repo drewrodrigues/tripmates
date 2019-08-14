@@ -11,17 +11,18 @@
   flex-direction: column;
   justify-content: space-between;
   white-space: pre-line;
+  position: relative;
 }
 
 .TripDetail-attendance {
   position: absolute;
-  right: 20px;
-  top: 20px;
+  left: 0;
+  bottom: 110%;
 }
 
 .TripDetail-attendance-status {
   font-size: 10px;
-  padding: 10px;
+  padding: 5px 10px;
   border-radius: $border-radius;
   outline: 0;
   border: 0;
@@ -31,6 +32,7 @@
 .TripDetail-attendance-request {
   background: white;
   color: $text-muted;
+  box-shadow: 0 0 10px #ccc;
 }
 
 .TripDetail-attendance-attending {
@@ -40,5 +42,6 @@
 
 .TripDetail-attendance-pending {
   background: #FFC300;
+  box-shadow: 0 0 10px #FFC300;
   color: white;
 }
