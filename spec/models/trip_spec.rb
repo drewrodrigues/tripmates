@@ -14,6 +14,12 @@
 #  privacy    :integer          default("visible"), not null
 #  details    :text             default(""), not null
 #
+# Indexes
+#
+#  index_trips_on_creator_id  (creator_id)
+#  index_trips_on_privacy     (privacy)
+#  index_trips_on_title       (title)
+#
 
 require "rails_helper"
 require "timecop"

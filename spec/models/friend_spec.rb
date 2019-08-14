@@ -8,6 +8,10 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
+# Indexes
+#
+#  index_friends_on_friend_one_id_and_friend_two_id  (friend_one_id,friend_two_id)
+#
 
 require 'rails_helper'
 

@@ -8,6 +8,10 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_attendances_on_user_id_and_trip_id  (user_id,trip_id) UNIQUE
+#
 
 class Attendance < ApplicationRecord
   belongs_to :trip

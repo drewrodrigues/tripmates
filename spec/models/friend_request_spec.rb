@@ -8,6 +8,10 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
+# Indexes
+#
+#  index_friend_requests_on_requester_id_and_requestee_id  (requester_id,requestee_id)
+#
 
 require "rails_helper"
 
