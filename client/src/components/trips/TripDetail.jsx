@@ -118,18 +118,18 @@ const TripDetail = ({
             </div>
 
             <div className="tripIndexItem-footer-right">
-              <ul className="tripIndexItem-attendees">
-                <li className="tripIndexItem-attendee">
-                  <Avatar image={creator.profilePicture} />
-                </li>
-                <li className="tripIndexItem-attendee">
-                  <Avatar image={creator.profilePicture} />
-                </li>
-                <li className="tripIndexItem-attendee">
-                  <Avatar image={creator.profilePicture} />
-                </li>
-              </ul>
-              <p className="tripIndexItem-others-count">+ 23 others</p>
+              {/*<ul className="tripIndexItem-attendees">*/}
+              {/*  <li className="tripIndexItem-attendee">*/}
+              {/*    <Avatar image={creator.profilePicture} />*/}
+              {/*  </li>*/}
+              {/*  <li className="tripIndexItem-attendee">*/}
+              {/*    <Avatar image={creator.profilePicture} />*/}
+              {/*  </li>*/}
+              {/*  <li className="tripIndexItem-attendee">*/}
+              {/*    <Avatar image={creator.profilePicture} />*/}
+              {/*  </li>*/}
+              {/*</ul>*/}
+              {/*<p className="tripIndexItem-others-count">+ 23 others</p>*/}
             </div>
           </div>
         }
