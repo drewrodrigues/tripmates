@@ -8,6 +8,13 @@ export const acceptAttendance = attendRequestId => {
   })
 }
 
+export const getAttendances = tripId => {
+  return axios({
+    method: "get",
+    url: `/api/trips/${tripId}/attendances`
+  })
+}
+
 export const deleteAttendance = id => {
   return axios({
     method: "delete",

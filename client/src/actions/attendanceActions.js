@@ -42,11 +42,14 @@ export const acceptAttendance = attendRequestId => dispatch => {
     .catch(err => console.log(err.response.data))
 }
 
+export const getAttendances = tripId => dispatch => {
+  return AttendanceUtils.getAttendances(tripId)
+    .then(res => dispatch(receiveAttendances(res.data)))
+    .catch(err => console.log(err.response.data))
+}
+
 export const deleteAttendance = id => dispatch => {
   return AttendanceUtils.deleteAttendance(id)
     .then(() => dispatch(removeAttendance(id)))
     .catch(err => console.log(err.response.data))
 }
-
-window.acceptAttendance = acceptAttendance
-window.deleteAttendance = deleteAttendance

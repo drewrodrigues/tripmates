@@ -12,6 +12,7 @@ class Api::AttendancesController < ApplicationController
   end
 
   def index
+    @attendances = Trip.find(params[:trip_id]).attendances
   end
 
   def destroy

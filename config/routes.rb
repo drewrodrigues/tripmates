@@ -4,8 +4,7 @@
 #       api_attend_requests GET    /api/attend_requests(.:format)                                                           api/attend_requests#index {:format=>:json}
 #                           POST   /api/attend_requests(.:format)                                                           api/attend_requests#create {:format=>:json}
 #        api_attend_request DELETE /api/attend_requests/:id(.:format)                                                       api/attend_requests#destroy {:format=>:json}
-#           api_attendances GET    /api/attendances(.:format)                                                               api/attendances#index {:format=>:json}
-#                           POST   /api/attendances(.:format)                                                               api/attendances#create {:format=>:json}
+#           api_attendances POST   /api/attendances(.:format)                                                               api/attendances#create {:format=>:json}
 #            api_attendance DELETE /api/attendances/:id(.:format)                                                           api/attendances#destroy {:format=>:json}
 #       api_friend_requests GET    /api/friend_requests(.:format)                                                           api/friend_requests#index {:format=>:json}
 #                           POST   /api/friend_requests(.:format)                                                           api/friend_requests#create {:format=>:json}
@@ -15,6 +14,7 @@
 #                api_friend DELETE /api/friends/:id(.:format)                                                               api/friends#destroy {:format=>:json}
 #               api_session DELETE /api/session(.:format)                                                                   api/sessions#destroy {:format=>:json}
 #                           POST   /api/session(.:format)                                                                   api/sessions#create {:format=>:json}
+#      api_trip_attendances GET    /api/trips/:trip_id/attendances(.:format)                                                api/attendances#index {:format=>:json}
 #                 api_trips GET    /api/trips(.:format)                                                                     api/trips#index {:format=>:json}
 #                           POST   /api/trips(.:format)                                                                     api/trips#create {:format=>:json}
 #                  api_trip GET    /api/trips/:id(.:format)                                                                 api/trips#show {:format=>:json}
@@ -37,11 +37,13 @@
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :attend_requests, only: [:create, :index, :destroy]
-    resources :attendances, only: [:create, :index, :destroy]
+    resources :attendances, only: [:create, :destroy]
     resources :friend_requests, only: [:create, :index, :destroy]
     resources :friends, only: [:create, :index, :destroy]
     resource  :session, only: [:create, :destroy]
-    resources :trips, except: [:new, :edit]
+    resources :trips, except: [:new, :edit] do
+      resources :attendances, only: [:index]
+    end
     resources :users, only: [:create, :destroy, :update, :index]
   end
 
