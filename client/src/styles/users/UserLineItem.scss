@@ -1,0 +1,20 @@
+.UserLineItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  background: white;
+}
+
+.UserLineItem-main {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-right: 10px;
+  }
+}

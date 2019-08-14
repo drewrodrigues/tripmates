@@ -1,5 +1,6 @@
 .tripShow {
   display: flex;
+  align-items: flex-start;
 
   .TripCoverPhoto {
     border-radius: $border-radius $border-radius 0 0;
@@ -106,11 +107,14 @@
     border-radius: $border-radius;
     color: $text-muted;
     background: white;
-    display: inline-block;
     padding: 10px;
+    display: block;
+    font-size: 12px;
 
-    &:hover {
-      // TODO: fix me bish
+    &.active {
+      background: $blue-primary;
+      font-weight: 900;
+      color: white;
     }
   }
 
@@ -126,8 +130,6 @@
 }
 
 .tripShow-body-content {
-  @include card;
-  @include card-padding;
 }
 
 .trip-button-edit {
@@ -149,4 +151,20 @@
   margin-left: 5px;
   color: white;
   cursor: pointer;
+}
+
+.tripShow-notification {
+  color: white;
+  background: $red-primary;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 2px 5px;
+  border-radius: $border-radius;
+  margin-left: 5px;
+}
+
+.tripShow-body-content-title {
+  font-size: 14px;
+  padding-bottom: 20px;
 }

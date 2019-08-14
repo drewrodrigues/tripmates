@@ -9,11 +9,12 @@ const mapStateToProps = (state, ownProps) => {
   return {
     trip,
     leader: state.entities.users[trip.creatorId],
-    isLeader: isLeaderOfTrip(state, trip)
+    isLeader: isLeaderOfTrip(state, trip),
+    attendRequests: Object.values(state.entities.attendRequests).filter(request => request.tripId == trip.id) || []
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getTripById: id => dispatch(getTripById(id))
   }

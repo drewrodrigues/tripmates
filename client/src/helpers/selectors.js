@@ -151,7 +151,7 @@ export const isRequestingAttendance = (state, trip) => {
   let requestedAttendance = false
 
   Object.values(state.entities.attendRequests).forEach(request => {
-    if (request.tripId == trip.id) {
+    if (request.userId == state.session.id && request.tripId == trip.id) {
       requestedAttendance = true
     }
   })

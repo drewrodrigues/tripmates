@@ -5,7 +5,7 @@ export const RECEIVE_ATTEND_REQUEST = "RECEIVE_ATTEND_REQUEST"
 export const REMOVE_ATTEND_REQUEST = "REMOVE_ATTEND_REQUEST"
 export const CLEAR_ATTEND_REQUESTS = "CLEAR_ATTEND_REQUESTS"
 
-const receiveAttendRequests = attendRequests => {
+export const receiveAttendRequests = attendRequests => {
   return {
     type: RECEIVE_ATTEND_REQUESTS,
     attendRequests

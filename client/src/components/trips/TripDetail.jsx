@@ -144,7 +144,7 @@ const mapStateToProps = (state, ownProps) => {
     creator,
     isLeader: isLeaderOfTrip(state, ownProps.trip),
     isRequestingAttendance: isRequestingAttendance(state, ownProps.trip),
-    attendRequest: Object.values(state.entities.attendRequests).find(request => request.tripId == ownProps.trip.id)
+    attendRequest: Object.values(state.entities.attendRequests).find(request => request.userId == state.session.id && request.tripId == ownProps.trip.id)
   }
 }
 

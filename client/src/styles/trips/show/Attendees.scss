@@ -1,0 +1,36 @@
+.AttendRequests {
+  margin-bottom: 40px;
+}
+
+.Attendees-placeholder {
+  text-align: center;
+  padding: $padding-main;
+  color: $text-muted;
+
+  button {
+    margin-top: $padding-main;
+  }
+}
+
+.AttendRequest-buttons {
+  border: 0;
+  border-radius: $border-radius;
+  color: white;
+  cursor: pointer;
+  padding: 5px 10px;
+
+  svg {
+    margin-right: 5px;
+  }
+}
+
+.AttendRequest-buttons-accept {
+  border: 1px solid $green-primary;
+  color: $green-primary;
+}
+
+.AttendRequest-buttons-cancel {
+  border: 1px solid $red-primary;
+  color: $red-primary;
+  margin-left: 5px;
+}

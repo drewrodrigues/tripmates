@@ -1,6 +1,7 @@
 import * as APIUtil from '../utils/tripUtil'
 
 import { receiveUser, receiveUsers } from './userActions'
+import { receiveAttendRequests } from './attendRequestActions'
 
 export const RECEIVE_TRIP  = "RECEIVE_TRIP"
 export const RECEIVE_TRIPS = "RECEIVE_TRIPS"
@@ -50,6 +51,7 @@ export const getTripById = id => dispatch => {
     .then(res => {
       dispatch(receiveTrips(res.data.trip))
       dispatch(receiveUsers(res.data.user))
+      dispatch(receiveAttendRequests(res.data.attendRequests))
       return res.data
     })
 }

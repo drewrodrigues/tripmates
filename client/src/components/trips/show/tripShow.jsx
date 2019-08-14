@@ -1,14 +1,14 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
-import {prettyDaysUntil, prettyDuration } from '../../../helpers/formatters'
+import React, { Component } from 'react'
+import { NavLink, Route, Switch } from 'react-router-dom'
 import TripDetail from "../TripDetail"
 import TripCoverPhoto from "../TripCoverPhoto"
 import Loader from "../../Shared/Loader"
+import Attendees from "./Attendees";
 
 class TripShow extends Component {
   constructor(props) {
     super(props)
-    this.state = {loading: true}
+    this.state = { loading: true }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -28,6 +28,7 @@ class TripShow extends Component {
   render() {
     if (this.state.loading === true || Object.keys(this.props.trip) == 0) return <Loader />
     const { trip } = this.props
+    const attendRequestCount = this.props.attendRequests.length
 
     return (
       <div className="tripShow">
@@ -39,15 +40,31 @@ class TripShow extends Component {
 
         <section className="tripShow-body">
           <ul className="tripShow-body-nav">
-            <li className="tripShow-body-nav-link active"><a href="#">Posts</a></li>
-            <li className="tripShow-body-nav-link"><a href="#">Inventory</a></li>
-            <li className="tripShow-body-nav-link"><a href="#">Attendees</a></li>
-            <li className="tripShow-body-nav-link"><a href="#">Invites</a></li>
-            <li className="tripShow-body-nav-link"><a href="#">Itenerary</a></li>
+            {/*<li className="tripShow-body-nav-link active"><a href="#">Coversation</a></li>*/}
+            {/*<li className="tripShow-body-nav-link"><a href="#">Inventory</a></li>*/}
+            <li className="tripShow-body-nav-link">
+              <NavLink to={`/trips/${trip.id}`}>
+                Attendees
+                { attendRequestCount == 0 ?
+                  null
+                  :
+                  <span className="tripShow-notification">
+                    { attendRequestCount }
+                  </span>
+                }
+              </NavLink>
+            </li>
+            {/*<li className="tripShow-body-nav-link"><a href="#">Invites</a></li>*/}
+            {/*<li className="tripShow-body-nav-link"><a href="#">Itenerary</a></li>*/}
           </ul>
 
           <div className="tripShow-body-content">
-            <p>Something goes here</p>
+            <Switch>
+              <Route
+                path="/trips/:id"
+                render={() => <Attendees attendRequests={ this.props.attendRequests } isLeader={this.props.isLeader} /> }
+              />
+            </Switch>
           </div>
         </section>
       </div>

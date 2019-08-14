@@ -20,6 +20,7 @@
 @import "./users/signUp";
 @import "./users/Avatar";
 @import "./users/userIndexItem";
+@import "./users/UserLineItem";
 
 // trips
 @import "./trips/base";
@@ -29,6 +30,8 @@
 @import "./trips/show/tripShow";
 @import "./trips/TripCoverPhoto";
 @import "./trips/TripDetail.scss";
+// - attendees
+@import "./trips/show/Attendees";
 
 body {
   background: $gray-background;

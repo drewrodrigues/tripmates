@@ -15,7 +15,7 @@ class Api::TripsController < ApplicationController
   # otherwise it'll return a 404 and the frontend knows how to handle that
 
   def show
-    @trip = Trip.find(params[:id])
+    @trip = Trip.includes(:creator, :attend_requests).find(params[:id])
   end
 
   def update
