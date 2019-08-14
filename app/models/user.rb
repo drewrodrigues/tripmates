@@ -28,20 +28,25 @@ class User < ApplicationRecord
 
   attr_reader :password
 
+  before_destroy :destroy_friend_records
+
   has_many :friend_requests,
-    foreign_key: :requestee_id
+           foreign_key: :requestee_id,
+           dependent: :destroy
   has_many :requested_friends,
-    foreign_key: :requester_id,
-    class_name: :FriendRequest
+           foreign_key: :requester_id,
+           class_name: :FriendRequest,
+           dependent: :destroy
   has_many :created_trips,
-    foreign_key: :creator_id,
-    class_name: :Trip,
-    dependent: :destroy
+           foreign_key: :creator_id,
+           class_name: :Trip,
+           dependent: :destroy
   has_many :attend_requests,
-    dependent: :destroy
+           dependent: :destroy
   has_many :managed_attend_requests,
            through: :created_trips,
-           source: :attend_requests
+           source: :attend_requests,
+           dependent: :destroy
 
   validates :first_name, :last_name, :email,
             :password_digest, :session_token, presence: true
@@ -95,5 +100,11 @@ class User < ApplicationRecord
 
   def friends
     User.where(id: friend_ids)
+  end
+
+  private
+
+  def destroy_friend_records
+    friend_records.destroy_all
   end
 end
