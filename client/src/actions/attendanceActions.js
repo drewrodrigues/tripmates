@@ -4,7 +4,7 @@ import { removeAttendRequest } from "./attendRequestActions"
 export const RECEIVE_ATTENDANCE = "RECEIVE_ATTENDANCE"
 export const RECEIVE_ATTENDANCES = "RECEIVE_ATTENDANCES"
 export const REMOVE_ATTENDANCE = "REMOVE_ATTENDANCE"
-export const CLEAR_ATTENDANCE = "CLEAR_ATTENDANCE"
+export const CLEAR_ATTENDANCES = "CLEAR_ATTENDANCES"
 
 export const receiveAttendance = attendance => {
   return {
@@ -27,9 +27,9 @@ export const removeAttendance = attendance => {
   }
 }
 
-export const clearAttendance = () => {
+export const clearAttendances = () => {
   return {
-    type: CLEAR_ATTENDANCE
+    type: CLEAR_ATTENDANCES
   }
 }
 

@@ -62,7 +62,7 @@ class TripShow extends Component {
             <Switch>
               <Route
                 path="/trips/:id"
-                render={() => <Attendees attendRequests={ this.props.attendRequests } isLeader={this.props.isLeader} /> }
+                render={() => <Attendees attendRequests={ this.props.attendRequests } isLeader={this.props.isLeader} tripId={ trip.id } /> }
               />
             </Switch>
           </div>

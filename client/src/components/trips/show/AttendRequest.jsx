@@ -3,15 +3,16 @@ import { connect } from 'react-redux'
 import UserLineItem from "../../users/UserLineItem";
 import { deleteAttendRequest} from "../../../actions/attendRequestActions"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { acceptAttendance } from "../../../actions/attendanceActions";
 
-const AttendRequest = ({ attendRequest: { id, userId, tripId }, attendRequest, user, deleteAttendRequest, isLeader, requestingUser }) => {
+const AttendRequest = ({ attendRequest: { id, userId, tripId }, attendRequest, user, deleteAttendRequest, isLeader, requestingUser, acceptAttendance }) => {
   if (!userId || !user) return <div>No found {userId}</div>
 
   return (
     <div>
       <UserLineItem fullName={ user.fullName } profilePicture={ user.profilePicture }>
         { isLeader && (
-          <button className="AttendRequest-buttons AttendRequest-buttons-accept">
+          <button className="AttendRequest-buttons AttendRequest-buttons-accept" onClick={ () => acceptAttendance(id) }>
             <FontAwesomeIcon icon="check" /> Accept
           </button>
         )}
@@ -35,7 +36,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteAttendRequest: id => dispatch(deleteAttendRequest(id))
+    deleteAttendRequest: id => dispatch(deleteAttendRequest(id)),
+    acceptAttendance: id => dispatch(acceptAttendance(id))
   }
 }
 
