@@ -32,6 +32,7 @@ class Trip < ApplicationRecord
   has_one_attached :cover_photo
   has_many :attend_requests, dependent: :destroy
   has_many :attendances, dependent: :destroy
+  has_many :messages, dependent: :destroy
 
   enum privacy: PRIVACIES
 
