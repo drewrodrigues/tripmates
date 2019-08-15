@@ -3,7 +3,7 @@ class Api::AttendancesController < ApplicationController
 
   def create
     attendance_request = current_user.managed_attend_requests.find(params[:id])
-    @attendance = Attendance.new(user: attendance_request.user, trip: attendance_request.trip).includes(:user)
+    @attendance = Attendance.includes(:user).new(user: attendance_request.user, trip: attendance_request.trip)
     if @attendance.save
       render :show
     else

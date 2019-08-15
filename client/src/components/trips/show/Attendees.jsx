@@ -2,6 +2,7 @@ import React from 'react'
 import AttendRequest from "./AttendRequest"
 import { connect } from "react-redux"
 import { getAttendances } from "../../../actions/attendanceActions";
+import Attendee from "./Attendee";
 
 class Attendees extends React.Component {
   componentDidMount() {
@@ -27,7 +28,7 @@ class Attendees extends React.Component {
             </>
             :
             <ul>
-              {this.props.attendances.map(attendance => <li>{ attendance.id }</li>)}
+              {this.props.attendances.map(attendance => <Attendee userId={ attendance.userId } id={ attendance.id } />)}
             </ul>
           }
         </div>
