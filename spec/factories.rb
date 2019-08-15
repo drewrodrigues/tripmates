@@ -18,10 +18,15 @@ FactoryBot.define do
     association :creator, factory: :user, strategy: :build
   end
 
+  factory(:attendee) do
+    trip
+    user
+  end
+
   factory :message do
     body { "Let's do the thing!" }
 
-    user
     trip
+    user
   end
 end

@@ -19,5 +19,16 @@ class Message < ApplicationRecord
   belongs_to :user
   belongs_to :trip
 
+  validate :must_be_leader_or_attendee_of_trip
   validates :body, presence: true
+
+  private
+
+  def must_be_leader_or_attendee_of_trip
+    return unless user
+
+    unless user.attended_trips.where(id: trip_id).exists? || user.created_trips.where(id: trip_id).exists?
+      errors.add(:you, "must be on the trip to message")
+    end
+  end
 end

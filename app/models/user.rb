@@ -54,6 +54,9 @@ class User < ApplicationRecord
            dependent: :destroy
   has_many :attendances,
            dependent: :destroy
+  has_many :attended_trips,
+           through: :attendances,
+           source: :trip
   has_many :managed_attendances,
            through: :created_trips,
            source: :attendances
