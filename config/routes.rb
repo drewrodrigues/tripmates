@@ -12,9 +12,12 @@
 #               api_friends GET    /api/friends(.:format)                                                                   api/friends#index {:format=>:json}
 #                           POST   /api/friends(.:format)                                                                   api/friends#create {:format=>:json}
 #                api_friend DELETE /api/friends/:id(.:format)                                                               api/friends#destroy {:format=>:json}
+#              api_messages POST   /api/messages(.:format)                                                                  api/messages#create {:format=>:json}
+#               api_message DELETE /api/messages/:id(.:format)                                                              api/messages#destroy {:format=>:json}
 #               api_session DELETE /api/session(.:format)                                                                   api/sessions#destroy {:format=>:json}
 #                           POST   /api/session(.:format)                                                                   api/sessions#create {:format=>:json}
 #      api_trip_attendances GET    /api/trips/:trip_id/attendances(.:format)                                                api/attendances#index {:format=>:json}
+#         api_trip_messages GET    /api/trips/:trip_id/messages(.:format)                                                   api/messages#index {:format=>:json}
 #                 api_trips GET    /api/trips(.:format)                                                                     api/trips#index {:format=>:json}
 #                           POST   /api/trips(.:format)                                                                     api/trips#create {:format=>:json}
 #                  api_trip GET    /api/trips/:id(.:format)                                                                 api/trips#show {:format=>:json}
@@ -40,9 +43,11 @@ Rails.application.routes.draw do
     resources :attendances, only: [:create, :destroy]
     resources :friend_requests, only: [:create, :index, :destroy]
     resources :friends, only: [:create, :index, :destroy]
+    resources :messages, only: [:create, :destroy]
     resource  :session, only: [:create, :destroy]
     resources :trips, except: [:new, :edit] do
       resources :attendances, only: [:index]
+      resources :messages, only: [:index]
     end
     resources :users, only: [:create, :destroy, :update, :index]
   end
