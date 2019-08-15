@@ -60,11 +60,6 @@ class Trip < ApplicationRecord
     (end_date - start_date).round + 1
   end
 
-  def spaces_left
-    return "Unlimited" if spaces.zero?
-    spaces - 1
-  end
-
   private
 
   def valid_date_range

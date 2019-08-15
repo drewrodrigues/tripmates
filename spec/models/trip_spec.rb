@@ -107,41 +107,4 @@ RSpec.describe Trip, type: :model do
       expect(trip.duration).to eq(1)
     end
   end
-
-  describe "#days_until" do
-    # TODO: make this computer on frontend
-    it "accounts for the current user's timezone"
-
-    context "when start date is today" do
-      it "returns 0" do
-        trip = build(:trip, start_date: Date.today, end_date: Date.today)
-        expect(trip.days_until).to eq(0)
-      end
-    end
-
-    context "when start date is in past" do
-      it "returns a negative number" do
-        past_day = Timecop.freeze(2019, 1, 1)
-        trip = build(:trip, start_date: Date.today, end_date: Date.today)
-        future_day = Date.new(2019, 6, 1)
-        Timecop.travel(future_day)
-
-        expect(trip.days_until).to be_negative
-      end
-    end
-  end
-
-  describe "#spaces_left" do
-    it "counts the leader as a space" do
-      trip = build(:trip, spaces: 5)
-      expect(trip.spaces_left).to eq(4)
-    end
-
-    context "when set to 0" do
-      it "returns 'unlimited'" do
-        trip = build(:trip, spaces: 0)
-        expect(trip.spaces_left).to eq("Unlimited")
-      end
-    end
-  end
 end
