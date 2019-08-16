@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Api::AttendRequestsController, type: :controller do
   render_views
@@ -25,7 +25,7 @@ RSpec.describe Api::AttendRequestsController, type: :controller do
       [
         "post :create, format: :json",
         "get :index, format: :json",
-        "delete :destroy, format: :json, params: { id: 2 }"
+        "delete :destroy, format: :json, params: { id: 2 }",
       ].each do |method|
         eval(method)
         expect(response).to have_http_status(:unauthorized)
@@ -47,9 +47,9 @@ RSpec.describe Api::AttendRequestsController, type: :controller do
           random_user = create(:user)
           subject.login!(random_user)
 
-          expect {
+          expect do
             delete :destroy, format: :json, params: { id: attend_request.id }
-          }.to raise_error(ActiveRecord::RecordNotFound)
+          end.to raise_error(ActiveRecord::RecordNotFound)
         end
       end
     end
@@ -61,7 +61,7 @@ RSpec.describe Api::AttendRequestsController, type: :controller do
         setup
         subject.login!(User.last)
         post :create, format: :json, params: {
-          attend_request: { trip_id: Trip.last.id }
+          attend_request: { trip_id: Trip.last.id },
         }
       end
 
@@ -75,13 +75,13 @@ RSpec.describe Api::AttendRequestsController, type: :controller do
 
       it "returns json" do
         attend_request = AttendRequest.last
-        expect(JSON.parse(response.body)).to eq({
+        expect(JSON.parse(response.body)).to eq(
           attend_request.id.to_s => {
             "id" => attend_request.id,
             "tripId" => attend_request.trip_id,
-            "userId" => attend_request.user_id
-          }
-        })
+            "userId" => attend_request.user_id,
+          },
+        )
       end
     end
 
@@ -91,7 +91,7 @@ RSpec.describe Api::AttendRequestsController, type: :controller do
 
         post :create, params: { attend_request: { trip_id: 1_000_000 } }
 
-        expect(JSON.parse(response.body)).to eq({ "errors" => ["Trip must exist"] })
+        expect(JSON.parse(response.body)).to eq("errors" => ["Trip must exist"])
       end
     end
   end
@@ -110,13 +110,13 @@ RSpec.describe Api::AttendRequestsController, type: :controller do
 
     it "returns JSON" do
       attend_request = AttendRequest.last
-      expect(JSON.parse(response.body)).to eq({
+      expect(JSON.parse(response.body)).to eq(
         attend_request.id.to_s => {
           "id" => attend_request.id,
           "userId" => attend_request.user_id,
-          "tripId" => attend_request.trip_id
-        }
-      })
+          "tripId" => attend_request.trip_id,
+        },
+      )
     end
   end
 
@@ -146,9 +146,9 @@ RSpec.describe Api::AttendRequestsController, type: :controller do
       it "responds with error" do
         subject.login!(create(:user))
 
-        expect {
+        expect do
           delete :destroy, format: :json, params: { id: 1_000_000 }
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

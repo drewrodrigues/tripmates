@@ -27,7 +27,8 @@ class Message < ApplicationRecord
   def must_be_leader_or_attendee_of_trip
     return unless user
 
-    unless user.attended_trips.where(id: trip_id).exists? || user.created_trips.where(id: trip_id).exists?
+    unless user.attended_trips.where(id: trip_id).exists? ||
+           user.created_trips.where(id: trip_id).exists?
       errors.add(:you, "must be on the trip to message")
     end
   end

@@ -49,7 +49,7 @@ RSpec.describe User, type: :model do
         user = create(:user)
         non_friend_user = create(:user)
 
-        non_friend_trip = create(:trip, creator: non_friend_user)
+        create(:trip, creator: non_friend_user)
         expect(Trip.count).to eq(1)
 
         expect(user.friends_trips.count).to eq(0)

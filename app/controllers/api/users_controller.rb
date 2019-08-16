@@ -14,7 +14,7 @@ class Api::UsersController < ApplicationController
     if @user.destroy
       render :show
     else
-      render json: {errors: @user.errors.full_messages}
+      render json: { errors: @user.errors.full_messages }
     end
   end
 
@@ -23,7 +23,7 @@ class Api::UsersController < ApplicationController
     if @user.update(user_params)
       render :show
     else
-      render json: {errors: @user.errors.full_messages}
+      render json: { errors: @user.errors.full_messages }
     end
   end
 
@@ -34,7 +34,7 @@ class Api::UsersController < ApplicationController
   private
 
   def user_params
-    base_params = [:first_name, :last_name, :password, :email]
+    base_params = %i[first_name last_name password email]
     if params["user"]["profile_picture"] == ""
       params.require(:user).permit(*base_params)
     else

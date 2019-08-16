@@ -13,7 +13,7 @@
 #  index_attendances_on_user_id_and_trip_id  (user_id,trip_id) UNIQUE
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Attendance, type: :model do
   let(:setup) do
@@ -66,7 +66,7 @@ RSpec.describe Attendance, type: :model do
 
       it "has an error" do
         @attendance.validate
-        expect(@attendance.errors.full_messages).to eq(['Attend request must be made first'])
+        expect(@attendance.errors.full_messages).to eq(["Attend request must be made first"])
       end
     end
 

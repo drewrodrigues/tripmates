@@ -7,6 +7,6 @@ class CreateApiAttendRequests < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    add_index :attend_requests, [:trip_id, :user_id], unique: true
+    add_index :attend_requests, %i[trip_id user_id], unique: true
   end
 end

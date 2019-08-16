@@ -19,7 +19,10 @@ class AttendRequest < ApplicationRecord
 
   # TODO: ensure user isn't already attending the trip (after attendees built)
 
-  validates :trip, uniqueness: { scope: :user, message: "already has attend request pending" }
+  validates :trip, uniqueness: {
+    cope: :user,
+    message: "already has attend request pending",
+  }
   validate :trip_is_public
   validate :must_be_friend_of_leader
 
@@ -34,7 +37,7 @@ class AttendRequest < ApplicationRecord
   end
 
   def must_be_friend_of_leader
-    return unless trip && trip.creator
+    return unless trip&.creator
 
     unless user.friends_with?(trip.creator)
       errors.add(:leader, "must be your friend")

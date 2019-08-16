@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Api::AttendancesController, type: :controller do
   render_views
@@ -26,7 +26,7 @@ RSpec.describe Api::AttendancesController, type: :controller do
       [
         "post :create, format: :json",
         "get :index, format: :json",
-        "delete :destroy, format: :json, params: { id: 1_000_000 }"
+        "delete :destroy, format: :json, params: { id: 1_000_000 }",
       ].each do |method|
         eval(method)
         expect(response).to have_http_status(:unauthorized)
@@ -57,28 +57,27 @@ RSpec.describe Api::AttendancesController, type: :controller do
         attendance = Attendance.last
         trip = Trip.last
         user = attender
-        expect(JSON.parse(response.body)).to eq({
-                                                       attendance.id.to_s => {
-                                                           "id" => attendance.id,
-                                                           "tripId" => trip.id,
-                                                           "userId" => user.id
-                                                       }
-                                                   })
+        expect(JSON.parse(response.body)).to eq(
+          attendance.id.to_s => {
+            "id" => attendance.id,
+            "tripId" => trip.id,
+            "userId" => user.id,
+          },
+        )
       end
     end
 
     context "when user isn't leader" do
       it "raises an error" do
         subject.login!(attender)
-        expect {
+        expect do
           post :create, format: :json, params: { id: AttendRequest.last.id }
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
 
   describe "GET #index" do
-
   end
 
   describe "DELETE #destroy" do
@@ -131,7 +130,7 @@ RSpec.describe Api::AttendancesController, type: :controller do
         subject.login!(create(:user))
         expect(Attendance.count).to eq(1)
         delete :destroy, params: { id: Attendance.last.id }
-        expect(JSON.parse(response.body)).to eq({ "errors" => ["Failed to leave trip"] })
+        expect(JSON.parse(response.body)).to eq("errors" => ["Failed to leave trip"])
       end
     end
   end

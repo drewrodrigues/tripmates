@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Api::FriendsController, type: :controller do
   render_views
@@ -7,8 +7,7 @@ RSpec.describe Api::FriendsController, type: :controller do
     it "protects all actions from signed out users" do
       ["post :create, format: :json",
        "get :index, format: :json",
-       "delete :destroy, format: :json, params: { id: 2 }"
-      ].each do |method|
+       "delete :destroy, format: :json, params: { id: 2 }"].each do |method|
         eval(method)
         expect(response).to have_http_status(:unauthorized)
       end
@@ -20,7 +19,10 @@ RSpec.describe Api::FriendsController, type: :controller do
       before do
         @user = create(:user)
         @other_user = create(:user)
-        friend_request = FriendRequest.create(requester: @other_user, requestee: @user)
+        friend_request = FriendRequest.create(
+          requester: @other_user,
+          requestee: @user,
+        )
         subject.login!(@user)
 
         post :create, format: :json, params: { id: friend_request.id }
@@ -32,24 +34,24 @@ RSpec.describe Api::FriendsController, type: :controller do
 
       it "returns json" do
         last_friend_id = Friend.last.id
-        expect(JSON.parse(response.body)).to eq({
+        expect(JSON.parse(response.body)).to eq(
           "friend" => {
             last_friend_id.to_s => {
               "id" => last_friend_id,
               "friendOneId" => @user.id,
-              "friendTwoId" => @other_user.id
-            }
+              "friendTwoId" => @other_user.id,
+            },
           },
           "user" => {
             @other_user.id.to_s => {
               "id" => @other_user.id,
               "firstName" => @other_user.first_name,
               "lastName" => @other_user.last_name,
-              "fullName" => @other_user.first_name + " " + @other_user.last_name,
-              "email" => @other_user.email
-            }
-          }
-        })
+              "fullName" => @other_user.full_name,
+              "email" => @other_user.email,
+            },
+          },
+        )
       end
 
       it "returns success response" do
@@ -61,12 +63,15 @@ RSpec.describe Api::FriendsController, type: :controller do
       it "raises RecordNotFound" do
         user = create(:user)
         other_user = create(:user)
-        @friend_request = FriendRequest.create(requester: user, requestee: other_user)
+        @friend_request = FriendRequest.create(
+          requester: user,
+          requestee: other_user,
+        )
         subject.login!(user)
 
-        expect {
+        expect do
           post :create, format: :json, params: { id: @friend_request.id }
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
         expect(Friend.count).to eq(0)
       end
     end
@@ -89,13 +94,13 @@ RSpec.describe Api::FriendsController, type: :controller do
 
     it "returns json" do
       last_friend_id = Friend.last.id
-      expect(JSON.parse(response.body)).to eq({
+      expect(JSON.parse(response.body)).to eq(
         "friends" => {
           last_friend_id.to_s => {
             "id" => last_friend_id,
             "friendOneId" => @user.id,
-            "friendTwoId" => @other_user.id
-          }
+            "friendTwoId" => @other_user.id,
+          },
         },
         "users" => {
           @other_user.id.to_s => {
@@ -103,10 +108,10 @@ RSpec.describe Api::FriendsController, type: :controller do
             "firstName" => @other_user.first_name,
             "lastName" => @other_user.last_name,
             "fullName" => @other_user.first_name + " " + @other_user.last_name,
-            "email" => @other_user.email
-          }
-        }
-      })
+            "email" => @other_user.email,
+          },
+        },
+      )
     end
   end
 

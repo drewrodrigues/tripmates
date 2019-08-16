@@ -8,7 +8,7 @@ class Api::AttendRequestsController < ApplicationController
     else
       render json:
                  { errors: @attend_request.errors.full_messages },
-                   status: 422
+             status: 422
     end
   end
 
@@ -18,12 +18,14 @@ class Api::AttendRequestsController < ApplicationController
 
   def destroy
     attend_request = current_user.attend_requests.find_by(id: params[:id]) ||
-                     current_user.managed_attend_requests.find_by(id: params[:id])
+      current_user.managed_attend_requests.find_by(id: params[:id])
     if attend_request&.destroy
       render json: {}, status: :ok
     else
       # TODO: refactor?
-      render json: { errors: ["Only trip leader and requesting user can cancel attend requests"] }, status: :unauthorized
+      render json: {
+        errors: ["Only trip leader and requesting user can cancel request"]
+      }, status: :unauthorized
     end
   end
 

@@ -1,6 +1,6 @@
 class Api::MessagesController < ApplicationController
   before_action :require_sign_in
-  before_action :set_trip, only: [:create, :index]
+  before_action :set_trip, only: %i[create index]
 
   def create
     @message = Message.new(message_params)
@@ -9,7 +9,9 @@ class Api::MessagesController < ApplicationController
     if @message.save
       render :show
     else
-      render json: { errors: ["Failed to create message"] }, status: :unprocessable_entity
+      render json: {
+        errors: ["Failed to create message"],
+      }, status: :unprocessable_entity
     end
   end
 
@@ -19,11 +21,13 @@ class Api::MessagesController < ApplicationController
 
   def destroy
     message = current_user.messages.find_by(id: params[:id]) ||
-              current_user.managed_messages.find(params[:id])
+      current_user.managed_messages.find(params[:id])
     if message.destroy
       render json: {}, status: :ok
     else
-      render json: { errors: ["Failed to delete message"] }, status: :bad_request
+      render json: {
+        errors: ["Failed to delete message"],
+      }, status: :bad_request
     end
   end
 
@@ -31,11 +35,10 @@ class Api::MessagesController < ApplicationController
 
   def set_trip
     @trip = current_user.created_trips.find_by(id: params[:trip_id]) ||
-            current_user.attended_trips.find(params[:trip_id])
+      current_user.attended_trips.find(params[:trip_id])
   end
 
   def message_params
     params.require(:message).permit(:body)
   end
 end
-

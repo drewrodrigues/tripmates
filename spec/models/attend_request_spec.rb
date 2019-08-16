@@ -13,7 +13,7 @@
 #  index_attend_requests_on_trip_id_and_user_id  (trip_id,user_id) UNIQUE
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe AttendRequest, type: :model do
   describe "validations" do
@@ -38,13 +38,13 @@ RSpec.describe AttendRequest, type: :model do
       AttendRequest.create(trip: trip, user: user)
 
       request = nil
-      expect {
+      expect do
         request = AttendRequest.create(trip: trip, user: user)
-      }.to_not change(AttendRequest, :count)
+      end.to_not change(AttendRequest, :count)
 
       expect(request.errors.full_messages).to eq([
-        'Trip already has attend request pending'
-      ])
+                                                   "Trip already has attend request pending",
+                                                 ])
     end
 
     context "when trip public" do
@@ -118,7 +118,7 @@ RSpec.describe AttendRequest, type: :model do
         attend_request = AttendRequest.create(trip: trip, user: user)
 
         expect(attend_request.errors.full_messages).to eq(
-          ["Leader must be your friend"]
+          ["Leader must be your friend"],
         )
       end
     end

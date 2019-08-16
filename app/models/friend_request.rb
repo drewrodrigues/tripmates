@@ -40,9 +40,9 @@ class FriendRequest < ApplicationRecord
 
   def unique_friend_request_between_users
     user1, user2 = [requester_id, requestee_id].sort
-    if FriendRequest.where(requestee_id: user1, requester_id: user2)
-                    .or(FriendRequest.where(requestee_id: user2, requester_id: user1))
-                    .exists?
+    if FriendRequest.where(requestee_id: user1, requester_id: user2).
+        or(FriendRequest.where(requestee_id: user2, requester_id: user1)).
+        exists?
       errors.add(:friend_request, "already exists")
     end
   end
@@ -61,7 +61,7 @@ class FriendRequest < ApplicationRecord
     friend_record = Friend.where(
       query,
       friend_one_id: requester_id,
-      friend_two_id: requestee_id
+      friend_two_id: requestee_id,
     ).exists?
     errors.add(:friend, "already added") if friend_record
   end

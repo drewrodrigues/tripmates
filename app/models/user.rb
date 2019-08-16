@@ -24,7 +24,7 @@ class User < ApplicationRecord
 
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
-    user if user.try(:is_password?, password)
+    user if user.try(:password?, password)
   end
 
   def self.generate_session_token
@@ -81,7 +81,7 @@ class User < ApplicationRecord
     self.session_token ||= User.generate_session_token
   end
 
-  def is_password?(password)
+  def password?(password)
     Password.new(password_digest).is_password?(password)
   end
 
@@ -106,10 +106,10 @@ class User < ApplicationRecord
   end
 
   def friend_ids
-    friend_records
-      .pluck(:friend_one_id, :friend_two_id)
-      .flatten
-      .reject { |i| i == id }
+    friend_records.
+      pluck(:friend_one_id, :friend_two_id).
+      flatten.
+      reject { |i| i == id }
   end
 
   def friends_with?(other_user)

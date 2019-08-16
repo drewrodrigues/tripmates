@@ -13,7 +13,7 @@
 #  index_friends_on_friend_one_id_and_friend_two_id  (friend_one_id,friend_two_id)
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Friend, type: :model do
   describe "validations" do
@@ -24,12 +24,12 @@ RSpec.describe Friend, type: :model do
           user_two = create(:user)
           FriendRequest.create(requestee: user_one, requester: user_two)
 
-          expect {
+          expect do
             Friend.create(
               friend_one_id: user_one.id,
-              friend_two_id: user_two.id
+              friend_two_id: user_two.id,
             )
-          }.to change(Friend, :count).by(1)
+          end.to change(Friend, :count).by(1)
         end
 
         it "destroys the friend request" do
@@ -37,12 +37,12 @@ RSpec.describe Friend, type: :model do
           user_two = create(:user)
           FriendRequest.create(requestee: user_one, requester: user_two)
 
-          expect {
+          expect do
             Friend.create(
               friend_one_id: user_one.id,
-              friend_two_id: user_two.id
+              friend_two_id: user_two.id,
             )
-          }.to change(FriendRequest, :count).by(-1)
+          end.to change(FriendRequest, :count).by(-1)
         end
       end
     end
@@ -55,23 +55,23 @@ RSpec.describe Friend, type: :model do
 
         Friend.create(
           friend_one_id: @user_one.id,
-          friend_two_id: @user_two.id
+          friend_two_id: @user_two.id,
         )
       end
 
       it "doesn't add the friend" do
-        expect {
+        expect do
           Friend.create(
             friend_one_id: @user_one.id,
-            friend_two_id: @user_two.id
+            friend_two_id: @user_two.id,
           )
-        }.to_not change(Friend, :count)
+        end.to_not change(Friend, :count)
       end
 
       it "has errors" do
         friend = Friend.create(
           friend_one_id: @user_one.id,
-          friend_two_id: @user_two.id
+          friend_two_id: @user_two.id,
         )
 
         expect(friend.errors.full_messages).to eq(["Friend already added"])
@@ -84,26 +84,26 @@ RSpec.describe Friend, type: :model do
       end
 
       it "doesn't add the friend" do
-        expect {
+        expect do
           Friend.create(
             friend_one_id: @user.id,
-            friend_two_id: 1_000_000
+            friend_two_id: 1_000_000,
           )
           Friend.create(
             friend_one_id: 1_000_000,
-            friend_two_id: @user.id
+            friend_two_id: @user.id,
           )
-         }.to_not change(Friend, :count)
+        end.to_not change(Friend, :count)
       end
 
       it "has errors" do
         @friend_one = Friend.create(
           friend_one_id: @user.id,
-          friend_two_id: 1_000_000
+          friend_two_id: 1_000_000,
         )
         @friend_two = Friend.create(
           friend_one_id: 1_000_000,
-          friend_two_id: @user.id
+          friend_two_id: @user.id,
         )
 
         [@friend_one, @friend_two].each do |friend|
@@ -119,26 +119,26 @@ RSpec.describe Friend, type: :model do
       end
 
       it "doesn't add the friend" do
-        expect {
+        expect do
           Friend.create(
             friend_one_id: @user_one.id,
-            friend_two_id: @user_two.id
+            friend_two_id: @user_two.id,
           )
           Friend.create(
             friend_one_id: @user_two.id,
-            friend_two_id: @user_one.id
+            friend_two_id: @user_one.id,
           )
-         }.to_not change(Friend, :count)
+        end.to_not change(Friend, :count)
       end
 
       it "has errors" do
         friend_one = Friend.create(
           friend_one_id: @user_one.id,
-          friend_two_id: @user_two.id
+          friend_two_id: @user_two.id,
         )
         friend_two = Friend.create(
           friend_one_id: @user_two.id,
-          friend_two_id: @user_one.id
+          friend_two_id: @user_one.id,
         )
 
         [friend_one, friend_two].each do |friend|

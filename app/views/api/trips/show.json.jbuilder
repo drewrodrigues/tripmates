@@ -28,6 +28,7 @@ end
 
 json.set! "attend_requests" do
   @trip.attend_requests.each do |attend_request|
-    json.partial! "api/attend_requests/attend_request", attend_request: attend_request
+    json.partial! "api/attend_requests/attend_request",
+                  attend_request: attend_request
   end
 end

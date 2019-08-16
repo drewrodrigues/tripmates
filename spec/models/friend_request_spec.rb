@@ -27,11 +27,11 @@ RSpec.describe FriendRequest, type: :model do
       user2 = build_stubbed(:user)
       FriendRequest.create(requester: user1, requestee: user2)
 
-      expect {
+      expect do
         request = FriendRequest.create(requester: user1, requestee: user2)
         expect(request).to_not be_valid
         expect(request.errors.full_messages).to eq(["Friend request already exists"])
-      }.to_not change(FriendRequest, :count)
+      end.to_not change(FriendRequest, :count)
     end
   end
 

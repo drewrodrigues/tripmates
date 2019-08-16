@@ -1,15 +1,15 @@
 ActiveRecord::Base.transaction do
-  SEED_DATA_PATH = "app/assets/seed_data/"
+  SEED_DATA_PATH = "app/assets/seed_data/".freeze
 
   drew = User.new(
     first_name: "Drew",
     last_name: "Rodrigues",
     email: "drew@tripmates.io",
-    password: "password"
+    password: "password",
   )
   drew.profile_picture.attach(
     io: File.open(SEED_DATA_PATH + "users/" + "me.jpeg"),
-    filename: "me"
+    filename: "me",
   )
   drew.save!
 end

@@ -59,7 +59,7 @@ class Friend < ApplicationRecord
     Friend.where(
       query,
       friend_one_id: friend_one_id,
-      friend_two_id: friend_two_id
+      friend_two_id: friend_two_id,
     ).exists?
   end
 
@@ -69,7 +69,7 @@ class Friend < ApplicationRecord
   end
 
   def no_friend_request?
-    !self.friend_request
+    !friend_request
   end
 
   def set_friend_request
@@ -80,7 +80,7 @@ class Friend < ApplicationRecord
     self.friend_request = FriendRequest.where(
       query,
       friend_one_id: friend_one_id,
-      friend_two_id: friend_two_id
+      friend_two_id: friend_two_id,
     ).first
   end
 

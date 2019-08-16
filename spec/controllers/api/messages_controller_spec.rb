@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Api::MessagesController, type: :controller do
   render_views
@@ -24,9 +24,15 @@ RSpec.describe Api::MessagesController, type: :controller do
   describe "authentication" do
     before do
       @methods = [
-        "post :create, format: :json, params: { trip_id: 1_000_000, message: { body: 'something' } }",
-        "get :index, format: :json, params: { trip_id: 1_000_000, message: {} }",
-        "delete :destroy, format: :json, params: { id: 2_000_000 }"
+        "post :create,
+          format: :json,
+          params: { trip_id: 1_000_000, message: { body: 'something' } }",
+        "get :index,
+          format: :json,
+          params: { trip_id: 1_000_000, message: {} }",
+        "delete :destroy,
+          format: :json,
+          params: { id: 2_000_000 }",
       ]
     end
 
@@ -46,7 +52,12 @@ RSpec.describe Api::MessagesController, type: :controller do
     context "when leader" do
       before do
         subject.login!(leader)
-        post :create, format: :json, params: { trip_id: Trip.last.id, message: { body: "Do the things" }}
+        post :create,
+             format: :json,
+             params: {
+               trip_id: Trip.last.id,
+               message: { body: "Do the things" },
+             }
       end
 
       it "creates the record" do
@@ -59,20 +70,25 @@ RSpec.describe Api::MessagesController, type: :controller do
 
       it "responds with JSON" do
         message = Message.last
-        expect(JSON.parse(response.body)).to eq({
+        expect(JSON.parse(response.body)).to eq(
           message.id.to_s => {
-              "body" => message.body,
-              "id" => message.id,
-              "tripId" => message.trip_id
-          }
-        })
+            "body" => message.body,
+            "id" => message.id,
+            "tripId" => message.trip_id,
+          },
+        )
       end
     end
 
     context "when attendee" do
       before do
         subject.login!(attendee)
-        post :create, format: :json, params: { trip_id: Trip.last.id, message: { body: "Do the things" }}
+        post :create,
+             format: :json,
+             params: {
+               trip_id: Trip.last.id,
+               message: { body: "Do the things" },
+             }
       end
 
       it "creates the record" do
@@ -85,31 +101,41 @@ RSpec.describe Api::MessagesController, type: :controller do
 
       it "responds with JSON" do
         message = Message.last
-        expect(JSON.parse(response.body)).to eq({
-            message.id.to_s => {
-                "body" => message.body,
-                "id" => message.id,
-                "tripId" => message.trip_id
-            }
-        })
+        expect(JSON.parse(response.body)).to eq(
+          message.id.to_s => {
+            "body" => message.body,
+            "id" => message.id,
+            "tripId" => message.trip_id,
+          },
+        )
       end
     end
 
     context "when neither" do
       it "raises error" do
         subject.login!(create(:user))
-        expect {
-          post :create, format: :json, params: { trip_id: Trip.last.id, message: { body: "Do the things" }}
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        expect do
+          post :create,
+               format: :json,
+               params: {
+                 trip_id: Trip.last.id,
+                 message: { body: "Do the things" },
+               }
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 
     context "with invalid params" do
       it "raises error" do
         subject.login!(create(:user))
-        expect {
-          post :create, format: :json, params: { trip_id: 1_000_000, message: { body: "Do the things" }}
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        expect do
+          post :create,
+               format: :json,
+               params: {
+                 trip_id: 1_000_000,
+                 message: { body: "Do the things" },
+               }
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
@@ -126,19 +152,20 @@ RSpec.describe Api::MessagesController, type: :controller do
       end
 
       it "responds with records" do
-        expect(JSON.parse(response.body)).to eq({
-            "messages" => { Message.last.id.to_s  => { "body" => "Do the things",
-                                                       "id" => Message.last.id,
-                                                       "tripId" => Trip.last.id
-            }
-            },
-            "users" =>    { attendee.id.to_s => { "email" => attendee.email,
-                                                  "firstName" => attendee.first_name,
-                                                  "fullName" => attendee.full_name,
-                                                  "id" => attendee.id,
-                                                  "lastName" => attendee.last_name
-            }           }
-        })
+        expect(JSON.parse(response.body)).to eq(
+          "messages" => { Message.last.id.to_s => {
+            "body" => "Do the things",
+            "id" => Message.last.id,
+            "tripId" => Trip.last.id,
+          } },
+          "users" => { attendee.id.to_s => {
+            "email" => attendee.email,
+            "firstName" => attendee.first_name,
+            "fullName" => attendee.full_name,
+            "id" => attendee.id,
+            "lastName" => attendee.last_name,
+          } },
+        )
       end
 
       it "responds with :ok status code" do
@@ -153,19 +180,20 @@ RSpec.describe Api::MessagesController, type: :controller do
       end
 
       it "responds with records" do
-        expect(JSON.parse(response.body)).to eq({
-          "messages" => { Message.last.id.to_s  => { "body" => "Do the things",
-                                      "id" => Message.last.id,
-                                      "tripId" => Trip.last.id
-                                    }
-                        },
-          "users" =>    { attendee.id.to_s => { "email" => attendee.email,
-                                      "firstName" => attendee.first_name,
-                                      "fullName" => attendee.full_name,
-                                      "id" => attendee.id,
-                                      "lastName" => attendee.last_name
-                        }           }
-        })
+        expect(JSON.parse(response.body)).to eq(
+          "messages" => { Message.last.id.to_s => {
+            "body" => "Do the things",
+            "id" => Message.last.id,
+            "tripId" => Trip.last.id,
+          } },
+          "users" => { attendee.id.to_s => {
+            "email" => attendee.email,
+            "firstName" => attendee.first_name,
+            "fullName" => attendee.full_name,
+            "id" => attendee.id,
+            "lastName" => attendee.last_name,
+          } },
+        )
       end
 
       it "responds with :ok status code" do
@@ -179,18 +207,18 @@ RSpec.describe Api::MessagesController, type: :controller do
       end
 
       it "raises error" do
-        expect {
+        expect do
           get :index, params: { trip_id: Trip.last.id }
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 
     context "with invalid params" do
       it "raises error" do
         subject.login!(create(:user))
-        expect {
+        expect do
           get :index, format: :json, params: { trip_id: 1_000_000 }
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
@@ -242,18 +270,18 @@ RSpec.describe Api::MessagesController, type: :controller do
     context "when neither" do
       it "raises error" do
         subject.login!(create(:user))
-        expect {
+        expect do
           delete :destroy, params: { id: Message.last.id }
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 
     context "with invalid params" do
       it "raises error" do
         subject.login!(create(:user))
-        expect {
+        expect do
           delete :destroy, format: :json, params: { id: 1_000_000 }
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

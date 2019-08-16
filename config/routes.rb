@@ -39,25 +39,25 @@
 
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
-    resources :attend_requests, only: [:create, :index, :destroy]
-    resources :attendances, only: [:create, :destroy]
-    resources :friend_requests, only: [:create, :index, :destroy]
-    resources :friends, only: [:create, :index, :destroy]
+    resources :attend_requests, only: %i[create index destroy]
+    resources :attendances, only: %i[create destroy]
+    resources :friend_requests, only: %i[create index destroy]
+    resources :friends, only: %i[create index destroy]
     resources :messages, only: [:destroy]
-    resource  :session, only: [:create, :destroy]
-    resources :trips, except: [:new, :edit] do
+    resource  :session, only: %i[create destroy]
+    resources :trips, except: %i[new edit] do
       resources :attendances, only: [:index]
-      resources :messages, only: [:create, :index]
+      resources :messages, only: %i[create index]
     end
-    resources :users, only: [:create, :destroy, :update, :index]
+    resources :users, only: %i[create destroy update index]
   end
 
   if Rails.env.test? || Rails.env.development?
     # for cypress before specs
     # TODO: only for development enviroment
     namespace :test do
-      post 'clean_database', to: 'databases#clean_database'
-      post 'seed_database', to: 'databases#seed_database'
+      post "clean_database", to: "databases#clean_database"
+      post "seed_database", to: "databases#seed_database"
     end
   end
 end

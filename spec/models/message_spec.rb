@@ -15,7 +15,7 @@
 #  index_messages_on_user_id  (user_id)
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Message, type: :model do
   it { should validate_presence_of(:body) }
@@ -62,7 +62,9 @@ RSpec.describe Message, type: :model do
 
       it "has errors" do
         @message.validate
-        expect(@message.errors.full_messages).to eq(['You must be on the trip to message'])
+        expect(@message.errors.full_messages).to eq(
+         ["You must be on the trip to message"]
+        )
       end
     end
   end

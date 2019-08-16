@@ -5,7 +5,7 @@ class Api::FriendsController < ApplicationController
     friend_request = current_user.friend_requests.find(params[:id])
     @friend_record = Friend.new(
       friend_one_id: current_user.id,
-      friend_two_id: friend_request.requester_id
+      friend_two_id: friend_request.requester_id,
     )
     if @friend_record.save
       @friend = @friend_record.other_user(current_user)
@@ -13,7 +13,7 @@ class Api::FriendsController < ApplicationController
     else
       render json:
         { errors: @friend_record.errors.full_messages },
-        status: 422
+             status: 422
     end
   end
 

@@ -22,7 +22,7 @@
 #
 
 class Trip < ApplicationRecord
-  PRIVACIES = %w(visible hidden)
+  PRIVACIES = %w(visible hidden).freeze
 
   default_scope { order(:start_date) }
   scope :visible, -> { where(privacy: "visible") }
@@ -64,12 +64,13 @@ class Trip < ApplicationRecord
 
   def valid_date_range
     return if [start_date, end_date].any?(&:nil?)
+
     if start_date > end_date
       errors.add(:start_date, "must be before or the same as end date.")
     end
   end
 
   def positive_spaces
-    errors.add(:spaces, 'must be positive') if spaces&.negative?
+    errors.add(:spaces, "must be positive") if spaces&.negative?
   end
 end

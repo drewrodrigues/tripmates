@@ -1,6 +1,6 @@
 class Api::TripsController < ApplicationController
   before_action :require_sign_in
-  before_action :set_trip_for_current_user, only: [:update, :destroy]
+  before_action :set_trip_for_current_user, only: %i[update destroy]
 
   def create
     @trip = current_user.created_trips.build(trip_params)
@@ -11,7 +11,8 @@ class Api::TripsController < ApplicationController
     end
   end
 
-  # TODO: add edit so frontend can hit it, and we can scope from current_user/resource a user can handle
+  # TODO: add edit so frontend can hit it, and we can scope from
+  # current_user/resource a user can handle
   # otherwise it'll return a 404 and the frontend knows how to handle that
 
   def show
@@ -27,13 +28,13 @@ class Api::TripsController < ApplicationController
   end
 
   def index
-    if params[:led_by] == "me"
-      @trips = current_user.created_trips
-    elsif params[:led_by] == "friends"
-      @trips = current_user.friends_trips.visible
-    else
-      @trips = current_user.created_trips.or(current_user.friends_trips).visible
-    end
+    @trips = if params[:led_by] == "me"
+               current_user.created_trips
+             elsif params[:led_by] == "friends"
+               current_user.friends_trips.visible
+             else
+               current_user.created_trips.or(current_user.friends_trips).visible
+             end
 
     if params[:when] == "past"
       @trips = @trips.before(params[:date])
@@ -60,14 +61,14 @@ class Api::TripsController < ApplicationController
   end
 
   def trip_params
-    base_params = [
-      :details,
-      :end_date,
-      :location,
-      :privacy,
-      :spaces,
-      :start_date,
-      :title
+    base_params = %i[
+      details
+      end_date
+      location
+      privacy
+      spaces
+      start_date
+      title
     ]
     cover_photo_param = params[:trip][:cover_photo]
     if cover_photo_param == "" || cover_photo_param.is_a?(String)
