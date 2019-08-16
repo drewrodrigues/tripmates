@@ -52,6 +52,9 @@ class User < ApplicationRecord
            through: :created_trips,
            source: :attend_requests,
            dependent: :destroy
+  has_many :managed_messages,
+           through: :created_trips,
+           source: :messages
   has_many :attendances,
            dependent: :destroy
   has_many :attended_trips,
