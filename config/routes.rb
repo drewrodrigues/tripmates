@@ -43,11 +43,11 @@ Rails.application.routes.draw do
     resources :attendances, only: [:create, :destroy]
     resources :friend_requests, only: [:create, :index, :destroy]
     resources :friends, only: [:create, :index, :destroy]
-    resources :messages, only: [:create, :destroy]
+    resources :messages, only: [:destroy]
     resource  :session, only: [:create, :destroy]
     resources :trips, except: [:new, :edit] do
       resources :attendances, only: [:index]
-      resources :messages, only: [:index]
+      resources :messages, only: [:create, :index]
     end
     resources :users, only: [:create, :destroy, :update, :index]
   end
