@@ -1,5 +1,5 @@
-const thunk = ({dispatch}) => next => action => {
-  if (typeof action === 'function') {
+const thunk = ({ dispatch }) => next => action => {
+  if (typeof action === "function") {
     return action(dispatch)
   }
 

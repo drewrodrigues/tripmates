@@ -1,11 +1,11 @@
-import * as APIUtil from '../utils/sessionUtil'
+import * as APIUtil from "../utils/sessionUtil"
 
-import { receiveUser } from './userActions'
+import { receiveUser } from "./userActions"
 
-export const RECEIVE_CURRENT_USER   = "RECEIVE_CURRENT_USER"
-export const LOGOUT                 = "LOGOUT"
+export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER"
+export const LOGOUT = "LOGOUT"
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS"
-export const CLEAR_SESSION_ERRORS   = "CLEAR_SESSION_ERRORS"
+export const CLEAR_SESSION_ERRORS = "CLEAR_SESSION_ERRORS"
 
 export const receiveCurrentUser = user => {
   return { type: RECEIVE_CURRENT_USER, user }
@@ -24,11 +24,10 @@ export const clearSessionErrors = () => {
 }
 
 export const logout = () => dispatch => {
-  return APIUtil.logout()
-    .then(res => {
-      dispatch(receiveLogout())
-      localStorage.removeItem('session')
-    })
+  return APIUtil.logout().then(res => {
+    dispatch(receiveLogout())
+    localStorage.removeItem("session")
+  })
 }
 
 export const signIn = user => dispatch => {
@@ -36,7 +35,7 @@ export const signIn = user => dispatch => {
     .then(res => {
       dispatch(receiveCurrentUser(res.data))
       dispatch(receiveUser(res.data))
-      localStorage.setItem('session', JSON.stringify(res.data))
+      localStorage.setItem("session", JSON.stringify(res.data))
     })
     .catch(error => {
       dispatch(receiveSessionErrors(error.response.data))

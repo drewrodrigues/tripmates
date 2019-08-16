@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "axios"
 
 export const createTrip = formData => {
   return axios({
@@ -18,7 +18,9 @@ export const fetchMyTrips = () => {
 }
 
 export const searchTrips = query => {
-  const queryString = Object.entries(query).map((a) => `${a[0]}=${a[1]}`).join('&')
+  const queryString = Object.entries(query)
+    .map(a => `${a[0]}=${a[1]}`)
+    .join("&")
   return axios({
     method: "GET",
     url: `/api/trips?${queryString}`
@@ -28,21 +30,21 @@ export const searchTrips = query => {
 export const fetchTrip = id => {
   return axios({
     method: "GET",
-    url: `/api/trips/${ id }`
+    url: `/api/trips/${id}`
   })
 }
 
 export const deleteTrip = id => {
   return axios({
     method: "DELETE",
-    url: `/api/trips/${ id }`
+    url: `/api/trips/${id}`
   })
 }
 
 export const updateTrip = formData => {
   return axios({
     method: "PUT",
-    url: `/api/trips/${ formData.get('trip[id]') }`,
+    url: `/api/trips/${formData.get("trip[id]")}`,
     data: formData,
     contentType: false,
     processData: false

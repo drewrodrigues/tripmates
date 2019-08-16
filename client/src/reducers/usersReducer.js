@@ -1,7 +1,4 @@
-import {
-  RECEIVE_USER,
-  RECEIVE_USERS
-} from '../actions/userActions'
+import { RECEIVE_USER, RECEIVE_USERS } from "../actions/userActions"
 
 const usersReducer = (oldState = {}, action) => {
   Object.freeze(oldState)

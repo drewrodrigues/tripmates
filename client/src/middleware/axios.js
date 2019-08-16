@@ -8,8 +8,7 @@ service.register({
     let responseMessage
     try {
       responseMessage = JSON.parse(error.response.data).message
-    }
-    catch {}
+    } catch {}
 
     if (error.response.status == 404) {
       window.location.hash = "#/404"

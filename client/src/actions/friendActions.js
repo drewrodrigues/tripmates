@@ -1,11 +1,6 @@
 import * as FriendUtil from "../utils/friendUtil"
-import {
-  receiveUser,
-  receiveUsers
-} from "./userActions"
-import {
-  removeFriendRequest
-} from "./friendRequestActions"
+import { receiveUser, receiveUsers } from "./userActions"
+import { removeFriendRequest } from "./friendRequestActions"
 
 export const RECEIVE_FRIEND = "RECEIVE_FRIEND"
 export const RECEIVE_FRIENDS = "RECEIVE_FRIENDS"
@@ -43,16 +38,15 @@ export const addFriend = friendRequestId => dispatch => {
 }
 
 export const getFriends = () => dispatch => {
-  return FriendUtil.getFriends()
-    .then(res => {
-      dispatch(receiveFriends(res.data.friends))
-      dispatch(receiveUsers(res.data.users))
-    })
+  return FriendUtil.getFriends().then(res => {
+    dispatch(receiveFriends(res.data.friends))
+    dispatch(receiveUsers(res.data.users))
+  })
 }
 
 export const deleteFriend = id => dispatch => {
   return FriendUtil.deleteFriend(id)
     .then(() => dispatch(removeFriend(id)))
     .catch(err => console.log(err.response.data))
-    // TODO: add notification box
+  // TODO: add notification box
 }

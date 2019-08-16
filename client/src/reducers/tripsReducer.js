@@ -3,7 +3,7 @@ import {
   RECEIVE_TRIPS,
   REMOVE_TRIP,
   CLEAR_TRIPS
-} from '../actions/tripActions'
+} from "../actions/tripActions"
 
 const tripsReducer = (oldState = {}, action) => {
   Object.freeze(oldState)

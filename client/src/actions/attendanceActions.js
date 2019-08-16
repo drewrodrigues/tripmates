@@ -1,6 +1,6 @@
 import * as AttendanceUtils from "../utils/attendanceUtils"
 import { removeAttendRequest } from "./attendRequestActions"
-import { receiveUser, receiveUsers } from "./userActions";
+import { receiveUser, receiveUsers } from "./userActions"
 
 export const RECEIVE_ATTENDANCE = "RECEIVE_ATTENDANCE"
 export const RECEIVE_ATTENDANCES = "RECEIVE_ATTENDANCES"

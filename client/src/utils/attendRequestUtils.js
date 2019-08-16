@@ -4,7 +4,7 @@ export const createAttendRequest = tripId => {
   return axios({
     method: "post",
     url: "/api/attend_requests",
-    data: { "attend_request": { "trip_id": tripId } }
+    data: { attend_request: { trip_id: tripId } }
   })
 }
 

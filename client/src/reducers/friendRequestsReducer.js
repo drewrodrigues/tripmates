@@ -2,7 +2,7 @@ import {
   RECEIVE_FRIEND_REQUEST,
   RECEIVE_FRIEND_REQUESTS,
   REMOVE_FRIEND_REQUEST
-} from '../actions/friendRequestActions'
+} from "../actions/friendRequestActions"
 
 const friendRequestsReducer = (oldState = {}, action) => {
   Object.freeze(oldState)

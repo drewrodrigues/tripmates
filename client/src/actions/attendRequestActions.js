@@ -28,36 +28,36 @@ export const removeAttendRequest = id => {
 
 export const createAttendRequest = tripId => dispatch => {
   return AttendRequestUtil.createAttendRequest(tripId)
-  .then(res => {
-    dispatch(receiveAttendRequest(res.data))
-  })
-  .catch(err => {
-    // TODO: handle errors with flash
-    console.log("oh no")
-    console.log(err.response.data)
-  })
+    .then(res => {
+      dispatch(receiveAttendRequest(res.data))
+    })
+    .catch(err => {
+      // TODO: handle errors with flash
+      console.log("oh no")
+      console.log(err.response.data)
+    })
 }
 
 export const deleteAttendRequest = id => dispatch => {
   return AttendRequestUtil.deleteAttendRequest(id)
-  .then(() => {
-    dispatch(removeAttendRequest(id))
-  })
-  .catch(err => {
-    // TODO: handle errors with flash
-    console.log("oh no")
-    console.log(err.response.data)
-  })
+    .then(() => {
+      dispatch(removeAttendRequest(id))
+    })
+    .catch(err => {
+      // TODO: handle errors with flash
+      console.log("oh no")
+      console.log(err.response.data)
+    })
 }
 
 export const getAttendRequests = () => dispatch => {
   return AttendRequestUtil.getAttendRequests()
-  .then(res => {
-    dispatch(receiveAttendRequests(res.data))
-  })
-  .catch(err => {
-    // TODO: handle errors with flash
-    console.log("oh no")
-    console.log(err.response.data)
-  })
+    .then(res => {
+      dispatch(receiveAttendRequests(res.data))
+    })
+    .catch(err => {
+      // TODO: handle errors with flash
+      console.log("oh no")
+      console.log(err.response.data)
+    })
 }

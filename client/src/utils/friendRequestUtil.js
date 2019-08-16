@@ -1,5 +1,4 @@
-
-import axios from 'axios'
+import axios from "axios"
 
 export const getAllFriendRequests = () => {
   return axios({
@@ -16,7 +15,7 @@ export const deleteFriendRequest = id => {
 
 export const createFriendRequest = id => {
   return axios({
-    url: '/api/friend_requests',
+    url: "/api/friend_requests",
     method: "POST",
     data: { id }
   })

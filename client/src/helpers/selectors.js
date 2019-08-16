@@ -14,7 +14,7 @@ export const tripsByStartDate = state => {
   let allTrips = allTripsSelector(state)
   return allTrips.sort((a, b) => {
     const aStart = new Date(a.startDate),
-          bStart = new Date(b.startDate)
+      bStart = new Date(b.startDate)
     return aStart - bStart
   })
 }
@@ -74,7 +74,10 @@ export const checkIfFriend = (state, userId) => {
   let isFriend = false
 
   Object.values(state.entities.friends).forEach(friendRecord => {
-    if (friendRecord.friendOneId == userId || friendRecord.friendTwoId == userId) {
+    if (
+      friendRecord.friendOneId == userId ||
+      friendRecord.friendTwoId == userId
+    ) {
       isFriend = true
     }
   })
@@ -87,8 +90,12 @@ export const friendRecordId = (state, userId) => {
   const currentUserId = state.session.id
 
   Object.values(state.entities.friends).forEach(friendRecord => {
-    if ((friendRecord.friendOneId == userId || friendRecord.friendTwoId == userId) &&
-        (friendRecord.friendOneId == currentUserId || friendRecord.friendTwoId == currentUserId)) {
+    if (
+      (friendRecord.friendOneId == userId ||
+        friendRecord.friendTwoId == userId) &&
+      (friendRecord.friendOneId == currentUserId ||
+        friendRecord.friendTwoId == currentUserId)
+    ) {
       id = friendRecord.id
     }
   })
@@ -101,8 +108,12 @@ export const friendRequestId = (state, userId) => {
   const currentUserId = state.session.id
 
   Object.values(state.entities.friendRequests).forEach(friendRequest => {
-    if ((friendRequest.requesteeId == userId || friendRequest.requesterId == userId) &&
-        (friendRequest.requesteeId == currentUserId || friendRequest.requesterId == currentUserId)) {
+    if (
+      (friendRequest.requesteeId == userId ||
+        friendRequest.requesterId == userId) &&
+      (friendRequest.requesteeId == currentUserId ||
+        friendRequest.requesterId == currentUserId)
+    ) {
       id = friendRequest.id
     }
   })
@@ -115,7 +126,10 @@ export const checkIfRequested = (state, userId) => {
   const currentUserId = state.session.id
   const friendRequests = friendRequestArray(state)
   for (let i = 0; i < friendRequests.length; i++) {
-    if (friendRequests[i].requesterId === currentUserId && friendRequests[i].requesteeId === userId) {
+    if (
+      friendRequests[i].requesterId === currentUserId &&
+      friendRequests[i].requesteeId === userId
+    ) {
       return true
     }
   }
@@ -127,7 +141,10 @@ export const checkIfFriendRequestPending = (state, userId) => {
   const currentUserId = state.session.id
   const friendRequests = friendRequestArray(state)
   for (let i = 0; i < friendRequests.length; i++) {
-    if (friendRequests[i].requesterId === userId && friendRequests[i].requesteeId === currentUserId) {
+    if (
+      friendRequests[i].requesterId === userId &&
+      friendRequests[i].requesteeId === currentUserId
+    ) {
       return true
     }
   }
@@ -139,8 +156,12 @@ export const selectFriendRequest = (state, userId) => {
   let friendRequest = {}
   const friendRequests = friendRequestArray(state)
   for (let i = 0; i < friendRequests.length; i++) {
-    if ((friendRequests[i].requesterId === userId && friendRequests[i].requesteeId === currentUserId)
-        || (friendRequests[i].requesterId === currentUserId && friendRequests[i].requesteeId === userId)) {
+    if (
+      (friendRequests[i].requesterId === userId &&
+        friendRequests[i].requesteeId === currentUserId) ||
+      (friendRequests[i].requesterId === currentUserId &&
+        friendRequests[i].requesteeId === userId)
+    ) {
       return friendRequests[i]
     }
   }

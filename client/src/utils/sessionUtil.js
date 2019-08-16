@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "axios"
 
 // TODO: PULL INTO USER UTIL
 export const signUp = formData => {
@@ -15,7 +15,7 @@ export const login = user => {
   return axios({
     method: "post",
     url: "/api/session",
-    data: {user: user}
+    data: { user: user }
   })
 }
 

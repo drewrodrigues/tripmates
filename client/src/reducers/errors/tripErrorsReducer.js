@@ -1,7 +1,7 @@
 import {
   RECEIVE_TRIP_ERRORS,
   CLEAR_TRIP_ERRORS
-} from '../../actions/tripActions'
+} from "../../actions/tripActions"
 
 const tripErrorsReducer = (oldState = [], action) => {
   switch (action.type) {

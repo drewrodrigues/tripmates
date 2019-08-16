@@ -1,4 +1,4 @@
-import { library } from '@fortawesome/fontawesome-svg-core'
+import { library } from "@fortawesome/fontawesome-svg-core"
 import {
   faCalendarAlt,
   faLongArrowAltRight,
@@ -26,8 +26,8 @@ import {
   faTimes,
   faCheck,
   faMapPin,
-  faUserClock,
-} from '@fortawesome/free-solid-svg-icons'
+  faUserClock
+} from "@fortawesome/free-solid-svg-icons"
 
 export default (() => {
   library.add(faCalendarAlt)
