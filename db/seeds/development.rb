@@ -82,7 +82,7 @@ ActiveRecord::Base.transaction do
     new_user.save!
   end
 
-  100.times do
+  500.times do
     FriendRequest.create(
       requester: User.all.sample,
       requestee: User.all.sample,
@@ -239,13 +239,15 @@ ActiveRecord::Base.transaction do
       friends_trips = users_friend.created_trips
 
       friends_trips.each do |trip|
-        next if rand(3) == 1
+        next if rand(2) == 1
 
-        AttendRequest.create!(user: user, trip: trip)
+        AttendRequest.create(user: user, trip: trip)
 
         next if rand(2) == 1
 
-        Attendance.create!(user: user, trip: trip)
+        Attendance.create(user: user, trip: trip)
+
+        Message.create(trip: trip, user: user, body: "Something goes here")
       end
     end
   end
@@ -256,4 +258,5 @@ ActiveRecord::Base.transaction do
   puts "#{Trip.count} Trips created"
   puts "#{AttendRequest.count} AttendRequest created"
   puts "#{Attendance.count} Attendance created"
+  puts "#{Message.count} Message created"
 end

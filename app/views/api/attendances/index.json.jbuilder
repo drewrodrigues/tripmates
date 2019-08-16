@@ -1,3 +1,6 @@
+json.attendances({})
+json.users({})
+
 json.attendances do
   json.partial! @attendances
 end
