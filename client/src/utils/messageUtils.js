@@ -21,7 +21,3 @@ export const deleteMessage = id => {
     url: `/api/messages/${id}`
   })
 }
-
-window.createMessage = createMessage
-window.getMessages = getMessages
-window.deleteMessage = deleteMessage
