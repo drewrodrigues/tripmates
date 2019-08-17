@@ -20,7 +20,7 @@ class AttendRequest < ApplicationRecord
   # TODO: ensure user isn't already attending the trip (after attendees built)
 
   validates :trip, uniqueness: {
-    cope: :user,
+    scope: :user,
     message: "already has attend request pending",
   }
   validate :trip_is_public
