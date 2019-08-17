@@ -51,6 +51,7 @@ class TripShow extends Component {
             {/*<li className="tripShow-body-nav-link"><a href="#">Inventory</a></li>*/}
             <li className="tripShow-body-nav-link">
               <NavLink to={`/trips/${trip.id}/attendance`}>
+                <FontAwesomeIcon icon="hiking" />
                 Attendees
                 { attendRequestCount == 0 ?
                   null
