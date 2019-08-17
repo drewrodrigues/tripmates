@@ -4,20 +4,24 @@ import { deleteMessage } from "../../../actions/messageActions"
 import { isLeaderOfTrip } from "../../../helpers/permissions"
 import { withRouter } from "react-router-dom"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import moment from "moment";
 
 class Message extends React.Component {
   render() {
     if (!this.props.message || !this.props.user) return null
 
-    const { id, body } = this.props.message
+    const { id, body, createdAt } = this.props.message
     const { profilePicture, fullName } = this.props.user
 
     return (
       <div className="Message">
         <img src={ profilePicture } className="Avatar" />
         <div className="Message-body">
-          <h5 className="Message-user">{ fullName }</h5>
+          <h5 className="Message-user">
+            { fullName }
+          </h5>
           <p className="Message-text">{ body }</p>
+          <p className="Message-timeago">{ moment(createdAt).fromNow() }</p>
         </div>
 
         {this.props.canDelete ?

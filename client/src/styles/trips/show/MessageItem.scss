@@ -1,9 +1,8 @@
 .Conversation {
   background: white;
   border-radius: $border-radius;
-  padding: 20px;
   border: 1px solid #efefef;
-  margin-bottom: 20px;
+  padding: 20px;
 }
 
 .Conversation-AddMessage-container {
@@ -16,6 +15,7 @@
   display: flex;
   justify-content: space-between;
   overflow: hidden;
+  margin-bottom: 20px;
 }
 
 .Conversation-AddMessage-input {
@@ -46,7 +46,7 @@
 .Message {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -63,6 +63,11 @@
   margin-bottom: 10px;
 }
 
+.Message-timeago {
+  font-size: 10px;
+  color: #ccc;
+}
+
 .Message-body {
   display: flex;
   flex-direction: column;
@@ -72,7 +77,6 @@
 .Message-delete-button {
   color: #ccc;
   border: 0;
-  align-self: center;
   cursor: pointer;
   padding: 5px 0;
 
@@ -84,4 +88,6 @@
 
 .Message-text {
   font-size: 14px;
+  margin-bottom: 10px;
+  line-height: 1.5;
 }

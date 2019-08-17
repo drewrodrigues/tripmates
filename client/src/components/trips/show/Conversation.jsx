@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { canSeeResourcesOfTrip } from "../../../helpers/permissions";
 import { withRouter } from "react-router-dom"
 import CantSeeResourcesPlaceholder from "../../Shared/CantSeeResourcesPlaceholder"
+import { orderByDescending } from "../../../helpers/sorters";
 
 class Conversation extends React.Component {
   constructor(props) {
@@ -30,13 +31,6 @@ class Conversation extends React.Component {
     if (this.props.canSeeResourcesOfTrip) {
       return (
         <>
-          <ul className="Conversation">
-            {this.props.messages.map(message => (
-              <Message message={ message }/>
-            ))}
-
-          </ul>
-
           <form className="Conversation-AddMessage-container" onSubmit={ this.handleSubmit }>
             <input
               type="text"
@@ -49,6 +43,13 @@ class Conversation extends React.Component {
               Send
             </button>
           </form>
+
+          <ul className="Conversation">
+            {this.props.messages.map(message => (
+              <Message message={ message }/>
+            ))}
+          </ul>
+
         </>
       )
     } else {
@@ -59,7 +60,7 @@ class Conversation extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    messages: Object.values(state.entities.messages),
+    messages: orderByDescending('createdAt', Object.values(state.entities.messages)),
     canSeeResourcesOfTrip: canSeeResourcesOfTrip(state, ownProps.match.params.tripId)
   }
 }
