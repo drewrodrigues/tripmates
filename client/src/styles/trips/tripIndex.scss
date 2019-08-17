@@ -92,11 +92,13 @@
 .tripIndex-ledByFilter-label {
   color: $text-muted;
   margin-bottom: 10px;
+  font-size: 14px;
 }
 
 .tripIndex-when-label {
   color: $text-muted;
   margin-bottom: 10px;
+  font-size: 14px;
 
   svg {
     margin-left: 10px;
@@ -117,4 +119,8 @@
   background: #D6FF94;
   font-weight: 900;
   color: $green-primary;
+}
+
+.filter-button {
+  padding: 5px 10px;
 }

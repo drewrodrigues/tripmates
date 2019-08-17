@@ -124,7 +124,7 @@ class TripIndex extends React.Component {
               <div className="filter-buttons">
                 <button
                   className={`
-                    button button-small button-white
+                    button button-small button-white filter-button
                     ${this.state.queryLedBy == 'anyone' ? "filter-active" : ""}`
                   }
                   onClick={this.updateFilters('queryLedBy', 'anyone')}
@@ -134,7 +134,7 @@ class TripIndex extends React.Component {
 
                 <button
                   className={`
-                    button button-small button-white
+                    button button-small button-white filter-button
                     ${this.state.queryLedBy == 'me' ? "filter-active" : ""}`
                   }
                   onClick={this.updateFilters('queryLedBy', 'me')}
@@ -144,7 +144,7 @@ class TripIndex extends React.Component {
 
                 <button
                   className={`
-                    button button-small button-white
+                    button button-small button-white filter-button
                     ${this.state.queryLedBy == 'friends' ? "filter-active" : ""}`
                   }
                   onClick={this.updateFilters('queryLedBy', 'friends')}
@@ -170,7 +170,7 @@ class TripIndex extends React.Component {
               <div className="filter-buttons">
                 <button to="/trips/past"
                   className={`
-                    button button-small button-white
+                    button button-small button-white filter-button
                     ${this.state.queryWhen == 'past' ? "filter-active" : ""}`
                   }
                   onClick={this.updateFilters('queryWhen', 'past')}
@@ -180,7 +180,7 @@ class TripIndex extends React.Component {
                 </button>
                 <button to="/trips/all"
                   className={`
-                    button button-small button-white
+                    button button-small button-white filter-button
                     ${this.state.queryWhen == 'all' ? "filter-active" : ""}`
                   }
                   onClick={this.updateFilters('queryWhen', 'all')}
@@ -189,7 +189,7 @@ class TripIndex extends React.Component {
                 </button>
                 <button to="/"
                   className={`
-                    button button-small button-white
+                    button button-small button-white filter-button
                     ${this.state.queryWhen == 'upcoming' ? "filter-active" : ""}`
                   }
                   onClick={this.updateFilters('queryWhen', 'upcoming')}
