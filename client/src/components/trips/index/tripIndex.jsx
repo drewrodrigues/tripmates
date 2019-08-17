@@ -61,12 +61,11 @@ class TripIndex extends React.Component {
   }
 
   componentDidMount() {
-    this.search()
     this.props.getAttendRequests()
     const query = queryString.parse(this.props.location.search)
     const queryWhen = query.when || this.state.queryWhen
     const queryLedBy = query.ledBy || this.state.queryLedBy
-    this.setState({ queryWhen, queryLedBy })
+    this.setState({ queryWhen, queryLedBy }, this.search)
   }
 
   componentDidUpdate(prevProps) {
