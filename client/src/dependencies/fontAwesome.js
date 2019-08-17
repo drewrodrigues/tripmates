@@ -26,7 +26,10 @@ import {
   faTimes,
   faCheck,
   faMapPin,
-  faUserClock
+  faUserClock,
+  faPaperPlane,
+  faComments,
+  faHiking
 } from "@fortawesome/free-solid-svg-icons"
 
 export default (() => {
@@ -57,4 +60,7 @@ export default (() => {
   library.add(faCheck)
   library.add(faMapPin)
   library.add(faUserClock)
+  library.add(faPaperPlane)
+  library.add(faComments)
+  library.add(faHiking)
 })()

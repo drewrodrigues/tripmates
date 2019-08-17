@@ -4,10 +4,11 @@
   align-items: center;
   font-size: 14px;
   border-radius: 10px;
-  box-shadow: 0 0 10px #ccc;
+  border: 1px solid #efefef;
   margin-bottom: 10px;
   padding: 10px 20px;
   background: white;
+  color: $text-primary;
 }
 
 .UserLineItem-main {

@@ -32,9 +32,11 @@
 @import "./trips/TripDetail.scss";
 // - attendees
 @import "./trips/show/Attendees";
+// - converation
+@import "./trips/show/MessageItem";
 
 body {
-  background: $gray-background;
+  background: white;
   color: $text-primary;
 }
 
