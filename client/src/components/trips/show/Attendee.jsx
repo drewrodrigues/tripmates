@@ -11,7 +11,6 @@ const Attendee = ({ id, userId, user }) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  // debugger
   return {
     user: Object.values(state.entities.users).find(user => user.id == ownProps.userId)
   }

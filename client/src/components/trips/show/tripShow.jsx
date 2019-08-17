@@ -4,6 +4,8 @@ import TripDetail from "../TripDetail"
 import TripCoverPhoto from "../TripCoverPhoto"
 import Loader from "../../Shared/Loader"
 import Attendees from "./Attendees";
+import Conversation from "./Conversation";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class TripShow extends Component {
   constructor(props) {
@@ -40,10 +42,15 @@ class TripShow extends Component {
 
         <section className="tripShow-body">
           <ul className="tripShow-body-nav">
-            {/*<li className="tripShow-body-nav-link active"><a href="#">Coversation</a></li>*/}
+            <li className="tripShow-body-nav-link">
+              <NavLink to={ `/trips/${trip.id}/conversation`}>
+                <FontAwesomeIcon icon="comments" />
+                Coversation
+              </NavLink>
+            </li>
             {/*<li className="tripShow-body-nav-link"><a href="#">Inventory</a></li>*/}
             <li className="tripShow-body-nav-link">
-              <NavLink to={`/trips/${trip.id}`}>
+              <NavLink to={`/trips/${trip.id}/attendance`}>
                 Attendees
                 { attendRequestCount == 0 ?
                   null
@@ -61,8 +68,12 @@ class TripShow extends Component {
           <div className="tripShow-body-content">
             <Switch>
               <Route
-                path="/trips/:id"
+                path="/trips/:tripId/attendance"
                 render={() => <Attendees attendRequests={ this.props.attendRequests } isLeader={this.props.isLeader} tripId={ trip.id } /> }
+              />
+              <Route
+                path="/trips/:tripId/conversation"
+                component={ Conversation }
               />
             </Switch>
           </div>

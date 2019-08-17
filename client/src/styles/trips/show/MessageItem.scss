@@ -1,0 +1,87 @@
+.Conversation {
+  background: white;
+  border-radius: $border-radius;
+  padding: 20px;
+  border: 1px solid #efefef;
+  margin-bottom: 20px;
+}
+
+.Conversation-AddMessage-container {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  border: 1px solid #efefef;
+  border-radius: $border-radius;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.Conversation-AddMessage-input {
+  flex-grow: 1;
+  padding: 10px 20px;
+  border: 0;
+  font-size: 14px;
+
+  &:focus {
+    border: 0;
+    outline: 0;
+  }
+}
+
+.Conversation-AddMessage-button {
+  border: 0;
+  outline: 0;
+  padding: 0 10px;
+  background: $green-primary;
+  color: white;
+  font-weight: 900;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.Message {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .Avatar {
+    margin-right: 10px;
+  }
+}
+
+.Message-user {
+  color: $text-muted;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.Message-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.Message-delete-button {
+  color: #ccc;
+  border: 0;
+  align-self: center;
+  cursor: pointer;
+  padding: 5px 0;
+
+  &:focus {
+    outline: 0;
+    border: 0;
+  }
+}
+
+.Message-text {
+  font-size: 14px;
+}
