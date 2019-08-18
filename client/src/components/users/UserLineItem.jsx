@@ -1,10 +1,11 @@
 import React from 'react'
+import Avatar from "./Avatar";
 
 const UserLineItem = ({ firstName, lastName, fullName, profilePicture, children }) => {
   return (
     <div className="UserLineItem">
       <header className="UserLineItem-main">
-        <img src={ profilePicture } alt="User profile picture" className="Nav-avatar"/>
+        <Avatar image={ profilePicture } />
         <p>{ fullName }</p>
       </header>
 

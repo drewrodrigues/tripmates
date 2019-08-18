@@ -1,27 +1,31 @@
-.usersIndex {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+.userIndex-title {
+  margin-bottom: 20px;
+  font-weight: 900;
 }
 
 .userIndexItem {
-  width: 22%;
   text-align: center;
-  padding: 20px;
-  height: 250px;
+  padding: 10px 20px;
   background: white;
-  margin-bottom: 3%;
+  margin-bottom: 10px;
   border-radius: $border-radius;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   position: relative;
   border: 1px solid #efefef;
+
+  .Avatar {
+    margin-right: 10px;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .userIndexItem-name {
-  font-weight: 900;
   font-size: 14px;
 }
 

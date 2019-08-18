@@ -2,6 +2,7 @@ import React from 'react'
 import UserIndexItem from './userIndexItem'
 import Loader from "../../Shared/Loader"
 import { handleLoading } from "../../../helpers/handlers"
+import { pluralize } from "../../../helpers/formatters"
 
 class UsersIndex extends React.Component {
   constructor(props) {
@@ -17,13 +18,17 @@ class UsersIndex extends React.Component {
 
   render() {
     if (this.state.loading) return <Loader />
+    const userCount = this.props.users.length
 
     return (
-      <ul className="usersIndex">
-        { this.props.users.map(user => (
-          <UserIndexItem key={ user.id } user={ user } />
-        ) ) }
-      </ul>
+      <>
+        <h4 className="userIndex-title">{userCount} { pluralize("User", userCount) }</h4>
+        <ul className="usersIndex">
+          { this.props.users.map(user => (
+            <UserIndexItem key={ user.id } user={ user } />
+          ) ) }
+        </ul>
+      </>
     )
   }
 }
