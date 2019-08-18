@@ -9,20 +9,22 @@ import { orderByDescending } from "../../../helpers/sorters"
 import Chat from "../../../assets/chat.svg"
 import Binoculars from "../../../assets/binoculars.svg"
 import Placeholder from "../../Shared/Placeholder"
-import {createAttendRequest} from "../../../actions/attendRequestActions"
+import { handleLoading } from "../../../helpers/handlers"
+import Loader from "../../Shared/Loader"
 
 // TODO: Pull message form into seperate component
 
 class Conversation extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { messageInput: "" }
+    this.state = { messageInput: "", loading: true }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleLoading = handleLoading.bind(this)
   }
 
   componentDidMount() {
     if (this.props.canSeeResourcesOfTrip) {
-      this.props.getMessages()
+      this.handleLoading(this.props.getMessages)
     }
   }
 
@@ -34,6 +36,8 @@ class Conversation extends React.Component {
 
   render() {
     if (this.props.canSeeResourcesOfTrip) {
+      if (this.state.loading) return <Loader />
+
       return (
         <>
           {this.props.messages.length == 0 ?

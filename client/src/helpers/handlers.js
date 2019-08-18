@@ -11,3 +11,15 @@ export function handleImage(e, property) {
     fileReader.readAsDataURL(file)
   }
 }
+
+export function handleLoading(handledFunction) {
+  this.setState({ loading: true }, () => {
+    if (typeof handledFunction == 'function') {
+      handledFunction()
+        .finally(() => this.setState({ loading: false }))
+    } else { // array (make sure to invoke the functions when passing in)
+      Promise.all(handledFunction)
+        .finally(() => this.setState({ loading: false }))
+    }
+  })
+}

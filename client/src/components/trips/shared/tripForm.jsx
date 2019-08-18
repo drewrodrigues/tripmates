@@ -8,6 +8,7 @@ import moment from 'moment'
 import ResponseButtons from './ResponseButtons'
 import Loader from "../../Shared/Loader"
 import Confirmation from "../../Shared/Confirmation"
+import { handleLoading } from "../../../helpers/handlers"
 
 const today = new Date()
 
@@ -38,26 +39,27 @@ class TripForm extends React.Component {
     this.onChange = this.onChange.bind(this)
     this.showConfirmation = this.showConfirmation.bind(this)
     this.hideConfirmation = this.hideConfirmation.bind(this)
+    this.handleLoading = handleLoading.bind(this)
   }
 
   componentDidMount() {
     if (this.props.actionType === "Update") {
-      this.setState({ loading: true })
-      this.props.fetchTrip(this.props.match.params.id).then(() => {
-        const {trip} = this.props
-        this.setState({
-          cover_photo: trip.coverPhoto,
-          id: trip.id,
-          location: trip.location,
-          privacy: trip.privacy,
-          spaces: trip.spaces,
-          title: trip.title,
-          image_preview: trip.coverPhoto,
-          dateRange: [moment(trip.startDate), moment(trip.endDate)],
-          details: trip.details,
-          loading: false
+      this.handleLoading(() => (
+        this.props.fetchTrip(this.props.match.params.id).then(() => {
+          const {trip} = this.props
+          this.setState({
+            cover_photo: trip.coverPhoto,
+            id: trip.id,
+            location: trip.location,
+            privacy: trip.privacy,
+            spaces: trip.spaces,
+            title: trip.title,
+            image_preview: trip.coverPhoto,
+            dateRange: [moment(trip.startDate), moment(trip.endDate)],
+            details: trip.details
+          })
         })
-      })
+      ))
     }
   }
 

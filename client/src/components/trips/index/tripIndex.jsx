@@ -4,9 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import TripDetail from "../TripDetail"
 import FriendsPlaceholder from '../../../assets/friends.png'
 import WorldPlaceholder from '../../../assets/world.png'
-import TripCoverPhoto from '../TripCoverPhoto';
+import TripCoverPhoto from '../TripCoverPhoto'
 import Loader from "../../Shared/Loader"
 import queryString from "query-string"
+import { handleLoading } from "../../../helpers/handlers"
 
 const TripIndexNoResultsPlaceholder = () => (
   <>
@@ -52,8 +53,7 @@ class TripIndex extends React.Component {
     super(props)
     this.state = defaultState
     this.updateFilters = this.updateFilters.bind(this)
-    this.updateSupdateSearchQuery = this.updateSearchQuery.bind(this)
-    this.doneLoading = this.doneLoading.bind(this)
+    this.handleLoading = handleLoading.bind(this)
   }
 
   componentWillUnmount() {
@@ -81,16 +81,13 @@ class TripIndex extends React.Component {
 
   search() {
     this.props.clearTrips()
-    this.setState({ loading: true })
-    this.props.searchTrips({
-      led_by: this.state.queryLedBy,
-      when: this.state.queryWhen,
-      date: new Date()
-    }).finally(this.doneLoading)
-  }
-
-  doneLoading() {
-    this.setState({loading: false})
+    this.handleLoading(() => (
+      this.props.searchTrips({
+        led_by: this.state.queryLedBy,
+        when: this.state.queryWhen,
+        date: new Date()
+      })
+    ))
   }
 
   updateFilters(prop, value) {

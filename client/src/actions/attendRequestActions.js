@@ -26,6 +26,12 @@ export const removeAttendRequest = id => {
   }
 }
 
+export const clearAttendRequests = () => {
+  return {
+    type: CLEAR_ATTEND_REQUESTS
+  }
+}
+
 export const createAttendRequest = tripId => dispatch => {
   return AttendRequestUtil.createAttendRequest(tripId)
     .then(res => {

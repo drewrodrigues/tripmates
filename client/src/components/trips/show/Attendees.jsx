@@ -1,18 +1,38 @@
 import React from 'react'
 import AttendRequest from "./AttendRequest"
 import { connect } from "react-redux"
-import { getAttendances } from "../../../actions/attendanceActions"
+import { getAttendances, clearAttendances } from "../../../actions/attendanceActions"
 import Attendee from "./Attendee"
 import JustYou from "../../../assets/justyou.svg"
 import NoRequests from "../../../assets/request.svg"
 import Placeholder from "../../Shared/Placeholder"
+import {clearAttendRequests} from "../../../actions/attendRequestActions"
+import {handleLoading} from "../../../helpers/handlers"
+import Loader from "../../Shared/Loader";
+
+// TODO: query for attend reqeusts (since it's only coming from the trip itself
 
 class Attendees extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { loading: true }
+    this.handleLoading = handleLoading.bind(this)
+  }
+
   componentDidMount() {
-    this.props.getAttendances(this.props.tripId)
+    // this.props.getAttendances(this.props.tripId)
+    this.handleLoading(() => this.props.getAttendances(this.props.tripId))
+  }
+
+  componentWillUnmount() {
+    this.props.clearAttendances()
+    // TODO: once we actually query for attend requests
+    // this.props.clearAttendRequests()
   }
 
   render() {
+    if (this.state.loading) return <Loader />
+
     return <div>
       <h3 className="tripShow-body-content-title">Attend Requests</h3>
       <ul className="AttendRequests">
@@ -51,7 +71,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getAttendances: tripId => dispatch(getAttendances(tripId))
+    getAttendances: tripId => dispatch(getAttendances(tripId)),
+    clearAttendances: () => dispatch(clearAttendances()),
+    clearAttendRequests: () => dispatch(clearAttendRequests())
   }
 }
 

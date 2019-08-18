@@ -1,21 +1,23 @@
 import React from 'react'
 import UserIndexItem from './userIndexItem'
+import Loader from "../../Shared/Loader"
+import { handleLoading } from "../../../helpers/handlers"
 
 class UsersIndex extends React.Component {
   constructor(props) {
     super(props)
     this.state = { loading: true }
+    this.handleLoading = handleLoading.bind(this)
   }
 
   componentDidMount() {
-    this.props.getAllUsers().then(() => {
-      this.setState({ loading: false })
-    })
-    this.props.getAllFriendRequests()
-    this.props.getFriends()
+    const { getAllUsers, getAllFriendRequests, getFriends } = this.props
+    this.handleLoading([getAllUsers(), getAllFriendRequests(), getFriends()])
   }
 
   render() {
+    if (this.state.loading) return <Loader />
+
     return (
       <ul className="usersIndex">
         { this.props.users.map(user => (

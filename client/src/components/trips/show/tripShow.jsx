@@ -6,19 +6,18 @@ import Loader from "../../Shared/Loader"
 import Attendees from "./Attendees";
 import Conversation from "./Conversation";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { handleLoading } from "../../../helpers/handlers"
 
 class TripShow extends Component {
   constructor(props) {
     super(props)
     this.state = { loading: true }
+    this.handleLoading = handleLoading.bind(this)
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.match.params.id !== this.props.match.params.id) {
-      this.setState({ loading: true }, () => {
-        this.props.getTripById(this.props.match.params.id)
-          .then(() => this.setState({ loading: false }))
-      })
+      this.handleLoading(() => this.props.getTripById(this.props.match.params.id))
     }
   }
 
