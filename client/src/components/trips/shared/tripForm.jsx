@@ -203,7 +203,7 @@ class TripForm extends React.Component {
             <input type="file"
               onChange={ e => handleImage(e, "cover_photo") }
               className="form-input"
-              accept=".jpg,.jpeg,.png"
+              accept=".jpg,.jpeg,.png,.gif"
               id="trip-photo"
               data-cy="tripInput-photo"
             />
