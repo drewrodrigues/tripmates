@@ -2,11 +2,16 @@ import React from 'react'
 import { connect } from "react-redux"
 import { createMessage, getMessages } from "../../../actions/messageActions"
 import Message from "./Message"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { canSeeResourcesOfTrip } from "../../../helpers/permissions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { canSeeResourcesOfTrip } from "../../../helpers/permissions"
 import { withRouter } from "react-router-dom"
-import CantSeeResourcesPlaceholder from "../../Shared/CantSeeResourcesPlaceholder"
-import { orderByDescending } from "../../../helpers/sorters";
+import { orderByDescending } from "../../../helpers/sorters"
+import Chat from "../../../assets/chat.svg"
+import Binoculars from "../../../assets/binoculars.svg"
+import Placeholder from "../../Shared/Placeholder"
+import {createAttendRequest} from "../../../actions/attendRequestActions"
+
+// TODO: Pull message form into seperate component
 
 class Conversation extends React.Component {
   constructor(props) {
@@ -31,29 +36,47 @@ class Conversation extends React.Component {
     if (this.props.canSeeResourcesOfTrip) {
       return (
         <>
-          <form className="Conversation-AddMessage-container" onSubmit={ this.handleSubmit }>
-            <input
-              type="text"
-              className="Conversation-AddMessage-input"
-              value={ this.state.messageInput }
-              onChange={ e => this.setState({ messageInput: e.target.value })}
-            />
-            <button className="Conversation-AddMessage-button">
-              <FontAwesomeIcon icon="paper-plane" />
-              Send
-            </button>
-          </form>
-
-          <ul className="Conversation">
-            {this.props.messages.map(message => (
-              <Message message={ message }/>
-            ))}
-          </ul>
+          {this.props.messages.length == 0 ?
+            <Placeholder image={Chat} title="No Messages Yet" text="You should try sending one">
+              <form className="Conversation-AddMessage-container" onSubmit={ this.handleSubmit }>
+                <input
+                  type="text"
+                  className="Conversation-AddMessage-input"
+                  value={ this.state.messageInput }
+                  onChange={ e => this.setState({ messageInput: e.target.value })}
+                />
+                <button className="Conversation-AddMessage-button">
+                  <FontAwesomeIcon icon="paper-plane" />
+                  Send
+                </button>
+              </form>
+            </Placeholder>
+          :
+            <>
+              <form className="Conversation-AddMessage-container" onSubmit={ this.handleSubmit }>
+                <input
+                  type="text"
+                  className="Conversation-AddMessage-input"
+                  value={ this.state.messageInput }
+                  onChange={ e => this.setState({ messageInput: e.target.value })}
+                />
+                <button className="Conversation-AddMessage-button">
+                  <FontAwesomeIcon icon="paper-plane" />
+                  Send
+                </button>
+              </form>
+              <ul className="Conversation">
+                {this.props.messages.map(message => (
+                  <Message message={ message } />
+                ))}
+              </ul>
+            </>
+          }
 
         </>
       )
     } else {
-      return <CantSeeResourcesPlaceholder resourceName={"Conversations"} />
+      return <Placeholder image={Binoculars} title="No Peeking" text="You must join this trip to join the conversations" />
     }
   }
 }
@@ -68,7 +91,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     createMessage: (tripId, message) => dispatch(createMessage(tripId, message)),
-    getMessages: () => dispatch(getMessages(ownProps.match.params.tripId))
+    getMessages: () => dispatch(getMessages(ownProps.match.params.tripId)),
   }
 }
 

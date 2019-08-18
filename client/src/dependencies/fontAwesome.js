@@ -29,7 +29,8 @@ import {
   faUserClock,
   faPaperPlane,
   faComments,
-  faHiking
+  faHiking,
+  faBell
 } from "@fortawesome/free-solid-svg-icons"
 
 export default (() => {
@@ -63,4 +64,5 @@ export default (() => {
   library.add(faPaperPlane)
   library.add(faComments)
   library.add(faHiking)
+  library.add(faBell)
 })()

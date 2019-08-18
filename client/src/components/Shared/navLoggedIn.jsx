@@ -41,17 +41,10 @@ class NavLoggedIn extends React.Component {
       <div className="Nav">
         <div className="container">
           <nav className="Nav-left">
-            <NavLink className="Nav-logo" to="/">tripmates</NavLink>
-          </nav>
-
-          <nav className="Nav-center">
             <NavLink to="/explore" exact className="Nav-link Nav-link-primary">
               <FontAwesomeIcon icon="compass" />
               Explore
             </NavLink>
-          </nav>
-
-          <nav className="Nav-right">
             <NavLink className="Nav-link Nav-link-primary" to="/" isActive={this.isTripNavActive}>
               <FontAwesomeIcon icon="globe-americas" />
               Trips
@@ -60,12 +53,22 @@ class NavLoggedIn extends React.Component {
               <FontAwesomeIcon icon="users" />
               Friends
             </NavLink>
+          </nav>
 
+          <nav className="Nav-center">
+            <NavLink className="Nav-logo" to="/">tripmates</NavLink>
+          </nav>
+
+          <nav className="Nav-right">
+              <a className="Nav-notification" to="/friends" exact>
+                <FontAwesomeIcon icon="bell" />
+              </a>
             <nav href="#"
               className={`Nav-user ${dropDownOpenClass}`}
               onClick={this.toggleDropDown}
               onMouseLeave={this.hideDropDown}
             >
+              { this.props.currentUser.fullName }
               <img
                 src={
                   this.props.currentUser.profilePicture ?

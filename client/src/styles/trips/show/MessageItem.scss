@@ -3,6 +3,34 @@
   border-radius: $border-radius;
   border: 1px solid #efefef;
   padding: 20px;
+  margin-top: 20px;
+}
+
+.Placeholder {
+  text-align: center;
+  padding: $padding-main;
+  border-radius: $border-radius;
+  border: 1px solid #efefef;
+}
+
+.Placeholder-image {
+  margin-bottom: $padding-main;
+  width: 100px;
+  height: 100px;
+}
+
+.Placeholder-title {
+  margin-bottom: 10px;
+  font-weight: 900;
+}
+
+.Placeholder-text {
+  color: $text-muted;
+  font-size: 12px;
+}
+
+.Placeholder-children {
+  margin-top: $padding-main;
 }
 
 .Conversation-AddMessage-container {
@@ -15,7 +43,6 @@
   display: flex;
   justify-content: space-between;
   overflow: hidden;
-  margin-bottom: 20px;
 }
 
 .Conversation-AddMessage-input {

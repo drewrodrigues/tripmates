@@ -1,5 +1,5 @@
 import React from 'react'
-import Binoculars from '../../assets/binoculars.png'
+import Binoculars from '../../assets/binoculars.svg'
 
 const CantSeeResourcesPlaceholder = ({ resourceName }) => (
   <div className="CantSeeResourcesPlaceholder">

@@ -30,14 +30,21 @@
   align-items: center;
 }
 
+.Nav-left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .Nav-right {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  font-size: 12px;
 }
 
 .Nav-link {
-  font-size: 14px;
+  font-size: 12px;
   margin-left: 10px;
   display: flex;
 
@@ -75,15 +82,28 @@
   }
 }
 
+.Nav-notification {
+  color: white;
+  font-size: 24px;
+  padding: 10px;
+
+  svg {
+    margin-right: 0;
+    padding: 5px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .Nav-user {
   display: flex;
   align-items: center;
   color: white;
-  font-weight: 900;
   position: relative;
   cursor: pointer;
   border-radius: $border-radius $border-radius 0 0;
-  padding-left: 10px;
   border: 1px solid $blue-primary;
 
   &.open {
@@ -99,6 +119,7 @@
   height: $avatar-size;
   border-radius: 50%;
   border: 3px solid white;
+  margin-left: 15px;
 }
 
 .Nav-dropdown {
