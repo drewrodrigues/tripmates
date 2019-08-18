@@ -1,45 +1,60 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import ResponseButtons from "../trips/shared/ResponseButtons"
 
 class FriendRequest extends React.Component {
   render() {
-    let button
+    let responseButtons = []
     if (this.props.isRequested) {
-      button = <button className="friend-data friend-button friendRequest-requested" onClick={() => this.props.cancelRequest(this.props.friendRequestId)}>
-        <FontAwesomeIcon icon="trash" />
-        Cancel Friend Request
-      </button>
+      responseButtons = [{
+        action: () => this.props.cancelRequest(this.props.friendRequestId),
+        actionableText: "Canceling",
+        className: "friend-data friend-button friendRequest-requested",
+        modelType: "Friend Request",
+        text: "Cancel",
+        icon: "trash"
+      }]
     } else if (this.props.isFriend) {
-      button = <button className="friend-data friend-button friend-delete" onClick={() => this.props.deleteFriend(this.props.friendRecordId)}>
-        <FontAwesomeIcon icon="user-minus" />
-        Remove Friend
-      </button>
+      responseButtons = [{
+        action: () => this.props.deleteFriend(this.props.friendRecordId),
+        actionableText: "Removing",
+        className: "friend-data friend-button friend-delete",
+        modelType: "Friend",
+        text: "Remove",
+        icon: "user-minus"
+      }]
     } else if (this.props.friendRequestPending) {
-      button = <>
-        <button className="friend-data friend-button friendRequest-accept" onClick={() => this.props.addFriend(this.props.friendRequestId)}>
-          <FontAwesomeIcon icon="check" />
-          Accept Friend Request
-        </button>
-        <button className="friend-data friend-button friendRequest-deny" onClick={() => this.props.cancelRequest(this.props.friendRequestId)}>
-          <FontAwesomeIcon icon="times" />
-          Deny Friend Request
-        </button>
-      </>
+      responseButtons = [
+        {
+          action: () => this.props.addFriend(this.props.friendRequestId),
+          actionableText: "Accepting",
+          className: "friend-data friend-button friendRequest-accept",
+          modelType: "Friend",
+          text: "Accept",
+          icon: "check"
+        },
+        {
+          action: () => this.props.cancelRequest(this.props.friendRequestId),
+          actionableText: "Denying",
+          className: "friend-data friend-button friendRequest-deny",
+          modelType: "Friend Request",
+          text: "Deny",
+          icon: "times"
+        }
+      ]
     } else {
-      button = <>
-        <button
-          className="friend-data friend-button friendRequest-add"
-          onClick={() => this.props.addRequest()}
-        >
-          <FontAwesomeIcon icon="user-plus" />
-          Send Friend Request
-        </button>
-      </>
+      responseButtons = [{
+        action: () => this.props.addRequest(),
+        actionableText: "Sending",
+        className: "friend-data friend-button friendRequest-add",
+        modelType: "Friend Request",
+        text: "Send",
+        icon: "user-plus"
+      }]
     }
 
     return (
       <div>
-        <div className="friend-buttons">{button}</div>
+        <ResponseButtons buttons={responseButtons} />
       </div>
     )
   }
