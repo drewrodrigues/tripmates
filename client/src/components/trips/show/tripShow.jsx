@@ -44,7 +44,7 @@ class TripShow extends Component {
             <li className="tripShow-body-nav-link">
               <NavLink to={ `/trips/${trip.id}/conversation`}>
                 <FontAwesomeIcon icon="comments" />
-                Coversation
+                Conversation
               </NavLink>
             </li>
             {/*<li className="tripShow-body-nav-link"><a href="#">Inventory</a></li>*/}
