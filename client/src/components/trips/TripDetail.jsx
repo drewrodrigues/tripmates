@@ -1,13 +1,13 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {prettyDaysUntil, prettyDuration, prettyDate, prettySpaces} from '../../helpers/formatters';
+import {prettyDaysUntil, prettyDuration, prettyDate, prettySpaces} from '../../helpers/formatters'
 import { connect } from 'react-redux'
 import { isLeaderOfTrip } from '../../helpers/permissions'
-import { isRequestingAttendance } from "../../helpers/selectors"
+import { isRequestingAttendance, isAttendingTrip } from "../../helpers/selectors"
 import TripSpaces from './shared/TripSpaces'
 import Avatar from '../users/Avatar'
-import { createAttendRequest, deleteAttendRequest } from '../../actions/attendRequestActions';
+import { createAttendRequest, deleteAttendRequest } from '../../actions/attendRequestActions'
 
 const TripDetail = ({
   trip: {
@@ -25,6 +25,7 @@ const TripDetail = ({
   attendRequest,
   createAttendRequest,
   deleteAttendRequest,
+  isAttending,
 }) => {
   const deleteAttendRequestAndPreventDefault = e => {
     e.preventDefault()
@@ -40,6 +41,7 @@ const TripDetail = ({
     <div className="TripDetail">
       <section className="TripDetail-body">
         <div className="TripDetail-attendance">
+          {/* TODO: break into component */}
           {!isLeader && (
             isRequestingAttendance ?
               <button
@@ -50,13 +52,19 @@ const TripDetail = ({
                 Join Request Pending
               </button>
               :
-              <button
-                className="TripDetail-attendance-status TripDetail-attendance-request"
-                onClick={createAttendRequestAndPreventDefault}
-              >
-                <FontAwesomeIcon icon="user-plus" />
-                Ask to Join
-              </button>
+              isAttending ?
+                <button className="TripDetail-attendance-status TripDetail-attendance-attending">
+                  <FontAwesomeIcon icon="check" />
+                  Attending
+                </button>
+                :
+                <button
+                  className="TripDetail-attendance-status TripDetail-attendance-request"
+                  onClick={createAttendRequestAndPreventDefault}
+                >
+                  <FontAwesomeIcon icon="user-plus" />
+                  Ask to Join
+                </button>
           )}
         </div>
 
@@ -144,6 +152,7 @@ const mapStateToProps = (state, ownProps) => {
     creator,
     isLeader: isLeaderOfTrip(state, ownProps.trip),
     isRequestingAttendance: isRequestingAttendance(state, ownProps.trip),
+    isAttending: isAttendingTrip(state, ownProps.trip),
     attendRequest: Object.values(state.entities.attendRequests).find(request => request.userId == state.session.id && request.tripId == ownProps.trip.id)
   }
 }

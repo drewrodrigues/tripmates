@@ -17,7 +17,11 @@ class Api::AttendancesController < ApplicationController
   end
 
   def index
-    @attendances = Trip.find(params[:trip_id]).attendances.includes(:user)
+    if params[:trip_id] == "undefined"
+      @attendances = Attendance.all
+    else
+      @attendances = Trip.find(params[:trip_id]).attendances.includes(:user)
+    end
   end
 
   def destroy

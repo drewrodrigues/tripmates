@@ -179,3 +179,16 @@ export const isRequestingAttendance = (state, trip) => {
 
   return requestedAttendance
 }
+
+export const isAttendingTrip = (state, trip) => {
+  let isAttending = false
+  const currentUserId = state.session.id
+
+  Object.values(state.entities.attendances).forEach(attendance => {
+    if (attendance.userId == currentUserId && attendance.tripId == trip.id) {
+      isAttending = true
+    }
+  })
+
+  return isAttending
+}

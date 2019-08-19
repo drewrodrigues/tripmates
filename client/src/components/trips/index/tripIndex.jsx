@@ -62,6 +62,7 @@ class TripIndex extends React.Component {
 
   componentDidMount() {
     this.props.getAttendRequests()
+    this.props.getAttendances()
     const query = queryString.parse(this.props.location.search)
     const queryWhen = query.when || this.state.queryWhen
     const queryLedBy = query.ledBy || this.state.queryLedBy
@@ -72,7 +73,7 @@ class TripIndex extends React.Component {
     if (prevProps.location.search !== this.props.location.search) {
       if (this.props.location.search === "") {
         // coming back to page after mounted
-        this.setState(defaultState, this.search)
+        this.setState(defaultState, [this.search(), this.props.getAttendances()])
       } else {
         this.search()
       }
