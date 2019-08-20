@@ -39,13 +39,14 @@
 
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
-    resources :attend_requests, only: %i[create index destroy]
+    resources :attend_requests, only: %i[destroy]
     resources :attendances, only: %i[create destroy]
     resources :friend_requests, only: %i[create index destroy]
     resources :friends, only: %i[create index destroy]
     resources :messages, only: [:destroy]
     resource  :session, only: %i[create destroy]
     resources :trips, except: %i[new edit] do
+      resources :attend_requests, only: %i[create index]
       resources :attendances, only: [:index]
       resources :messages, only: %i[create index]
     end

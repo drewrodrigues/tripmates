@@ -2,7 +2,8 @@ class Api::AttendRequestsController < ApplicationController
   before_action :require_sign_in
 
   def create
-    @attend_request = current_user.attend_requests.build(attend_request_params)
+    trip = Trip.find(params[:trip_id])
+    @attend_request = current_user.attend_requests.build(trip: trip)
     if @attend_request.save
       render :show
     else
@@ -13,7 +14,7 @@ class Api::AttendRequestsController < ApplicationController
   end
 
   def index
-    @attend_requests = current_user.attend_requests
+    @attend_requests = Trip.find(params[:trip_id]).attend_requests.includes(:user)
   end
 
   def destroy
@@ -27,11 +28,5 @@ class Api::AttendRequestsController < ApplicationController
         errors: ["Only trip leader and requesting user can cancel request"]
       }, status: :unauthorized
     end
-  end
-
-  private
-
-  def attend_request_params
-    params.require(:attend_request).permit(:trip_id)
   end
 end

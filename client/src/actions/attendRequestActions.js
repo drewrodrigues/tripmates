@@ -1,4 +1,5 @@
 import * as AttendRequestUtil from "../utils/attendRequestUtils"
+import { receiveUsers } from "./userActions";
 
 export const RECEIVE_ATTEND_REQUESTS = "RECEIVE_ATTEND_REQUESTS"
 export const RECEIVE_ATTEND_REQUEST = "RECEIVE_ATTEND_REQUEST"
@@ -12,7 +13,7 @@ export const receiveAttendRequests = attendRequests => {
   }
 }
 
-const receiveAttendRequest = attendRequest => {
+export const receiveAttendRequest = attendRequest => {
   return {
     type: RECEIVE_ATTEND_REQUEST,
     attendRequest
@@ -56,10 +57,11 @@ export const deleteAttendRequest = id => dispatch => {
     })
 }
 
-export const getAttendRequests = () => dispatch => {
-  return AttendRequestUtil.getAttendRequests()
+export const getAttendRequests = tripId => dispatch => {
+  return AttendRequestUtil.getAttendRequests(tripId)
     .then(res => {
-      dispatch(receiveAttendRequests(res.data))
+      dispatch(receiveAttendRequests(res.data.attendRequests))
+      dispatch(receiveUsers(res.data.users))
     })
     .catch(err => {
       // TODO: handle errors with flash

@@ -6,7 +6,10 @@ import Attendee from "./Attendee"
 import JustYou from "../../../assets/justyou.svg"
 import NoRequests from "../../../assets/request.svg"
 import Placeholder from "../../Shared/Placeholder"
-import {clearAttendRequests} from "../../../actions/attendRequestActions"
+import {
+  clearAttendRequests,
+  getAttendRequests
+} from "../../../actions/attendRequestActions"
 import {handleLoading} from "../../../helpers/handlers"
 import Loader from "../../Shared/Loader";
 
@@ -20,14 +23,10 @@ class Attendees extends React.Component {
   }
 
   componentDidMount() {
-    // this.props.getAttendances(this.props.tripId)
-    this.handleLoading(() => this.props.getAttendances(this.props.tripId))
-  }
-
-  componentWillUnmount() {
-    this.props.clearAttendances()
-    // TODO: once we actually query for attend requests
-    // this.props.clearAttendRequests()
+    this.handleLoading([
+      this.props.getAttendRequests(this.props.tripId),
+      this.props.getAttendances(this.props.tripId)
+    ])
   }
 
   render() {
@@ -72,8 +71,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getAttendances: tripId => dispatch(getAttendances(tripId)),
-    clearAttendances: () => dispatch(clearAttendances()),
-    clearAttendRequests: () => dispatch(clearAttendRequests())
+    getAttendRequests: tripId => dispatch(getAttendRequests(tripId))
   }
 }
 

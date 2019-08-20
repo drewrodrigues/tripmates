@@ -1,4 +1,5 @@
-json.set!("attend_requests", {})
+json.set!("attend_request", {})
+json.set!("attendance", {})
 
 json.set! "trip" do
   json.set! @trip.id do
@@ -26,9 +27,18 @@ json.set! "user" do
   end
 end
 
-json.set! "attend_requests" do
-  @trip.attend_requests.each do |attend_request|
-    json.partial! "api/attend_requests/attend_request",
-                  attend_request: attend_request
+json.set! "attend_request" do
+  attend_request = @trip.attend_request_for_user(current_user)
+
+  if attend_request
+    json.partial! "api/attend_requests/attend_request", attend_request: attend_request
+  end
+end
+
+json.set! "attendance" do
+  attendance = @trip.attendance_for_user(current_user)
+
+  if attendance
+    json.partial! "api/attendances/attendance", attendance: attendance
   end
 end

@@ -3,8 +3,7 @@ import axios from "axios"
 export const createAttendRequest = tripId => {
   return axios({
     method: "post",
-    url: "/api/attend_requests",
-    data: { attend_request: { trip_id: tripId } }
+    url: `/api/trips/${tripId}/attend_requests`
   })
 }
 
@@ -15,9 +14,9 @@ export const deleteAttendRequest = id => {
   })
 }
 
-export const getAttendRequests = () => {
+export const getAttendRequests = tripId => {
   return axios({
     method: "get",
-    url: "/api/attend_requests"
+    url: `/api/trips/${tripId}/attend_requests`
   })
 }
