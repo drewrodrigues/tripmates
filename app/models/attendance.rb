@@ -21,7 +21,8 @@ class Attendance < ApplicationRecord
 
   validate :leader_cant_attend
   validate :unique_record
-  validate :attend_request_must_exist
+  validate :attend_request_must_exist, on: :create
+  validate :trip_not_at_capacity, on: :create
 
   private
 
@@ -56,5 +57,11 @@ class Attendance < ApplicationRecord
 
   def destroy_attend_request!
     attend_request.destroy!
+  end
+
+  def trip_not_at_capacity
+    if trip.at_capacity?
+      errors.add(:trip, "is already at capacity")
+    end
   end
 end

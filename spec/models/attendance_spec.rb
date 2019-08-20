@@ -103,5 +103,28 @@ RSpec.describe Attendance, type: :model do
         expect(@attendance.errors.full_messages).to eq(["You are already attending this trip"])
       end
     end
+
+    context "when trip at capacity" do
+      before do
+        create(:user)
+        create(:user)
+        FriendRequest.create(requester: User.first, requestee: User.last)
+        Friend.create(friend_one_id: User.first.id, friend_two_id: User.last.id)
+        trip = create(:trip, creator: User.first)
+        AttendRequest.create(user: User.last, trip: trip)
+        allow(trip).to receive(:at_capacity?) { true }
+
+        @attendance = Attendance.new(user: User.last, trip: trip)
+      end
+
+      it "is invalid" do
+        expect(@attendance).to be_invalid
+      end
+
+      it "has errors" do
+        @attendance.validate
+        expect(@attendance.errors.full_messages).to eq(["Trip is already at capacity"])
+      end
+    end
   end
 end
