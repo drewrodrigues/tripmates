@@ -19,7 +19,7 @@ const TripDetail = ({
     location,
     spaces,
     startDate,
-    privacy
+    privacy,
   },
   isLeader,
   isRequestingAttendance,
@@ -104,7 +104,7 @@ const TripDetail = ({
             <FontAwesomeIcon icon="clock" />
             {prettyDuration(duration)}
           </span>
-          <TripSpaces spaces={spaces} />
+          <TripSpaces tripId={id} spaces={spaces} />
         </div>
 
         <p className="tripIndexItem-description">

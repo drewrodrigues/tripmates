@@ -3,6 +3,7 @@ import * as APIUtil from "../utils/tripUtil"
 import { receiveUser, receiveUsers } from "./userActions"
 import { receiveAttendRequest, receiveAttendRequests } from "./attendRequestActions"
 import { receiveAttendance, receiveAttendances } from "./attendanceActions";
+import {receiveTripCounts, receiveTripsCounts} from "./counts/tripCountActions";
 
 export const RECEIVE_TRIP = "RECEIVE_TRIP"
 export const RECEIVE_TRIPS = "RECEIVE_TRIPS"
@@ -44,6 +45,7 @@ export const searchTrips = query => dispatch => {
     dispatch(receiveUsers(res.data.users))
     dispatch(receiveAttendRequests(res.data.attendRequests))
     dispatch(receiveAttendances(res.data.attendances))
+    dispatch(receiveTripsCounts(res.data.tripCounts))
   })
 }
 
@@ -53,6 +55,7 @@ export const getTripById = id => dispatch => {
     dispatch(receiveUsers(res.data.user))
     dispatch(receiveAttendRequest(res.data.attendRequest))
     dispatch(receiveAttendance(res.data.attendance))
+    dispatch(receiveTripCounts(res.data.tripCounts))
     return res.data
   })
 }

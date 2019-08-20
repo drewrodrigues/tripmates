@@ -17,6 +17,12 @@ json.set! "trip" do
   end
 end
 
+json.set! "trip_counts" do
+  json.set! @trip.id do
+    json.spaces_left @trip.spaces_left
+  end
+end
+
 json.set! "user" do
   json.partial! "api/users/user", user: @trip.creator
 

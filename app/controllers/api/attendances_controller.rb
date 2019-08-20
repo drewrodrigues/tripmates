@@ -20,7 +20,8 @@ class Api::AttendancesController < ApplicationController
     if params[:trip_id] == "undefined"
       @attendances = Attendance.all
     else
-      @attendances = Trip.find(params[:trip_id]).attendances.includes(:user)
+      @trip = Trip.find(params[:trip_id])
+      @attendances = @trip.attendances.includes(:user)
     end
   end
 
@@ -28,7 +29,7 @@ class Api::AttendancesController < ApplicationController
     attendance = current_user.attendances.find_by(id: params[:id]) ||
       current_user.managed_attendances.find_by(id: params[:id])
     if attendance&.destroy
-      render json: {}, status: :ok
+      render json: attendance, status: :ok
     else
       render json: { errors: ["Failed to leave trip"] }, status: :bad_request
     end

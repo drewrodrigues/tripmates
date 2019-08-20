@@ -61,7 +61,7 @@ class Trip < ApplicationRecord
   end
 
   def at_capacity?
-    spaces - attendances.count == 0
+    spaces_left == 0
   end
 
   def attend_request_for_user(user)
@@ -72,6 +72,9 @@ class Trip < ApplicationRecord
     attendances.find_by(user: user)
   end
 
+  def spaces_left
+    spaces - attendances.count
+  end
 
   private
 

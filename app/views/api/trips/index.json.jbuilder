@@ -1,4 +1,5 @@
 json.trips({})
+json.trip_counts({})
 json.users({})
 json.attend_requests({})
 json.attendances({})
@@ -17,6 +18,14 @@ json.set! "trips" do
                           :details,
                           :privacy
       json.coverPhoto url_for(trip.cover_photo) if trip.cover_photo.attached?
+    end
+  end
+end
+
+json.set! "trip_counts" do
+  @trips.each do |trip|
+    json.set! trip.id do
+      json.spaces_left trip.spaces_left
     end
   end
 end
