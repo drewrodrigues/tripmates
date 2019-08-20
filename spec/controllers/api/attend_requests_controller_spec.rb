@@ -36,7 +36,7 @@ RSpec.describe Api::AttendRequestsController, type: :controller do
   describe "authorization" do
     context "DELETE #destroy" do
       context "when user doesn't own the record" do
-        it "raises an error" do
+        it "returns an error" do
           leader = create(:user)
           user = create(:user)
           FriendRequest.create(requester: leader, requestee: user)
@@ -72,17 +72,6 @@ RSpec.describe Api::AttendRequestsController, type: :controller do
       it "creates the record" do
         expect(AttendRequest.count).to eq(1)
       end
-
-      it "returns json" do
-        attend_request = AttendRequest.last
-        expect(JSON.parse(response.body)).to eq(
-          attend_request.id.to_s => {
-            "id" => attend_request.id,
-            "tripId" => attend_request.trip_id,
-            "userId" => attend_request.user_id,
-          },
-        )
-      end
     end
 
     context "when trip doesn't exist" do
@@ -106,17 +95,6 @@ RSpec.describe Api::AttendRequestsController, type: :controller do
 
     it "responds with success code" do
       expect(response).to have_http_status(:success)
-    end
-
-    it "returns JSON" do
-      attend_request = AttendRequest.last
-      expect(JSON.parse(response.body)).to eq(
-        attend_request.id.to_s => {
-          "id" => attend_request.id,
-          "userId" => attend_request.user_id,
-          "tripId" => attend_request.trip_id,
-        },
-      )
     end
   end
 
@@ -142,7 +120,7 @@ RSpec.describe Api::AttendRequestsController, type: :controller do
       end
     end
 
-    context "when record doens't exist" do
+    context "when record doesn't exist" do
       it "responds with error" do
         subject.login!(create(:user))
 

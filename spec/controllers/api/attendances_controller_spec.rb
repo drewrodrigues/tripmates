@@ -25,7 +25,7 @@ RSpec.describe Api::AttendancesController, type: :controller do
     it "protects all actions from signed out users" do
       [
         "post :create, format: :json",
-        "get :index, format: :json",
+        "get :index, format: :json, params: { trip_id: 1_000_000 }",
         "delete :destroy, format: :json, params: { id: 1_000_000 }",
       ].each do |method|
         eval(method)
@@ -51,19 +51,6 @@ RSpec.describe Api::AttendancesController, type: :controller do
 
       it "has :ok status code" do
         expect(response).to have_http_status(:ok)
-      end
-
-      it "renders json" do
-        attendance = Attendance.last
-        trip = Trip.last
-        user = attender
-        expect(JSON.parse(response.body)).to eq(
-          attendance.id.to_s => {
-            "id" => attendance.id,
-            "tripId" => trip.id,
-            "userId" => user.id,
-          },
-        )
       end
     end
 

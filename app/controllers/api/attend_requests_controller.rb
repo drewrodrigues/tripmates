@@ -18,8 +18,8 @@ class Api::AttendRequestsController < ApplicationController
 
   def destroy
     attend_request = current_user.attend_requests.find_by(id: params[:id]) ||
-      current_user.managed_attend_requests.find_by(id: params[:id])
-    if attend_request&.destroy
+      current_user.managed_attend_requests.find(id: params[:id])
+    if attend_request.destroy
       render json: {}, status: :ok
     else
       # TODO: refactor?

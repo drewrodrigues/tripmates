@@ -67,17 +67,6 @@ RSpec.describe Api::MessagesController, type: :controller do
       it "responds with :ok" do
         expect(response).to have_http_status(:ok)
       end
-
-      it "responds with JSON" do
-        message = Message.last
-        expect(JSON.parse(response.body)).to eq(
-          message.id.to_s => {
-            "body" => message.body,
-            "id" => message.id,
-            "tripId" => message.trip_id,
-          },
-        )
-      end
     end
 
     context "when attendee" do
@@ -97,17 +86,6 @@ RSpec.describe Api::MessagesController, type: :controller do
 
       it "responds with :ok" do
         expect(response).to have_http_status(:ok)
-      end
-
-      it "responds with JSON" do
-        message = Message.last
-        expect(JSON.parse(response.body)).to eq(
-          message.id.to_s => {
-            "body" => message.body,
-            "id" => message.id,
-            "tripId" => message.trip_id,
-          },
-        )
       end
     end
 
@@ -151,23 +129,6 @@ RSpec.describe Api::MessagesController, type: :controller do
         get :index, format: :json, params: { trip_id: Trip.last.id }
       end
 
-      it "responds with records" do
-        expect(JSON.parse(response.body)).to eq(
-          "messages" => { Message.last.id.to_s => {
-            "body" => "Do the things",
-            "id" => Message.last.id,
-            "tripId" => Trip.last.id,
-          } },
-          "users" => { attendee.id.to_s => {
-            "email" => attendee.email,
-            "firstName" => attendee.first_name,
-            "fullName" => attendee.full_name,
-            "id" => attendee.id,
-            "lastName" => attendee.last_name,
-          } },
-        )
-      end
-
       it "responds with :ok status code" do
         expect(response).to have_http_status(:ok)
       end
@@ -177,23 +138,6 @@ RSpec.describe Api::MessagesController, type: :controller do
       before do
         subject.login!(attendee)
         get :index, format: :json, params: { trip_id: Trip.last.id }
-      end
-
-      it "responds with records" do
-        expect(JSON.parse(response.body)).to eq(
-          "messages" => { Message.last.id.to_s => {
-            "body" => "Do the things",
-            "id" => Message.last.id,
-            "tripId" => Trip.last.id,
-          } },
-          "users" => { attendee.id.to_s => {
-            "email" => attendee.email,
-            "firstName" => attendee.first_name,
-            "fullName" => attendee.full_name,
-            "id" => attendee.id,
-            "lastName" => attendee.last_name,
-          } },
-        )
       end
 
       it "responds with :ok status code" do
