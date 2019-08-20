@@ -21,6 +21,7 @@ const TripDetail = ({
     spaces,
     startDate,
     privacy,
+    spacesLeft,
   },
   truncateDetail,
   isLeader,
@@ -61,13 +62,15 @@ const TripDetail = ({
                   Attending
                 </button>
                 :
-                <button
-                  className="TripDetail-attendance-status TripDetail-attendance-request"
-                  onClick={createAttendRequestAndPreventDefault}
-                >
-                  <FontAwesomeIcon icon="user-plus" />
-                  Ask to Join
-                </button>
+                spacesLeft != 0 && (
+                  <button
+                    className="TripDetail-attendance-status TripDetail-attendance-request"
+                    onClick={createAttendRequestAndPreventDefault}
+                  >
+                    <FontAwesomeIcon icon="user-plus" />
+                    Ask to Join
+                  </button>
+                )
           )}
         </div>
 
@@ -106,7 +109,7 @@ const TripDetail = ({
             <FontAwesomeIcon icon="clock" />
             {prettyDuration(duration)}
           </span>
-          <TripSpaces tripId={id} spaces={spaces} />
+          <TripSpaces tripId={id} spaces={spaces} spacesLeft={spacesLeft} />
         </div>
 
         <p className="tripIndexItem-description">

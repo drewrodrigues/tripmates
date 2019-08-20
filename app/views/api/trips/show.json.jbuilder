@@ -12,7 +12,8 @@ json.set! "trip" do
       :privacy,
       :spaces,
       :start_date,
-      :title
+      :title,
+      :spaces_left
     json.coverPhoto url_for(@trip.cover_photo) if @trip.cover_photo.attached?
   end
 end
