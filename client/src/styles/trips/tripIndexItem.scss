@@ -6,13 +6,25 @@
 
 .tripIndexItem {
   @include card;
-  margin-bottom: 20px;
   display: flex;
-  flex-direction: column;
-  width: 49%;
-  overflow: hidden;
-  border-radius: $border-radius;
-  border: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
+  border-right: 1px solid #efefef;
+
+  &:first-of-type {
+    border-top: 1px solid #efefef;
+  }
+
+  .TripCoverPhoto {
+    width: 50%;
+    padding: $padding-half;
+    min-height: initial;
+    border-radius: $border-radius 0 0 $border-radius;
+  }
+
+  .TripDetail {
+    width: 50%;
+    padding: $padding-main;
+  }
 }
 
 .tripIndexItem-location {
@@ -66,6 +78,10 @@
 .tripIndexItem-footer-left {
   display: flex;
   align-items: center;
+
+  .Avatar {
+    margin-right: 5px;
+  }
 }
 
 .tripIndexItem-leader-avatar {
@@ -78,11 +94,11 @@
 .tripIndexItem-led-by {
   color: $text-muted;
   margin-left: 5px;
+  font-size: 12px;
 }
 
 .tripIndexItem-led-by-user {
   color: $blue-primary;
-  font-weight: 900;
 }
 
 .tripindexItem-footer {

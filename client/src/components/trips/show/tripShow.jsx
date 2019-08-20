@@ -36,30 +36,41 @@ class TripShow extends Component {
 
         <section className="tripShow-detail">
           <TripCoverPhoto coverPhoto={trip.coverPhoto} title={trip.title} />
-          <TripDetail trip={trip} />
         </section>
 
+        <ul className="tripShow-body-nav">
+          <li className="tripShow-body-nav-link">
+            <NavLink exact to={ `/trips/${trip.id}`}>
+              <FontAwesomeIcon icon="comments" />
+              Detail
+            </NavLink>
+          </li>
+          <li className="tripShow-body-nav-link">
+            <NavLink to={ `/trips/${trip.id}/conversation`}>
+              <FontAwesomeIcon icon="comments" />
+              Conversation
+            </NavLink>
+          </li>
+          {/*<li className="tripShow-body-nav-link"><a href="#">Inventory</a></li>*/}
+          <li className="tripShow-body-nav-link">
+            <NavLink to={`/trips/${trip.id}/attendance`}>
+              <FontAwesomeIcon icon="hiking" />
+              Attendees
+            </NavLink>
+          </li>
+          {/*<li className="tripShow-body-nav-link"><a href="#">Invites</a></li>*/}
+          {/*<li className="tripShow-body-nav-link"><a href="#">Itenerary</a></li>*/}
+        </ul>
+
         <section className="tripShow-body">
-          <ul className="tripShow-body-nav">
-            <li className="tripShow-body-nav-link">
-              <NavLink to={ `/trips/${trip.id}/conversation`}>
-                <FontAwesomeIcon icon="comments" />
-                Conversation
-              </NavLink>
-            </li>
-            {/*<li className="tripShow-body-nav-link"><a href="#">Inventory</a></li>*/}
-            <li className="tripShow-body-nav-link">
-              <NavLink to={`/trips/${trip.id}/attendance`}>
-                <FontAwesomeIcon icon="hiking" />
-                Attendees
-              </NavLink>
-            </li>
-            {/*<li className="tripShow-body-nav-link"><a href="#">Invites</a></li>*/}
-            {/*<li className="tripShow-body-nav-link"><a href="#">Itenerary</a></li>*/}
-          </ul>
 
           <div className="tripShow-body-content">
             <Switch>
+              <Route
+                exact
+                path="/trips/:tripId"
+                render={() => <TripDetail trip={trip} />}
+              />
               <Route
                 path="/trips/:tripId/attendance"
                 render={() => <Attendees attendRequests={ this.props.attendRequests } isLeader={this.props.isLeader} tripId={ trip.id } /> }

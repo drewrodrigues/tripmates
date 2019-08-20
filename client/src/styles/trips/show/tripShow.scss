@@ -1,22 +1,30 @@
 .tripShow {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
 
   .TripCoverPhoto {
-    border-radius: $border-radius $border-radius 0 0;
+    border-radius: $border-radius;
+    width: 100%;
+    min-height: 500px;
+  }
+
+  .TripCoverPhoto-title {
+    font-size: 32px;
+    margin-top: -180px;
   }
 }
 
 .tripShow-detail {
   @include card;
-  display: block;
-  width: 50%;
-  margin-right: 20px;
-  border: 1px solid #efefef;
+  width: 100%;
 }
 
 .tripShow-body {
-  max-width: 50%;
+  width: 600px;
+  z-index: 20;
+  background: white;
+  border-radius: $border-radius;
 }
 
 .tripShow-detail-title {
@@ -84,10 +92,6 @@
   margin-left: 5px;
 }
 
-.tripShow-body {
-  width: 66.6666%;
-}
-
 .tripShow-title {
   font-size: 72px;
   text-shadow: 0 0 10px black;
@@ -97,7 +101,9 @@
 .tripShow-body-nav {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 15px;
+  margin-top: -200px;
+  margin-bottom: 20px;
+  z-index: 20;
 }
 
 .tripShow-body-nav-link {
@@ -131,6 +137,11 @@
 }
 
 .tripShow-body-content {
+  padding: 40px;
+
+  .TripDetail {
+    padding: 0px;
+  }
 }
 
 .trip-button-edit {
