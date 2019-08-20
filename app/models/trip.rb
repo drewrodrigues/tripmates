@@ -64,6 +64,15 @@ class Trip < ApplicationRecord
     spaces - attendances.count == 0
   end
 
+  def attend_request_for_user(user)
+    attend_requests.find_by(user: user)
+  end
+
+  def attendance_for_user(user)
+    attendances.find_by(user: user)
+  end
+
+
   private
 
   def valid_date_range

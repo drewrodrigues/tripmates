@@ -14,9 +14,10 @@ class Api::TripsController < ApplicationController
   # TODO: add edit so frontend can hit it, and we can scope from
   # current_user/resource a user can handle
   # otherwise it'll return a 404 and the frontend knows how to handle that
+  # because otherwise we are hitting the #show, which is getting a lot of extra data
 
   def show
-    @trip = Trip.includes(:creator, :attend_requests).find(params[:id])
+    @trip = Trip.includes(:creator, :attendances, :attend_requests).find(params[:id])
   end
 
   def update
@@ -42,7 +43,7 @@ class Api::TripsController < ApplicationController
       @trips = @trips.after(params[:date])
     end
 
-    @trips.includes(:creator)
+    @trips.includes(:creator, :attendances, :attend_requests)
   end
 
   def destroy

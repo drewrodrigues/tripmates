@@ -1,6 +1,5 @@
 import React from 'react'
 import FriendRequest from '../../friendRequests/friendRequestContainer'
-import AvatarPlaceholder from '../../../assets/avatarPlaceholder.jpg'
 import Avatar from "../Avatar";
 
 const UserIndexItem = ({ user }) => {
