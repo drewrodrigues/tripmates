@@ -7,13 +7,10 @@ import JustYou from "../../../assets/justyou.svg"
 import NoRequests from "../../../assets/request.svg"
 import Placeholder from "../../Shared/Placeholder"
 import {
-  clearAttendRequests,
   getAttendRequests
 } from "../../../actions/attendRequestActions"
 import {handleLoading} from "../../../helpers/handlers"
 import Loader from "../../Shared/Loader";
-
-// TODO: query for attend reqeusts (since it's only coming from the trip itself
 
 class Attendees extends React.Component {
   constructor(props) {

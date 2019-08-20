@@ -26,10 +26,10 @@ export const receiveAttendances = attendances => {
   }
 }
 
-export const removeAttendance = attendance => {
+export const removeAttendance = id => {
   return {
     type: REMOVE_ATTENDANCE,
-    attendance
+    id
   }
 }
 
@@ -64,7 +64,7 @@ export const deleteAttendance = id => dispatch => {
   return AttendanceUtils.deleteAttendance(id)
     .then(res => {
       dispatch(removeAttendance(id))
-      dispatch(incrementSpacesLeft(res.data.tripId))
+      dispatch(incrementSpacesLeft(res.data.trip_id))
     })
     .catch(err => console.log(err.response.data))
 }
