@@ -19,6 +19,7 @@ const TripDetail = ({
     location,
     spaces,
     startDate,
+    privacy
   },
   isLeader,
   isRequestingAttendance,
@@ -69,6 +70,13 @@ const TripDetail = ({
         </div>
 
         <header>
+          { privacy == "hidden" && (
+            <span className="TripDetail-private">
+              <FontAwesomeIcon icon="mask" />
+              { privacy[0].toUpperCase() + privacy.slice(1) }
+            </span>
+          )}
+
           <h4 className="tripIndexItem-location">
             <FontAwesomeIcon icon="map-marker-alt"/>
             {location}
