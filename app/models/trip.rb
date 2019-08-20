@@ -46,7 +46,8 @@ class Trip < ApplicationRecord
   validates :details, presence: true
   validates :privacy, inclusion: { in: PRIVACIES }
   validate :valid_date_range
-  validate :positive_spaces
+  validate :positive_or_unlimited_spaces
+  validate :space_is_big_enough_for_attendees, on: :update
 
   def self.before(date)
     Trip.where("start_date < ?", date.to_date)
@@ -86,7 +87,18 @@ class Trip < ApplicationRecord
     end
   end
 
-  def positive_spaces
-    errors.add(:spaces, "must be positive") if spaces&.negative?
+  def positive_or_unlimited_spaces
+    return unless spaces
+
+    unless spaces == -1 || spaces >= 0
+      errors.add(:spaces, "must be positive") if spaces&.negative?
+    end
+  end
+
+  def space_is_big_enough_for_attendees
+    count = attendances.count
+    if count > spaces && spaces != -1
+      errors.add(:spaces, "must be at least at least #{count} to fit attendees")
+    end
   end
 end

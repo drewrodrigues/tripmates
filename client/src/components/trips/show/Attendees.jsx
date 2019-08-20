@@ -50,7 +50,7 @@ class Attendees extends React.Component {
             </Placeholder>
             :
             <ul>
-              {this.props.attendances.map(attendance => <Attendee userId={ attendance.userId } id={ attendance.id } />)}
+              {this.props.attendances.map(attendance => <Attendee userId={ attendance.userId } id={ attendance.id } isLeader={ this.props.isLeader }/>)}
             </ul>
           }
         </div>

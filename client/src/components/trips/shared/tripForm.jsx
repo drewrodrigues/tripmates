@@ -222,15 +222,23 @@ class TripForm extends React.Component {
             </label>
             <div className="button-row">
               <button
-                className={`form-button button button-${spaces == 0 ? 'blue' : 'white'}`}
-                onClick={e => this.select(e, 'spaces', 0)}
+                className={`form-button button button-${spaces == -1 ? 'blue' : 'white'}`}
+                onClick={e => this.select(e, 'spaces', -1)}
                 data-cy="tripInput-spaces-unlimited"
               >
                 Unlimited
               </button>
 
+              <button
+                className={`form-button button button-${spaces == 0 ? 'blue' : 'white'}`}
+                onClick={e => this.select(e, 'spaces', 0)}
+                data-cy="tripInput-spaces-none"
+              >
+                None
+              </button>
+
               <input
-                className={`form-button button button-${spaces != 0 ? 'blue' : 'white'}`}
+                className={`form-button button button-${spaces > 0 ? 'blue' : 'white'}`}
                 onChange={ handleUpdate('spaces') }
                 value={ spaces }
                 data-cy="tripInput-spaces"

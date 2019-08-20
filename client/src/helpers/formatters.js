@@ -30,8 +30,10 @@ export const prettyDuration = days => {
 }
 
 export const prettySpaces = spaces => {
-  if (spaces == 0) {
+  if (spaces <= -1) {
     return "Unlimited space"
+  } else if (spaces == 0) {
+    return "No space left"
   } else {
     return `${spaces} ${pluralize("space", spaces)} left`
   }
