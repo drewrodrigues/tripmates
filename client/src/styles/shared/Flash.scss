@@ -1,0 +1,28 @@
+.Flash-container {
+  position: fixed;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.Flash {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  background: $red-primary;
+  border-radius: $border-radius;
+  color: white;
+  font-weight: 900;
+  font-size: 12px;
+  cursor: pointer;
+
+  svg {
+    margin-left: 10px;
+    margin-right: 0;
+  }
+}
