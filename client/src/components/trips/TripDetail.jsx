@@ -8,6 +8,7 @@ import { isRequestingAttendance, isAttendingTrip } from "../../helpers/selectors
 import TripSpaces from './shared/TripSpaces'
 import Avatar from '../users/Avatar'
 import { createAttendRequest, deleteAttendRequest } from '../../actions/attendRequestActions'
+import { truncate } from "../../helpers/formatters"
 
 const TripDetail = ({
   trip: {
@@ -21,6 +22,7 @@ const TripDetail = ({
     startDate,
     privacy,
   },
+  truncateDetail,
   isLeader,
   isRequestingAttendance,
   attendRequest,
@@ -108,7 +110,7 @@ const TripDetail = ({
         </div>
 
         <p className="tripIndexItem-description">
-          {details}
+          { truncateDetail ? truncate(300, details) : details }
         </p>
 
         {creator &&

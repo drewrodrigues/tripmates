@@ -208,7 +208,7 @@ class TripIndex extends React.Component {
                   className="tripIndexItem"
                 >
                   <TripCoverPhoto coverPhoto={trip.coverPhoto} title={trip.title} />
-                  <TripDetail trip={trip} key={trip.id} />
+                  <TripDetail trip={trip} key={trip.id} truncateDetail={true} />
                 </Link>
               ))}
             </div>

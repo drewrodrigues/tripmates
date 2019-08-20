@@ -56,3 +56,11 @@ export const prettyDaysUntil = startDate => {
     return `${daysAway} ${dayString} away`
   }
 }
+
+export const truncate = (length, text) => {
+  if (text.length >= length) {
+    return text.slice(0, length) + "..."
+  } else {
+    return text
+  }
+}
