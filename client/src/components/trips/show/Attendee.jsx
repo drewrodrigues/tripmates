@@ -4,12 +4,14 @@ import UserLineItem from "../../users/UserLineItem";
 import { deleteAttendance } from "../../../actions/attendanceActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Attendee = ({ id, userId, user, deleteAttendance }) => {
+const Attendee = ({ id, userId, user, deleteAttendance, isLeader, requestingUser }) => {
   if (!user) return null
   return <>
     <UserLineItem profilePicture={ user.profilePicture } fullName={ user.fullName }>
       <button onClick={() => deleteAttendance(id) } className="button button-small button-muted">
-        <FontAwesomeIcon icon="times" />
+        {(isLeader || requestingUser) && (
+          <FontAwesomeIcon icon="times" />
+        )}
       </button>
     </UserLineItem>
   </>
@@ -17,7 +19,8 @@ const Attendee = ({ id, userId, user, deleteAttendance }) => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    user: Object.values(state.entities.users).find(user => user.id == ownProps.userId)
+    user: Object.values(state.entities.users).find(user => user.id == ownProps.userId),
+    requestingUser: state.session.id == ownProps.userId
   }
 }
 
