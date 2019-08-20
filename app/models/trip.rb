@@ -60,6 +60,10 @@ class Trip < ApplicationRecord
     (end_date - start_date).round + 1
   end
 
+  def at_capacity?
+    spaces - attendances.count == 0
+  end
+
   private
 
   def valid_date_range

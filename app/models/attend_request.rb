@@ -25,6 +25,7 @@ class AttendRequest < ApplicationRecord
   }
   validate :trip_is_public
   validate :must_be_friend_of_leader
+  validate :trip_not_at_capacity
 
   private
 
@@ -41,6 +42,14 @@ class AttendRequest < ApplicationRecord
 
     unless user.friends_with?(trip.creator)
       errors.add(:leader, "must be your friend")
+    end
+  end
+
+  def trip_not_at_capacity
+    return unless trip
+
+    if trip.at_capacity?
+      errors.add(:trip, "has no space left")
     end
   end
 end

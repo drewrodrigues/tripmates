@@ -15,7 +15,16 @@ FactoryBot.define do
     privacy { "visible" }
     details { "Cool details go here" }
 
+    trait :at_capacity do
+      spaces { 0 }
+    end
+
     association :creator, factory: :user, strategy: :build
+  end
+
+  factory :attend_request do
+    trip
+    user
   end
 
   factory(:attendee) do

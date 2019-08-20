@@ -122,5 +122,37 @@ RSpec.describe AttendRequest, type: :model do
         )
       end
     end
+
+    context "when trip not at capacity" do
+      it "is valid" do
+        leader = create(:user)
+        user = create(:user)
+        FriendRequest.create(requester: leader, requestee: user)
+        Friend.create(friend_one_id: leader.id, friend_two_id: user.id)
+        trip = create(:trip, creator: leader)
+        attend_request = build(:attend_request, trip: trip, user: user)
+        expect(attend_request).to be_valid
+      end
+    end
+
+    context "when trip at capacity" do
+      before do
+        leader = create(:user)
+        user = create(:user)
+        FriendRequest.create(requester: leader, requestee: user)
+        Friend.create(friend_one_id: leader.id, friend_two_id: user.id)
+        trip = create(:trip, :at_capacity, creator: leader)
+        @attend_request = build(:attend_request, trip: trip, user: user)
+      end
+
+      it "is invalid" do
+        expect(@attend_request).to be_invalid
+      end
+
+      it "has errors" do
+        @attend_request.validate
+        expect(@attend_request.errors.full_messages).to eq(['Trip has no space left'])
+      end
+    end
   end
 end
