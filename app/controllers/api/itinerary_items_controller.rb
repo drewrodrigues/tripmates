@@ -1,31 +1,32 @@
 class Api::ItineraryItemsController < ApplicationController
   before_action :require_sign_in, except: :index
-  before_action :set_trip, except: :index
+  before_action :set_trip
   before_action :ensure_attending_or_leader!, except: :index
 
   def create
-    @item = @trip.itinerary_items.build(itinerary_item_params)
+    @itinerary_item = @trip.itinerary_items.build(itinerary_item_params)
 
-    if @item.save
+    if @itinerary_item.save
       render :show
     else
-      render json: { "errors" => @item.errors.messages }
+      render json: { "errors" => @itinerary_item.errors.messages }, status: :unprocessable_entity
     end
   end
 
   def index
-    @itinerary_items = ItineraryItem.all
+    @itinerary_items = @trip.itinerary_items
+    @attendance = @trip.attendance_for_user(current_user) if current_user
   end
 
   # TODO: update
 
   def destroy
-    @item = @trip.itinerary_items.find(params[:id])
+    @itinerary_item = @trip.itinerary_items.find(params[:id])
 
-    if @item.destroy
+    if @itinerary_item.destroy
       render :show
     else
-      render json: { "errors" => @item.errors.messages }
+      render json: { "errors" => @itinerary_item.errors.messages }
     end
   end
 

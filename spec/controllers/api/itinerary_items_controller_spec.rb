@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+# TODO: add specs for invalid params (no title etc) with a 422 response
+
 RSpec.describe Api::ItineraryItemsController, type: :controller do
   let(:setup) do
     leader = create(:user)
