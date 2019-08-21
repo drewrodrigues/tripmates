@@ -57,7 +57,7 @@ class User < ApplicationRecord
            source: :messages
   has_many :attendances,
            dependent: :destroy
-  has_many :attended_trips,
+  has_many :attending_trips,
            through: :attendances,
            source: :trip
   has_many :managed_attendances,
