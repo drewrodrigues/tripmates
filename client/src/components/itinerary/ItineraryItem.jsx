@@ -7,7 +7,7 @@ import ItineraryItemPhoto from './ItineraryItem/ItineraryItemPhoto'
 import ItineraryItemAttachment from './ItineraryItem/ItineraryItemAttachment'
 import ItineraryItemPosition from './ItineraryItem/ItineraryItemPosition'
 
-const ItineraryItem = ({ item: { id, startTime, endTime, startDate, endDate, description, title, position }}) => {
+const ItineraryItem = ({ item: { id, startTime, endTime, startDate, endDate, description, title, position, photo, files }}) => {
   // debugger
   return (
     <div className="ItineraryItem">
@@ -16,9 +16,9 @@ const ItineraryItem = ({ item: { id, startTime, endTime, startDate, endDate, des
       <ItineraryItemDates startDate={startDate} endDate={endDate} />
       {/* TODO: if cover photo, then pass title into cover Photo and don't render title */}
       <ItineraryItemTitle title={title} />
-      {/*<ItineraryItemPhoto photo={"some photo"} />*/}
+      <ItineraryItemPhoto photo={photo} />
       <ItineraryItemDescription description={description} />
-      {/*<ItineraryItemAttachment attachment={"somefile"} />*/}
+      <ItineraryItemAttachment files={files} />
     </div>
   )
 }

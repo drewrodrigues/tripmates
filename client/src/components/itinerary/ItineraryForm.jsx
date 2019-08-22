@@ -1,12 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from "react-router-dom";
-import DateRangePicker from "@wojtekmaj/react-daterange-picker";
+import DateRangePicker from "@wojtekmaj/react-daterange-picker"
+import { handleImage } from "../../helpers/handlers"
 import TimePicker from 'react-time-picker'
-import FormErrors from "../Shared/formErrors";
 
 const today = new Date()
 
+// TODO: change state to handle form updates and component state differently
 const defaultState = {
   // form
   title: "",
@@ -17,16 +18,19 @@ const defaultState = {
   start_time: null,
   end_time: null,
   position: null,
+  photo: null,
   errors: [],
+  files: null,
   // component
   useDates: false,
-  useTimes: false
+  useTimes: false,
 }
 
 class ItineraryForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = defaultState
+    this.handleImage = handleImage.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.toggle = this.toggle.bind(this)
   }
@@ -34,15 +38,29 @@ class ItineraryForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    const params = {
-      ...this.state,
-      start_date: (this.state.useDates ? this.state.date_range[0] : null),
-      end_date: (this.state.useDates ? this.state.date_range[1] : null),
-      start_time: (this.state.useTimes ? this.state.start_time : null),
-      end_time: (this.state.useTimes ? this.state.end_time : null)
+    const formData = new FormData()
+
+    formData.append('itinerary_item[title]', this.state.title)
+    if (this.state.photo) {
+      formData.append('itinerary_item[photo]', this.state.photo)
+    }
+    // debugger
+    for (let i = 0; i < this.state.files.length; i++) {
+      // debugger
+      formData.append('itinerary_item[files][]', this.state.files[i])
     }
 
-    this.props.action(params)
+
+    // const params = {
+    //   ...this.state,
+    //   start_date: (this.state.useDates ? this.state.date_range[0] : null),
+    //   end_date: (this.state.useDates ? this.state.date_range[1] : null),
+    //   start_time: (this.state.useTimes ? this.state.start_time : null),
+    //   end_time: (this.state.useTimes ? this.state.end_time : null),
+    //   photo: this.state.photo
+    // }
+
+    this.props.action(formData)
       .then(() => {
         this.setState(defaultState)
         this.props.toggleForm()
@@ -80,13 +98,21 @@ class ItineraryForm extends React.Component {
           className={`form-input ${this.hasError('title') && 'error'}`}
         />
 
+
+        <input type="file"
+               onChange={ e => this.setState({ photo: e.target.files[0] }) }
+               // className="form-input"
+               accept=".jpg,.jpeg,.png,.gif"
+               // id="trip-photo"
+               // data-cy="tripInput-photo"
+        />
+
         <label>Description</label>
         <input
           type="text"
           onChange={e => this.setState({ description: e.target.value })}
           value={this.state.description}
-          className="form-input"
-        />
+          className="form-input" />
 
 
         <a className="button button-green" onClick={e => this.toggle(e, 'useDates')}>{ this.state.useDates ? "Using dates" : "Not using dates"}</a>
@@ -100,6 +126,13 @@ class ItineraryForm extends React.Component {
             data-cy="tripInput-dateRange"
           />
         </>)}
+
+        <h3>Attachments</h3>
+        <input type="file" multiple onChange={e => {
+          window.files = e.target.files
+          console.log('run it')
+          this.setState({ files: e.target.files })
+        }} />
 
         <a className="button button-green" onClick={e => this.toggle(e, 'useTimes')}>{ this.state.useTimes ? "Using times" : "Not using times"}</a>
         {this.state.useTimes && (<>
@@ -126,6 +159,7 @@ class ItineraryForm extends React.Component {
   }
 }
 
+Object.assign(ItineraryForm.prototype, handleImage)
 
 const mapStateToProps = (state, ownProps) => {
   // TODO: if edit, an id will be passed down & fetch that trip

@@ -75,7 +75,7 @@ class Itinerary extends React.Component {
 const mapStateToProps = (state, ownProps) => ({
   itineraryItems: itineraryItemsForTripId(state, ownProps.match.params.tripId),
   userCanManageItinerary: userCanManageItinerary(state, ownProps.match.params.tripId) ||
-                          state.entities.trips[ownProps.match.params.tripId].creatorId == state.session.id
+                          state.entities.trips[ownProps.match.params.tripId].creatorId == state.session.id // TODO: use selector
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

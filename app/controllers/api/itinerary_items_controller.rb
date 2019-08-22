@@ -51,7 +51,9 @@ class Api::ItineraryItemsController < ApplicationController
       :position,
       :description,
       :trip_id,
-      :title
+      :title,
+      :photo,
+      :files => []
     )
   end
 end

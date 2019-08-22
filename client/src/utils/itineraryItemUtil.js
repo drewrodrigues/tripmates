@@ -4,7 +4,7 @@ export const createItineraryItem = (tripId, item) => {
   return axios({
     method: "post",
     url: `/api/trips/${tripId}/itinerary_items`,
-    data: { itinerary_item: item }
+    data: item
   })
 }
 

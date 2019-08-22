@@ -1,21 +1,17 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const ItineraryItemAttachment = ({ attachment }) => {
-  if (!attachment) return null
+const ItineraryItemAttachment = ({ files }) => {
+  if (!files) return null
 
   return (
     <div className="ItineraryItemAttachment-container">
-      <button className="ItineraryItemAttachment">
-        <FontAwesomeIcon icon="paperclip" />
-        {/*{attachment}*/}
-        Camping Reservations
-      </button>
-      <button className="ItineraryItemAttachment">
-        <FontAwesomeIcon icon="paperclip" />
-        {/*{attachment}*/}
-        Place Tickets
-      </button>
+      {files.map(file => (
+        <a className="ItineraryItemAttachment" href={file.url} download>
+          <FontAwesomeIcon icon="paperclip" />
+          {file.name}
+        </a>
+      ))}
     </div>
   )
 }

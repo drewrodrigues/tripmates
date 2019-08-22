@@ -25,5 +25,8 @@
 class ItineraryItem < ApplicationRecord
   belongs_to :trip
 
+  has_one_attached :photo
+  has_many_attached :files
+
   validates :title, presence: true
 end
