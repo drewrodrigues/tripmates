@@ -36,8 +36,11 @@
 // - converation
 @import "./trips/show/MessageItem";
 
+// itinerary
+@import "./itinerary/ItineraryItem";
+
 body {
-  background: white;
+  background: $gray-background;
   color: $text-primary;
 }
 

@@ -252,6 +252,10 @@ ActiveRecord::Base.transaction do
     end
   end
 
+  100.times do
+    ItineraryItem.create(trip_id: Trip.ids.sample, title: "Something Goes Here")
+  end
+
   puts "#{User.count} Users created"
   puts "#{FriendRequest.count} FriendRequests created"
   puts "#{Friend.count} Friends created"
@@ -259,4 +263,5 @@ ActiveRecord::Base.transaction do
   puts "#{AttendRequest.count} AttendRequest created"
   puts "#{Attendance.count} Attendance created"
   puts "#{Message.count} Message created"
+  puts "#{ItineraryItem.count} itinerary items created"
 end

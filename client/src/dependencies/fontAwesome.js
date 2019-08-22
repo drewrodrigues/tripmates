@@ -31,7 +31,9 @@ import {
   faComments,
   faHiking,
   faBell,
-  faMask
+  faMask,
+  faBook,
+  faPaperclip
 } from "@fortawesome/free-solid-svg-icons"
 
 export default (() => {
@@ -67,4 +69,6 @@ export default (() => {
   library.add(faHiking)
   library.add(faBell)
   library.add(faMask)
+  library.add(faBook)
+  library.add(faPaperclip)
 })()

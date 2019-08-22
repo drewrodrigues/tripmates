@@ -192,3 +192,12 @@ export const isAttendingTrip = (state, trip) => {
 
   return isAttending
 }
+
+export const itineraryItemsForTripId = (state, tripId) => {
+  return Object.values(state.entities.itinerary).filter(item => item.tripId == tripId)
+}
+
+export const userCanManageItinerary = (state, tripId) => {
+  const currentUserId = state.session.id
+  return Object.values(state.entities.attendances).some(attendance => attendance.tripId == tripId && attendance.userId == currentUserId)
+}
