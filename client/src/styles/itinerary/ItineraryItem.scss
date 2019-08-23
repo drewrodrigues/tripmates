@@ -68,8 +68,7 @@
   color: white;
   font-size: 24px;
   font-weight: 900;
-  margin-bottom: 20px;
-  margin: 0 -20px;
+  margin: 0 -20px 40px;
 }
 
 .ItineraryItemDescription {
@@ -90,5 +89,7 @@
   border-radius: $border-radius;
   padding: 5px 10px;
   cursor: pointer;
-  margin: 0 5px;
+  margin: 0 5px 10px;
+  font-size: 10px;
+  display: inline-block;
 }
