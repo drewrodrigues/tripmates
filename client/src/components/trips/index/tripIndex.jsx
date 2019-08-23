@@ -111,12 +111,12 @@ class TripIndex extends React.Component {
         <div className="tripsIndex">
           <header className="tripIndex-header">
             <div className="tripIndex-header-left" onMouseLeave={ () => this.setState({ showLedByFilter: false })}>
-              <label className="tripIndex-ledByFilter-label">
-                <FontAwesomeIcon icon="user"/>
-                Led by
-              </label>
 
               <div className="filter-buttons">
+                <label className="tripIndex-ledByFilter-label">
+                  <FontAwesomeIcon icon="user"/>
+                  Led by
+                </label>
                 <button
                   className={`
                     button button-small button-white filter-button
@@ -157,11 +157,6 @@ class TripIndex extends React.Component {
             </div>
 
             <div className="tripIndex-header-right">
-              <label className="tripIndex-when-label">
-                When
-                <FontAwesomeIcon icon="calendar-alt"/>
-              </label>
-
               <div className="filter-buttons">
                 <button to="/trips/past"
                   className={`
@@ -192,6 +187,11 @@ class TripIndex extends React.Component {
                   <FontAwesomeIcon icon="angle-double-right"/>
                   Upcoming
                 </button>
+
+                <label className="tripIndex-when-label">
+                  <FontAwesomeIcon icon="calendar-alt"/>
+                  When
+                </label>
               </div>
             </div>
           </header>
