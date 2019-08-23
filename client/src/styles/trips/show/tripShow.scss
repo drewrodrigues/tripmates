@@ -30,7 +30,7 @@
 .tripShow-detail-title {
   margin-bottom: 20px;
   font-size: 32px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .tripShow-detail-photo {
@@ -120,7 +120,7 @@
 
     &.active {
       background: $blue-primary;
-      font-weight: 900;
+      font-weight: 700;
       color: white;
     }
   }
@@ -128,7 +128,7 @@
   &.active a {
     background: $blue-primary;
     color: white;
-    font-weight: 900;
+    font-weight: 700;
 
     &:hover {
       background: $blue-secondary;
@@ -170,7 +170,7 @@
   background: $red-primary;
   display: inline-block;
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 700;
   padding: 2px 5px;
   border-radius: $border-radius;
   margin-left: 5px;
