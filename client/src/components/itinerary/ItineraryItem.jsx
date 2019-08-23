@@ -6,17 +6,37 @@ import ItineraryItemDescription from "./ItineraryItem/ItineraryItemDescription"
 import ItineraryItemPhoto from './ItineraryItem/ItineraryItemPhoto'
 import ItineraryItemAttachment from './ItineraryItem/ItineraryItemAttachment'
 import ItineraryItemPosition from './ItineraryItem/ItineraryItemPosition'
+import ItineraryItemDeleteButton from './ItineraryItem/ItineraryItemDeleteButton'
 
-const ItineraryItem = ({ item: { id, startTime, endTime, startDate, endDate, description, title, position, photo, files }}) => {
-  // debugger
+const ItineraryItem = ({
+  userCanManageItinerary,
+  item: {
+    id,
+    startTime,
+    endTime,
+    startDate,
+    endDate,
+    description,
+    title,
+    position,
+    photo,
+    files
+  }}) => {
+
   return (
     <div className="ItineraryItem">
+      {userCanManageItinerary && <ItineraryItemDeleteButton id={id} />}
       <ItineraryItemPosition position={position} />
       <ItineraryItemTimes startTime={startTime} endTime={endTime} />
       <ItineraryItemDates startDate={startDate} endDate={endDate} />
-      {/* TODO: if cover photo, then pass title into cover Photo and don't render title */}
-      <ItineraryItemTitle title={title} />
-      <ItineraryItemPhoto photo={photo} />
+      { photo ?
+        <ItineraryItemPhoto photo={photo} title={title} />
+        :
+        (<>
+          <ItineraryItemTitle title={title} />
+          <ItineraryItemPhoto photo={photo} />
+        </>)
+      }
       <ItineraryItemDescription description={description} />
       <ItineraryItemAttachment files={files} />
     </div>
