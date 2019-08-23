@@ -29,7 +29,7 @@ class Trip < ApplicationRecord
   scope :hidden, -> { where(privacy: "hidden") }
 
   belongs_to :creator, class_name: :User
-  has_one_attached :cover_photo
+  has_one_attached :cover_photo, dependent: :destroy
   has_many :attend_requests, dependent: :destroy
   has_many :attendances, dependent: :destroy
   has_many :attending_users,
