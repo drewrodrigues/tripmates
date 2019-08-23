@@ -33,7 +33,8 @@ import {
   faBell,
   faMask,
   faBook,
-  faPaperclip
+  faPaperclip,
+  faInfoCircle
 } from "@fortawesome/free-solid-svg-icons"
 
 export default (() => {
@@ -71,4 +72,5 @@ export default (() => {
   library.add(faMask)
   library.add(faBook)
   library.add(faPaperclip)
+  library.add(faInfoCircle)
 })()
