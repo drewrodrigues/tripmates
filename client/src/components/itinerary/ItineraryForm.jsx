@@ -20,7 +20,7 @@ const defaultState = {
   position: null,
   photo: null,
   errors: [],
-  files: null,
+  files: [],
   // component
   useDates: false,
   useTimes: false,
