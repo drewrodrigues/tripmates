@@ -30,6 +30,7 @@
 }
 
 .tripIndexItem-location {
+  cursor: pointer;
   font-size: 14px;
   margin-bottom: 10px;
   display: flex;
@@ -145,5 +146,23 @@
 
   &:hover {
     background: #A4CCFF;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  display: none;
+  font-size: 8px;
+  bottom: 150%;
+  background: #efefef;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.hasTooltip:hover {
+  position: relative;
+
+  .tooltip {
+    display: inline-block;
   }
 }

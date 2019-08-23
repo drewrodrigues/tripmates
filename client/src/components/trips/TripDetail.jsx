@@ -41,6 +41,13 @@ const TripDetail = ({
     createAttendRequest(id)
   }
 
+  const googleMapsSearchUrl = `https://www.google.com/maps/search/${location.split(' ').join('+')}`
+
+  const openGoogleMaps = e => {
+    e.preventDefault()
+    window.open(googleMapsSearchUrl, '_blank')
+  }
+
   return (
     <div className="TripDetail">
       <section className="TripDetail-body">
@@ -75,17 +82,21 @@ const TripDetail = ({
         </div>
 
         <header>
-          { privacy == "hidden" && (
+          {privacy == "hidden" && (
             <span className="TripDetail-private">
               <FontAwesomeIcon icon="mask" />
               { privacy[0].toUpperCase() + privacy.slice(1) }
             </span>
           )}
 
-          <h4 className="tripIndexItem-location">
+          <a
+            target="_blank" className="tripIndexItem-location hasTooltip"
+            onClick={openGoogleMaps}
+          >
+            <p className="tooltip">Open in Google Maps</p>
             <FontAwesomeIcon icon="map-marker-alt"/>
             {location}
-          </h4>
+          </a>
           <h5 className="tripIndexItem-dates">
             <FontAwesomeIcon icon="calendar-alt" />
             { startDate === endDate ?
