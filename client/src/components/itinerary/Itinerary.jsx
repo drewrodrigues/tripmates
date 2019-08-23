@@ -65,7 +65,12 @@ class Itinerary extends React.Component {
           toggleForm={this.toggleForm}
         />
         <ul>
-          {this.props.itineraryItems.map(item => <ItineraryItem item={item} />)}
+          {this.props.itineraryItems.map(item => (
+            <ItineraryItem
+              item={item}
+              userCanManageItinerary={this.props.userCanManageItinerary}
+            />
+          ))}
         </ul>
       </>
     )
