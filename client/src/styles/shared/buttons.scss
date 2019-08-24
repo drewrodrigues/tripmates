@@ -38,7 +38,8 @@
 }
 
 .button-gray {
-  background: #ccc;
+  background: $gray-background;
+  color: $text-primary;
 
   &:hover {
     background: #ddd;

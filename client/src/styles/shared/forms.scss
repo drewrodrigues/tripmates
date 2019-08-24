@@ -4,6 +4,12 @@
   text-align: center;
 }
 
+.form-section-title {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #efefef;
+  padding-bottom: 20px;
+}
+
 .form-title {
   font-size: 32px;
   font-weight: 700;
@@ -26,7 +32,7 @@
 
 .form-errors {
   padding: 0;
-  margin-bottom: $padding-main;
+  margin-bottom: $padding-half;
 }
 
 .form-error {
@@ -36,14 +42,17 @@
   padding: 10px;
   color: white;
   margin-bottom: 5px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
+  display: inline-block;
+  box-shadow: inset 0 0 3px maroon;
 }
 
 .form-label {
   display: block;
   font-size: 14px;
   margin-bottom: 10px;
+  color: $text-muted;
 
   span {
     font-weight: 700;
@@ -117,4 +126,54 @@
 
 button:disabled {
   cursor: default;
+}
+
+.ItineraryForm {
+  padding: 40px;
+  border-radius: $border-radius;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 5px #ccc;
+  margin-top: 20px;
+
+  .form-input,
+  .form-textarea {
+    border: 0;
+    padding: 10px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    background: #efefef;
+    display: block;
+
+    &:focus {
+      border: 0;
+    }
+  }
+
+  .form-textarea {
+    min-height: 200px;
+    width: 0;
+    resize: vertical;
+    border-radius: 10px;
+  }
+
+  .form-submit {
+    width: 100%;
+    display: block;
+    margin-top: 20px;
+  }
+
+  label {
+    display: block;
+    font-size: 12px;
+    color: $text-muted;
+    margin-bottom: 10px;
+
+    span {
+      color: #ccc;
+    }
+  }
+
+  .button-toggle {
+    margin-bottom: 20px;
+  }
 }

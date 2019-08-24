@@ -9,7 +9,7 @@ class Api::ItineraryItemsController < ApplicationController
     if @itinerary_item.save
       render :show
     else
-      render json: { "errors" => @itinerary_item.errors.messages }, status: :unprocessable_entity
+      render json: { "errors" => @itinerary_item.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

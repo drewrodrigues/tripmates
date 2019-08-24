@@ -4,6 +4,8 @@ import { withRouter } from "react-router-dom";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker"
 import { handleImage } from "../../helpers/handlers"
 import TimePicker from 'react-time-picker'
+import FormErrors from "../Shared/formErrors";
+import ResponseButtons from "../trips/shared/ResponseButtons";
 
 const today = new Date()
 
@@ -67,7 +69,7 @@ class ItineraryForm extends React.Component {
       formData.append('itinerary_item[files][]', this.state.files[i])
     }
 
-    this.props.action(formData)
+    return this.props.action(formData)
       .then(() => {
         this.setState(defaultState)
         this.props.toggleForm()
@@ -95,8 +97,10 @@ class ItineraryForm extends React.Component {
     // looks just like the created resource
     // TODO: pull into input components that handle errors w/ messages
     return (
-      <form onSubmit={this.handleSubmit} className="ItineraryForm">
-        <label>Title</label>
+      <form className="ItineraryForm">
+        <FormErrors errors={this.state.errors} />
+
+        <label className="form-label">Title</label>
         { this.hasError('title') && <h2>{ this.errorsFor('title') }</h2>}
         <input
           type="text"
@@ -105,27 +109,41 @@ class ItineraryForm extends React.Component {
           className={`form-input ${this.hasError('title') && 'error'}`}
         />
 
-
-        <input type="file"
-               onChange={ e => this.setState({ photo: e.target.files[0] }) }
-               // className="form-input"
-               accept=".jpg,.jpeg,.png,.gif"
-               // id="trip-photo"
-               // data-cy="tripInput-photo"
-        />
-
-        <label>Description</label>
-        <input
+        <label>Description <span>(optional)</span></label>
+        <textarea
           type="text"
           onChange={e => this.setState({ description: e.target.value })}
-          value={this.state.description}
-          className="form-input" />
+          // value={this.state.description}
+          className="form-textarea"
+        >
+          {this.state.description}
+        </textarea>
 
+        <label>Photo <span>(optional)</span></label>
+        <input type="file"
+               onChange={ e => this.setState({ photo: e.target.files[0] }) }
+               className="form-input"
+               accept=".jpg,.jpeg,.png,.gif"
+        />
 
-        <a className="button button-green" onClick={e => this.toggle(e, 'useDates')}>{ this.state.useDates ? "Using dates" : "Not using dates"}</a>
+        <label>Attachments <span>(optional)</span></label>
+        <input type="file" className="form-input" multiple onChange={e => {
+          window.files = e.target.files
+          this.setState({ files: e.target.files })
+        }} />
+
+        <a className={`button button-toggle ${this.state.useDates ? 'button-blue' : 'button-gray'}`}
+           onClick={e => this.toggle(e, 'useDates')}>
+          { this.state.useDates ? "Using dates" : "Not using dates"
+        }</a>
+        <a className={`button button-toggle ${this.state.useTimes ? 'button-blue' : 'button-gray'}`}
+           onClick={e => this.toggle(e, 'useTimes')}
+        >
+          { this.state.useTimes ? "Using times" : "Not using times"}
+        </a>
+
         {this.state.useDates && (<>
-          <h3>Date <span>optional</span></h3>
-          <label className="form-label"><span>When</span> are you going?</label>
+          <label>Date <span>(optional)</span></label>
           <DateRangePicker
             onChange={date_range => this.setState({ date_range })}
             value={this.state.date_range}
@@ -134,17 +152,8 @@ class ItineraryForm extends React.Component {
           />
         </>)}
 
-        <h3>Attachments</h3>
-        <input type="file" multiple onChange={e => {
-          window.files = e.target.files
-          console.log('run it')
-          this.setState({ files: e.target.files })
-        }} />
-
-        <a className="button button-green" onClick={e => this.toggle(e, 'useTimes')}>{ this.state.useTimes ? "Using times" : "Not using times"}</a>
         {this.state.useTimes && (<>
-          <h3>Time <span>optional</span></h3>
-          <label className="form-label"><span>What time?</span></label>
+          <label>Time <span>(optional)</span></label>
           <div data-cy="tripInput-start_time">
             <TimePicker
               onChange={start_time => this.setState({ start_time })}
@@ -160,7 +169,16 @@ class ItineraryForm extends React.Component {
           </div>
         </>)}
 
-        <button>Create</button>
+        <ResponseButtons buttons={[
+          {
+            action: e => this.handleSubmit(e),
+            actionableText: "Creating",
+            className: "button button-green form-submit",
+            modelType: "Item",
+            text: "Create",
+            icon: "plus"
+          }
+        ]}/>
       </form>
     )
   }
