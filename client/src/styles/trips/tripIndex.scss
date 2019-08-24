@@ -2,22 +2,20 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  background: white;
+  border-radius: 20px;
+  padding: 5px 20px;
 
   > div {
     width: 33.3333%;
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
   }
 }
 
 .tripIndex-header-center {
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.tripIndex-header-right {
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .tripIndex-noResultsHeader {
@@ -28,7 +26,7 @@
 
 .tripIndex-noResults-title {
   font-size: 28px;
-  font-weight: 900;
+  font-weight: 700;
   margin-bottom: 10px;
 }
 
@@ -83,37 +81,33 @@
 }
 
 .tripIndex-header-left {
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .tripIndex-header-right {
-  align-items: flex-end;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .tripIndex-ledByFilter-label {
   color: $text-muted;
-  margin-bottom: 10px;
   font-size: 12px;
-
-  svg {
-    margin-right: 5px;
-  }
+  margin-right: 20px;
 }
 
 .tripIndex-when-label {
   color: $text-muted;
-  margin-bottom: 10px;
   font-size: 12px;
-
-  svg {
-    margin-left: 5px;
-    margin-right: 0;
-  }
+  margin-left: 20px;
 }
 
 .filter-buttons {
   background: white;
   border-radius: $border-radius;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   .button {
     margin: 0;
@@ -122,7 +116,7 @@
 
 .filter-active {
   background: #D6FF94;
-  font-weight: 900;
+  font-weight: 700;
   color: $green-primary;
 }
 

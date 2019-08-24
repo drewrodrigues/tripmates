@@ -34,11 +34,12 @@
 }
 
 .button-heavy {
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .button-gray {
-  background: #ccc;
+  background: $gray-background;
+  color: $text-primary;
 
   &:hover {
     background: #ddd;

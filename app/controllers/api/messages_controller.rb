@@ -35,7 +35,7 @@ class Api::MessagesController < ApplicationController
 
   def set_trip
     @trip = current_user.created_trips.find_by(id: params[:trip_id]) ||
-      current_user.attended_trips.find(params[:trip_id])
+      current_user.attending_trips.find(params[:trip_id])
   end
 
   def message_params

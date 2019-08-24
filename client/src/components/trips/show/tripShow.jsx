@@ -7,6 +7,7 @@ import Attendees from "./Attendees";
 import Conversation from "./Conversation";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { handleLoading } from "../../../helpers/handlers"
+import Itinerary from "../../itinerary/Itinerary"
 
 class TripShow extends Component {
   constructor(props) {
@@ -55,11 +56,16 @@ class TripShow extends Component {
           <li className="tripShow-body-nav-link">
             <NavLink to={`/trips/${trip.id}/attendance`}>
               <FontAwesomeIcon icon="hiking" />
-              Attendees
+              Attendance
             </NavLink>
           </li>
           {/*<li className="tripShow-body-nav-link"><a href="#">Invites</a></li>*/}
-          {/*<li className="tripShow-body-nav-link"><a href="#">Itenerary</a></li>*/}
+          <li className="tripShow-body-nav-link">
+            <NavLink to={`/trips/${trip.id}/itinerary`}>
+              <FontAwesomeIcon icon="book" />
+              Itinerary
+            </NavLink>
+          </li>
         </ul>
 
         <section className="tripShow-body">
@@ -78,6 +84,10 @@ class TripShow extends Component {
               <Route
                 path="/trips/:tripId/conversation"
                 component={ Conversation }
+              />
+              <Route
+                path="/trips/:tripId/itinerary"
+                component={ Itinerary }
               />
             </Switch>
           </div>

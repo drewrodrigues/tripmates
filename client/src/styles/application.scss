@@ -36,8 +36,11 @@
 // - converation
 @import "./trips/show/MessageItem";
 
+// itinerary
+@import "./itinerary/ItineraryItem";
+
 body {
-  background: white;
+  background: $gray-background;
   color: $text-primary;
 }
 
@@ -105,4 +108,50 @@ a {
 
 .svg-inline--fa {
   margin-right: 10px;
+}
+
+.updates {
+  line-height: 1.5;
+  margin: 0 auto;
+  background: white;
+  border-radius: 10px;
+  max-width: 600px;
+  padding: 40px;
+  margin-top: 20px;
+
+  header {
+    background: $green-primary;
+    padding: 10px;
+    font-size: 12px;
+    border-radius: $border-radius;
+    margin-bottom: 20px;
+
+    a {
+      font-weight: 700;
+    }
+  }
+
+  h3 {
+    font-size: 24px;
+    font-weight: 700;
+    padding-bottom: 10px;
+    margin-top: 20px;
+    display: block;
+    clear: both;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  input {
+    float: left;
+    margin: 0;
+    margin-right: 5px;
+    margin-top: 5px;
+  }
+
+  li {
+    font-size: 14px;
+  }
 }

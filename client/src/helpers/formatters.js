@@ -17,6 +17,7 @@ export const todayForInput = () => {
 }
 
 export const prettyDate = date => {
+  if (!date) return ""
   const parsedDate = parseDate(date)
   return parsedDate.toLocaleString("en-us", {
     month: "long",

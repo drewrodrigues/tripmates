@@ -29,9 +29,14 @@ class Trip < ApplicationRecord
   scope :hidden, -> { where(privacy: "hidden") }
 
   belongs_to :creator, class_name: :User
-  has_one_attached :cover_photo
+  has_one_attached :cover_photo, dependent: :destroy
   has_many :attend_requests, dependent: :destroy
   has_many :attendances, dependent: :destroy
+  has_many :attending_users,
+           through: :attendances,
+           source: :user
+  has_many :itinerary_items,
+           dependent: :destroy
   has_many :messages, dependent: :destroy
 
   enum privacy: PRIVACIES
@@ -75,6 +80,10 @@ class Trip < ApplicationRecord
 
   def spaces_left
     spaces - attendances.count
+  end
+
+  def is_attending_or_leader?(user)
+    user == creator || attending_users.where(id: user.id).exists?
   end
 
   private

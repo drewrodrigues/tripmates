@@ -10,6 +10,7 @@ import UsersIndexContainer from '../users/index/usersIndexContainer'
 import SignUpContainer from '../users/signUpContainer'
 import SignInContainer from '../sessions/signInContainer'
 import NotFoundError from "../Pages/NotFoundError"
+import Updates from "../Pages/Updates"
 
 const selectRoutes = loggedIn => {
   if (loggedIn) {
@@ -22,6 +23,7 @@ const selectRoutes = loggedIn => {
         <Route path="/trips/:id" component={ TripShowContainer } />
         <Route path="/trips" component={ TripIndexContainer } />
         <Route path="/friends" component={ UsersIndexContainer } />
+        <Route path="/updates" component={ Updates } />
         <Route path="/404" component={ NotFoundError } />
         <Route path="/" component={ TripIndexContainer } />
       </Switch>

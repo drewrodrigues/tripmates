@@ -41,9 +41,13 @@ class NavLoggedIn extends React.Component {
       <div className="Nav">
         <div className="container">
           <nav className="Nav-left">
-            <NavLink to="/explore" exact className="Nav-link Nav-link-primary">
-              <FontAwesomeIcon icon="compass" />
-              Explore
+            {/*<NavLink to="/explore" exact className="Nav-link Nav-link-primary">*/}
+            {/*  <FontAwesomeIcon icon="compass" />*/}
+            {/*  Explore*/}
+            {/*</NavLink>*/}
+            <NavLink to="/updates" exact className="Nav-link Nav-link-primary">
+              <FontAwesomeIcon icon="info-circle" />
+              Updates
             </NavLink>
             <NavLink className="Nav-link Nav-link-primary" to="/" isActive={this.isTripNavActive}>
               <FontAwesomeIcon icon="globe-americas" />

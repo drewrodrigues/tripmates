@@ -1,8 +1,6 @@
 # == Route Map
 #
 #                    Prefix Verb   URI Pattern                                                                              Controller#Action
-#       api_attend_requests GET    /api/attend_requests(.:format)                                                           api/attend_requests#index {:format=>:json}
-#                           POST   /api/attend_requests(.:format)                                                           api/attend_requests#create {:format=>:json}
 #        api_attend_request DELETE /api/attend_requests/:id(.:format)                                                       api/attend_requests#destroy {:format=>:json}
 #           api_attendances POST   /api/attendances(.:format)                                                               api/attendances#create {:format=>:json}
 #            api_attendance DELETE /api/attendances/:id(.:format)                                                           api/attendances#destroy {:format=>:json}
@@ -12,12 +10,17 @@
 #               api_friends GET    /api/friends(.:format)                                                                   api/friends#index {:format=>:json}
 #                           POST   /api/friends(.:format)                                                                   api/friends#create {:format=>:json}
 #                api_friend DELETE /api/friends/:id(.:format)                                                               api/friends#destroy {:format=>:json}
-#              api_messages POST   /api/messages(.:format)                                                                  api/messages#create {:format=>:json}
 #               api_message DELETE /api/messages/:id(.:format)                                                              api/messages#destroy {:format=>:json}
 #               api_session DELETE /api/session(.:format)                                                                   api/sessions#destroy {:format=>:json}
 #                           POST   /api/session(.:format)                                                                   api/sessions#create {:format=>:json}
+#  api_trip_attend_requests GET    /api/trips/:trip_id/attend_requests(.:format)                                            api/attend_requests#index {:format=>:json}
+#                           POST   /api/trips/:trip_id/attend_requests(.:format)                                            api/attend_requests#create {:format=>:json}
 #      api_trip_attendances GET    /api/trips/:trip_id/attendances(.:format)                                                api/attendances#index {:format=>:json}
+#  api_trip_itinerary_items GET    /api/trips/:trip_id/itinerary_items(.:format)                                            api/itinerary_items#index {:format=>:json}
+#                           POST   /api/trips/:trip_id/itinerary_items(.:format)                                            api/itinerary_items#create {:format=>:json}
+#   api_trip_itinerary_item DELETE /api/trips/:trip_id/itinerary_items/:id(.:format)                                        api/itinerary_items#destroy {:format=>:json}
 #         api_trip_messages GET    /api/trips/:trip_id/messages(.:format)                                                   api/messages#index {:format=>:json}
+#                           POST   /api/trips/:trip_id/messages(.:format)                                                   api/messages#create {:format=>:json}
 #                 api_trips GET    /api/trips(.:format)                                                                     api/trips#index {:format=>:json}
 #                           POST   /api/trips(.:format)                                                                     api/trips#create {:format=>:json}
 #                  api_trip GET    /api/trips/:id(.:format)                                                                 api/trips#show {:format=>:json}
@@ -48,6 +51,7 @@ Rails.application.routes.draw do
     resources :trips, except: %i[new edit] do
       resources :attend_requests, only: %i[create index]
       resources :attendances, only: [:index]
+      resources :itinerary_items, only: [:create, :index, :destroy]
       resources :messages, only: %i[create index]
     end
     resources :users, only: %i[create destroy update index]
